@@ -1,0 +1,381 @@
+CRITICAL - 2026-06-07 09:38:10 --> ErrorException: Undefined variable $dateValid
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 484.
+ 1 APPPATH\Controllers\Admin.php(484): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $dateValid', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 484)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 09:38:24 --> ErrorException: Undefined variable $dateValid
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 484.
+ 1 APPPATH\Controllers\Admin.php(484): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $dateValid', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 484)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 09:43:32 --> Error: Class "App\Controllers\DateTime" not found
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 539.
+ 1 APPPATH\Controllers\Admin.php(470): App\Controllers\Admin->isDateWithin15Days('2026-06-07')
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 09:45:26 --> Error: Class "App\Controllers\DateTime" not found
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 541.
+ 1 APPPATH\Controllers\Admin.php(470): App\Controllers\Admin->isDateWithin15Days('2026-06-07')
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 09:45:58 --> Error: Class "App\Controllers\DateTime" not found
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 542.
+ 1 APPPATH\Controllers\Admin.php(470): App\Controllers\Admin->isDateWithin15Days('2026-06-07')
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 09:46:53 --> Error: Class "App\Controllers\DateTime" not found
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 544.
+ 1 APPPATH\Controllers\Admin.php(470): App\Controllers\Admin->isDateWithin15Days('2025-12-06')
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 09:48:30 --> Error: Class "App\Controllers\DateTime" not found
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 550.
+ 1 APPPATH\Controllers\Admin.php(476): App\Controllers\Admin->isDateWithin15Days('2026-06-07')
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 09:49:07 --> Error: Class "App\Controllers\DateTime" not found
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 550.
+ 1 APPPATH\Controllers\Admin.php(476): App\Controllers\Admin->isDateWithin15Days('2026-06-07')
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 09:53:30 --> Error: Class "App\Controllers\DateTime" not found
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 565.
+ 1 APPPATH\Controllers\Admin.php(491): App\Controllers\Admin->isDateWithin15Days(null)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 09:54:32 --> Error: Class "App\Controllers\DateTime" not found
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 567.
+ 1 APPPATH\Controllers\Admin.php(493): App\Controllers\Admin->isDateWithin15Days(null)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 09:57:23 --> Error: Class "App\Controllers\DateTime" not found
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 569.
+ 1 APPPATH\Controllers\Admin.php(495): App\Controllers\Admin->isDateWithin15Days(null)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 10:01:13 --> Error: Class "App\Controllers\DateTime" not found
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 568.
+ 1 APPPATH\Controllers\Admin.php(494): App\Controllers\Admin->isDateWithin15Days(null)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 10:05:26 --> Error: Class "App\Controllers\DateTime" not found
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 554.
+ 1 APPPATH\Controllers\Admin.php(480): App\Controllers\Admin->isDateWithin15Days('2026-06-07')
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 10:09:14 --> Error: Class "App\Controllers\DateTime" not found
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 556.
+ 1 APPPATH\Controllers\Admin.php(482): App\Controllers\Admin->isDateWithin15Days(2013)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 11:20:46 --> ErrorException: Undefined variable $month
+[Method: GET, Route: admin/payment-history]
+in APPPATH\Views\admin\payment_history.php on line 55.
+ 1 APPPATH\Views\admin\payment_history.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $month', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php', 55)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/payment_history', [], true)
+ 5 APPPATH\Controllers\Admin.php(651): view('admin/payment_history', [])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->paymentHistory()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 11:20:51 --> ErrorException: Undefined variable $month
+[Method: GET, Route: admin/payment-history]
+in APPPATH\Views\admin\payment_history.php on line 55.
+ 1 APPPATH\Views\admin\payment_history.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $month', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php', 55)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/payment_history', [], true)
+ 5 APPPATH\Controllers\Admin.php(651): view('admin/payment_history', [])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->paymentHistory()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 11:21:06 --> ErrorException: Undefined variable $month
+[Method: GET, Route: admin/payment-history]
+in APPPATH\Views\admin\payment_history.php on line 55.
+ 1 APPPATH\Views\admin\payment_history.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $month', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php', 55)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/payment_history', [], true)
+ 5 APPPATH\Controllers\Admin.php(651): view('admin/payment_history', [])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->paymentHistory()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 11:21:27 --> ErrorException: Undefined variable $month
+[Method: GET, Route: admin/payment-history]
+in APPPATH\Views\admin\payment_history.php on line 55.
+ 1 APPPATH\Views\admin\payment_history.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $month', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php', 55)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/payment_history', [], true)
+ 5 APPPATH\Controllers\Admin.php(651): view('admin/payment_history')
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->paymentHistory()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 11:22:57 --> ErrorException: Undefined variable $month
+[Method: GET, Route: admin/payment-history]
+in APPPATH\Views\admin\payment_history.php on line 55.
+ 1 APPPATH\Views\admin\payment_history.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $month', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php', 55)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/payment_history', [], true)
+ 5 APPPATH\Controllers\Admin.php(651): view('admin/payment_history')
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->paymentHistory()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 11:23:00 --> ErrorException: Undefined variable $month
+[Method: GET, Route: admin/payment-history]
+in APPPATH\Views\admin\payment_history.php on line 55.
+ 1 APPPATH\Views\admin\payment_history.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $month', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php', 55)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/payment_history', [], true)
+ 5 APPPATH\Controllers\Admin.php(651): view('admin/payment_history')
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->paymentHistory()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 11:26:05 --> ErrorException: Undefined variable $month
+[Method: GET, Route: admin/payment-history]
+in APPPATH\Views\admin\payment_history.php on line 55.
+ 1 APPPATH\Views\admin\payment_history.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $month', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php', 55)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/payment_history', [], true)
+ 5 APPPATH\Controllers\Admin.php(650): view('admin/payment_history', [])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->paymentHistory()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 11:27:51 --> ErrorException: Undefined variable $month
+[Method: GET, Route: admin/payment-history]
+in APPPATH\Views\admin\payment_history.php on line 55.
+ 1 APPPATH\Views\admin\payment_history.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $month', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php', 55)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/payment_history', [], true)
+ 5 APPPATH\Controllers\Admin.php(650): view('admin/payment_history', [])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->paymentHistory()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 11:29:35 --> ErrorException: Undefined variable $month
+[Method: GET, Route: admin/payment-history]
+in APPPATH\Views\admin\payment_history.php on line 55.
+ 1 APPPATH\Views\admin\payment_history.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $month', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php', 55)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/payment_history', [], true)
+ 5 APPPATH\Controllers\Admin.php(649): view('admin/payment_history')
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->paymentHistory()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 11:30:21 --> ErrorException: Undefined variable $month
+[Method: GET, Route: admin/payment-history]
+in APPPATH\Views\admin\payment_history.php on line 55.
+ 1 APPPATH\Views\admin\payment_history.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $month', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php', 55)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/payment_history', [], true)
+ 5 APPPATH\Controllers\Admin.php(650): view('admin/payment_history')
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->paymentHistory()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 11:30:22 --> ErrorException: Undefined variable $month
+[Method: GET, Route: admin/payment-history]
+in APPPATH\Views\admin\payment_history.php on line 55.
+ 1 APPPATH\Views\admin\payment_history.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $month', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php', 55)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\payment_history.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/payment_history', [], true)
+ 5 APPPATH\Controllers\Admin.php(650): view('admin/payment_history')
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->paymentHistory()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 12:00:18 --> Error: Class "App\Controllers\SubscriptionModel" not found
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 466.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 12:02:49 --> ErrorException: Trait "App\Controllers\App\Models\SubscriptionModel" not found
+[Method: GET, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 10.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-06-07 12:02:50 --> ErrorException: Trait "App\Controllers\App\Models\SubscriptionModel" not found
+[Method: GET, Route: admin/payment-history]
+in APPPATH\Controllers\Admin.php on line 10.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-06-07 12:02:56 --> ErrorException: Trait "App\Controllers\App\Models\SubscriptionModel" not found
+[Method: GET, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 10.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-06-07 12:02:58 --> ErrorException: Trait "App\Controllers\App\Models\SubscriptionModel" not found
+[Method: GET, Route: admin/expired-next]
+in APPPATH\Controllers\Admin.php on line 10.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-06-07 12:03:04 --> ErrorException: Trait "App\Controllers\App\Models\SubscriptionModel" not found
+[Method: GET, Route: admin]
+in APPPATH\Controllers\Admin.php on line 10.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-06-07 12:14:24 --> ErrorException: Undefined variable $data
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 478.
+ 1 APPPATH\Controllers\Admin.php(478): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 478)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 12:14:41 --> ErrorException: Undefined variable $data
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 478.
+ 1 APPPATH\Controllers\Admin.php(478): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 478)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-07 12:15:06 --> ErrorException: Undefined variable $data
+[Method: POST, Route: admin/renew]
+in APPPATH\Controllers\Admin.php on line 478.
+ 1 APPPATH\Controllers\Admin.php(478): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 478)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-07 12:49:08 --> Email: sendWithMail threw ErrorException: mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in D:\xampp\htdocs\gbinsurance\system\Email\Email.php:1776
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'mail(): Failed ...', 'D:\\xampp\\htdocs...', 1776)
+#1 D:\xampp\htdocs\gbinsurance\system\Email\Email.php(1776): mail('vijay.kumawat.m...', '=?UTF-8?Q?New=2...', 'This is a multi...', 'Date: Sun, 7 Ju...', '-f no-reply@you...')
+#2 D:\xampp\htdocs\gbinsurance\system\Email\Email.php(1708): CodeIgniter\Email\Email->sendWithMail()
+#3 D:\xampp\htdocs\gbinsurance\system\Email\Email.php(1602): CodeIgniter\Email\Email->spoolEmail()
+#4 D:\xampp\htdocs\gbinsurance\app\Controllers\Admin.php(501): CodeIgniter\Email\Email->send()
+#5 D:\xampp\htdocs\gbinsurance\system\CodeIgniter.php(974): App\Controllers\Admin->renewSubscriptionPost()
+#6 D:\xampp\htdocs\gbinsurance\system\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#7 D:\xampp\htdocs\gbinsurance\system\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\xampp\htdocs\gbinsurance\system\Boot.php(417): CodeIgniter\CodeIgniter->run()
+#9 D:\xampp\htdocs\gbinsurance\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 D:\xampp\htdocs\gbinsurance\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2026-06-07 12:49:08 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2026-06-07 12:49:08 --> 
+ERROR - 2026-06-07 12:49:08 --> Email failed: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.<br><pre>Date: Sun, 7 Jun 2026 12:49:06 +0000
+From: &quot;Subscription System&quot; &lt;no-reply@yourdomain.com&gt;
+Return-Path: &lt;no-reply@yourdomain.com&gt;
+Reply-To: &lt;no-reply@yourdomain.com&gt;
+User-Agent: CodeIgniter
+X-Sender: no-reply@yourdomain.com
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;6a2568c25edfd1.04987778@yourdomain.com&gt;
+Mime-Version: 1.0
+Content-Type: multipart/mixed; boundary=&quot;B_ATC_6a2568c25ef236.08080872&quot;
+</pre>

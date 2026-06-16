@@ -1,0 +1,15 @@
+CRITICAL - 2026-06-16 01:15:35 --> ErrorException: include(../sidebar.php): Failed to open stream: No such file or directory
+[Method: GET, Route: admin/attendance/mark]
+in APPPATH\Views\admin\attendance\mark.php on line 56.
+ 1 APPPATH\Views\admin\attendance\mark.php(56): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../sidebar.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\mark.php', 56)
+ 2 APPPATH\Views\admin\attendance\mark.php(56): include()
+ 3 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\mark.php')
+ 4 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/attendance/mark', [], true)
+ 6 APPPATH\Controllers\Admin.php(1188): view('admin/attendance/mark', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->markAttendancePage()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

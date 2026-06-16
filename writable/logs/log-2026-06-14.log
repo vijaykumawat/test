@@ -1,0 +1,147 @@
+CRITICAL - 2026-06-14 02:26:26 --> Error: Class "App\Models\EmployeeLoginHistoryModel" not found
+[Method: POST, Route: employee/login]
+in APPPATH\Controllers\Auth.php on line 31.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Auth->login()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-14 02:28:33 --> Error: Class "App\Models\EmployeeLoginHistoryModel" not found
+[Method: POST, Route: employee/login]
+in APPPATH\Controllers\Auth.php on line 34.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Auth->login()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-14 02:29:25 --> Error: Class "App\Models\EmployeeLoginHistoryModel" not found
+[Method: POST, Route: employee/login]
+in APPPATH\Controllers\Auth.php on line 35.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Auth->login()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-14 08:35:42 --> Error: Call to undefined function App\Controllers\purchaseSubscription()
+[Method: POST, Route: admin/employee-add]
+in APPPATH\Controllers\Admin.php on line 1020.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->addEmployee()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-14 08:36:11 --> Error: Call to undefined function App\Controllers\purchaseSubscription()
+[Method: POST, Route: admin/employee-add]
+in APPPATH\Controllers\Admin.php on line 1020.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->addEmployee()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-14 08:37:03 --> Error: Call to undefined function App\Controllers\purchaseSubscription()
+[Method: POST, Route: admin/employee-add]
+in APPPATH\Controllers\Admin.php on line 1023.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->addEmployee()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-14 09:17:13 --> Subscription purchase failed: Screenshot is old
+ERROR - 2026-06-14 09:20:10 --> Subscription purchase failed: Receiver name mismatch, Screenshot is old
+ERROR - 2026-06-14 09:20:10 --> Subscription purchase failed: Receiver name mismatch, Screenshot is old
+ERROR - 2026-06-14 12:13:52 --> Cannot add or update a child row: a foreign key constraint fails (`gb_insurance`.`subscriptions`, CONSTRAINT `subscriptions_ibfk_1` FOREIGN KEY (`employeeId`) REFERENCES `employee` (`employeeId`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `subscriptions` (`employeeId`, `startDate`, `endDate`, `status`, `amount`, `createdAt`, `updatedAt`) VALUES (\'68c11fc6db91e1de\', \'2026-06-14\', \'2026-07-14\', \'Expired\', 100, \'2026-06-14 12:13:52\', \'2026-06-14 12:13:52\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `subscriptions` (`employeeId`, `startDate`, `endDate`, `status`, `amount`, `createdAt`, `updatedAt`) VALUES (\'68c11fc6db91e1de\', \'2026-06-14\', \'2026-07-14\', \'Expired\', 100, \'2026-06-14 12:13:52\', \'2026-06-14 12:13:52\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `subscriptions` (`employeeId`, `startDate`, `endDate`, `status`, `amount`, `createdAt`, `updatedAt`) VALUES (\'68c11fc6db91e1de\', \'2026-06-14\', \'2026-07-14\', \'Expired\', 100, \'2026-06-14 12:13:52\', \'2026-06-14 12:13:52\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2343): CodeIgniter\Database\BaseConnection->query('INSERT INTO `subscriptions` (`employeeId`, `startDate`, `endDate`, `status`, `amount`, `createdAt`, `updatedAt`) VALUES (:employeeId:, :startDate:, :endDate:, :status:, :amount:, :createdAt:, :updatedAt:)', [...], false)
+ 5 SYSTEMPATH\Model.php(357): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(670): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\Admin.php(623): CodeIgniter\Model->insert([...])
+ 9 APPPATH\Controllers\Admin.php(1046): App\Controllers\Admin->purchaseSubscription(Object(CodeIgniter\HTTP\Files\UploadedFile), [...])
+10 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->addEmployee()
+11 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+12 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-14 12:13:52 --> CodeIgniter\Database\Exceptions\DatabaseException: Cannot add or update a child row: a foreign key constraint fails (`gb_insurance`.`subscriptions`, CONSTRAINT `subscriptions_ibfk_1` FOREIGN KEY (`employeeId`) REFERENCES `employee` (`employeeId`))
+[Method: POST, Route: admin/employee-add]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2343): CodeIgniter\Database\BaseConnection->query('INSERT INTO `subscriptions` (`employeeId`, `startDate`, `endDate`, `status`, `amount`, `createdAt`, `updatedAt`) VALUES (:employeeId:, :startDate:, :endDate:, :status:, :amount:, :createdAt:, :updatedAt:)', [...], false)
+ 2 SYSTEMPATH\Model.php(357): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(670): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\Admin.php(623): CodeIgniter\Model->insert([...])
+ 6 APPPATH\Controllers\Admin.php(1046): App\Controllers\Admin->purchaseSubscription(Object(CodeIgniter\HTTP\Files\UploadedFile), [...])
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->addEmployee()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-14 12:13:52 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Cannot add or update a child row: a foreign key constraint fails (`gb_insurance`.`subscriptions`, CONSTRAINT `subscriptions_ibfk_1` FOREIGN KEY (`employeeId`) REFERENCES `employee` (`employeeId`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `subscriptions` (`employeeId`, `startDate`, `endDate`, `status`, `amount`, `createdAt`, `updatedAt`) VALUES (\'68c11fc6db91e1de\', \'2026-06-14\', \'2026-07-14\', \'Expired\', 100, \'2026-06-14 12:13:52\', \'2026-06-14 12:13:52\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `subscriptions` (`employeeId`, `startDate`, `endDate`, `status`, `amount`, `createdAt`, `updatedAt`) VALUES (\'68c11fc6db91e1de\', \'2026-06-14\', \'2026-07-14\', \'Expired\', 100, \'2026-06-14 12:13:52\', \'2026-06-14 12:13:52\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2343): CodeIgniter\Database\BaseConnection->query('INSERT INTO `subscriptions` (`employeeId`, `startDate`, `endDate`, `status`, `amount`, `createdAt`, `updatedAt`) VALUES (:employeeId:, :startDate:, :endDate:, :status:, :amount:, :createdAt:, :updatedAt:)', [...], false)
+ 4 SYSTEMPATH\Model.php(357): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(670): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\Admin.php(623): CodeIgniter\Model->insert([...])
+ 8 APPPATH\Controllers\Admin.php(1046): App\Controllers\Admin->purchaseSubscription(Object(CodeIgniter\HTTP\Files\UploadedFile), [...])
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->addEmployee()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-14 12:13:52 --> [Caused by] mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`gb_insurance`.`subscriptions`, CONSTRAINT `subscriptions_ibfk_1` FOREIGN KEY (`employeeId`) REFERENCES `employee` (`employeeId`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `subscriptions` (`employeeId`, `startDate`, `endDate`, `status`, `amount`, `createdAt`, `updatedAt`) VALUES (\'68c11fc6db91e1de\', \'2026-06-14\', \'2026-07-14\', \'Expired\', 100, \'2026-06-14 12:13:52\', \'2026-06-14 12:13:52\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `subscriptions` (`employeeId`, `startDate`, `endDate`, `status`, `amount`, `createdAt`, `updatedAt`) VALUES (\'68c11fc6db91e1de\', \'2026-06-14\', \'2026-07-14\', \'Expired\', 100, \'2026-06-14 12:13:52\', \'2026-06-14 12:13:52\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `subscriptions` (`employeeId`, `startDate`, `endDate`, `status`, `amount`, `createdAt`, `updatedAt`) VALUES (\'68c11fc6db91e1de\', \'2026-06-14\', \'2026-07-14\', \'Expired\', 100, \'2026-06-14 12:13:52\', \'2026-06-14 12:13:52\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2343): CodeIgniter\Database\BaseConnection->query('INSERT INTO `subscriptions` (`employeeId`, `startDate`, `endDate`, `status`, `amount`, `createdAt`, `updatedAt`) VALUES (:employeeId:, :startDate:, :endDate:, :status:, :amount:, :createdAt:, :updatedAt:)', [...], false)
+ 5 SYSTEMPATH\Model.php(357): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(670): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\Admin.php(623): CodeIgniter\Model->insert([...])
+ 9 APPPATH\Controllers\Admin.php(1046): App\Controllers\Admin->purchaseSubscription(Object(CodeIgniter\HTTP\Files\UploadedFile), [...])
+10 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->addEmployee()
+11 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+12 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-14 12:38:10 --> TypeError: App\Controllers\Admin::containsReceiverName(): Argument #2 ($expectedNames) must be of type array, string given, called in D:\xampp\htdocs\gbinsurance\app\Controllers\Admin.php on line 615
+[Method: POST, Route: admin/employee-add]
+in APPPATH\Controllers\Admin.php on line 670.
+ 1 APPPATH\Controllers\Admin.php(615): App\Controllers\Admin->containsReceiverName('Transaction Successful
+05:41 PM on 14 Jun 2026
+Paid to
+Vijey Kumawatt
+O
++919607593966
+Banking Name
+Mr Vijay Kailas Kumawat
+Transfer Details
+Transaction ID
+T2606141741332296839260
+Debited from
+UTR: 321841473275
+Powered by
+AXIS BANK', 'Vijay Kailas kumawat')
+ 2 APPPATH\Controllers\Admin.php(1082): App\Controllers\Admin->purchaseSubscription(Object(CodeIgniter\HTTP\Files\UploadedFile), [...])
+ 3 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->addEmployee()
+ 4 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 5 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

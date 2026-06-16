@@ -1,0 +1,151 @@
+CRITICAL - 2026-06-12 01:39:34 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "admin/nextexpiries.php"
+[Method: GET, Route: admin/next-expiries]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('admin/nextexpiries.php')
+ 2 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/nextexpiries', [], true)
+ 3 APPPATH\Controllers\Admin.php(290): view('admin/nextexpiries', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->expiredNextMonth()
+ 5 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-12 01:39:39 --> ErrorException: Undefined variable $results
+[Method: GET, Route: admin/current-expiries]
+in APPPATH\Views\admin\currentexpiries.php on line 225.
+ 1 APPPATH\Views\admin\currentexpiries.php(225): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $results', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\currentexpiries.php', 225)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\currentexpiries.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/currentexpiries', [], true)
+ 5 APPPATH\Controllers\Admin.php(232): view('admin/currentexpiries', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->expiredCurrentMonth()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-12 01:39:58 --> ErrorException: Undefined variable $results
+[Method: GET, Route: admin/current-expiries]
+in APPPATH\Views\admin\currentexpiries.php on line 225.
+ 1 APPPATH\Views\admin\currentexpiries.php(225): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $results', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\currentexpiries.php', 225)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\currentexpiries.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/currentexpiries', [], true)
+ 5 APPPATH\Controllers\Admin.php(232): view('admin/currentexpiries', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->expiredCurrentMonth()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-12 01:40:04 --> ErrorException: Undefined variable $results
+[Method: GET, Route: admin/current-expiries]
+in APPPATH\Views\admin\currentexpiries.php on line 225.
+ 1 APPPATH\Views\admin\currentexpiries.php(225): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $results', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\currentexpiries.php', 225)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\currentexpiries.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/currentexpiries', [], true)
+ 5 APPPATH\Controllers\Admin.php(232): view('admin/currentexpiries', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->expiredCurrentMonth()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-12 02:36:46 --> Error: Call to undefined function App\Controllers\policyTableToExcel()
+[Method: GET, Route: admin/export-expired]
+in APPPATH\Controllers\Admin.php on line 385.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->exportExpiredExcel()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-12 02:37:01 --> Error: Call to undefined function App\Controllers\policyTableToExcel()
+[Method: GET, Route: admin/export-expired]
+in APPPATH\Controllers\Admin.php on line 385.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->exportExpiredExcel()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-12 02:38:38 --> Error: Call to undefined function App\Controllers\policyTableToExcel()
+[Method: GET, Route: admin/export-expired]
+in APPPATH\Controllers\Admin.php on line 385.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->exportExpiredExcel()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-12 05:24:32 --> ErrorException: Undefined variable $db
+[Method: POST, Route: admin/upload-data]
+in APPPATH\Controllers\Admin.php on line 721.
+ 1 APPPATH\Controllers\Admin.php(721): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $db', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 721)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->uploadDataPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-12 05:27:14 --> ErrorException: Undefined property: App\Controllers\Admin::$dataModel
+[Method: POST, Route: admin/upload-data]
+in APPPATH\Controllers\Admin.php on line 722.
+ 1 APPPATH\Controllers\Admin.php(722): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Admin::$dataModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 722)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->uploadDataPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-12 05:27:54 --> ErrorException: Undefined property: App\Controllers\Admin::$dataModel
+[Method: POST, Route: admin/upload-data]
+in APPPATH\Controllers\Admin.php on line 722.
+ 1 APPPATH\Controllers\Admin.php(722): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Admin::$dataModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 722)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->uploadDataPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-12 11:47:51 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "base_url('assets"
+[Method: GET, Route: admin/base_url%28%27assets/images/logos/1.png%27%29]
+in SYSTEMPATH\Router\Router.php on line 766.
+ 1 SYSTEMPATH\Router\Router.php(217): CodeIgniter\Router\Router->checkDisallowedChars('admin/base_url(\'assets/images/logos/1.png\')')
+ 2 SYSTEMPATH\CodeIgniter.php(852): CodeIgniter\Router\Router->handle('admin/base_url(\'assets/images/logos/1.png\')')
+ 3 SYSTEMPATH\CodeIgniter.php(464): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-12 15:55:15 --> ErrorException: include(sidebar.php): Failed to open stream: No such file or directory
+[Method: GET, Route: admin/employees]
+in APPPATH\Views\admin\employees\list.php on line 272.
+ 1 APPPATH\Views\admin\employees\list.php(272): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(sidebar.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\employees\\list.php', 272)
+ 2 APPPATH\Views\admin\employees\list.php(272): include()
+ 3 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\employees\\list.php')
+ 4 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/employees/list', [], true)
+ 6 APPPATH\Controllers\Admin.php(855): view('admin/employees/list')
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->listEmployees()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-12 15:56:04 --> ErrorException: include(sidebar.php): Failed to open stream: No such file or directory
+[Method: GET, Route: admin/employees]
+in APPPATH\Views\admin\employees\list.php on line 272.
+ 1 APPPATH\Views\admin\employees\list.php(272): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(sidebar.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\employees\\list.php', 272)
+ 2 APPPATH\Views\admin\employees\list.php(272): include()
+ 3 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\employees\\list.php')
+ 4 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/employees/list', [], true)
+ 6 APPPATH\Controllers\Admin.php(856): view('admin/employees/list')
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->listEmployees()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

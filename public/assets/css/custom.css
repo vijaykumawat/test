@@ -1,0 +1,23 @@
+.draggable-header {
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 4px;
+  background: #f8f9fa;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: grab;
+}
+.draggable-header:active {
+  cursor: grabbing;
+}
+.drop-zone {
+  min-height: 40px;
+  border: 2px dashed #ccc;
+  margin-bottom: 8px;
+  padding: 6px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.drop-zone.bg-light {
+  border-color: #007bff;
+  background-color: #e9f5ff;
+}

@@ -1,0 +1,68 @@
+ERROR - 2026-06-11 18:50:02 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\xampp\htdocs\gbinsurance\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 D:\xampp\htdocs\gbinsurance\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'gb_insurance', 3306, '', 0)
+#1 D:\xampp\htdocs\gbinsurance\system\Database\BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\xampp\htdocs\gbinsurance\system\Database\BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\xampp\htdocs\gbinsurance\system\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\xampp\htdocs\gbinsurance\system\Model.php(297): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\xampp\htdocs\gbinsurance\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 D:\xampp\htdocs\gbinsurance\app\Models\PolicyModel.php(153): CodeIgniter\BaseModel->first()
+#7 D:\xampp\htdocs\gbinsurance\app\Controllers\Admin.php(97): App\Models\PolicyModel->getPolicyByNumber('132/02/21/0527/...')
+#8 D:\xampp\htdocs\gbinsurance\system\CodeIgniter.php(974): App\Controllers\Admin->uploadPolicyPost()
+#9 D:\xampp\htdocs\gbinsurance\system\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#10 D:\xampp\htdocs\gbinsurance\system\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\xampp\htdocs\gbinsurance\system\Boot.php(417): CodeIgniter\CodeIgniter->run()
+#12 D:\xampp\htdocs\gbinsurance\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\xampp\htdocs\gbinsurance\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in D:\xampp\htdocs\gbinsurance\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 D:\xampp\htdocs\gbinsurance\system\Database\BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\xampp\htdocs\gbinsurance\system\Database\BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\xampp\htdocs\gbinsurance\system\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\xampp\htdocs\gbinsurance\system\Model.php(297): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\xampp\htdocs\gbinsurance\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#5 D:\xampp\htdocs\gbinsurance\app\Models\PolicyModel.php(153): CodeIgniter\BaseModel->first()
+#6 D:\xampp\htdocs\gbinsurance\app\Controllers\Admin.php(97): App\Models\PolicyModel->getPolicyByNumber('132/02/21/0527/...')
+#7 D:\xampp\htdocs\gbinsurance\system\CodeIgniter.php(974): App\Controllers\Admin->uploadPolicyPost()
+#8 D:\xampp\htdocs\gbinsurance\system\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#9 D:\xampp\htdocs\gbinsurance\system\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\xampp\htdocs\gbinsurance\system\Boot.php(417): CodeIgniter\CodeIgniter->run()
+#11 D:\xampp\htdocs\gbinsurance\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\xampp\htdocs\gbinsurance\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2026-06-11 18:56:34 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\xampp\htdocs\gbinsurance\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 D:\xampp\htdocs\gbinsurance\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'gb_insurance', 3306, '', 0)
+#1 D:\xampp\htdocs\gbinsurance\system\Database\BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\xampp\htdocs\gbinsurance\system\Database\BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\xampp\htdocs\gbinsurance\system\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\xampp\htdocs\gbinsurance\system\Model.php(297): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\xampp\htdocs\gbinsurance\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 D:\xampp\htdocs\gbinsurance\app\Models\PolicyModel.php(153): CodeIgniter\BaseModel->first()
+#7 D:\xampp\htdocs\gbinsurance\app\Controllers\Admin.php(97): App\Models\PolicyModel->getPolicyByNumber('132/02/21/0527/...')
+#8 D:\xampp\htdocs\gbinsurance\system\CodeIgniter.php(974): App\Controllers\Admin->uploadPolicyPost()
+#9 D:\xampp\htdocs\gbinsurance\system\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#10 D:\xampp\htdocs\gbinsurance\system\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\xampp\htdocs\gbinsurance\system\Boot.php(417): CodeIgniter\CodeIgniter->run()
+#12 D:\xampp\htdocs\gbinsurance\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\xampp\htdocs\gbinsurance\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in D:\xampp\htdocs\gbinsurance\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 D:\xampp\htdocs\gbinsurance\system\Database\BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\xampp\htdocs\gbinsurance\system\Database\BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\xampp\htdocs\gbinsurance\system\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\xampp\htdocs\gbinsurance\system\Model.php(297): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\xampp\htdocs\gbinsurance\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#5 D:\xampp\htdocs\gbinsurance\app\Models\PolicyModel.php(153): CodeIgniter\BaseModel->first()
+#6 D:\xampp\htdocs\gbinsurance\app\Controllers\Admin.php(97): App\Models\PolicyModel->getPolicyByNumber('132/02/21/0527/...')
+#7 D:\xampp\htdocs\gbinsurance\system\CodeIgniter.php(974): App\Controllers\Admin->uploadPolicyPost()
+#8 D:\xampp\htdocs\gbinsurance\system\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#9 D:\xampp\htdocs\gbinsurance\system\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\xampp\htdocs\gbinsurance\system\Boot.php(417): CodeIgniter\CodeIgniter->run()
+#11 D:\xampp\htdocs\gbinsurance\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\xampp\htdocs\gbinsurance\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
