@@ -1,0 +1,10 @@
+CRITICAL - 2026-06-19 23:55:57 --> ErrorException: Undefined variable $session
+[Method: GET, Route: employee/dashboard]
+in APPPATH\Controllers\Employee.php on line 23.
+ 1 APPPATH\Controllers\Employee.php(23): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $session', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Employee.php', 23)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

@@ -25,13 +25,13 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                     <span class="hide-menu">Home</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="<?= base_url('/employee') ?>" aria-expanded="false">
+                    <a class="sidebar-link" href="<?= base_url('/employee/dashboard') ?>" aria-expanded="false">
                         <i class="ti ti-atom"></i>
                         <span class="hide-menu">Home</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="<?= base_url('/employee') ?>" aria-expanded="false">
+                    <a class="sidebar-link" href="<?= base_url('/employee/all-data') ?>" aria-expanded="false">
                         <i class="ti ti-file-text"></i>
                         <span class="hide-menu">All Data</span>
                     </a>

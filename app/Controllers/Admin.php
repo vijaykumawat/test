@@ -12,6 +12,8 @@ use App\Models\SubscriptionModel;
 use CodeIgniter\Email\Email;
 use CodeIgniter\I18n\Time;
 use App\Models\EmployeeSubscriptionModel;
+use App\Models\HistoryModel;
+
 use DateTime;
 
 class Admin extends BaseController
@@ -21,6 +23,7 @@ class Admin extends BaseController
     protected $ocrProcessor;
     protected $dataModel;
     protected $attendanceModel;
+    protected $historyModel;
     public function __construct()
     {
         $this->policyModel = new PolicyModel();
@@ -28,6 +31,7 @@ class Admin extends BaseController
         $this->ocrProcessor = new OCRProcessor();
         $this->dataModel = new DataModel();
         $this->attendanceModel = new AttendanceModel();     
+        $this->historyModel = new HistoryModel();
     }
 
     /**
@@ -839,120 +843,137 @@ private function containsReceiverName(string $text, array $expectedNames): bool
         return view('admin/dataloader');
     }
 
+public function uploadDataPost()
+{
+    // Accept either 'csv_file' or 'csvFile' as the input name
+    $file = $this->request->getFile('csv_file') ?: $this->request->getFile('csvFile');
 
+    if (! $file || ! $file->isValid()) {
+        return $this->response->setStatusCode(400)
+            ->setJSON(['success' => false, 'message' => 'No valid CSV uploaded']);
+    }
 
-    public function uploadDataPost()
-    {
-     
-        // Accept either 'csv_file' or 'csvFile' as the input name
-        $file = $this->request->getFile('csv_file') ?: $this->request->getFile('csvFile');
+    // Block upload if table already has data
+    $count = $this->dataModel->countAll();
+    if ($count >= 1) {
+        return $this->response->setStatusCode(400)
+            ->setJSON(['success' => false, 'message' => 'Data table already has records. Please clear before uploading.']);
+    }
 
-        if (! $file || ! $file->isValid()) {
-            return $this->response->setStatusCode(400)
-                ->setJSON(['success' => false, 'message' => 'No valid CSV uploaded']);
+    // DB fields that the user can map (exclude recordId from mapping)
+    $dbFields = [
+        'regDate','regDateMonth','regNumber','ownerName',
+        'address','vehicleMaker','vehicleModel','fuelType','saleAmt',
+        'seatCapacity','mobile','expiryDate','prevInsuCompany','finance','telecaller'
+    ];
+
+    // Read CSV header (first line)
+    $stream = fopen($file->getTempName(), 'r');
+    if ($stream === false) {
+        return $this->response->setStatusCode(500)->setJSON(['success'=>false,'message'=>'Unable to read uploaded file']);
+    }
+
+    $rawHeaders = fgetcsv($stream);
+    if ($rawHeaders === false) {
+        fclose($stream);
+        return $this->response->setStatusCode(400)->setJSON(['success'=>false,'message'=>'CSV appears empty or invalid']);
+    }
+
+    $headers = array_map(function($h){ return preg_replace('/^\x{FEFF}/u', '', trim((string)$h)); }, $rawHeaders);
+
+    // mapping JSON from the POST body
+    $mappingJson = $this->request->getPost('mapping');
+    $mapping = $mappingJson ? json_decode($mappingJson, true) : null;
+
+    // If no mapping provided, try exact auto-match (case-insensitive)
+    if (! $mapping) {
+        $lowerHeaders = array_map('mb_strtolower', $headers);
+        $allFound = true;
+        $mapping = [];
+        foreach ($dbFields as $f) {
+            $pos = array_search(mb_strtolower($f), $lowerHeaders);
+            if ($pos === false) { $allFound = false; break; }
+            $mapping[$f] = $headers[$pos];
         }
-
-        $count = $this->dataModel->countAll();
-        if ($count >= 1) {
-            return $this->response->setStatusCode(400)
-                ->setJSON(['success' => false, 'message' => 'Data table already has records. Please clear before uploading.']);
-        }
-
-        // DB fields that the user can map
-        $dbFields = [
-            'recordId','regDate','regDateMonth','regNumber','ownerName',
-            'address','vehicleMaker','vehicleModel','fuelType','saleAmt',
-            'seatCapacity','mobile','expiryDate','prevInsuCompany','finance','telecaller'
-        ];
-
-        // Read CSV header (first line)
-        $stream = fopen($file->getTempName(), 'r');
-        if ($stream === false) {
-            return $this->response->setStatusCode(500)->setJSON(['success'=>false,'message'=>'Unable to read uploaded file']);
-        }
-
-        $rawHeaders = fgetcsv($stream);
-        if ($rawHeaders === false) {
+        if (! $allFound) {
             fclose($stream);
-            return $this->response->setStatusCode(400)->setJSON(['success'=>false,'message'=>'CSV appears empty or invalid']);
+            return $this->response->setStatusCode(400)
+                ->setJSON(['success'=>false,'message'=>'Mapping required: CSV headers do not match DB fields and no mapping was submitted']);
         }
-
-        $headers = array_map(function($h){ return preg_replace('/^\x{FEFF}/u', '', trim((string)$h)); }, $rawHeaders);
-
-        // mapping JSON from the POST body
-        $mappingJson = $this->request->getPost('mapping');
-        $mapping = $mappingJson ? json_decode($mappingJson, true) : null;
-
-        // If no mapping provided, try exact auto-match (case-insensitive)
-        if (! $mapping) {
-            $lowerHeaders = array_map('mb_strtolower', $headers);
-            $allFound = true;
-            $mapping = [];
-            foreach ($dbFields as $f) {
-                $pos = array_search(mb_strtolower($f), $lowerHeaders);
-                if ($pos === false) { $allFound = false; break; }
-                $mapping[$f] = $headers[$pos];
-            }
-            if (! $allFound) {
+    } else {
+        // ensure mapping covers required dbFields
+        foreach ($dbFields as $f) {
+            if (!isset($mapping[$f]) || $mapping[$f] === '') {
                 fclose($stream);
                 return $this->response->setStatusCode(400)
-                    ->setJSON(['success'=>false,'message'=>'Mapping required: CSV headers do not match DB fields and no mapping was submitted']);
-            }
-        } else {
-            // ensure mapping covers required dbFields
-            foreach ($dbFields as $f) {
-                if (!isset($mapping[$f]) || $mapping[$f] === '') {
-                    fclose($stream);
-                    return $this->response->setStatusCode(400)
-                        ->setJSON(['success'=>false,'message'=>"Mapping incomplete: missing mapping for {$f}"]);
-                }
+                    ->setJSON(['success'=>false,'message'=>"Mapping incomplete: missing mapping for {$f}"]);
             }
         }
+    }
 
-        // Build header index lookup
-        $headerIndex = [];
-        foreach ($headers as $i => $h) { $headerIndex[mb_strtolower($h)] = $i; }
+    // Build header index lookup
+    $headerIndex = [];
+    foreach ($headers as $i => $h) { $headerIndex[mb_strtolower($h)] = $i; }
 
-        $rows = [];
-        while (($csvRow = fgetcsv($stream)) !== false) {
-            // skip empty rows
-            $nonEmpty = false;
-            foreach ($csvRow as $c) { if (trim((string)$c) !== '') { $nonEmpty = true; break; } }
-            if (! $nonEmpty) continue;
+    $rows = [];
+    while (($csvRow = fgetcsv($stream)) !== false) {
+        // skip empty rows
+        $nonEmpty = false;
+        foreach ($csvRow as $c) { if (trim((string)$c) !== '') { $nonEmpty = true; break; } }
+        if (! $nonEmpty) continue;
 
-            $rowData = [];
-            foreach ($dbFields as $field) {
-                $csvHeader = $mapping[$field];
-                $idx = array_key_exists(mb_strtolower($csvHeader), $headerIndex) ? $headerIndex[mb_strtolower($csvHeader)] : null;
-                $value = ($idx !== null && array_key_exists($idx, $csvRow)) ? trim($csvRow[$idx]) : null;
-                $rowData[$field] = $value;
-            }
+        $rowData = [];
 
-            // auto-fill required fields
-            $rowData['dataUploadDate'] = date('Y-m-d H:i:s');
-            $rowData['actionTaken']    = 0;
-            $rowData['isImportant']    = 0;
-            $rowData['alreadySale']    = 0;
-            $rowData['modifiyDate']    = date('Y-m-d H:i:s');
-            $rowData['isIntrested']    = 0;
-            $rowData['saleInGb']       = 0;
+        // Generate system recordId (alphanumeric, 15–16 chars)
+        $rowData['recordId'] = $this->generateRecordId();
 
-            $rows[] = $rowData;
-        }
-        fclose($stream);
-
-        if (empty($rows)) {
-            return $this->response->setStatusCode(400)->setJSON(['success'=>false,'message'=>'No data rows found in CSV']);
+        foreach ($dbFields as $field) {
+            $csvHeader = $mapping[$field];
+            $idx = array_key_exists(mb_strtolower($csvHeader), $headerIndex) ? $headerIndex[mb_strtolower($csvHeader)] : null;
+            $value = ($idx !== null && array_key_exists($idx, $csvRow)) ? trim($csvRow[$idx]) : null;
+            $rowData[$field] = $value;
         }
 
-        try {
-            $builder = $this->dataModel->db->table('data');
-            $builder->insertBatch($rows);
-        } catch (\Exception $e) {
-            return $this->response->setStatusCode(500)->setJSON(['success'=>false,'message'=>'DB insert failed: '.$e->getMessage()]);
-        }
+        // auto-fill required fields
+        $rowData['dataUploadDate'] = date('Y-m-d H:i:s');
+        $rowData['actionTaken']    = 0;
+        $rowData['isImportant']    = 0;
+        $rowData['alreadySale']    = 0;
+        $rowData['modifiyDate']    = date('Y-m-d H:i:s');
+        $rowData['isIntrested']    = 0;
+        $rowData['saleInGb']       = 0;
 
-        return $this->response->setJSON(['success'=>true,'message'=>'Data uploaded successfully']);
+        $rows[] = $rowData;
+    }
+    fclose($stream);
+
+    if (empty($rows)) {
+        return $this->response->setStatusCode(400)->setJSON(['success'=>false,'message'=>'No data rows found in CSV']);
+    }
+
+    try {
+        $builder = $this->dataModel->db->table('data');
+        $builder->insertBatch($rows);
+    } catch (\Exception $e) {
+        return $this->response->setStatusCode(500)->setJSON(['success'=>false,'message'=>'DB insert failed: '.$e->getMessage()]);
+    }
+
+    return $this->response->setJSON(['success'=>true,'message'=>'Data uploaded successfully']);
+}
+
+/**
+ * Generate a unique alphanumeric recordId (15–16 characters).
+ */
+    private function generateRecordId(): string
+    {
+        do {
+            // Generate 12 hex characters (from random bytes) + 4 digits
+            $randomHex = substr(bin2hex(random_bytes(8)), 0, 12); // already lowercase
+            $randomNum = str_pad((string)random_int(1000, 9999), 4, '0', STR_PAD_LEFT); // 4 digits
+            $id = substr($randomHex . $randomNum, 0, 16); // total length 15–16 chars
+        } while ($this->dataModel->where('recordId', $id)->countAllResults() > 0);
+
+        return $id;
     }
 
     public function removeAllData(){
@@ -966,7 +987,7 @@ private function containsReceiverName(string $text, array $expectedNames): bool
                 ]);
             }
             $this->dataModel->db->table('data')->truncate();
-
+            //$this->historyModel->db->table('history')->truncate();
             return $this->response->setJSON([
                 'success' => true,
                 'message' => 'All data removed successfully!'
@@ -1105,6 +1126,7 @@ private function containsReceiverName(string $text, array $expectedNames): bool
         }
 
         // Step 2: Purchase subscription (employeeId now exists)
+        /*
         $res = $this->purchaseSubscription(
             $this->request->getFile('paymentScreenshot'),
             $employeeData
@@ -1113,7 +1135,7 @@ private function containsReceiverName(string $text, array $expectedNames): bool
         if (!$res['success']) {
             $db->transRollback();
             return redirect()->back()->with('error', 'Subscription verification failed: ' . $res['message']);
-        }
+        } */
 
         // Commit transaction
         $db->transComplete();
@@ -1526,6 +1548,15 @@ private function containsReceiverName(string $text, array $expectedNames): bool
             'success' => true,
             'message' => 'Attendance deleted successfully'
         ]);
+    }
+
+    public function allData()
+    {
+        // Fetch all rows from the data table
+        $rows = $this->dataModel->findAll();
+
+        // Pass them to the view
+        return view('admin/all_data', ['rows' => $rows]);
     }
 
 }

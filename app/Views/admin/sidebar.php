@@ -37,6 +37,12 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link" href="<?= base_url('/admin/all-data') ?>" aria-expanded="false">
+                        <i class="ti ti-box-multiple"></i>
+                        <span class="hide-menu">All Data</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link justify-content-between has-arrow" href="javascript:void(0)"
                         aria-expanded="false">
                         <div class="d-flex align-items-center gap-3">

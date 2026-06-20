@@ -3,7 +3,6 @@
 use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
-$routes->get('/', 'Home::index');
 
 $routes->get('/admin', 'Admin::index');
 
@@ -64,6 +63,7 @@ $routes->post('/admin/attendance/delete', 'Admin::deleteAttendance');
 $routes->get('/admin/attendance/history', 'Admin::employeeAttendanceHistory');
 $routes->post('/admin/employee-update', 'Admin::updateEmployee');
 $routes->post('/admin/extract-data', 'Admin::extractData');
+$routes->get('/admin/all-data', 'Admin::allData');
 
 
 // Employee Authentication Routes
@@ -71,4 +71,10 @@ $routes->get('/employee/login', 'Auth::loginForm');       // Show login form
 $routes->post('/employee/login', 'Auth::login');         // Handle login POST
 $routes->get('/employee/logout', 'Auth::logout'); 
 
-$routes->get('/employee/dashboard', 'Employee::dashboard'); // Employee dashboard route
+
+$routes->get('/employee/dashboard', 'Employee::dashboard');
+$routes->get('/employee/dashboard/(:any)', 'Employee::dashboard/$1'); // Employee dashboard route
+$routes->post('/employee/save', 'Employee::save');       // Show login form
+$routes->get('/employee/all-data', 'Employee::allData');       // Show login form
+$routes->get('/employee/nextRecord/(:any)', 'Employee::nextRecord/$1');       // Show login form
+

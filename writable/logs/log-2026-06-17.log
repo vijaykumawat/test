@@ -1,0 +1,10 @@
+CRITICAL - 2026-06-17 01:37:38 --> ErrorException: Undefined variable $res
+[Method: POST, Route: admin/employee-add]
+in APPPATH\Controllers\Admin.php on line 1142.
+ 1 APPPATH\Controllers\Admin.php(1142): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $res', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 1142)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->addEmployee()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

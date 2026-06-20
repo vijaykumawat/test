@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\EmployeeModel;
+use App\Models\DataModel;
 use App\Models\EmployeeLoginHistoryModel;
 
 class Auth extends BaseController
@@ -14,41 +15,52 @@ class Auth extends BaseController
 
     public function login()
     {
-
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
         $employeeModel = new EmployeeModel();
         $employee = $employeeModel->where('username', $username)->first();
-        
-        if($employee['isActive'] == 0) {
-                return redirect()->back()->with('error', 'Your account is inactive. Please contact admin.');
+
+        if (!$employee) {
+            return redirect()->back()->with('error', 'User not found');
+        }
+
+        if ($employee['isActive'] == 0) {
+            return redirect()->back()->with('error', 'Your account is inactive. Please contact admin.');
         }
 
         if ($employee && $password === $employee['password']) {
-            // Save session
-            
-            session()->set('employeeId', $employee['employeeId']);
-            session()->set('employeeName', $employee['name']);   // store name
-            session()->set('isLoggedIn', true);
-            
-            // Record login history
+            $session = session();
+            $session->set('employeeId', $employee['employeeId']);
+            $session->set('employeeName', $employee['name']);
+            $session->set('isLoggedIn', true);
+
+           
             $historyModel = new EmployeeLoginHistoryModel();
-        
             $historyModel->insert([
                 'employeeId' => $employee['employeeId'],
                 'status'     => 'LoggedIn'
             ]);
-            
-            
 
-            if($employee['jobTitle'] === 'Admin') {
+            if ($employee['jobTitle'] === 'Admin') {
                 return redirect()->to('/admin');
             }
-            return redirect()->to('/employee/dashboard');
+
+            $dataModel = new DataModel();
+            $dataRecord = $dataModel->where([
+                'telecaller' => $employee['employeeId'], // or nickName
+                'actionTaken' => 0
+            ])->first();
+
+
+
+            if ($dataRecord) {
+                return redirect()->to('/employee/dashboard/'.$dataRecord['recordId']);
+            } else {
+                return redirect()->to('/employee/dashboard');
+            }
         }
 
-        
         return redirect()->back()->with('error', 'Invalid credentials');
     }
 
@@ -80,4 +92,6 @@ class Auth extends BaseController
         session()->destroy();
         return redirect()->to('/employee/login')->with('success', 'Logged out successfully');
     }
+
+
 }

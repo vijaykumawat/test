@@ -266,8 +266,8 @@
                                 <div class="modal fade" id="subscriptionModal" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Purchase Subscription</h5>
+                                        <div class="modal-header text-danger">
+                                            <h5 class="modal-title bg-danger-subtle">Purchase Subscription</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
                                         <div class="modal-body">
@@ -280,7 +280,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" form="employeeForm" id="finalSubmitBtn" class="btn btn-success" disabled>
+                                            <button type="submit" form="employeeForm" id="finalSubmitBtn" class="btn btn-danger" disabled>
                                                 Submit
                                             </button>
                                         </div>

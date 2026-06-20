@@ -1,0 +1,21 @@
+ownerName,address,mobile,regNumber,regDate,regDateMonth,expiryDate,vehicleMaker,vehicleModel,fuelType,saleAmt,seatCapacity,prevInsuCompany,finance,telecaller
+Rajesh Sharma,"Pune, Maharashtra",9876543210,MH12AB1234,2026-06-01,June,2027-06-01,Maruti,Suzuki Swift,Petrol,450000,5,ICICI Lombard,HDFC Bank,7ca7cf176fb9d5a8
+Anita Verma,"Delhi, India",9123456789,DL8CAF5678,2026-05-15,May,2027-05-15,Hyundai,Creta,Diesel,1200000,5,Bajaj Allianz,Axis Bank,7ca7cf176fb9d5a8
+Sunil Patil,"Ahmedabad, Gujarat",9988776655,GJ1XY7890,2026-04-20,April,2027-04-20,Honda,City,CNG,950000,5,Tata AIG,SBI Bank,7ca7cf176fb9d5a8
+Meena Rao,"Bangalore, Karnataka",9876501234,KA05MN4321,2026-03-10,March,2027-03-10,Toyota,Innova,Diesel,1600000,7,New India Assurance,ICICI Bank,7ca7cf176fb9d5a8
+Vikas Singh,"Lucknow, Uttar Pradesh",9123409876,UP16GH8765,2026-02-05,February,2027-02-05,Ford,Ecosport,Petrol,800000,5,HDFC Ergo,HDFC Bank,7ca7cf176fb9d5a8
+Shreya Das,"Kolkata, West Bengal",9988701122,WB20JK3456,2026-01-25,January,2027-01-25,Tata,Nexon,Electric,1400000,5,Oriental Insurance,Axis Bank,7ca7cf176fb9d5a8
+Arjun Kulkarni,"Pune, Maharashtra",9876543211,MH14PQ9876,2026-06-10,June,2027-06-10,Mahindra,Thar,Diesel,1500000,4,United India Insurance,SBI Bank,7ca7cf176fb9d5a8
+Kavita Sharma,"Delhi, India",9123456780,DL9RS2345,2026-05-22,May,2027-05-22,Renault,Kwid,Petrol,500000,5,Future Generali,HDFC Bank,7ca7cf176fb9d5a8
+Ramesh Patel,"Surat, Gujarat",9988776611,GJ2LM7654,2026-04-18,April,2027-04-18,Nissan,Magnite,Petrol,700000,5,ICICI Lombard,Axis Bank,7ca7cf176fb9d5a8
+Deepa Nair,"Mysore, Karnataka",9876509876,KA06UV1234,2026-03-30,March,2027-03-30,Volkswagen,Polo,Diesel,900000,5,Bajaj Allianz,SBI Bank,7ca7cf176fb9d5a8
+Prakash Jadhav,"Pune, Maharashtra",9876543222,MH15XY4321,2026-06-02,June,2027-06-02,Maruti,Baleno,Petrol,650000,5,ICICI Lombard,HDFC Bank,Rohit
+Neha Gupta,"Delhi, India",9123456799,DL10AB5678,2026-05-12,May,2027-05-12,Hyundai,i20,Diesel,1100000,5,Bajaj Allianz,Axis Bank,Rohit
+Suresh Mehta,"Ahmedabad, Gujarat",9988776622,GJ3CD7890,2026-04-25,April,2027-04-25,Honda,Amaze,Petrol,800000,5,Tata AIG,SBI Bank,Rohit
+Anjali Menon,"Bangalore, Karnataka",9876501222,KA07EF4321,2026-03-15,March,2027-03-15,Toyota,Yaris,Petrol,1200000,5,New India Assurance,ICICI Bank,Rohit
+Manoj Kumar,"Lucknow, Uttar Pradesh",9123409888,UP17GH8765,2026-02-08,February,2027-02-08,Ford,Figo,Diesel,600000,5,HDFC Ergo,HDFC Bank,Rohit
+Priyanka Sen,"Kolkata, West Bengal",9988701133,WB21JK3456,2026-01-28,January,2027-01-28,Tata,Altroz,Petrol,750000,5,Oriental Insurance,Axis Bank,Rohit
+Sachin Deshmukh,"Pune, Maharashtra",9876543233,MH16PQ9876,2026-06-12,June,2027-06-12,Mahindra,XUV500,Diesel,1700000,7,United India Insurance,SBI Bank,Rohit
+Rekha Sharma,"Delhi, India",9123456777,DL11RS2345,2026-05-24,May,2027-05-24,Renault,Duster,Diesel,1000000,5,Future Generali,HDFC Bank,Rohit
+Harish Patel,"Surat, Gujarat",9988776633,GJ4LM7654,2026-04-19,April,2027-04-19,Nissan,Kicks,Petrol,950000,5,ICICI Lombard,Axis Bank,Rohit
+Divya Nair,"Mysore, Karnataka",9876509888,KA08UV1234,2026-03-31,March,2027-03-31,Volkswagen,Vento,Diesel,1300000,5,Bajaj Allianz,SBI Bank,Rohit
