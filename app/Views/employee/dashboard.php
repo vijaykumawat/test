@@ -80,7 +80,7 @@
                                             <div class="row">
                                                 <div class="col-sm-1">
                                                     <a
-                                                        href="<?php echo base_url();?>starRecord/<?php echo $recordId;?>/<?php if($isImportant){echo "0";}else{echo "1";}?>">
+                                                        href="<?php echo base_url();?>employee/starRecord/<?php echo $recordId;?>/<?php if($isImportant){echo "0";}else{echo "1";}?>">
                                                         <i class="ti ti-star"
                                                             style="font-size:48px;color:<?php if(!$isImportant){echo 'black';}else{echo "#FFD700";} ?>"></i>
                                                     </a>

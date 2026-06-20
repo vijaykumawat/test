@@ -3,78 +3,65 @@
 use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
+// Employee Authentication Routes (no filter)
+$routes->get('/employee/login', 'Auth::loginForm');
+$routes->post('/employee/login', 'Auth::login');
+$routes->get('/employee/logout', 'Auth::logout');
 
-$routes->get('/admin', 'Admin::index');
+// Protected Employee Routes
+$routes->group('employee', ['filter' => 'authEmployee'], function($routes) {
+    $routes->get('dashboard', 'Employee::dashboard');
+    $routes->get('dashboard/(:any)', 'Employee::dashboard/$1');
+    $routes->post('save', 'Employee::save');
+    $routes->get('all-data', 'Employee::allData');
+    $routes->get('nextRecord/(:any)', 'Employee::nextRecord/$1');
+    $routes->get('starRecord/(:any)/(:any)', 'Employee::starRecord/$1/$2');
+    $routes->get('allStarRecord', 'Employee::allStarRecord');
+});
 
-// Upload routes
-$routes->get('/admin/upload', 'Admin::uploadPolicy');
-$routes->post('/admin/upload', 'Admin::uploadPolicyPost');
-//$routes->get('/admin/data-loader', 'Admin::dataLoader');
-$routes->get('/admin/data-loader', 'Admin::dataLoader');
-$routes->post('/admin/upload-data', 'Admin::uploadDataPost');
-// Search routes
-$routes->get('/admin/search-policy', 'Admin::searchPolicy');
-$routes->get('/admin/search-policy-api', 'Admin::searchPolicyApi');
-$routes->get('/admin/download-policy/(:num)', 'Admin::downloadPolicy/$1');
-$routes->delete('/admin/policy/(:num)', 'Admin::deletePolicy/$1');
-$routes->post('/admin/policy/(:num)', 'Admin::updatePolicy/$1');
-
-// Expired policies routes
-$routes->get('/admin/current-expiries', 'Admin::expiredCurrentMonth');
-$routes->get('/admin/current-expiries-api', 'Admin::expiredCurrentMonthApi');
-$routes->get('/admin/next-expiries', 'Admin::expiredNextMonth');
-$routes->get('/admin/next-expiries-api', 'Admin::expiredNextMonthApi');
-
-// Image OCR route
-$routes->post('/admin/ocr', 'Admin::extractImageText');
-
-// Excel export routes
-$routes->get('/admin/export-expired', 'Admin::exportExpiredExcel');
-$routes->get('/admin/export-next-expiries', 'Admin::exportNextExpiriesExcel');
-// Renew subscription
-$routes->get('/admin/renew', 'Admin::renewSubscription');
-$routes->post('/admin/renew', 'Admin::renewSubscriptionPost');
-$routes->get('/admin/payment-history', 'Admin::paymentHistory');
-
-// remove data loader route if not needed
-$routes->post('/admin/remove-all-data', 'Admin::removeAllData');
-
-//Employee routes
-$routes->get('/admin/employees', 'Admin::listEmployees');
-$routes->get('/admin/employee/(:any)', 'Admin::viewEmployee/$1');
-$routes->get('/admin/employees/(:num)/edit', 'Admin::editEmployee/$1');
-$routes->post('/admin/employees/(:num)/edit', 'Admin::updateEmployee/$1');
-$routes->delete('/admin/employees/(:num)', 'Admin::deleteEmployee/$1');
-$routes->get('/admin/employees/new', 'Admin::newEmployee');
-$routes->post('/admin/employee-add', 'Admin::addEmployee');
-
-// Attendance routes
-$routes->get('/admin/attendance/mark', 'Admin::markAttendancePage');
-$routes->post('/admin/attendance/save', 'Admin::saveAttendance');
-$routes->get('/admin/attendance/report', 'Admin::attendanceReportPage');
-$routes->post('/admin/attendance/get-report', 'Admin::getAttendanceReport');
-$routes->get('/admin/attendance/export', 'Admin::exportAttendanceReport');
-$routes->get('/admin/attendance/monthly', 'Admin::monthlyAttendancePage');
-$routes->post('/admin/attendance/get-monthly', 'Admin::getMonthlyAttendance');
-$routes->get('/admin/attendance/history/(:num)', 'Admin::employeeAttendanceHistory/$1');
-$routes->post('/admin/attendance/today-stats', 'Admin::getTodayStats');
-$routes->post('/admin/attendance/update', 'Admin::updateAttendance');
-$routes->post('/admin/attendance/delete', 'Admin::deleteAttendance');
-$routes->get('/admin/attendance/history', 'Admin::employeeAttendanceHistory');
-$routes->post('/admin/employee-update', 'Admin::updateEmployee');
-$routes->post('/admin/extract-data', 'Admin::extractData');
-$routes->get('/admin/all-data', 'Admin::allData');
-
-
-// Employee Authentication Routes
-$routes->get('/employee/login', 'Auth::loginForm');       // Show login form
-$routes->post('/employee/login', 'Auth::login');         // Handle login POST
-$routes->get('/employee/logout', 'Auth::logout'); 
-
-
-$routes->get('/employee/dashboard', 'Employee::dashboard');
-$routes->get('/employee/dashboard/(:any)', 'Employee::dashboard/$1'); // Employee dashboard route
-$routes->post('/employee/save', 'Employee::save');       // Show login form
-$routes->get('/employee/all-data', 'Employee::allData');       // Show login form
-$routes->get('/employee/nextRecord/(:any)', 'Employee::nextRecord/$1');       // Show login form
-
+// Protected Admin Routes
+$routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
+    $routes->get('/', 'Admin::index');
+    $routes->get('upload', 'Admin::uploadPolicy');
+    $routes->post('upload', 'Admin::uploadPolicyPost');
+    $routes->get('data-loader', 'Admin::dataLoader');
+    $routes->post('upload-data', 'Admin::uploadDataPost');
+    $routes->get('search-policy', 'Admin::searchPolicy');
+    $routes->get('search-policy-api', 'Admin::searchPolicyApi');
+    $routes->get('download-policy/(:num)', 'Admin::downloadPolicy/$1');
+    $routes->delete('policy/(:num)', 'Admin::deletePolicy/$1');
+    $routes->post('policy/(:num)', 'Admin::updatePolicy/$1');
+    $routes->get('current-expiries', 'Admin::expiredCurrentMonth');
+    $routes->get('current-expiries-api', 'Admin::expiredCurrentMonthApi');
+    $routes->get('next-expiries', 'Admin::expiredNextMonth');
+    $routes->get('next-expiries-api', 'Admin::expiredNextMonthApi');
+    $routes->post('ocr', 'Admin::extractImageText');
+    $routes->get('export-expired', 'Admin::exportExpiredExcel');
+    $routes->get('export-next-expiries', 'Admin::exportNextExpiriesExcel');
+    $routes->get('renew', 'Admin::renewSubscription');
+    $routes->post('renew', 'Admin::renewSubscriptionPost');
+    $routes->get('payment-history', 'Admin::paymentHistory');
+    $routes->post('remove-all-data', 'Admin::removeAllData');
+    $routes->get('employees', 'Admin::listEmployees');
+    $routes->get('employee/(:any)', 'Admin::viewEmployee/$1');
+    $routes->get('employees/(:num)/edit', 'Admin::editEmployee/$1');
+    $routes->post('employees/(:num)/edit', 'Admin::updateEmployee/$1');
+    $routes->delete('employees/(:num)', 'Admin::deleteEmployee/$1');
+    $routes->get('employees/new', 'Admin::newEmployee');
+    $routes->post('employee-add', 'Admin::addEmployee');
+    $routes->get('attendance/mark', 'Admin::markAttendancePage');
+    $routes->post('attendance/save', 'Admin::saveAttendance');
+    $routes->get('attendance/report', 'Admin::attendanceReportPage');
+    $routes->post('attendance/get-report', 'Admin::getAttendanceReport');
+    $routes->get('attendance/export', 'Admin::exportAttendanceReport');
+    $routes->get('attendance/monthly', 'Admin::monthlyAttendancePage');
+    $routes->post('attendance/get-monthly', 'Admin::getMonthlyAttendance');
+    $routes->get('attendance/history/(:num)', 'Admin::employeeAttendanceHistory/$1');
+    $routes->post('attendance/today-stats', 'Admin::getTodayStats');
+    $routes->post('attendance/update', 'Admin::updateAttendance');
+    $routes->post('attendance/delete', 'Admin::deleteAttendance');
+    $routes->get('attendance/history', 'Admin::employeeAttendanceHistory');
+    $routes->post('employee-update', 'Admin::updateEmployee');
+    $routes->post('extract-data', 'Admin::extractData');
+    $routes->get('all-data', 'Admin::allData');
+});

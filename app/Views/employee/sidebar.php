@@ -8,7 +8,7 @@ $currentRoute = service('router')->getMatchedRoute()[0];
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-            <a href="<?= base_url('/employee') ?>" class="text-nowrap logo-img" style="margin-top:15px;">
+            <a href="<?= base_url('/employee/dashboard') ?>" class="text-nowrap logo-img" style="margin-top:15px;">
                 <img src="<?= base_url('/assets/images/logos/9.png') ?>" alt="" width=60px; height=60px; />
             <strong class="ms-2" style="font-size:30px; position:relative; top:10px;">Telecaller</strong>
 
@@ -37,7 +37,7 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="<?= base_url('/employee') ?>" aria-expanded="false">
+                    <a class="sidebar-link" href="<?= base_url('/employee/allStarRecord') ?>" aria-expanded="false">
                         <i class="ti ti-star"></i>
                         <span class="hide-menu">Star Records</span>
                     </a>

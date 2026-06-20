@@ -6,6 +6,7 @@
                                 <i class="ti ti-menu-2"></i>
                             </a>
                         </li>
+                        <!--
                         <li class="nav-item dropdown">
                             <a class="nav-link " href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -22,7 +23,7 @@
                                     </a>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
@@ -46,6 +47,7 @@
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
+                                        <!--
                                         <a href="javascript:void(0)"
                                             class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
@@ -60,7 +62,7 @@
                                             class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-list-check fs-6"></i>
                                             <p class="mb-0 fs-3">My Task</p>
-                                        </a>
+                                        </a> -->
                                         <a href="<?= base_url('/employee/logout') ?>"
                                             class="btn btn-outline-primary mx-3 mt-2 d-block">Logout1</a>
                                     </div>

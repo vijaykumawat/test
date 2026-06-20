@@ -223,29 +223,7 @@ class Employee extends BaseController
             
         return view('employee/allData',$data);    
     }
-    /*
-    public function prevRecord($param=0){
-        $session = session();
-        helper(['form']);
-        $dataModel = new DataModel();
-        
-        $db = db_connect();
-        
-        $sql = 'SELECT * FROM `data` WHERE recordId = (SELECT MAX(recordId) FROM `data` WHERE telecaller = ? AND actionTaken = ? AND recordId < ?)';
-        $query = $db->query($sql, [$session->get('employeeId') , 1,$param]);
-        $record = $query->getRow();
-        if($record){
-        return redirect()->to('/employee/dashboard/'.$record->recordId);
-        }
-        else{
-
-            $session->setFlashdata("message", "Data Not Found");
-            
-            return redirect()->to('/employee/dashboard/'.$param);
-            //return "No Data Found!"; 
-        }    
-        
-    } */
+    
     public function nextRecord($param = 0)
     {
      
@@ -267,5 +245,32 @@ class Employee extends BaseController
                         ->with('error', 'No next record found');
     }
     
+    public function starRecord($recordId=0,$flag=0){
+            
+
+        $getLink = service('uri');
+         
+        
+        $session = session();
+        helper(['form']);
+        $dataModel = new DataModel();
+        
+        $data = [
+        'isImportant' => (int) $flag
+        ];
+       $dataModel->update($recordId,$data);
+     
+       return redirect()->to('/employee/dashboard/'.$recordId);
+    }
+
+    public function allStarRecord(){
+        $session = session();
+        $dataModel = new DataModel();
+        
+        
+        $data['allData'] = $dataModel->where(array('telecaller'=>$session->get('employeeId'),'isImportant'=>1))->findAll();
+        
+        return view('employee/allStarRecord',$data);    
+    }
 
 }

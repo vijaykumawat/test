@@ -31,10 +31,21 @@ class Auth extends BaseController
 
         if ($employee && $password === $employee['password']) {
             $session = session();
-            $session->set('employeeId', $employee['employeeId']);
-            $session->set('employeeName', $employee['name']);
-            $session->set('isLoggedIn', true);
+               $session->set([
+                'employeeId'   => $employee['employeeId'],
+                'employeeName' => $employee['name'],
+                'jobTitle'     => $employee['jobTitle'], // <-- add this
+                'isLoggedIn'   => true
+            ]);
+            $session->setTempdata('isLoggedIn', true, 3600);
 
+            if ($employee['jobTitle'] === 'Admin') {
+                
+                return redirect()->to('/admin');
+            }
+            return redirect()->to('/employee/dashboard');
+
+            /*
            
             $historyModel = new EmployeeLoginHistoryModel();
             $historyModel->insert([
@@ -42,9 +53,6 @@ class Auth extends BaseController
                 'status'     => 'LoggedIn'
             ]);
 
-            if ($employee['jobTitle'] === 'Admin') {
-                return redirect()->to('/admin');
-            }
 
             $dataModel = new DataModel();
             $dataRecord = $dataModel->where([
@@ -59,6 +67,7 @@ class Auth extends BaseController
             } else {
                 return redirect()->to('/employee/dashboard');
             }
+                */
         }
 
         return redirect()->back()->with('error', 'Invalid credentials');
