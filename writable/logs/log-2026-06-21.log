@@ -1,0 +1,96 @@
+CRITICAL - 2026-06-21 02:43:46 --> ErrorException: Undefined property: App\Controllers\Auth::$dataModel
+[Method: POST, Route: auth/employee-add]
+in APPPATH\Controllers\Auth.php on line 273.
+ 1 APPPATH\Controllers\Auth.php(273): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Auth::$dataModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Auth.php', 273)
+ 2 APPPATH\Controllers\Auth.php(121): App\Controllers\Auth->generateRecordId()
+ 3 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Auth->employeeAdd()
+ 4 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 5 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 02:56:18 --> Error: Class "App\Controllers\OCRProcessor" not found
+[Method: GET, Route: register]
+in APPPATH\Controllers\Auth.php on line 20.
+ 1 SYSTEMPATH\CodeIgniter.php(944): App\Controllers\Auth->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(511): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 02:56:21 --> Error: Class "App\Controllers\OCRProcessor" not found
+[Method: GET, Route: employee/login]
+in APPPATH\Controllers\Auth.php on line 20.
+ 1 SYSTEMPATH\CodeIgniter.php(944): App\Controllers\Auth->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(511): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 02:56:23 --> Error: Class "App\Controllers\OCRProcessor" not found
+[Method: GET, Route: employee/login]
+in APPPATH\Controllers\Auth.php on line 20.
+ 1 SYSTEMPATH\CodeIgniter.php(944): App\Controllers\Auth->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(511): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 02:56:33 --> Error: Class "App\Controllers\OCRProcessor" not found
+[Method: GET, Route: employee/login]
+in APPPATH\Controllers\Auth.php on line 20.
+ 1 SYSTEMPATH\CodeIgniter.php(944): App\Controllers\Auth->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(511): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 02:58:40 --> Error: Class "App\Controllers\OCRProcessor" not found
+[Method: GET, Route: employee/login]
+in APPPATH\Controllers\Auth.php on line 21.
+ 1 SYSTEMPATH\CodeIgniter.php(944): App\Controllers\Auth->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(511): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 02:59:39 --> ErrorException: Undefined variable $employeeModel
+[Method: POST, Route: employee/login]
+in APPPATH\Controllers\Auth.php on line 37.
+ 1 APPPATH\Controllers\Auth.php(37): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $employeeModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Auth.php', 37)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Auth->login()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 04:50:15 --> Error: Class "App\Filters\SessionExpireFilter" not found
+[Method: GET, Route: employee/dashboard]
+in SYSTEMPATH\Filters\Filters.php on line 299.
+ 1 SYSTEMPATH\Filters\Filters.php(239): CodeIgniter\Filters\Filters->createFilter('App\\Filters\\SessionExpireFilter')
+ 2 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+ 3 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\Filters\Filters->run('employee/dashboard', 'before')
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 05:06:31 --> ErrorException: Undefined variable $file
+[Method: POST, Route: auth/employee-add]
+in APPPATH\Controllers\Auth.php on line 167.
+ 1 APPPATH\Controllers\Auth.php(167): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $file', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Auth.php', 167)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Auth->employeeAdd()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 05:10:14 --> Error: Call to undefined method App\Controllers\Auth::containsReceiverName()
+[Method: POST, Route: auth/employee-add]
+in APPPATH\Controllers\Auth.php on line 219.
+ 1 APPPATH\Controllers\Auth.php(167): App\Controllers\Auth->purchaseSubscription(Object(CodeIgniter\HTTP\Files\UploadedFile), [...])
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Auth->employeeAdd()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

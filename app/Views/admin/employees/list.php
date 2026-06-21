@@ -295,8 +295,9 @@
                                 <h2 class="mb-0 fw-bolder fs-8">Employee Management</h2>
                             </div>
                             <div class="col-lg-4 col-md-6 d-none d-md-flex align-items-center justify-content-end">
-                                
-                                <a href="<?= base_url('/admin/employees/new') ?>" class="btn btn-primary d-flex align-items-center ms-2">
+
+                                <a href="<?= base_url('/admin/employees/new') ?>"
+                                    class="btn btn-primary d-flex align-items-center ms-2">
                                     <i class="ti ti-plus me-1"></i>
                                     Add New
                                 </a>
@@ -330,45 +331,63 @@
                                             <th>
                                                 <h6 class="fs-4 fw-semibold mb-0">Joining</h6>
                                             </th>
-                                          
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                         <?php if (!empty($employees)): ?>
-                                            <?php foreach ($employees as $emp): ?>
+                                        <?php if (!empty($employees)): ?>
+                                        <?php foreach ($employees as $emp): ?>
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <img src="<?= base_url('uploads/profile/' . ($emp['profilePhoto'] ?? 'default.jpg')) ?>"
-                                                    class="rounded-circle" width="40" height="40" alt="">
-                                                    <a  href="<?= base_url('/admin/employee/' . $emp['employeeId']) ?>">
-                                                    
-                                                    <div class="ms-3">
-                                                        <h6 class="fs-4 fw-semibold mb-0"><?php echo $emp['name']; ?></h6>
-                                                        <span class="fw-normal"><?php echo $emp['jobTitle'] ?? 'Position'; ?></span>
-                                                    </div>
+                                                    <?php
+        // Check if profile photo exists
+        $photo = $emp['profilePhoto'] ?? null;
+
+        if (empty($photo)) {
+            // Fallback based on session gender
+            $gender = session()->get('gender');
+            $photo = ($gender === 'Male') ? 'user-1.jpg' : 'user-2.jpg';
+        }
+    ?>
+                                                    <img src="<?= base_url('uploads/profile/' . $photo) ?>"
+                                                        class="rounded-circle" width="40" height="40" alt="profile-img">
+
+                                                    <a href="<?= base_url('/admin/employee/' . $emp['employeeId']) ?>">
+                                                        <div class="ms-3">
+                                                            <h6 class="fs-4 fw-semibold mb-0"><?= esc($emp['name']) ?>
+                                                            </h6>
+                                                            <span
+                                                                class="fw-normal"><?= esc($emp['jobTitle'] ?? 'Position') ?></span>
+                                                        </div>
                                                     </a>
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="mb-0 fw-normal fs-4"><?php echo $emp['username'] ?? 'Username'; ?></p>
+                                                <p class="mb-0 fw-normal fs-4">
+                                                    <?php echo $emp['username'] ?? 'Username'; ?></p>
                                             </td>
                                             <td>
-                                                <p class="mb-0 fw-normal fs-4"><?php echo $emp['password'] ?? 'Password'; ?></p>
+                                                <p class="mb-0 fw-normal fs-4">
+                                                    <?php echo $emp['password'] ?? 'Password'; ?></p>
                                             </td>
-                                            
+
                                             <td>
-                                                <span class="badge bg-success-subtle text-<?php if($emp['isActive']==1): ?>success<?php else: ?>danger<?php endif; ?>"><?php echo $emp['isActive'] == 1 ? 'Active' : 'Inactive'; ?></span>
+                                                <span
+                                                    class="badge bg-success-subtle text-<?php if($emp['isActive']==1): ?>success<?php else: ?>danger<?php endif; ?>"><?php echo $emp['isActive'] == 1 ? 'Active' : 'Inactive'; ?></span>
                                             </td>
                                             <td>
-                                                <h6 class="fs-4 fw-semibold mb-0"><?php echo $emp['hireDate'] ?? 'Joining Date'; ?></h6>
+                                                <h6 class="fs-4 fw-semibold mb-0">
+                                                    <?php echo $emp['hireDate'] ?? 'Joining Date'; ?></h6>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
                                         <?php else: ?>
-                                          <tr><td colspan="6">No employees found.</td></tr>
-                                        <?php endif; ?>   
-                                        </tbody>
+                                        <tr>
+                                            <td colspan="6">No employees found.</td>
+                                        </tr>
+                                        <?php endif; ?>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

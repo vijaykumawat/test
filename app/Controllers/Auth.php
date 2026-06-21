@@ -11,6 +11,18 @@ use DateTime;
 
 class Auth extends BaseController
 {
+    protected $dataModel;
+    protected $employeeModel;
+    protected $employeeLoginHistoryModel;
+    protected $subscriptionModel;
+    public function __construct()
+    {
+        $this->dataModel = new DataModel();
+        $this->employeeModel = new EmployeeModel();
+        $this->employeeLoginHistoryModel = new EmployeeLoginHistoryModel();
+        $this->subscriptionModel = new EmployeeSubscriptionModel();
+    }
+
     public function loginForm()
     {
         return view('login'); // your login view
@@ -18,11 +30,20 @@ class Auth extends BaseController
 
     public function login()
     {
+        $session = session();
+        // 🚫 Prevent re-login if already logged in
+        if ($session->get('isLoggedIn')) {
+            if ($session->get('jobTitle') === 'Admin') {
+                return redirect()->to('/admin')->with('info', 'You are already logged in.');
+            }
+            return redirect()->to('/employee/dashboard')->with('info', 'You are already logged in.');
+        }
+
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        $employeeModel = new EmployeeModel();
-        $employee = $employeeModel->where('username', $username)->first();
+        //$employeeModel = new EmployeeModel();
+        $employee = $this->employeeModel->where('username', $username)->first();
 
         if (!$employee) {
             
@@ -34,8 +55,7 @@ class Auth extends BaseController
         }
 
         if ($employee && $password === $employee['password']) {
-            $session = session();
-               $session->set([
+                $session->set([
                 'employeeId'   => $employee['employeeId'],
                 'employeeName' => $employee['name'],
                 'jobTitle'     => $employee['jobTitle'], // <-- add this
@@ -44,36 +64,17 @@ class Auth extends BaseController
                 'isLoggedIn'   => true
             ]);
             $session->setTempdata('isLoggedIn', true, 3600);
-
-            if ($employee['jobTitle'] === 'Admin') {
-                
-                return redirect()->to('/admin');
-            }
-            return redirect()->to('/employee/dashboard');
-
-            /*
-           
-            $historyModel = new EmployeeLoginHistoryModel();
-            $historyModel->insert([
+            
+            $this->employeeLoginHistoryModel->insert([
                 'employeeId' => $employee['employeeId'],
                 'status'     => 'LoggedIn'
             ]);
 
-
-            $dataModel = new DataModel();
-            $dataRecord = $dataModel->where([
-                'telecaller' => $employee['employeeId'], // or nickName
-                'actionTaken' => 0
-            ])->first();
-
-
-
-            if ($dataRecord) {
-                return redirect()->to('/employee/dashboard/'.$dataRecord['recordId']);
-            } else {
-                return redirect()->to('/employee/dashboard');
+            if ($employee['jobTitle'] === 'Admin') {
+                return redirect()->to('/admin');
             }
-                */
+            return redirect()->to('/employee/dashboard');
+
         }
 
         return redirect()->back()->with('error', 'Invalid credentials');
@@ -82,13 +83,11 @@ class Auth extends BaseController
     public function logout()
     {
         $employeeId = session()->get('employeeId');
-        //$historyModel = new EmployeeLoginHistoryModel();
         
          if ($employeeId) {
-            $historyModel = new EmployeeLoginHistoryModel();
-
+           
             // Get the latest login record with no logoutTime
-            $lastLogin = $historyModel->where('employeeId', $employeeId)
+            $lastLogin = $this->employeeLoginHistoryModel->where('employeeId', $employeeId)
                                     ->where('logoutTime', null)
                                     ->orderBy('loginTime', 'DESC')
                                     ->first();
@@ -115,18 +114,10 @@ class Auth extends BaseController
 
     public function employeeAdd()
     {
-        $employeeModel = new \App\Models\EmployeeModel();
+        //$employeeModel = new \App\Models\EmployeeModel();
         $db = \Config\Database::connect();
 
-        // Handle file upload
-        $file = $this->request->getFile('paymentScreenshot');
-        $photoName = null;
-        if ($file && $file->isValid() && !$file->hasMoved()) {
-            $photoName = $file->getRandomName();
-            $file->move(FCPATH . 'uploads/profile', $photoName);
-        }
-
-        $empid = substr(bin2hex(random_bytes(8)), 0, 16);
+        $empid = $this->generateRecordId();
 
         $data = [
             'employeeId'       => $empid,
@@ -136,8 +127,8 @@ class Auth extends BaseController
             'phoneNumber'      => $this->request->getPost('phoneNumber'),
             'email'            => $this->request->getPost('email'),
             'username'         => $this->request->getPost('username'),
-            'password'         => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'profilePhoto'     => $photoName,
+            'password'         => $this->request->getPost('password'),
+            'profilePhoto'     => '',
             'hireDate'         => date('Y-m-d'),
             'jobTitle'         => 'Admin',
             'employmentStatus' => 'Active',
@@ -153,26 +144,37 @@ class Auth extends BaseController
             $data['dateOfBirth'] = $date ? $date->format('Y-m-d') : $data['dateOfBirth'];
         }
 
+        /* Handle profile image upload
+        $file = $this->request->getFile('profile_img');
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $newName = $file->getRandomName();
+            $targetPath = FCPATH . 'uploads/profile/';
+            $file->move($targetPath, $newName);
+            $employeeData['profilePhoto'] = $newName;
+        } else {
+            $employeeData['profilePhoto'] = null; // no file selected
+        }
+        */
+        
         $db->transStart();
 
-        if ($employeeModel->insert($data) === false) {
+        if ($this->employeeModel->insert($data) === false) {
             $db->transRollback();
             return redirect()->to(site_url('register'))
                             ->with('error', 'Failed to add employee.');
         }
 
-        $res = $this->purchaseSubscription($file, $data);
+        $res = $this->purchaseSubscription($this->request->getFile('paymentScreenshot'), $data);
         if (!$res['success']) {
-
-
             $db->transRollback();
-return redirect()->to(base_url('register'))
+            return redirect()->to(base_url('register'))
                  ->with('error', 'Subscription verification failed: ' . $res['message']);
         }
-
+        
         $db->transComplete();
+        
 
-        return redirect()->to(site_url('register'))
+        return redirect()->to(site_url('employee/login'))
                         ->with('success', 'Employee added successfully');
     }
 
@@ -210,16 +212,28 @@ return redirect()->to(base_url('register'))
             "Vijay Kailas Kumawat",
             "Vijey Kumawatt",
             "Vijay Kailash Kumawat",
-            "Vijay Kumawat"
+            "Vijay Kumawat",
+            "Vijay",
+            "MR VIJAY KAILAS KUMAWAT",
+            "KUMAWAT",
+            "Kumawat"
         ];
 
         $text          = trim($ocrResult['text'] ?? '');
+        print_r("text::".$text);
+        log_message('debug', 'Image extract data: ' . $text);
         $receiverValid = $this->containsReceiverName($text, $validNames);
         $dateText      = $this->extractDateFromText($text);
         $dateValid     = $this->isTodayDate($dateText);
 
+        print_r("receiver valid::".$receiverValid);
+        print_r("DateText::".$dateText);
+        print_r("is date vlaid::".$dateValid);
+
         // 🚫 Stop here if validation fails — no DB insert
         if (!$receiverValid || !$dateValid) {
+            echo "something not valid";
+            exit;
             return [
                 'success' => false,
                 'message' => 'Wrong screenshot attached.',
@@ -227,7 +241,7 @@ return redirect()->to(base_url('register'))
         }
 
         // ✅ Only insert if validation passed
-        $subscriptionModel = new EmployeeSubscriptionModel();
+        
         $insertData = [
             'employeeId' => $employeeData['employeeId'],
             'startDate'  => date('Y-m-d'),
@@ -236,7 +250,7 @@ return redirect()->to(base_url('register'))
             'amount'     => 100.00
         ];
 
-        $subscriptionId = $subscriptionModel->insert($insertData);
+        $subscriptionId = $this->subscriptionModel->insert($insertData);
 
         if ($subscriptionId === false) {
             return [
@@ -253,6 +267,133 @@ return redirect()->to(base_url('register'))
             'date'           => $dateText ?: date('Y-m-d'),
             'subscriptionId' => $subscriptionId
         ];
+    }
+
+    private function runOcrPython(string $imagePath): array
+    {
+        $rootPath = defined('ROOTPATH') ? ROOTPATH : realpath(APPPATH . '../') . DIRECTORY_SEPARATOR;
+        $scriptPath = $rootPath . 'ocr.py';
+
+        if (! file_exists($scriptPath)) {
+            return ['error' => 'OCR script not found'];
+        }
+
+        $commands = ['python', 'python3', 'py -3'];
+        foreach ($commands as $command) {
+            $cmd = $command . ' ' . escapeshellarg($scriptPath) . ' ' . escapeshellarg($imagePath) . ' 2>&1';
+            $output = shell_exec($cmd);
+            $result = json_decode($output, true);
+            if (is_array($result)) {
+                return $result;
+            }
+        }
+
+        return ['error' => 'OCR execution failed or returned invalid response.'];
+    }
+    /**
+ * Generate a unique alphanumeric recordId (15–16 characters).
+ */
+    private function generateRecordId(): string
+    {
+        do {
+            // Generate 12 hex characters (from random bytes) + 4 digits
+            $randomHex = substr(bin2hex(random_bytes(8)), 0, 12); // already lowercase
+            $randomNum = str_pad((string)random_int(1000, 9999), 4, '0', STR_PAD_LEFT); // 4 digits
+            $id = substr($randomHex . $randomNum, 0, 16); // total length 15–16 chars
+        } while ($this->employeeModel->where('employeeId', $id)->countAllResults() > 0);
+
+        return $id;
+    }
+
+private function containsReceiverName(string $text, array $expectedNames): bool
+{
+    if (preg_match_all('/(?:To|Paid To)\s*:?\s*([^\n]+)/i', $text, $matches)) {
+        foreach ($matches[1] as $name) {
+            // Normalize whitespace and case
+            $cleanName = strtolower(trim(preg_replace('/\s+/', ' ', $name)));
+
+            // Remove common prefixes
+            $cleanName = preg_replace('/^(mr|mrs|dr)\s+/i', '', $cleanName);
+
+            foreach ($expectedNames as $expected) {
+                $expectedClean = strtolower(trim(preg_replace('/\s+/', ' ', $expected)));
+
+                // ✅ Use "contains" instead of strict equality
+                if (strpos($cleanName, $expectedClean) !== false) {
+                    log_message('debug', 'Name matched: ' . $expectedClean);
+                    return true;
+                }
+            }
+        }
+    }
+
+    // Extra handling for next-line case
+    $lines = preg_split('/\r?\n/', $text);
+    for ($i = 0; $i < count($lines) - 1; $i++) {
+        if (preg_match('/^(?:To|Paid To)\s*:?\s*$/i', trim($lines[$i]))) {
+            $nextLine = strtolower(trim(preg_replace('/\s+/', ' ', $lines[$i+1])));
+            $nextLine = preg_replace('/^(mr|mrs|dr)\s+/i', '', $nextLine);
+
+            foreach ($expectedNames as $expected) {
+                $expectedClean = strtolower(trim(preg_replace('/\s+/', ' ', $expected)));
+                if (strpos($nextLine, $expectedClean) !== false) {
+                    log_message('debug', 'Name matched: ' . $expectedClean);
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
+    private function extractDateFromText(string $text): ?string
+    {
+        $patterns = [
+            '/\b(\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4})\b/',
+            '/\b(\d{4}[\/-]\d{1,2}[\/-]\d{1,2})\b/',
+            '/\b([A-Za-z]{3,9}\s+\d{1,2},?\s+\d{4})\b/',
+            '/\b(\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4})\b/',
+        ];
+
+        foreach ($patterns as $pattern) {
+            if (preg_match_all($pattern, $text, $matches)) {
+                foreach ($matches[1] as $candidate) {
+                    $normalized = $this->normalizeDateString($candidate);
+                    if ($normalized !== null) {
+                        return $normalized;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private function normalizeDateString(string $dateStr): ?string
+    {
+        $formats = ['d/m/Y', 'd-m-Y', 'd/m/y', 'd-m-y', 'Y-m-d', 'Y/m/d', 'M d, Y', 'F d, Y', 'd M Y', 'd F Y'];
+        foreach ($formats as $format) {
+            $dt = \DateTime::createFromFormat($format, trim($dateStr));
+            if ($dt !== false) {
+                return $dt->format('Y-m-d');
+            }
+        }
+
+        return null;
+    }
+
+    private function isTodayDate(?string $dateStr): bool
+    {
+        if (empty($dateStr)) {
+            return false;
+        }
+
+        $res =  $dateStr === date('Y-m-d');
+        log_message('debug', 'isDatevalid: ' . $res);
+        print_r("res::".$res);
+                    
+        return $res;
     }
 
 

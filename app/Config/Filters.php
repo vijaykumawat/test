@@ -30,6 +30,7 @@ class Filters extends BaseFilters
         'authEmployee'  => \App\Filters\AuthEmployee::class,
         'authAdmin'     => \App\Filters\AuthAdmin::class,
         'honeypot'      => Honeypot::class,
+        'sessionExpire' => \App\Filters\SessionExpireFilter::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'cors'          => Cors::class,

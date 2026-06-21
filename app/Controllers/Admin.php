@@ -1073,7 +1073,8 @@ public function uploadDataPost()
         $db = \Config\Database::connect();
 
         // Generate employeeId first
-        $empid = substr(bin2hex(random_bytes(8)), 0, 16);
+        //$empid = substr(bin2hex(random_bytes(8)), 0, 16);
+        $empid = $this->generateRecordId();
 
         // Collect employee data
         $employeeData = [
@@ -1126,7 +1127,7 @@ public function uploadDataPost()
         }
 
         // Step 2: Purchase subscription (employeeId now exists)
-        /*
+        
         $res = $this->purchaseSubscription(
             $this->request->getFile('paymentScreenshot'),
             $employeeData
@@ -1135,7 +1136,7 @@ public function uploadDataPost()
         if (!$res['success']) {
             $db->transRollback();
             return redirect()->back()->with('error', 'Subscription verification failed: ' . $res['message']);
-        } */
+        } 
 
         // Commit transaction
         $db->transComplete();

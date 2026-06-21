@@ -295,8 +295,9 @@
                                 <h2 class="mb-0 fw-bolder fs-8">Employee Management</h2>
                             </div>
                             <div class="col-lg-4 col-md-6 d-none d-md-flex align-items-center justify-content-end">
-                                
-                                <a href="<?= base_url('/admin/employees/new') ?>" class="btn btn-primary d-flex align-items-center ms-2">
+
+                                <a href="<?= base_url('/admin/employees/new') ?>"
+                                    class="btn btn-primary d-flex align-items-center ms-2">
                                     <i class="ti ti-plus me-1"></i>
                                     Add New
                                 </a>
@@ -313,48 +314,72 @@
                             </div>
                             <div class="table-responsive border rounded-2">
                                 <table class="table text-nowrap customize-table mb-0 align-middle">
-    <thead class="text-dark fs-4">
-        <tr>
-            <th><h6 class="fs-4 fw-semibold mb-0">Employee</h6></th>
-            <th><h6 class="fs-4 fw-semibold mb-0">Emp</h6></th>
-            <th><h6 class="fs-4 fw-semibold mb-0">Subscription</h6></th>
-            <th><h6 class="fs-4 fw-semibold mb-0">End Date</h6></th>
-            <th><h6 class="fs-4 fw-semibold mb-0">Action</h6></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php if (!empty($employees)): ?>
-            <?php foreach ($employees as $emp): ?>
-                <tr>
-                    <!-- Employee Info -->
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <img src="<?= base_url('uploads/profile/' . ($emp['profilePhoto'] ?? 'default.jpg')) ?>"
-                                 class="rounded-circle" width="40" height="40" alt="">
-                            <a href="<?= base_url('/admin/employee/' . $emp['employeeId']) ?>">
-                                <div class="ms-3">
-                                    <h6 class="fs-4 fw-semibold mb-0"><?= esc($emp['name']); ?></h6>
-                                    <span class="fw-normal"><?= esc($emp['jobTitle'] ?? 'Position'); ?></span>
-                                </div>
-                            </a>
-                        </div>
-                    </td>
+                                    <thead class="text-dark fs-4">
+                                        <tr>
+                                            <th>
+                                                <h6 class="fs-4 fw-semibold mb-0">Employee</h6>
+                                            </th>
+                                            <th>
+                                                <h6 class="fs-4 fw-semibold mb-0">Emp</h6>
+                                            </th>
+                                            <th>
+                                                <h6 class="fs-4 fw-semibold mb-0">Subscription</h6>
+                                            </th>
+                                            <th>
+                                                <h6 class="fs-4 fw-semibold mb-0">End Date</h6>
+                                            </th>
+                                            <th>
+                                                <h6 class="fs-4 fw-semibold mb-0">Action</h6>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if (!empty($employees)): ?>
+                                        <?php foreach ($employees as $emp): ?>
+                                        <tr>
+                                            <!-- Employee Info -->
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <?php
+            // Check if employee has a profile photo
+            $photo = $emp['profilePhoto'] ?? null;
 
-                    <!-- Employee Active/Inactive -->
-                    <td>
-                        <?php
+            if (empty($photo)) {
+                // Fallback based on session gender
+                $gender = session()->get('gender');
+                $photo = ($gender === 'Male') ? 'user-1.jpg' : 'user-2.jpg';
+            }
+        ?>
+                                                    <img src="<?= base_url('uploads/profile/' . $photo) ?>"
+                                                        class="rounded-circle" width="40" height="40" alt="profile-img">
+
+                                                    <a href="<?= base_url('/admin/employee/' . $emp['employeeId']) ?>">
+                                                        <div class="ms-3">
+                                                            <h6 class="fs-4 fw-semibold mb-0"><?= esc($emp['name']); ?>
+                                                            </h6>
+                                                            <span
+                                                                class="fw-normal"><?= esc($emp['jobTitle'] ?? 'Position'); ?></span>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </td>
+
+
+                                            <!-- Employee Active/Inactive -->
+                                            <td>
+                                                <?php
                         $empBadgeClass = $emp['isActive'] == 1
                             ? 'bg-success-subtle text-success'
                             : 'bg-danger-subtle text-danger';
                         ?>
-                        <span class="badge <?= $empBadgeClass; ?>">
-                            <?= $emp['isActive'] == 1 ? 'Active' : 'Inactive'; ?>
-                        </span>
-                    </td>
+                                                <span class="badge <?= $empBadgeClass; ?>">
+                                                    <?= $emp['isActive'] == 1 ? 'Active' : 'Inactive'; ?>
+                                                </span>
+                                            </td>
 
-                    <!-- Subscription Status -->
-                    <td>
-                        <?php
+                                            <!-- Subscription Status -->
+                                            <td>
+                                                <?php
                         $status = $emp['status'] ?? 'Unknown'; // Active, Expired, Cancelled
                         switch ($status) {
                             case 'Active':
@@ -374,28 +399,30 @@
                                 $subLabel = 'No Subscription';
                         }
                         ?>
-                        <span class="badge <?= $subBadgeClass; ?>">
-                            <?= $subLabel; ?>
-                        </span>
-                    </td>
+                                                <span class="badge <?= $subBadgeClass; ?>">
+                                                    <?= $subLabel; ?>
+                                                </span>
+                                            </td>
 
-                    <!-- End Date -->
-                    <td>
-                        <p class="mb-0 fw-normal fs-4"><?= esc($emp['endDate'] ?? '-'); ?></p>
-                    </td>
+                                            <!-- End Date -->
+                                            <td>
+                                                <p class="mb-0 fw-normal fs-4"><?= esc($emp['endDate'] ?? '-'); ?></p>
+                                            </td>
 
-                    <!-- Action -->
-                    <td>
-                        <a href="<?= base_url('/admin/renew/' . $emp['employeeId']); ?>"
-                           class="btn btn-sm btn-primary">Renew</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <tr><td colspan="5">No employees found.</td></tr>
-        <?php endif; ?>
-    </tbody>
-</table>
+                                            <!-- Action -->
+                                            <td>
+                                                <a href="<?= base_url('/admin/renew/' . $emp['employeeId']); ?>"
+                                                    class="btn btn-sm btn-primary">Renew</a>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                        <?php else: ?>
+                                        <tr>
+                                            <td colspan="5">No employees found.</td>
+                                        </tr>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
 
                             </div>
                         </div>

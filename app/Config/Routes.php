@@ -12,7 +12,7 @@ $routes->post('/auth/employee-add', 'Auth::employeeAdd');
 
 
 // Protected Employee Routes
-$routes->group('employee', ['filter' => 'authEmployee'], function($routes) {
+$routes->group('employee', ['filter' => ['authEmployee', 'sessionExpire']], function($routes) {
     $routes->get('dashboard', 'Employee::dashboard');
     $routes->get('dashboard/(:any)', 'Employee::dashboard/$1');
     $routes->post('save', 'Employee::save');
