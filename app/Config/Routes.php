@@ -72,5 +72,6 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->post('extract-data', 'Admin::extractData');
     $routes->get('all-data', 'Admin::allData');
     $routes->post('uploadProfilePhoto', 'Admin::uploadProfilePhoto');
+    $routes->post('renew-subscription', 'Admin::renewEmpSubscription');
     
 });

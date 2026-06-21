@@ -55,7 +55,27 @@ class Auth extends BaseController
         }
 
         if ($employee && $password === $employee['password']) {
-                $session->set([
+            
+            // ✅ Check subscription
+            $subscription = $this->subscriptionModel->where('employeeId', $employee['employeeId'])
+                                            ->orderBy('endDate', 'DESC')
+                                            ->first();
+
+            $today = date('Y-m-d');
+
+            if (!$subscription) {
+                return redirect()->back()->with('error', 'No subscription found. Please contact admin.');
+            }
+
+            if ($subscription['endDate'] < $today ) {
+                 $this->subscriptionModel->update($subscription['id'], [
+                    'status' => 'Expired'
+                ]);
+                return redirect()->back()->with('error', 'Your subscription has expired.');
+            }
+
+
+            $session->set([
                 'employeeId'   => $employee['employeeId'],
                 'employeeName' => $employee['name'],
                 'jobTitle'     => $employee['jobTitle'], // <-- add this

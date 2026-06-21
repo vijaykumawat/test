@@ -305,6 +305,36 @@
                         </div>
                     </div>
                     <!-- start Default Size Light Table -->
+                    <?php if (session()->has('success')): ?>
+                    <div class="alert bg-success-subtle text-success alert-dismissible fade show mb-3" role="alert">
+                        <div class="d-flex align-items-center">
+                            <i class="ti ti-circle-check me-2 fs-4"></i>
+                            <?= session('success') ?>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php endif; ?>
+
+                    <?php if (session()->has('error')): ?>
+                    <div class="alert bg-danger-subtle text-danger alert-dismissible fade show mb-3" role="alert">
+                        <div class="d-flex align-items-center">
+                            <i class="ti ti-alert-circle me-2 fs-4"></i>
+                            <?= session('error') ?>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php endif; ?>
+
+                    <?php if (session()->has('warning')): ?>
+                    <div class="alert bg-warning-subtle text-warning alert-dismissible fade show mb-3" role="alert">
+                        <div class="d-flex align-items-center">
+                            <i class="ti ti-alert-triangle me-2 fs-4"></i>
+                            <?= session('warning') ?>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php endif; ?>
+
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex mb-2 align-items-center">
@@ -341,15 +371,15 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <?php
-            // Check if employee has a profile photo
-            $photo = $emp['profilePhoto'] ?? null;
+                                                                    // Check if employee has a profile photo
+                                                                    $photo = $emp['profilePhoto'] ?? null;
 
-            if (empty($photo)) {
-                // Fallback based on session gender
-                $gender = session()->get('gender');
-                $photo = ($gender === 'Male') ? 'user-1.jpg' : 'user-2.jpg';
-            }
-        ?>
+                                                                    if (empty($photo)) {
+                                                                        // Fallback based on session gender
+                                                                        $gender = session()->get('gender');
+                                                                        $photo = ($gender === 'Male') ? 'user-1.jpg' : 'user-2.jpg';
+                                                                    }
+                                                                ?>
                                                     <img src="<?= base_url('uploads/profile/' . $photo) ?>"
                                                         class="rounded-circle" width="40" height="40" alt="profile-img">
 
@@ -368,10 +398,10 @@
                                             <!-- Employee Active/Inactive -->
                                             <td>
                                                 <?php
-                        $empBadgeClass = $emp['isActive'] == 1
-                            ? 'bg-success-subtle text-success'
-                            : 'bg-danger-subtle text-danger';
-                        ?>
+                                                $empBadgeClass = $emp['isActive'] == 1
+                                                    ? 'bg-success-subtle text-success'
+                                                    : 'bg-danger-subtle text-danger';
+                                                ?>
                                                 <span class="badge <?= $empBadgeClass; ?>">
                                                     <?= $emp['isActive'] == 1 ? 'Active' : 'Inactive'; ?>
                                                 </span>
@@ -380,25 +410,25 @@
                                             <!-- Subscription Status -->
                                             <td>
                                                 <?php
-                        $status = $emp['status'] ?? 'Unknown'; // Active, Expired, Cancelled
-                        switch ($status) {
-                            case 'Active':
-                                $subBadgeClass = 'bg-success-subtle text-success';
-                                $subLabel = 'Active Subscription';
-                                break;
-                            case 'Expired':
-                                $subBadgeClass = 'bg-warning-subtle text-warning';
-                                $subLabel = 'Expired Subscription';
-                                break;
-                            case 'Cancelled':
-                                $subBadgeClass = 'bg-danger-subtle text-danger';
-                                $subLabel = 'Cancelled Subscription';
-                                break;
-                            default:
-                                $subBadgeClass = 'bg-secondary-subtle text-secondary';
-                                $subLabel = 'No Subscription';
-                        }
-                        ?>
+                                                $status = $emp['status'] ?? 'Unknown'; // Active, Expired, Cancelled
+                                                switch ($status) {
+                                                    case 'Active':
+                                                        $subBadgeClass = 'bg-success-subtle text-success';
+                                                        $subLabel = 'Active Subscription';
+                                                        break;
+                                                    case 'Expired':
+                                                        $subBadgeClass = 'bg-danger-subtle text-danger';
+                                                        $subLabel = 'Expired Subscription';
+                                                        break;
+                                                    case 'Cancelled':
+                                                        $subBadgeClass = 'bg-danger-subtle text-danger';
+                                                        $subLabel = 'Cancelled Subscription';
+                                                        break;
+                                                    default:
+                                                        $subBadgeClass = 'bg-secondary-subtle text-secondary';
+                                                        $subLabel = 'No Subscription';
+                                                }
+                                                ?>
                                                 <span class="badge <?= $subBadgeClass; ?>">
                                                     <?= $subLabel; ?>
                                                 </span>
@@ -406,13 +436,35 @@
 
                                             <!-- End Date -->
                                             <td>
-                                                <p class="mb-0 fw-normal fs-4"><?= esc($emp['endDate'] ?? '-'); ?></p>
+                                                <?php
+                                                $endDateClass = '';
+                                                if (in_array($emp['status'], ['Expired', 'Cancelled'])) {
+                                                    $endDateClass = 'bg-danger-subtle text-danger'; // red background + red text
+                                                } elseif ($emp['status'] === 'Active') {
+                                                    $endDateClass = 'bg-success-subtle text-success'; // green background + green text
+                                                }
+                                                ?>
+                                                <p class="mb-0 fw-normal fs-4 <?= $endDateClass; ?>">
+                                                    <?= esc($emp['endDate'] ?? '-'); ?>
+                                                </p>
                                             </td>
-
                                             <!-- Action -->
                                             <td>
-                                                <a href="<?= base_url('/admin/renew/' . $emp['employeeId']); ?>"
-                                                    class="btn btn-sm btn-primary">Renew</a>
+                                                <?php
+                                                // Decide button class and disabled state based on subscription status
+                                                if ($emp['status'] === 'Active') {
+                                                    $btnClass = 'bg-primary-subtle text-primary btn-sm';
+                                                    $disabled = 'disabled';
+                                                } else {
+                                                    $btnClass = 'btn-primary btn-sm';
+                                                    $disabled = '';
+                                                }
+                                                 //href="<?= base_url('/admin/renew/' . $emp['employeeId']); 
+                                                ?>
+                                                <button class="btn <?= $btnClass; ?> purchaseSubscriptionBtn"
+                                                    data-employee-id="<?= $emp['employeeId']; ?>" <?= $disabled;?>>
+                                                    Renew
+                                                </button>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
@@ -428,6 +480,34 @@
                         </div>
                     </div>
                     <!-- end Default Size Light Table -->
+                    <div class="modal fade" id="subscriptionModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <form action="<?= site_url('admin/renew-subscription') ?>" method="post"
+                                    enctype="multipart/form-data" id="subscriptionForm">
+                                    <div class="modal-header text-danger">
+                                        <h5 class="modal-title bg-danger-subtle">Purchase Subscription</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>You must purchase a subscription to access employee management features.</p>
+                                        <div class="mb-3">
+                                            <label for="paymentScreenshot" class="form-label">Upload Payment
+                                                Screenshot</label>
+                                            <input type="file" class="form-control" id="paymentScreenshot"
+                                                name="paymentScreenshot" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="hidden" name="employeeId" id="employeeIdField">
+                                        <button type="submit" id="finalSubmitBtn" class="btn btn-danger" disabled>
+                                            Submit
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
@@ -435,6 +515,31 @@
         </div>
     </div>
     </div>
+
+    <script>
+    document.querySelectorAll('.purchaseSubscriptionBtn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Get employeeId from button attribute
+            const empId = this.getAttribute('data-employee-id');
+            document.getElementById('employeeIdField').value = empId;
+
+            // Show modal
+            var modal = new bootstrap.Modal(document.getElementById('subscriptionModal'));
+            modal.show();
+        });
+    });
+    const paymentScreenshot = document.getElementById('paymentScreenshot');
+    const finalSubmitBtn = document.getElementById('finalSubmitBtn');
+
+    // Enable Submit only when a file is selected
+    paymentScreenshot.addEventListener('change', function() {
+        if (this.files.length > 0) {
+            finalSubmitBtn.removeAttribute('disabled');
+        } else {
+            finalSubmitBtn.setAttribute('disabled', true);
+        }
+    });
+    </script>
 
     <script src="<?= base_url('/assets/libs/jquery/dist/jquery.min.js') ?>"></script>
     <script src="<?= base_url('/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') ?>"></script>

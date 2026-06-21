@@ -210,3 +210,17 @@ in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
 11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
 12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 08:13:56 --> ErrorException: Undefined variable $subscriptionModel
+[Method: POST, Route: employee/login]
+in APPPATH\Controllers\Auth.php on line 71.
+ 1 APPPATH\Controllers\Auth.php(71): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $subscriptionModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Auth.php', 71)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Auth->login()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 09:51:49 --> ErrorException: Cannot redeclare App\Controllers\Admin::renewSubscription()
+[Method: GET, Route: admin/subscription]
+in APPPATH\Controllers\Admin.php on line 1627.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()

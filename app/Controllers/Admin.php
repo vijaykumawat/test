@@ -1563,6 +1563,15 @@ public function uploadDataPost()
     public function subscriptionDetails(){
         $db = \Config\Database::connect();
 
+         $builder = $db->table('subscriptions');
+
+        $today = date('Y-m-d');
+
+        // 🔄 Update all expired subscriptions
+        $builder->where('endDate <', $today)
+                ->where('status !=', 'Expired')
+                ->update(['status' => 'Expired']);
+
         $builder = $db->table('employee');
         $builder->select('employee.employeeId, employee.profilePhoto, employee.jobTitle, employee.name, employee.username, employee.password, employee.isActive, employee.hireDate, subscriptions.startDate, subscriptions.endDate, subscriptions.status, subscriptions.amount');
         $builder->join('subscriptions', 'subscriptions.employeeId = employee.employeeId', 'left'); 
@@ -1611,8 +1620,78 @@ public function uploadDataPost()
             }
             return redirect()->back()->with('success', 'Profile photo updated successfully.');
         }
-
         return redirect()->back()->with('error', 'No file selected or upload failed.');
     }
+    
+    public function renewEmpSubscription()
+    {
+        $employeeId = $this->request->getPost('employeeId');
+
+        $image = $this->request->getFile('paymentScreenshot');
+        if (! $image || ! $image->isValid()) {
+            return redirect()->to('/admin/subscription')
+                            ->with('error', 'Please upload a valid image file.');
+        }
+
+        $extension = strtolower($image->getClientExtension() ?: pathinfo($image->getClientName(), PATHINFO_EXTENSION));
+        $allowedExtensions = ['jpg','jpeg','png','webp','bmp','gif'];
+        if (! in_array($extension, $allowedExtensions)) {
+            return redirect()->to('/admin/subscription')
+                            ->with('error', 'Only image files are allowed (jpg, png, webp, bmp, gif).');
+        }
+
+        $uploadPath = FCPATH . 'uploads/receipts/';
+        if (! is_dir($uploadPath)) {
+            mkdir($uploadPath, 0755, true);
+        }
+
+        $newName = $image->getRandomName();
+        if (! $image->move($uploadPath, $newName)) {
+            return redirect()->to('/admin/subscription')
+                            ->with('error', 'Failed to save uploaded image.');
+        }
+
+        $imagePath = $uploadPath . $newName;
+        $ocrResult = $this->runOcrPython($imagePath);
+        if (! empty($ocrResult['error'])) {
+            return redirect()->to('/admin/subscription')
+                            ->with('error', 'OCR failed: ' . $ocrResult['error']);
+        }
+
+        $validNames = [
+            "Vijay Kailas Kumawat",
+            "Vijey Kumawatt",
+            "Vijay Kailash Kumawat",
+            "Vijay Kumawat"
+        ];
+
+        $text          = trim($ocrResult['text'] ?? '');
+        $receiverValid = $this->containsReceiverName($text, $validNames);
+        $dateText      = $this->extractDateFromText($text);
+        $dateValid     = $this->isTodayDate($dateText);
+
+        if (!$receiverValid || !$dateValid) {
+            return redirect()->to('/admin/subscription')
+                            ->with('error', 'Wrong screenshot attached.');
+        }
+
+        $subscriptionModel = new EmployeeSubscriptionModel();
+        $baseDate = strtotime($dateText);
+
+        $updateData = [
+            'endDate'   => date('Y-m-d', strtotime('+1 month', $baseDate)),
+            'status'    => 'Active',
+            'updatedAt' => date('Y-m-d H:i:s')
+        ];
+
+        $subscriptionModel->where('employeeId', $employeeId)
+                        ->set($updateData)
+                        ->update();
+
+        return redirect()->to('/admin/subscription')
+                        ->with('success', 'Payment screenshot verified successfully. Subscription renewed.');
+    }
+
+
 
 }

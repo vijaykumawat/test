@@ -257,36 +257,38 @@
                                                 Img</label>
                                             <div class="col-md-8 d-flex align-items-center">
                                                 <input id="profile_img" type="file" class="form-control mt-2"
-                                                    name="profile_img" accept=".jpg,.jpeg" >
+                                                    name="profile_img" accept=".jpg,.jpeg">
 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal fade" id="subscriptionModal" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header text-danger">
-                                            <h5 class="modal-title bg-danger-subtle">Purchase Subscription</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>You must purchase a subscription before adding a new employee.</p>
-                                            <div class="mb-3">
-                                                <label for="paymentScreenshot" class="form-label">Upload Payment
-                                                    Screenshot</label>
-                                                <input type="file" class="form-control" id="paymentScreenshot"
-                                                    name="paymentScreenshot" required>
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header text-danger">
+                                                <h5 class="modal-title bg-danger-subtle">Purchase Subscription</h5>
+                                                <button type="button" class="btn-close"
+                                                    data-bs-dismiss="modal"></button>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" form="employeeForm" id="finalSubmitBtn" class="btn btn-danger" disabled>
-                                                Submit
-                                            </button>
+                                            <div class="modal-body">
+                                                <p>You must purchase a subscription before adding a new employee.</p>
+                                                <div class="mb-3">
+                                                    <label for="paymentScreenshot" class="form-label">Upload Payment
+                                                        Screenshot</label>
+                                                    <input type="file" class="form-control" id="paymentScreenshot"
+                                                        name="paymentScreenshot" required>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" form="employeeForm" id="finalSubmitBtn"
+                                                    class="btn btn-danger" disabled>
+                                                    Submit
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             </form>
                             <!-- end Default Basic Forms -->
                         </div>
@@ -375,7 +377,7 @@
                                 </form>
                             </div>
                             <!-- end Event Registration -->
-                            
+
                         </div>
                     </div>
                 </div>
@@ -390,11 +392,11 @@
 
     screenshotInput.addEventListener('change', function() {
         if (this.files.length > 0) {
-            finalSubmitBtn.disabled = false;  // enable submit
+            finalSubmitBtn.disabled = false; // enable submit
         } else {
-            finalSubmitBtn.disabled = true;   // keep disabled if no file
+            finalSubmitBtn.disabled = true; // keep disabled if no file
         }
-    });    
+    });
 
     function toggleEdit(field) {
         const view = document.getElementById(field + 'View');
@@ -466,13 +468,15 @@
     document.getElementById('saveBtn').addEventListener('click', function() {
         var modal = new bootstrap.Modal(document.getElementById('subscriptionModal'));
         modal.show();
-        });
+    });
 
-        document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
         const saveBtn = document.getElementById('saveBtn');
 
         // Check if uploadResults has values in the UI
-        const hasValues = ['name','dob','email','mobile','gender','address','pincode','username','password']
+        const hasValues = ['name', 'dob', 'email', 'mobile', 'gender', 'address', 'pincode', 'username',
+                'password'
+            ]
             .some(field => {
                 const view = document.getElementById(field + 'View');
                 return view && view.textContent.trim() !== '';
