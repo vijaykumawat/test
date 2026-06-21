@@ -590,7 +590,7 @@ class Admin extends BaseController
     }
 
     private function purchaseSubscription($img, array $employeeData)
-{
+    {
     $image = $img;
     if (! $image || ! $image->isValid()) {
         return ['success' => false, 'message' => 'Please upload a valid image file.'];
@@ -1558,5 +1558,21 @@ public function uploadDataPost()
         // Pass them to the view
         return view('admin/all_data', ['rows' => $rows]);
     }
+
+    public function subscriptionDetails(){
+        $db = \Config\Database::connect();
+
+        $builder = $db->table('employee');
+        $builder->select('employee.employeeId, employee.profilePhoto, employee.jobTitle, employee.name, employee.username, employee.password, employee.isActive, employee.hireDate, subscriptions.startDate, subscriptions.endDate, subscriptions.status, subscriptions.amount');
+        $builder->join('subscriptions', 'subscriptions.employeeId = employee.employeeId', 'left'); 
+        // use 'inner' if you only want employees who have subscriptions
+
+        $query = $builder->get();
+        $data['employees'] = $query->getResultArray();
+
+        return view('admin/subscription/employee_subscriptions', $data);
+       
+    }
+
 
 }

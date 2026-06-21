@@ -7,6 +7,9 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/employee/login', 'Auth::loginForm');
 $routes->post('/employee/login', 'Auth::login');
 $routes->get('/employee/logout', 'Auth::logout');
+$routes->get('/register', 'Auth::register');
+$routes->post('/auth/employee-add', 'Auth::employeeAdd');
+
 
 // Protected Employee Routes
 $routes->group('employee', ['filter' => 'authEmployee'], function($routes) {
@@ -22,6 +25,7 @@ $routes->group('employee', ['filter' => 'authEmployee'], function($routes) {
 // Protected Admin Routes
 $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->get('/', 'Admin::index');
+    $routes->get('subscription', 'Admin::subscriptionDetails');    
     $routes->get('upload', 'Admin::uploadPolicy');
     $routes->post('upload', 'Admin::uploadPolicyPost');
     $routes->get('data-loader', 'Admin::dataLoader');

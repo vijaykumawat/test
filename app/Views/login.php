@@ -64,13 +64,13 @@
                         Remeber this Device
                       </label>
                     </div>
-                    <a class="text-primary fw-bold" href="<?php echo base_url(); ?>/index.html">Forgot Password ?</a>
+                    <!--<a class="text-primary fw-bold" href="<?php echo base_url(); ?>/index.html">Forgot Password ?</a> -->
                   </div>
                   <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In </button>  
                   <!--<a href="<?php echo base_url(); ?>/employee/login" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</a>-->
                   <div class="d-flex align-items-center justify-content-center">
-                    <p class="fs-4 mb-0 fw-bold">New to Gb ?</p>
-                    <a class="text-primary fw-bold ms-2" href="<?php echo base_url(); ?>/authentication-register.html">Create an account</a>
+                    <p class="fs-4 mb-0 fw-bold">Don't have an account yet? ?</p>
+                    <a class="text-primary fw-bold ms-2" href="<?php echo base_url(); ?>register">Create an account</a>
                   </div>
                 </form>
               </div>

@@ -10,9 +10,9 @@ $currentRoute = service('router')->getMatchedRoute()[0];
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="<?= base_url('/admin') ?>" class="text-nowrap logo-img" style="margin-top:15px;">
                 <img src="<?= base_url('/assets/images/logos/admin.png') ?>" alt="" width=60px; height=60px; />
-            <strong class="ms-2" style="font-size:30px; position:relative; top:10px;"> &nbsp;&nbsp;Admin</strong>
+                <strong class="ms-2" style="font-size:30px; position:relative; top:10px;"> &nbsp;&nbsp;Admin</strong>
 
-      </a>
+            </a>
             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                 <i class="ti ti-x fs-6"></i>
             </div>
@@ -98,7 +98,7 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                         </li>
                     </ul>
                 </li>
-                
+
                 <li class="sidebar-item">
                     <a class="sidebar-link justify-content-between has-arrow" href="javascript:void(0)"
                         aria-expanded="false">
@@ -184,9 +184,16 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                                 </li>
                             </ul>
                         </li>
-                       
+                        
+
                     </ul>
                 </li>
+                <li class="sidebar-item">
+                            <a class="sidebar-link" href="<?= base_url('/admin/subscription') ?>" aria-expanded="false">
+                                <i class="ti ti-currency-dollar"></i>
+                                <span class="hide-menu">Subscription</span>
+                            </a>
+                        </li>
 
 
             </ul>
