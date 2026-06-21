@@ -94,3 +94,119 @@ in APPPATH\Controllers\Auth.php on line 219.
  5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
  6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 06:34:31 --> ErrorException: Undefined variable $emp
+[Method: GET, Route: admin/employee/cef99519ba925515]
+in APPPATH\Views\admin\employees\viewemployee.php on line 105.
+ 1 APPPATH\Views\admin\employees\viewemployee.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $emp', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\employees\\viewemployee.php', 105)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\employees\\viewemployee.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/employees/viewemployee', [], true)
+ 5 APPPATH\Controllers\Admin.php(1160): view('admin/employees/viewemployee', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->viewEmployee('cef99519ba925515')
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 06:44:35 --> ErrorException: Undefined property: App\Controllers\Admin::$employeeModel
+[Method: POST, Route: admin/uploadProfilePhoto]
+in APPPATH\Controllers\Admin.php on line 1604.
+ 1 APPPATH\Controllers\Admin.php(1604): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Admin::$employeeModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 1604)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->uploadProfilePhoto()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 06:47:27 --> CodeIgniter\Exceptions\InvalidArgumentException: Invalid primary key: '' is not allowed.
+[Method: POST, Route: admin/uploadProfilePhoto]
+in SYSTEMPATH\BaseModel.php on line 833.
+ 1 SYSTEMPATH\BaseModel.php(818): CodeIgniter\BaseModel->validateID('', false)
+ 2 SYSTEMPATH\BaseModel.php(1040): CodeIgniter\BaseModel->validateID([...])
+ 3 SYSTEMPATH\Model.php(711): CodeIgniter\BaseModel->update([...], [...])
+ 4 APPPATH\Controllers\Admin.php(1605): CodeIgniter\Model->update('', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->uploadProfilePhoto()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 06:47:45 --> CodeIgniter\Exceptions\InvalidArgumentException: Invalid primary key: '' is not allowed.
+[Method: POST, Route: admin/uploadProfilePhoto]
+in SYSTEMPATH\BaseModel.php on line 833.
+ 1 SYSTEMPATH\BaseModel.php(818): CodeIgniter\BaseModel->validateID('', false)
+ 2 SYSTEMPATH\BaseModel.php(1040): CodeIgniter\BaseModel->validateID([...])
+ 3 SYSTEMPATH\Model.php(711): CodeIgniter\BaseModel->update([...], [...])
+ 4 APPPATH\Controllers\Admin.php(1605): CodeIgniter\Model->update('', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->uploadProfilePhoto()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 07:14:11 --> Error: Undefined constant "session"
+[Method: GET, Route: admin/employees]
+in APPPATH\Views\admin\header.php on line 57.
+ 1 SYSTEMPATH\View\View.php(240): include()
+ 2 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\View\View.php(489): CodeIgniter\View\View->render('admin/header', null, true)
+ 4 APPPATH\Views\admin\employees\list.php(277): CodeIgniter\View\View->include('admin/header')
+ 5 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\employees\\list.php')
+ 6 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 7 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/employees/list', [], true)
+ 8 APPPATH\Controllers\Admin.php(1012): view('admin/employees/list', [...])
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->listEmployees()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 07:14:21 --> Error: Undefined constant "session"
+[Method: GET, Route: admin/employees]
+in APPPATH\Views\admin\header.php on line 57.
+ 1 SYSTEMPATH\View\View.php(240): include()
+ 2 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\View\View.php(489): CodeIgniter\View\View->render('admin/header', null, true)
+ 4 APPPATH\Views\admin\employees\list.php(277): CodeIgniter\View\View->include('admin/header')
+ 5 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\employees\\list.php')
+ 6 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 7 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/employees/list', [], true)
+ 8 APPPATH\Controllers\Admin.php(1012): view('admin/employees/list', [...])
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->listEmployees()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 07:30:44 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "sidebar.php"
+[Method: GET, Route: employee/ada6e82001732249]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('sidebar.php')
+ 2 SYSTEMPATH\View\View.php(489): CodeIgniter\View\View->render('sidebar', null, true)
+ 3 APPPATH\Views\employee\viewemployee.php(42): CodeIgniter\View\View->include('sidebar')
+ 4 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\viewemployee.php')
+ 5 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/viewemployee', [], true)
+ 7 APPPATH\Controllers\Employee.php(281): view('employee/viewemployee', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->viewEmployee('ada6e82001732249')
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-21 07:30:50 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "sidebar.php"
+[Method: GET, Route: employee/ada6e82001732249]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('sidebar.php')
+ 2 SYSTEMPATH\View\View.php(489): CodeIgniter\View\View->render('sidebar', null, true)
+ 3 APPPATH\Views\employee\viewemployee.php(42): CodeIgniter\View\View->include('sidebar')
+ 4 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\viewemployee.php')
+ 5 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/viewemployee', [], true)
+ 7 APPPATH\Controllers\Employee.php(281): view('employee/viewemployee', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->viewEmployee('ada6e82001732249')
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

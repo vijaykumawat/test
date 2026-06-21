@@ -20,6 +20,9 @@ $routes->group('employee', ['filter' => ['authEmployee', 'sessionExpire']], func
     $routes->get('nextRecord/(:any)', 'Employee::nextRecord/$1');
     $routes->get('starRecord/(:any)/(:any)', 'Employee::starRecord/$1/$2');
     $routes->get('allStarRecord', 'Employee::allStarRecord');
+    $routes->get('(:any)', 'Employee::viewEmployee/$1');
+    $routes->post('uploadProfilePhoto', 'Employee::uploadProfilePhoto'); 
+    $routes->post('employee-update', 'Employee::updateEmployee');
 });
 
 // Protected Admin Routes
@@ -68,4 +71,6 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->post('employee-update', 'Admin::updateEmployee');
     $routes->post('extract-data', 'Admin::extractData');
     $routes->get('all-data', 'Admin::allData');
+    $routes->post('uploadProfilePhoto', 'Admin::uploadProfilePhoto');
+    
 });

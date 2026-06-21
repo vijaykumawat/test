@@ -39,13 +39,14 @@
         data-sidebar-position="fixed" data-header-position="fixed">
 
         <!-- Sidebar Start -->
-        <?= $this->include('admin/sidebar'); ?>
+        <?php include 'sidebar.php'; ?>
+        
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
             <!--  Header Start -->
-            <?= $this->include('admin/header'); ?>
-            <!--  Header End -->
+            <?php include 'header.php'; ?>
+        <!--  Header End -->
             <div class="body-wrapper-inner">
                 <div class="container-fluid">
                     <div class="page-titles mb-7 mb-md-5">
@@ -112,7 +113,7 @@
                                             style="cursor:pointer;" data-default="<?= base_url('uploads/profile/' . $photo) ?>">
 
                                         <!-- Hidden file input -->
-                                        <form id="uploadForm" action="<?= base_url('/admin/uploadProfilePhoto') ?>"
+                                        <form id="uploadForm" action="<?= base_url('/employee/uploadProfilePhoto') ?>"
                                             method="post" enctype="multipart/form-data">
                                             <input type="hidden" name="employeeId" value="<?php echo $employee['employeeId']; ?>">
                                             <input type="file" id="profileInput" name="profilePhoto"
@@ -130,7 +131,7 @@
                         </div>
                         <div class="col-8 ">
                             <!-- start Default Basic Forms -->
-                            <form action="<?= site_url('admin/employee-update') ?>" method="post"
+                            <form action="<?= site_url('employee/employee-update') ?>" method="post"
                                 enctype="multipart/form-data" id="employeeForm">
                                 <div class="card">
                                     <div class="form-actions">

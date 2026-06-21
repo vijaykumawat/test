@@ -266,11 +266,98 @@ class Employee extends BaseController
     public function allStarRecord(){
         $session = session();
         $dataModel = new DataModel();
-        
-        
         $data['allData'] = $dataModel->where(array('telecaller'=>$session->get('employeeId'),'isImportant'=>1))->findAll();
-        
         return view('employee/allStarRecord',$data);    
     }
+     public function viewEmployee($id)
+    {
+        $employeeModel = new EmployeeModel();
+        $employee = $employeeModel->find($id);
+
+        if (! $employee) {
+            return redirect()->to('/admin/employees')->with('error', 'Employee not found');
+        }
+
+        return view('employee/viewemployee', ['employee' => $employee]);
+    }
+    
+    public function uploadProfilePhoto()
+    {
+        $session = session();
+        $employeeId = $this->request->getPost('employeeId');
+     
+        $file = $this->request->getFile('profilePhoto');
+
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            // Validate size (800 KB max) and type
+            if ($file->getSize() > 800 * 1024) {
+                return redirect()->back()->with('error', 'File too large. Max 800KB.');
+            }
+
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            if (! in_array($file->getMimeType(), $allowedTypes)) {
+                return redirect()->back()->with('error', 'Invalid file type.');
+            }
+
+            // Generate unique filename
+            $newName = $employeeId . '_' . time() . '.' . $file->getExtension();
+
+            // Move file to public/uploads/profile
+            $file->move(FCPATH . 'uploads/profile', $newName);
+
+            // Update employee record
+            $employeeModel = new EmployeeModel();
+            $employeeModel->update($employeeId, [
+                'profilePhoto' => $newName
+            ]);
+
+            if ($session->get('employeeId') === (string) $employeeId) {
+                $session->set('profilePhoto', $newName);
+            }
+
+            return redirect()->back()->with('success', 'Profile photo updated successfully.');
+        }
+
+        return redirect()->back()->with('error', 'No file selected or upload failed.');
+    }
+    public function updateEmployee()
+        {
+
+           
+            $employeeModel = new EmployeeModel();
+
+            // Grab employeeId from hidden field
+            $employeeId = $this->request->getPost('employeeId');
+            $statusInput = $this->request->getPost('status');
+            $statusValue = ($statusInput === 'Active') ? 1 : 0;
+            // Map UI fields to DB columns
+               // Map UI fields to DB columns
+            $data = [
+                'name'             => $this->request->getPost('name'),
+                'dateOfBirth'      => $this->request->getPost('dob'),
+                'gender'           => $this->request->getPost('gender'),
+                'email'            => $this->request->getPost('email'),
+                'employmentStatus' => $statusInput,   // keep text if you want
+                'isActive'         => $statusValue,   // numeric flag
+                'phoneNumber'      => $this->request->getPost('contactNo'),
+                'address'          => $this->request->getPost('address'),
+                'pincode'          => $this->request->getPost('pincode'),
+                'username'         => $this->request->getPost('username'),
+                'password'         => $this->request->getPost('password'),
+                'jobTitle'         => $this->request->getPost('jobTitle'),
+                'hireDate'         => $this->request->getPost('hireDate'),
+                'salary'           => $this->request->getPost('salary'),
+                'nationalId'       => $this->request->getPost('nationalId'),
+                'bankAccountNumber'=> $this->request->getPost('bankAccountNumber'),
+                'workLocation'     => $this->request->getPost('workLocation'),
+                'updatedAt'        => date('Y-m-d H:i:s')
+            ];
+
+            // Perform update
+            $employeeModel->update($employeeId, $data);
+            $path = '/employee/' . $employeeId;
+            return redirect()->to($path)->with('success', 'Employee updated successfully');
+    }
+
 
 }

@@ -1576,4 +1576,43 @@ public function uploadDataPost()
     }
 
 
+    public function uploadProfilePhoto()
+    {
+        $session = session();
+        $employeeId = $this->request->getPost('employeeId');
+     
+        $file = $this->request->getFile('profilePhoto');
+
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            // Validate size (800 KB max) and type
+            if ($file->getSize() > 800 * 1024) {
+                return redirect()->back()->with('error', 'File too large. Max 800KB.');
+            }
+
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            if (! in_array($file->getMimeType(), $allowedTypes)) {
+                return redirect()->back()->with('error', 'Invalid file type.');
+            }
+
+            // Generate unique filename
+            $newName = $employeeId . '_' . time() . '.' . $file->getExtension();
+
+            // Move file to public/uploads/profile
+            $file->move(FCPATH . 'uploads/profile', $newName);
+
+            // Update employee record
+            $employeeModel = new EmployeeModel();
+            $employeeModel->update($employeeId, [
+                'profilePhoto' => $newName
+            ]);
+
+            if ($session->get('employeeId') === (string) $employeeId) {
+                $session->set('profilePhoto', $newName);
+            }
+            return redirect()->back()->with('success', 'Profile photo updated successfully.');
+        }
+
+        return redirect()->back()->with('error', 'No file selected or upload failed.');
+    }
+
 }

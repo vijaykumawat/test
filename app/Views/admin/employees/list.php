@@ -346,7 +346,7 @@
 
         if (empty($photo)) {
             // Fallback based on session gender
-            $gender = session()->get('gender');
+            $gender = $emp['gender'];
             $photo = ($gender === 'Male') ? 'user-1.jpg' : 'user-2.jpg';
         }
     ?>
