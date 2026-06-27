@@ -409,60 +409,79 @@
 
                                             <!-- Subscription Status -->
                                             <td>
-                                                <?php
-                                                $status = $emp['status'] ?? 'Unknown'; // Active, Expired, Cancelled
-                                                switch ($status) {
-                                                    case 'Active':
-                                                        $subBadgeClass = 'bg-success-subtle text-success';
-                                                        $subLabel = 'Active Subscription';
-                                                        break;
-                                                    case 'Expired':
-                                                        $subBadgeClass = 'bg-danger-subtle text-danger';
-                                                        $subLabel = 'Expired Subscription';
-                                                        break;
-                                                    case 'Cancelled':
-                                                        $subBadgeClass = 'bg-danger-subtle text-danger';
-                                                        $subLabel = 'Cancelled Subscription';
-                                                        break;
-                                                    default:
-                                                        $subBadgeClass = 'bg-secondary-subtle text-secondary';
-                                                        $subLabel = 'No Subscription';
-                                                }
-                                                ?>
-                                                <span class="badge <?= $subBadgeClass; ?>">
-                                                    <?= $subLabel; ?>
-                                                </span>
-                                            </td>
+  <?php
+    // Calculate remaining days
+    $endDate = strtotime($emp['endDate']);
+    $today   = strtotime(date('Y-m-d'));
+    $daysRemaining = ceil(($endDate - $today) / (60 * 60 * 24));
 
-                                            <!-- End Date -->
-                                            <td>
-                                                <?php
-                                                $endDateClass = '';
-                                                if (in_array($emp['status'], ['Expired', 'Cancelled'])) {
-                                                    $endDateClass = 'bg-danger-subtle text-danger'; // red background + red text
-                                                } elseif ($emp['status'] === 'Active') {
-                                                    $endDateClass = 'bg-success-subtle text-success'; // green background + green text
-                                                }
-                                                ?>
-                                                <p class="mb-0 fw-normal fs-4 <?= $endDateClass; ?>">
-                                                    <?= esc($emp['endDate'] ?? '-'); ?>
-                                                </p>
-                                            </td>
+    // Decide text and color
+    if ($daysRemaining < 0) {
+        $subLabel     = "Expired Subscription";
+        $subBadgeClass = "bg-danger-subtle text-danger";
+    } elseif ($daysRemaining >= 10) {
+        $subLabel     = $daysRemaining . " days remaining";
+        $subBadgeClass = "bg-success-subtle text-success";
+    } elseif ($daysRemaining >= 0 && $daysRemaining <= 9) {
+        $subLabel     = $daysRemaining . " days remaining";
+        $subBadgeClass = "bg-warning-subtle text-warning";
+    } else { // 1 to 4 days
+        $subLabel     = $daysRemaining . " days remaining";
+        $subBadgeClass = "bg-danger-subtle text-danger";
+    }
+  ?>
+  <span class="badge <?= $subBadgeClass; ?>">
+    <?= $subLabel; ?>
+  </span>
+</td>
+
+                                           <!-- End Date -->
+<td>
+  <?php
+    $endDateClass = '';
+    $endDateText  = esc($emp['endDate'] ?? '-');
+
+    if (!empty($emp['endDate'])) {
+        $endDate   = strtotime($emp['endDate']);
+        $today     = strtotime(date('Y-m-d'));
+        $daysRemaining = ceil(($endDate - $today) / (60 * 60 * 24));
+
+        if ($daysRemaining < 0) {
+            $endDateClass = 'bg-danger-subtle text-danger'; // expired
+        } elseif ($daysRemaining >= 10) {
+            $endDateClass = 'bg-success-subtle text-success'; // safe
+        } elseif ($daysRemaining >= 0 && $daysRemaining <= 9) {
+            $endDateClass = 'bg-warning-subtle text-warning'; // warning
+        } else { // 1 to 4 days
+            $endDateClass = 'bg-danger-subtle text-danger'; // urgent
+        }
+    }
+  ?>
+  <p class="mb-0 fw-normal fs-4 <?= $endDateClass; ?>">
+    <?= $endDateText; ?>
+  </p>
+</td>
                                             <!-- Action -->
-                                            <td>
+                                           <td>
                                                 <?php
-                                                // Decide button class and disabled state based on subscription status
-                                                if ($emp['status'] === 'Active') {
-                                                    $btnClass = 'bg-primary-subtle text-primary btn-sm';
-                                                    $disabled = 'disabled';
-                                                } else {
-                                                    $btnClass = 'btn-primary btn-sm';
-                                                    $disabled = '';
-                                                }
-                                                 //href="<?= base_url('/admin/renew/' . $emp['employeeId']); 
+                                                    // Calculate remaining days
+                                                    $endDate = strtotime($emp['endDate']);
+                                                    $today   = strtotime(date('Y-m-d'));
+                                                    $daysRemaining = ceil(($endDate - $today) / (60 * 60 * 24));
+
+                                                    // Decide button class and disabled state
+                                                    if ($daysRemaining <= 10 ) {
+                                                        // Enable Renew button if 1–10 days remaining
+                                                        $btnClass = 'btn-primary btn-sm';
+                                                        $disabled = '';
+                                                    } else {
+                                                        // Disable button if more than 10 days left OR expired
+                                                        $btnClass = 'bg-primary-subtle text-primary btn-sm';
+                                                        $disabled = 'disabled';
+                                                    }
                                                 ?>
                                                 <button class="btn <?= $btnClass; ?> purchaseSubscriptionBtn"
-                                                    data-employee-id="<?= $emp['employeeId']; ?>" <?= $disabled;?>>
+                                                        data-employee-id="<?= $emp['employeeId']; ?>" <?= $disabled; ?>>
                                                     Renew
                                                 </button>
                                             </td>

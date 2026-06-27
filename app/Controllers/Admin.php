@@ -37,10 +37,36 @@ class Admin extends BaseController
     /**
      * Display admin dashboard
      */
-    public function index()
-    {
-        return view('admin/dashboard');
+     public function index()
+    {   
+        $db = \Config\Database::connect();
+        $builder = $db->table('employee');
+        $builder->select('employee.employeeId, employee.profilePhoto, employee.name, subscriptions.endDate, subscriptions.status');
+        $builder->join('subscriptions', 'subscriptions.employeeId = employee.employeeId', 'left'); 
+
+        $query = $builder->get();
+        $employees = $query->getResultArray();
+
+        // Add daysRemaining field
+        foreach ($employees as &$emp) {
+            if (!empty($emp['endDate'])) {
+                $endDate = strtotime($emp['endDate']);
+                $today   = strtotime(date('Y-m-d'));
+                $emp['daysRemaining'] = ceil(($endDate - $today) / (60 * 60 * 24));
+            } else {
+                $emp['daysRemaining'] = null;
+            }
+        }
+
+        $data['employees'] = $employees;
+        // Total policies
+        $data['totalPolicies'] = $this->policyModel->countAllResults();
+
+        // Total data
+        $data['totalData'] = $this->dataModel->countAllResults();
+        return view('admin/dashboard', $data);
     }
+
 
     /**
      * Display upload policy form
@@ -123,6 +149,7 @@ class Admin extends BaseController
                     'company_name' => $details['companyName'],
                     'vehicle_number' => $details['vehicleNumber'],
                     'insurance_type' => $details['insuranceType'],
+                    'mobileNo'       => '',
                     'issue_date' => $details['policyStart'],
                     'expiry_date' => $details['expiryDate'],
                     'file_path' => 'writable/uploads/policies/' . $newName,

@@ -111,10 +111,11 @@
                         <!-- start row -->
                         <tr>
                             <th>#</th>
-                            <th>Policy No.</th>
+                            <!--<th>Policy No.</th>-->
                             <th>Holder Name</th>
                             <th>Vehicle No.</th>
                             <th>Insurance Type</th>
+                            <th>Mobile No</th>
                             <th>Issue Date</th>
                             <th>Expiry Date</th>
                             <th>Download</th>
@@ -165,10 +166,11 @@
                         const row = `
                             <tr>
                                 <td>${start + idx}</td>
-                                <td>${policy.policy_number}</td>
+                                <!--<td>${policy.policy_number}</td>-->
                                 <td>${policy.holder_name}</td>
                                 <td>${policy.vehicle_number}</td>
                                 <td>${policy.insurance_type}</td>
+                                <td>${policy.mobileNo}</td>
                                 <td>${policy.issue_date}</td>
                                 <td>${policy.expiry_date}</td>
                                 <td><a class="download-icon" href="${downloadUrlBase}/${policy.policy_id}" download>⬇️</a></td>

@@ -320,6 +320,9 @@
                                                 <h6 class="fs-4 fw-semibold mb-0">Employee</h6>
                                             </th>
                                             <th>
+                                                <h6 class="fs-4 fw-semibold mb-0">ID</h6>
+                                            </th>
+                                            <th>
                                                 <h6 class="fs-4 fw-semibold mb-0">Username</h6>
                                             </th>
                                             <th>
@@ -362,6 +365,10 @@
                                                         </div>
                                                     </a>
                                                 </div>
+                                            </td>
+                                            <td>
+                                                <p class="mb-0 fw-normal fs-4">
+                                                    <?php echo $emp['employeeId'] ?? 'employeeId'; ?></p>
                                             </td>
                                             <td>
                                                 <p class="mb-0 fw-normal fs-4">
