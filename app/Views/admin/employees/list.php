@@ -8,6 +8,7 @@
     <link rel="shortcut icon" type="image/png" href="<?= base_url('/assets/images/logos/favicon.png') ?>" />
     <link rel="stylesheet" href="<?= base_url('/assets/css/styles.min.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('/assets/css/toast.css') ?>" />
+          <link rel="stylesheet" href="<?= base_url('/assets/css/common.css') ?>" />
     <style>
     body {
         font-family: "Segoe UI", Arial, sans-serif;
@@ -349,8 +350,9 @@
 
         if (empty($photo)) {
             // Fallback based on session gender
-            $gender = $emp['gender'];
-            $photo = ($gender === 'Male') ? 'user-1.jpg' : 'user-2.jpg';
+            //$gender = $emp['gender'];
+            $gender = strtolower(trim($emp['gender'] ?? ''));
+            $photo = ($gender === 'male') ? 'user-1.jpg' : 'user-2.jpg';
         }
     ?>
                                                     <img src="<?= base_url('uploads/profile/' . $photo) ?>"
@@ -417,7 +419,12 @@
     <script src="<?= base_url('/assets/js/dashboard.js') ?>"></script>
     <!-- solar icons -->
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+<script>
+    const baseUrl = "<?= base_url() ?>";
+    const searchCustomerUrl = "<?= site_url('admin/searchCustomerAjax') ?>";
+</script>
 
+<script src="<?= base_url('assets/js/customer-search.js') ?>"></script>
 </body>
 
 </html>

@@ -18,6 +18,8 @@ class PolicyModel extends Model
         'company_name',
         'vehicle_number',
         'insurance_type',
+        'mobileNo',
+        'telecaller',
         'issue_date',
         'expiry_date',
         'file_path',
@@ -152,4 +154,34 @@ class PolicyModel extends Model
     {
         return $this->where('policy_number', $policyNumber)->first();
     }
+
+public function getAllPoliciesWithTelecaller($limit, $offset)
+{
+    return $this->select('policies.*, employee.name as telecaller_name')
+                ->join('employee', 'employee.employeeId = policies.telecaller', 'left')
+                ->limit($limit, $offset)
+                ->findAll();
+}
+
+public function searchPoliciesWithTelecaller($search, $limit, $offset)
+{
+    return $this->select('policies.*, employee.name as telecaller_name')
+                ->join('employee', 'employee.employeeId = policies.telecaller', 'left')
+                ->groupStart()
+                    ->like('policy_id', $search)
+                    ->orLike('policy_number', $search)
+                    ->orLike('holder_name', $search)
+                    ->orLike('company_name', $search)
+                    ->orLike('vehicle_number', $search)
+                    ->orLike('insurance_type', $search)
+                    ->orLike('mobileNo', $search)
+                    ->orLike('employee.name', $search)   // search by telecaller name
+                    ->orLike('issue_date', $search)
+                    ->orLike('expiry_date', $search)
+                    ->orLike('file_path', $search)
+                ->groupEnd()
+                ->limit($limit, $offset)
+                ->findAll();
+}
+     
 }

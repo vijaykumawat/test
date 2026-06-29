@@ -7,6 +7,7 @@
     <title>Flexy Free Bootstrap Admin Template by WrapPixel</title>
     <link rel="shortcut icon" type="image/png" href="<?= base_url('/assets/images/logos/favicon.png') ?>" />
     <link rel="stylesheet" href="<?= base_url('/assets/css/styles.min.css') ?>" />
+          <link rel="stylesheet" href="<?= base_url('/assets/css/common.css') ?>" />
     <style>
     /* Ensure removing the topstrip leaves no empty gap */
 
@@ -102,8 +103,9 @@
                                             // Check if profile photo exists
                                             $photo = $employee['profilePhoto'] ?? null;
                                             if (empty($photo)) {
-                                                $gender = $employee['gender'];
-                                                $photo = ($gender === 'Male') ? 'user-1.jpg' : 'user-2.jpg';
+                                                //$gender = $employee['gender'];
+                                                $gender = strtolower(trim($employee['gender'] ?? ''));
+                                                $photo = ($gender === 'male') ? 'user-1.jpg' : 'user-2.jpg';
                                             }
                                         ?>
                                         <!-- Profile picture (clickable) -->
@@ -499,6 +501,12 @@
         profileInput.value = ""; // clear file input
     });
     </script>
+    <script>
+    const baseUrl = "<?= base_url() ?>";
+    const searchCustomerUrl = "<?= site_url('admin/searchCustomerAjax') ?>";
+</script>
+
+<script src="<?= base_url('assets/js/customer-search.js') ?>"></script>
 </body>
 
 </html>

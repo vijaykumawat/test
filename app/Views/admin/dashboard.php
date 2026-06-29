@@ -7,6 +7,7 @@
     <title>Flexy Free Bootstrap Admin Template by WrapPixel</title>
     <link rel="shortcut icon" type="image/png" href="<?= base_url('/assets/images/logos/favicon.png') ?>" />
     <link rel="stylesheet" href="<?= base_url('/assets/css/styles.min.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('/assets/css/common.css') ?>" />
     <style>
     /* Ensure no top gap after removing app-topstrip */
     html,
@@ -33,10 +34,7 @@
         padding-top: 0 !important;
     }
 
-    /* fix left sidebar when layout is fixed */
-    #main-wrapper[data-layout="vertical"][data-sidebar-position="fixed"] .left-sidebar {
-        top: 0 !important;
-    }
+ 
     </style>
 </head>
 
@@ -125,14 +123,26 @@
                                                   $statusText  = $daysRemaining . " days remaining";
                                                   $statusClass = "text-danger";
                                               }
+                                              $photo = $emp['profilePhoto'] ?? null;
+
+                                                if (empty($photo)) {
+                                                    // Fallback based on session gender
+                                                    //$gender = $emp['gender'];
+                                                    $gender = strtolower(trim($emp['gender'] ?? ''));
+                                                    $photo = ($gender === 'male') ? 'user-1.jpg' : 'user-2.jpg';
+                                                }
                                             ?>
                                             <div class="col-md-4 mb-4">
-                                                <a  href="<?= base_url('/admin/subscription') ?>">
+                                                <a href="<?= base_url('/admin/subscription') ?>">
 
                                                     <div class="position-relative">
-                                                        <img src="<?= base_url('uploads/profile/' . ($emp['profilePhoto'] ?? 'default.jpg')) ?>"
+                                                        <img src="<?= base_url('uploads/profile/' . $photo) ?>"
                                                             alt="employee-img" class="rounded-1 img-fluid mb-4">
-
+                                                        <!--
+                                                        <div class="position-absolute start-50 translate-middle-x bg-opacity-75 px-3 py-1 rounded <?= $statusClass; ?>"
+                                                        style="bottom: 100px; ">
+                                                            <?= esc(explode(' ', $emp['name'])[0]) ?>
+                                                        </div> -->
                                                         <!-- Overlay lifted above bottom with semi-transparent dark background -->
                                                         <div class="position-absolute start-50 translate-middle-x bg-dark bg-opacity-75 px-3 py-1 rounded <?= $statusClass; ?>"
                                                             style="bottom: 1px;">
@@ -166,6 +176,12 @@
     <script src="<?= base_url('/assets/js/dashboard.js') ?>"></script>
     <!-- solar icons -->
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+<script>
+    const baseUrl = "<?= base_url() ?>";
+    const searchCustomerUrl = "<?= site_url('admin/searchCustomerAjax') ?>";
+</script>
+
+<script src="<?= base_url('assets/js/customer-search.js') ?>"></script>
 </body>
 
 </html>

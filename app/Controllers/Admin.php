@@ -24,6 +24,8 @@ class Admin extends BaseController
     protected $dataModel;
     protected $attendanceModel;
     protected $historyModel;
+    protected $employeeModel;
+    
     public function __construct()
     {
         $this->policyModel = new PolicyModel();
@@ -32,6 +34,7 @@ class Admin extends BaseController
         $this->dataModel = new DataModel();
         $this->attendanceModel = new AttendanceModel();     
         $this->historyModel = new HistoryModel();
+        $this->employeeModel = new EmployeeModel();
     }
 
     /**
@@ -41,7 +44,7 @@ class Admin extends BaseController
     {   
         $db = \Config\Database::connect();
         $builder = $db->table('employee');
-        $builder->select('employee.employeeId, employee.profilePhoto, employee.name, subscriptions.endDate, subscriptions.status');
+        $builder->select('employee.employeeId, employee.profilePhoto, employee.name,employee.gender, subscriptions.endDate, subscriptions.status');
         $builder->join('subscriptions', 'subscriptions.employeeId = employee.employeeId', 'left'); 
 
         $query = $builder->get();
@@ -150,6 +153,7 @@ class Admin extends BaseController
                     'vehicle_number' => $details['vehicleNumber'],
                     'insurance_type' => $details['insuranceType'],
                     'mobileNo'       => '',
+                    'telecaller'     => '',
                     'issue_date' => $details['policyStart'],
                     'expiry_date' => $details['expiryDate'],
                     'file_path' => 'writable/uploads/policies/' . $newName,
@@ -223,8 +227,8 @@ class Admin extends BaseController
      */
     public function searchPolicyApi()
     {
-        $search = $this->request->getVar('q') ?? '';
-        $page = (int)($this->request->getVar('page') ?? 1);
+        $search  = $this->request->getVar('q') ?? '';
+        $page    = (int)($this->request->getVar('page') ?? 1);
         $perPage = (int)($this->request->getVar('per_page') ?? 25);
 
         if ($perPage === 0 || $perPage > 200) {
@@ -234,29 +238,29 @@ class Admin extends BaseController
         $offset = ($page - 1) * $perPage;
 
         if (!empty($search)) {
-            $policies = $this->policyModel->searchPolicies($search, $perPage, $offset);
-            $total = $this->policyModel->countSearch($search);
+            $policies = $this->policyModel->searchPoliciesWithTelecaller($search, $perPage, $offset);
+            $total    = $this->policyModel->countSearch($search);
         } else {
-            $cache = \Config\Services::cache();
+            $cache    = \Config\Services::cache();
             $cacheKey = 'all_policies_count';
-            $total = $cache->get($cacheKey);
+            $total    = $cache->get($cacheKey);
 
             if ($total === null) {
                 $total = $this->policyModel->countAllResults();
                 $cache->save($cacheKey, $total, 0);
             }
 
-            $policies = $this->policyModel->getAllPolicies($perPage, $offset);
+            $policies = $this->policyModel->getAllPoliciesWithTelecaller($perPage, $offset);
         }
 
         $totalPages = $perPage ? ceil($total / $perPage) : 1;
 
         return $this->response->setJSON([
-            'success' => true,
-            'data' => $policies,
-            'total' => $total,
-            'page' => $page,
-            'per_page' => $perPage,
+            'success'     => true,
+            'data'        => $policies,
+            'total'       => $total,
+            'page'        => $page,
+            'per_page'    => $perPage,
             'total_pages' => $totalPages
         ]);
     }
@@ -831,6 +835,7 @@ private function containsReceiverName(string $text, array $expectedNames): bool
     /**
      * Update a policy and invalidate cache
      */
+    /*
     public function updatePolicy($policyId)
     {
         if (! $this->request->is('post')) {
@@ -857,7 +862,7 @@ private function containsReceiverName(string $text, array $expectedNames): bool
         }
 
         return $this->response->setJSON(['success' => false, 'message' => 'Failed to update policy']);
-    }
+    } */
     public function paymentHistory()
     {
         $subscriptionModel = new \App\Models\SubscriptionModel();
@@ -1130,6 +1135,15 @@ public function uploadDataPost()
         if (!empty($employeeData['dateOfBirth'])) {
             $date = DateTime::createFromFormat('d/m/Y', $employeeData['dateOfBirth']);
             $employeeData['dateOfBirth'] = $date ? $date->format('Y-m-d') : null;
+        }
+
+        // ✅ Duplicate check: same name + DOB
+        $existing = $employeeModel->where('name', $employeeData['name'])
+                                ->where('dateOfBirth', $employeeData['dateOfBirth'])
+                                ->first();
+
+        if ($existing) {
+            return redirect()->back()->with('error', 'Employee with same name and DOB already exists.');
         }
 
         // Handle profile image upload
@@ -1719,6 +1733,74 @@ public function uploadDataPost()
                         ->with('success', 'Payment screenshot verified successfully. Subscription renewed.');
     }
 
+    public function editPolicyView($policy_id)
+    {
+        /*
+        $policy_id = $this->request->getGet('policy_id');
+        if (!$policy_id) {
+            return redirect()->back()->with('error', 'Policy number missing.');
+        }*/
 
+        $policy = $this->policyModel->where('policy_id', $policy_id)->first();
+        if (!$policy) {
+            return redirect()->back()->with('error', 'Policy not found.');
+        }
 
+        // Fetch only active employees
+        $employees = $this->employeeModel->where('isActive', 1)->findAll();
+
+        // telecaller is employeeId, so fetch employee record
+        $telecaller = $this->employeeModel->find($policy['telecaller']);
+
+        return view('admin/policy/editpolicy', [
+            'policy'     => $policy,
+            'employees'  => $employees,
+            'telecaller' => $telecaller['name'] ?? ''   // pass employee name
+        ]);
+    }
+
+    public function postUpdatePolicy()
+    {
+        $policyId = $this->request->getPost('policy_id');
+        if (!$policyId) {
+            return redirect()->back()->with('error', 'Policy ID missing.');
+        }
+
+        $data = [
+            'holder_name'   => $this->request->getPost('holderName'),
+            'policy_number' => $this->request->getPost('policyNumber'),
+            'company_name'  => $this->request->getPost('companyName'),
+            'vehicle_number'=> $this->request->getPost('vehicleNumber'),
+            'mobileNo'      => $this->request->getPost('mobileNo'),
+            'telecaller'    => $this->request->getPost('telecaller'), // employeeId
+            'issue_date'    => $this->request->getPost('issueDate'),
+            'expiry_date'   => $this->request->getPost('expiryDate'),
+            'updated_at'    => date('Y-m-d H:i:s')
+        ];
+
+        // Perform update
+        $this->policyModel->update($policyId, $data);
+
+        // Correct redirect pathreturn 
+        
+        return redirect()->to('admin/edit-policy-view/' . $policyId)
+                 ->with('success', 'Policy updated successfully');
+    }
+
+    public function searchCustomerAjax()
+    {
+        $keyword = $this->request->getGet('keyword');
+
+        $result = $this->policyModel->groupStart()
+                ->like('holder_name', $keyword)
+                ->orLike('policy_number', $keyword)
+                ->orLike('vehicle_number', $keyword)
+                ->orLike('mobileNo', $keyword)
+            ->groupEnd()
+            ->limit(10)
+            ->findAll();
+
+        return $this->response->setJSON($result);
+    }
+   
 }

@@ -27,4 +27,17 @@ class EmployeeModel extends Model
     protected $useTimestamps = true; // will auto-manage createdAt & updatedAt
     protected $createdField  = 'createdAt';
     protected $updatedField  = 'updatedAt';
+
+    /**
+     * Get employees with subscription info
+     */
+    public function getEmployeesWithSubscriptions()
+    {
+        return $this->db->table('employee e')
+            ->select('e.employeeId, e.name, e.profilePhoto, s.status, s.endDate')
+            ->join('subscriptions s', 's.employeeId = e.employeeId', 'left')
+            ->get()
+            ->getResultArray();
+    }
+
 }

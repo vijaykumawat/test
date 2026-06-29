@@ -1,0 +1,21 @@
+   /* fix left sidebar when layout is fixed */
+    #main-wrapper[data-layout="vertical"][data-sidebar-position="fixed"] .left-sidebar {
+        top: 0 !important;
+    }
+    #suggestionBox{
+
+    max-height:300px;
+
+    overflow-y:auto;
+
+    border-radius:0 0 8px 8px;
+
+}
+
+#suggestionBox a:hover{
+
+    background:#f5f5f5;
+
+    cursor:pointer;
+
+}

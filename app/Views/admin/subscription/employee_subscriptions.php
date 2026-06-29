@@ -8,6 +8,7 @@
     <link rel="shortcut icon" type="image/png" href="<?= base_url('/assets/images/logos/favicon.png') ?>" />
     <link rel="stylesheet" href="<?= base_url('/assets/css/styles.min.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('/assets/css/toast.css') ?>" />
+          <link rel="stylesheet" href="<?= base_url('/assets/css/common.css') ?>" />
     <style>
     body {
         font-family: "Segoe UI", Arial, sans-serif;
@@ -520,7 +521,8 @@
                                     <div class="modal-footer">
                                         <input type="hidden" name="employeeId" id="employeeIdField">
                                         <button type="submit" id="finalSubmitBtn" class="btn btn-danger" disabled>
-                                            Submit
+                                             <span class="spinner-border spinner-border-sm d-none" id="submitSpinner"></span>
+                                            <span id="submitText">Submit</span>
                                         </button>
                                     </div>
                                 </form>
@@ -549,6 +551,9 @@
     });
     const paymentScreenshot = document.getElementById('paymentScreenshot');
     const finalSubmitBtn = document.getElementById('finalSubmitBtn');
+    const submitSpinner = document.getElementById('submitSpinner');
+    const submitText = document.getElementById('submitText');
+    const subscriptionForm = document.getElementById('subscriptionForm');
 
     // Enable Submit only when a file is selected
     paymentScreenshot.addEventListener('change', function() {
@@ -557,6 +562,15 @@
         } else {
             finalSubmitBtn.setAttribute('disabled', true);
         }
+    });
+
+        // Show processing on submit
+    subscriptionForm.addEventListener('submit', function () {
+
+        finalSubmitBtn.disabled = true;          // Prevent double click
+        submitSpinner.classList.remove('d-none');
+        submitText.innerText = 'Processing...';
+
     });
     </script>
 
@@ -569,7 +583,12 @@
     <script src="<?= base_url('/assets/js/dashboard.js') ?>"></script>
     <!-- solar icons -->
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+<script>
+    const baseUrl = "<?= base_url() ?>";
+    const searchCustomerUrl = "<?= site_url('admin/searchCustomerAjax') ?>";
+</script>
 
+<script src="<?= base_url('assets/js/customer-search.js') ?>"></script>
 </body>
 
 </html>

@@ -8,6 +8,7 @@
   <link rel="shortcut icon" type="image/png" href="<?= base_url('/assets/images/logos/favicon.png') ?>" />
   <link rel="stylesheet" href="<?= base_url('/assets/css/styles.min.css') ?>" />
   <link rel="stylesheet" href="<?= base_url('/assets/css/toast.css') ?>" />
+      <link rel="stylesheet" href="<?= base_url('/assets/css/common.css') ?>" />
     <style>
         body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; background-color: #f5f7fa; color: #333; }
         .wrapper { display: flex; flex-direction: column; min-height: 100vh; width: 100%; }
@@ -234,9 +235,15 @@
             row.style.display = text.includes(input) ? "" : "none";
         });
     }
+    
 
 </script>
+<script>
+    const baseUrl = "<?= base_url() ?>";
+    const searchCustomerUrl = "<?= site_url('admin/searchCustomerAjax') ?>";
+</script>
 
+<script src="<?= base_url('assets/js/customer-search.js') ?>"></script>
 </body>
 
 </html>

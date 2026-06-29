@@ -7,6 +7,7 @@
     <title>Flexy Free Bootstrap Admin Template by WrapPixel</title>
     <link rel="shortcut icon" type="image/png" href="<?= base_url('/assets/images/logos/favicon.png') ?>" />
     <link rel="stylesheet" href="<?= base_url('/assets/css/styles.min.css') ?>" />
+        <link rel="stylesheet" href="<?= base_url('/assets/css/common.css') ?>" />
     <style>
     /* Ensure removing the topstrip leaves no empty gap */
 
@@ -175,6 +176,15 @@
         </div>
     </div>
     <?= $this->include('admin/script'); ?>
+    <script>
+    var baseUrl = "<?= base_url() ?>";
+</script>
+<script>
+    const baseUrl = "<?= base_url() ?>";
+    const searchCustomerUrl = "<?= site_url('admin/searchCustomerAjax') ?>";
+</script>
+
+<script src="<?= base_url('assets/js/customer-search.js') ?>"></script>
 </body>
 
 </html>

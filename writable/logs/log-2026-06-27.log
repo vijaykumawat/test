@@ -1,0 +1,1108 @@
+CRITICAL - 2026-06-27 03:16:32 --> CodeIgniter\Exceptions\BadMethodCallException: Call to undefined method App\Models\PolicyModel::getEmployeesWithSubscriptions
+[Method: GET, Route: admin]
+in SYSTEMPATH\Model.php on line 763.
+ 1 APPPATH\Controllers\Admin.php(36): CodeIgniter\Model->__call('getEmployeesWithSubscriptions', [])
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 03:26:48 --> Error: Class "App\Controllers\EmployeeModel" not found
+[Method: GET, Route: admin]
+in APPPATH\Controllers\Admin.php on line 27.
+ 1 SYSTEMPATH\CodeIgniter.php(944): App\Controllers\Admin->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(511): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 03:27:00 --> Error: Class "App\Controllers\EmployeeModel" not found
+[Method: GET, Route: admin]
+in APPPATH\Controllers\Admin.php on line 27.
+ 1 SYSTEMPATH\CodeIgniter.php(944): App\Controllers\Admin->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(511): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 04:18:38 --> Error: Call to undefined method App\Controllers\Admin::validateUpload()
+[Method: POST, Route: admin/upload]
+in APPPATH\Controllers\Admin.php on line 60.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->uploadPolicyPost()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 04:25:32 --> Error: Call to undefined method App\Controllers\Admin::validateUpload()
+[Method: POST, Route: admin/upload]
+in APPPATH\Controllers\Admin.php on line 60.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->uploadPolicyPost()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 04:28:47 --> Error: Call to undefined method App\Controllers\Admin::validateUpload()
+[Method: POST, Route: admin/upload]
+in APPPATH\Controllers\Admin.php on line 61.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->uploadPolicyPost()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 04:29:00 --> Error: Call to undefined method App\Controllers\Admin::validateUpload()
+[Method: POST, Route: admin/upload]
+in APPPATH\Controllers\Admin.php on line 61.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->uploadPolicyPost()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 04:29:18 --> Error: Call to undefined method App\Controllers\Admin::validateUpload()
+[Method: POST, Route: admin/upload]
+in APPPATH\Controllers\Admin.php on line 61.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->uploadPolicyPost()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 04:29:24 --> Error: Call to undefined method App\Controllers\Admin::validateUpload()
+[Method: POST, Route: admin/upload]
+in APPPATH\Controllers\Admin.php on line 61.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->uploadPolicyPost()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 04:30:37 --> ErrorException: Undefined array key "path"
+[Method: GET, Route: admin/upload]
+in APPPATH\Views\admin\uploadpolicy.php on line 201.
+ 1 APPPATH\Views\admin\uploadpolicy.php(201): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "path"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\uploadpolicy.php', 201)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\uploadpolicy.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/uploadpolicy', [], true)
+ 5 APPPATH\Controllers\Admin.php(50): view('admin/uploadpolicy', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->uploadPolicy()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 04:49:40 --> ErrorException: Undefined array key "policyNumber"
+[Method: GET, Route: admin/upload]
+in APPPATH\Views\admin\uploadpolicy.php on line 193.
+ 1 APPPATH\Views\admin\uploadpolicy.php(193): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "policyNumber"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\uploadpolicy.php', 193)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\uploadpolicy.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/uploadpolicy', [], true)
+ 5 APPPATH\Controllers\Admin.php(50): view('admin/uploadpolicy', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->uploadPolicy()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 09:34:16 --> ErrorException: Undefined variable $employee
+[Method: GET, Route: admin/edit-policy-view]
+in APPPATH\Views\admin\policy\editpolicy.php on line 115.
+ 1 APPPATH\Views\admin\policy\editpolicy.php(115): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $employee', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\policy\\editpolicy.php', 115)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\policy\\editpolicy.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/policy/editpolicy', [], true)
+ 5 APPPATH\Controllers\Admin.php(1745): view('admin/policy/editpolicy', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 09:43:23 --> ParseError: syntax error, unexpected end of file, expecting "elseif" or "else" or "endif"
+[Method: GET, Route: admin/edit-policy-view]
+in APPPATH\Views\admin\policy\editpolicy.php on line 367.
+ 1 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/policy/editpolicy', [], true)
+ 3 APPPATH\Controllers\Admin.php(1745): view('admin/policy/editpolicy', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 5 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 09:47:27 --> ParseError: syntax error, unexpected end of file, expecting "elseif" or "else" or "endif"
+[Method: GET, Route: admin/edit-policy-view]
+in APPPATH\Views\admin\policy\editpolicy.php on line 334.
+ 1 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/policy/editpolicy', [], true)
+ 3 APPPATH\Controllers\Admin.php(1745): view('admin/policy/editpolicy', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 5 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 11:21:31 --> ErrorException: Undefined variable $employeeModel
+[Method: GET, Route: admin/edit-policy-view]
+in APPPATH\Controllers\Admin.php on line 1749.
+ 1 APPPATH\Controllers\Admin.php(1749): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $employeeModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 1749)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 11:22:27 --> ErrorException: Undefined variable $employeeModel
+[Method: GET, Route: admin/edit-policy-view]
+in APPPATH\Controllers\Admin.php on line 1749.
+ 1 APPPATH\Controllers\Admin.php(1749): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $employeeModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 1749)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 11:23:25 --> ErrorException: Undefined variable $employeeModel
+[Method: GET, Route: admin/edit-policy-view]
+in APPPATH\Controllers\Admin.php on line 1749.
+ 1 APPPATH\Controllers\Admin.php(1749): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $employeeModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 1749)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 11:31:35 --> ErrorException: Undefined variable $employeeModel
+[Method: GET, Route: admin/edit-policy-view]
+in APPPATH\Controllers\Admin.php on line 1750.
+ 1 APPPATH\Controllers\Admin.php(1750): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $employeeModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 1750)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 11:32:03 --> ErrorException: Undefined variable $employeeModel
+[Method: GET, Route: admin/edit-policy-view]
+in APPPATH\Controllers\Admin.php on line 1750.
+ 1 APPPATH\Controllers\Admin.php(1750): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $employeeModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 1750)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 11:32:08 --> ErrorException: Undefined variable $employeeModel
+[Method: GET, Route: admin/edit-policy-view]
+in APPPATH\Controllers\Admin.php on line 1750.
+ 1 APPPATH\Controllers\Admin.php(1750): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $employeeModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 1750)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 11:32:25 --> ErrorException: Undefined variable $employeeModel
+[Method: GET, Route: admin/edit-policy-view]
+in APPPATH\Controllers\Admin.php on line 1754.
+ 1 APPPATH\Controllers\Admin.php(1754): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $employeeModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 1754)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 11:32:27 --> ErrorException: Undefined variable $employeeModel
+[Method: GET, Route: admin/edit-policy-view]
+in APPPATH\Controllers\Admin.php on line 1754.
+ 1 APPPATH\Controllers\Admin.php(1754): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $employeeModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 1754)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 11:33:03 --> ErrorException: Undefined variable $employeeModel
+[Method: GET, Route: admin/edit-policy-view]
+in APPPATH\Controllers\Admin.php on line 1754.
+ 1 APPPATH\Controllers\Admin.php(1754): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $employeeModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 1754)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 11:33:36 --> ErrorException: Array to string conversion
+[Method: GET, Route: admin/edit-policy-view]
+in APPPATH\Controllers\Admin.php on line 1751.
+ 1 APPPATH\Controllers\Admin.php(1751): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 1751)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 11:34:47 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "admin/edit_policy_view.php"
+[Method: GET, Route: admin/edit-policy-view]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('admin/edit_policy_view.php')
+ 2 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/edit_policy_view', [], true)
+ 3 APPPATH\Controllers\Admin.php(1753): view('admin/edit_policy_view', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 5 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 11:36:16 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "admin/policy/edit_policy_view.php"
+[Method: GET, Route: admin/edit-policy-view]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('admin/policy/edit_policy_view.php')
+ 2 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/policy/edit_policy_view', [], true)
+ 3 APPPATH\Controllers\Admin.php(1753): view('admin/policy/edit_policy_view', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 5 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 11:36:21 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "admin/policy/edit_policy_view.php"
+[Method: GET, Route: admin/edit-policy-view]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('admin/policy/edit_policy_view.php')
+ 2 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/policy/edit_policy_view', [], true)
+ 3 APPPATH\Controllers\Admin.php(1753): view('admin/policy/edit_policy_view', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 5 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 11:37:21 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "admin/policy/edit_policy_view.php"
+[Method: GET, Route: admin/edit-policy-view]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('admin/policy/edit_policy_view.php')
+ 2 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/policy/edit_policy_view', [], true)
+ 3 APPPATH\Controllers\Admin.php(1753): view('admin/policy/edit_policy_view', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView()
+ 5 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 11:43:42 --> ErrorException: Cannot redeclare App\Controllers\Admin::updatePolicy()
+[Method: GET, Route: admin/upload]
+in APPPATH\Controllers\Admin.php on line 1760.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-06-27 11:43:44 --> ErrorException: Cannot redeclare App\Controllers\Admin::updatePolicy()
+[Method: GET, Route: admin/edit-policy-view]
+in APPPATH\Controllers\Admin.php on line 1760.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-06-27 17:36:15 --> ErrorException: Undefined variable $policy
+[Method: GET, Route: admin/search-policy]
+in APPPATH\Views\admin\searchpolicy.php on line 387.
+ 1 APPPATH\Views\admin\searchpolicy.php(387): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $policy', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\searchpolicy.php', 387)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\searchpolicy.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/searchpolicy', [], true)
+ 5 APPPATH\Controllers\Admin.php(222): view('admin/searchpolicy', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicy()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 17:36:20 --> ErrorException: Undefined variable $policy
+[Method: GET, Route: admin/search-policy]
+in APPPATH\Views\admin\searchpolicy.php on line 387.
+ 1 APPPATH\Views\admin\searchpolicy.php(387): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $policy', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\searchpolicy.php', 387)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\searchpolicy.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/searchpolicy', [], true)
+ 5 APPPATH\Controllers\Admin.php(222): view('admin/searchpolicy', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicy()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-27 17:43:49 --> Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(68): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPolicies(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 17:43:49 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'gb_insurance.employees' doesn't exist
+[Method: GET, Route: admin/search-policy-api]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\PolicyModel.php(68): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPolicies(25, 0)
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 17:43:49 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\PolicyModel.php(68): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPolicies(25, 0)
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 17:43:49 --> [Caused by] mysqli_sql_exception: Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(68): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPolicies(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-27 17:43:51 --> Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(68): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPolicies(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 17:43:51 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'gb_insurance.employees' doesn't exist
+[Method: GET, Route: admin/search-policy-api]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\PolicyModel.php(68): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPolicies(25, 0)
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 17:43:51 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\PolicyModel.php(68): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPolicies(25, 0)
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 17:43:51 --> [Caused by] mysqli_sql_exception: Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(68): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPolicies(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-27 17:43:54 --> Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(68): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPolicies(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 17:43:54 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'gb_insurance.employees' doesn't exist
+[Method: GET, Route: admin/search-policy-api]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\PolicyModel.php(68): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPolicies(25, 0)
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 17:43:54 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\PolicyModel.php(68): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPolicies(25, 0)
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 17:43:54 --> [Caused by] mysqli_sql_exception: Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(68): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPolicies(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-27 18:14:35 --> Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 18:14:35 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'gb_insurance.employees' doesn't exist
+[Method: GET, Route: admin/search-policy-api]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 18:14:35 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 18:14:35 --> [Caused by] mysqli_sql_exception: Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-27 18:14:38 --> Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 18:14:38 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'gb_insurance.employees' doesn't exist
+[Method: GET, Route: admin/search-policy-api]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 18:14:38 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 18:14:38 --> [Caused by] mysqli_sql_exception: Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-27 18:14:41 --> Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 18:14:41 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'gb_insurance.employees' doesn't exist
+[Method: GET, Route: admin/search-policy-api]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 18:14:41 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 18:14:41 --> [Caused by] mysqli_sql_exception: Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-27 18:15:11 --> Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 18:15:11 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'gb_insurance.employees' doesn't exist
+[Method: GET, Route: admin/search-policy-api]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 18:15:11 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 18:15:11 --> [Caused by] mysqli_sql_exception: Table 'gb_insurance.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employees` ON `employees`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-27 18:17:30 --> Unknown column 'employees.name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 18:17:30 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'employees.name' in 'field list'
+[Method: GET, Route: admin/search-policy-api]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 18:17:30 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'employees.name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-27 18:17:30 --> [Caused by] mysqli_sql_exception: Unknown column 'employees.name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `policies`.*, `employees`.`name` as `telecaller_name`
+FROM `policies`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `policies`.`telecaller`
+ LIMIT 25', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PolicyModel.php(163): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(253): App\Models\PolicyModel->getAllPoliciesWithTelecaller(25, 0)
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchPolicyApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

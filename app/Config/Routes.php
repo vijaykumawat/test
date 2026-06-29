@@ -35,9 +35,13 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->post('upload-data', 'Admin::uploadDataPost');
     $routes->get('search-policy', 'Admin::searchPolicy');
     $routes->get('search-policy-api', 'Admin::searchPolicyApi');
+    //$routes->get('edit-policy-view', 'Admin::editPolicyView');
+    $routes->get('edit-policy-view/(:num)', 'Admin::editPolicyView/$1');
+    $routes->get('searchCustomerAjax','Admin::searchCustomerAjax');
     $routes->get('download-policy/(:num)', 'Admin::downloadPolicy/$1');
     $routes->delete('policy/(:num)', 'Admin::deletePolicy/$1');
-    $routes->post('policy/(:num)', 'Admin::updatePolicy/$1');
+    //$routes->post('policy/(:num)', 'Admin::updatePolicy/$1');
+    $routes->post('policy-update', 'Admin::postUpdatePolicy');
     $routes->get('current-expiries', 'Admin::expiredCurrentMonth');
     $routes->get('current-expiries-api', 'Admin::expiredCurrentMonthApi');
     $routes->get('next-expiries', 'Admin::expiredNextMonth');

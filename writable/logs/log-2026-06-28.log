@@ -1,0 +1,1457 @@
+ERROR - 2026-06-28 08:10:46 --> Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:10:46 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+[Method: GET, Route: admin/searchCustomerAjax]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:10:46 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:10:46 --> [Caused by] mysqli_sql_exception: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-28 08:10:46 --> Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%san%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%san%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%san%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%san%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%san%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%san%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:10:46 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+[Method: GET, Route: admin/searchCustomerAjax]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:10:46 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%san%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%san%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%san%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%san%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:10:46 --> [Caused by] mysqli_sql_exception: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%san%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%san%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%san%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%san%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%san%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%san%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%san%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-28 08:10:46 --> Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:10:46 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+[Method: GET, Route: admin/searchCustomerAjax]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:10:46 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:10:46 --> [Caused by] mysqli_sql_exception: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-28 08:10:47 --> Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:10:47 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+[Method: GET, Route: admin/searchCustomerAjax]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:10:47 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:10:47 --> [Caused by] mysqli_sql_exception: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-28 08:10:48 --> Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:10:48 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+[Method: GET, Route: admin/searchCustomerAjax]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:10:48 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:10:48 --> [Caused by] mysqli_sql_exception: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-28 08:14:02 --> Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:14:02 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+[Method: GET, Route: admin/searchCustomerAjax]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:14:02 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:14:02 --> [Caused by] mysqli_sql_exception: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-28 08:16:00 --> Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:16:00 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+[Method: GET, Route: admin/searchCustomerAjax]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:16:01 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:16:01 --> [Caused by] mysqli_sql_exception: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%sa%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%sa%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-28 08:18:40 --> Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%dd%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%dd%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%dd%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:18:40 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+[Method: GET, Route: admin/searchCustomerAjax]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:18:40 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%dd%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%dd%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:18:40 --> [Caused by] mysqli_sql_exception: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%dd%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%dd%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%dd%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%dd%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-06-28 08:19:09 --> Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%ss%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%ss%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%ss%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:19:09 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+[Method: GET, Route: admin/searchCustomerAjax]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:19:09 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%ss%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%ss%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:19:09 --> [Caused by] mysqli_sql_exception: Unknown column 'contact_number' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%ss%\' ESCAPE \'!\'
+ )
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%ss%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `policy_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `vehicle_number` LIKE \'%ss%\' ESCAPE \'!\'
+OR  `contact_number` LIKE \'%ss%\' ESCAPE \'!\'
+ )
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `policies`
+WHERE   (
+`holder_name` LIKE :holder_name: ESCAPE \'!\'
+OR  `policy_number` LIKE :policy_number: ESCAPE \'!\'
+OR  `vehicle_number` LIKE :vehicle_number: ESCAPE \'!\'
+OR  `contact_number` LIKE :contact_number: ESCAPE \'!\'
+ )
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(1801): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->searchCustomerAjax()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:31:05 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "<"
+[Method: GET, Route: admin/%3C]
+in SYSTEMPATH\Router\Router.php on line 766.
+ 1 SYSTEMPATH\Router\Router.php(217): CodeIgniter\Router\Router->checkDisallowedChars('admin/<')
+ 2 SYSTEMPATH\CodeIgniter.php(852): CodeIgniter\Router\Router->handle('admin/<')
+ 3 SYSTEMPATH\CodeIgniter.php(464): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:31:07 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "<"
+[Method: GET, Route: admin/%3C]
+in SYSTEMPATH\Router\Router.php on line 766.
+ 1 SYSTEMPATH\Router\Router.php(217): CodeIgniter\Router\Router->checkDisallowedChars('admin/<')
+ 2 SYSTEMPATH\CodeIgniter.php(852): CodeIgniter\Router\Router->handle('admin/<')
+ 3 SYSTEMPATH\CodeIgniter.php(464): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:31:51 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "<"
+[Method: GET, Route: admin/%3C]
+in SYSTEMPATH\Router\Router.php on line 766.
+ 1 SYSTEMPATH\Router\Router.php(217): CodeIgniter\Router\Router->checkDisallowedChars('admin/<')
+ 2 SYSTEMPATH\CodeIgniter.php(852): CodeIgniter\Router\Router->handle('admin/<')
+ 3 SYSTEMPATH\CodeIgniter.php(464): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:33:29 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "<"
+[Method: GET, Route: admin/%3C]
+in SYSTEMPATH\Router\Router.php on line 766.
+ 1 SYSTEMPATH\Router\Router.php(217): CodeIgniter\Router\Router->checkDisallowedChars('admin/<')
+ 2 SYSTEMPATH\CodeIgniter.php(852): CodeIgniter\Router\Router->handle('admin/<')
+ 3 SYSTEMPATH\CodeIgniter.php(464): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:33:50 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "<"
+[Method: GET, Route: admin/%3C]
+in SYSTEMPATH\Router\Router.php on line 766.
+ 1 SYSTEMPATH\Router\Router.php(217): CodeIgniter\Router\Router->checkDisallowedChars('admin/<')
+ 2 SYSTEMPATH\CodeIgniter.php(852): CodeIgniter\Router\Router->handle('admin/<')
+ 3 SYSTEMPATH\CodeIgniter.php(464): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:34:05 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "<"
+[Method: GET, Route: admin/%3C]
+in SYSTEMPATH\Router\Router.php on line 766.
+ 1 SYSTEMPATH\Router\Router.php(217): CodeIgniter\Router\Router->checkDisallowedChars('admin/<')
+ 2 SYSTEMPATH\CodeIgniter.php(852): CodeIgniter\Router\Router->handle('admin/<')
+ 3 SYSTEMPATH\CodeIgniter.php(464): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:34:23 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "<"
+[Method: GET, Route: admin/%3C]
+in SYSTEMPATH\Router\Router.php on line 766.
+ 1 SYSTEMPATH\Router\Router.php(217): CodeIgniter\Router\Router->checkDisallowedChars('admin/<')
+ 2 SYSTEMPATH\CodeIgniter.php(852): CodeIgniter\Router\Router->handle('admin/<')
+ 3 SYSTEMPATH\CodeIgniter.php(464): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-06-28 08:34:25 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "<"
+[Method: GET, Route: admin/%3C]
+in SYSTEMPATH\Router\Router.php on line 766.
+ 1 SYSTEMPATH\Router\Router.php(217): CodeIgniter\Router\Router->checkDisallowedChars('admin/<')
+ 2 SYSTEMPATH\CodeIgniter.php(852): CodeIgniter\Router\Router->handle('admin/<')
+ 3 SYSTEMPATH\CodeIgniter.php(464): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
