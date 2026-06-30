@@ -8,3 +8,10 @@
     <script src="<?= base_url('/assets/js/custom.js') ?>"></script>
     <!-- solar icons -->
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+    <script>
+    const baseUrl = "<?= base_url() ?>";
+    const searchCustomerUrl = "<?= site_url('admin/searchCustomerAjax') ?>";
+    </script>
+
+    <script src="<?= base_url('assets/js/customer-search.js') ?>"></script>
+

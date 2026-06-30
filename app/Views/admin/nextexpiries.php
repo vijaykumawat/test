@@ -2,11 +2,7 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Flexy Free Bootstrap Admin Template by WrapPixel</title>
-  <link rel="shortcut icon" type="image/png" href="<?= base_url('/assets/images/logos/favicon.png') ?>" />
-  <link rel="stylesheet" href="<?= base_url('/assets/css/styles.min.css') ?>" />
+  <?= $this->include('admin/link'); ?>
   <link rel="stylesheet" href="<?= base_url('/assets/css/toast.css') ?>" />
       <link rel="stylesheet" href="<?= base_url('/assets/css/common.css') ?>" />
     <style>
@@ -47,16 +43,7 @@
     .body-wrapper, .body-wrapper-inner { margin-top: 0 !important; padding-top: 0 !important; }
     .app-header, .navbar { top: 0 !important; margin-top: 0 !important; padding-top: 0 !important; }
 
-    /* fix left sidebar when layout is fixed */
-    #main-wrapper[data-layout="vertical"][data-sidebar-position="fixed"] .left-sidebar { top: 0 !important; }
-    .body-wrapper .container-fluid,
-.body-wrapper .container-sm,
-.body-wrapper .container-md,
-.body-wrapper .container-lg,
-.body-wrapper .container-xl,
-.body-wrapper .container-xxl {
-    padding-top: 100px;
-}
+
     </style>
 </head>
 
@@ -217,15 +204,8 @@
     document.addEventListener('DOMContentLoaded', loadPolicies);
 </script>
 
-  <script src="<?= base_url('/assets/libs/jquery/dist/jquery.min.js') ?>"></script>
-  <script src="<?= base_url('/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') ?>"></script>
-  <script src="<?= base_url('/assets/js/sidebarmenu.js') ?>"></script>
-  <script src="<?= base_url('/assets/js/app.min.js') ?>"></script>
-  <script src="<?= base_url('/assets/libs/apexcharts/dist/apexcharts.min.js') ?>"></script>
-  <script src="<?= base_url('/assets/libs/simplebar/dist/simplebar.js') ?>"></script>
-  <script src="<?= base_url('/assets/js/dashboard.js') ?>"></script>
-  <!-- solar icons -->
-  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+  <?= $this->include('admin/script'); ?>
+
 <script>
     function searchTable() {
         let input = document.getElementById("searchBox").value.toLowerCase();
@@ -237,12 +217,6 @@
     }
 
 </script>
-<script>
-    const baseUrl = "<?= base_url() ?>";
-    const searchCustomerUrl = "<?= site_url('admin/searchCustomerAjax') ?>";
-</script>
-
-<script src="<?= base_url('assets/js/customer-search.js') ?>"></script>
 </body>
 
 </html>

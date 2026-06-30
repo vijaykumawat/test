@@ -2,29 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Flexy Free Bootstrap Admin Template by WrapPixel</title>
-    <link rel="shortcut icon" type="image/png" href="<?= base_url('/assets/images/logos/favicon.png') ?>" />
-    <link rel="stylesheet" href="<?= base_url('/assets/css/styles.min.css') ?>" />
+    <?= $this->include('admin/link'); ?>
         <link rel="stylesheet" href="<?= base_url('/assets/css/common.css') ?>" />
-    <style>
-    /* Ensure removing the topstrip leaves no empty gap */
-
-    #main-wrapper[data-layout="vertical"][data-sidebar-position="fixed"] .left-sidebar {
-        top: 0 !important;
-    }
-
-    .body-wrapper .container-fluid,
-    .body-wrapper .container-sm,
-    .body-wrapper .container-md,
-    .body-wrapper .container-lg,
-    .body-wrapper .container-xl,
-    .body-wrapper .container-xxl {
-        padding-top: 100px;
-    }
-
-    </style>
 </head>
 
 <body>
@@ -176,15 +155,6 @@
         </div>
     </div>
     <?= $this->include('admin/script'); ?>
-    <script>
-    var baseUrl = "<?= base_url() ?>";
-</script>
-<script>
-    const baseUrl = "<?= base_url() ?>";
-    const searchCustomerUrl = "<?= site_url('admin/searchCustomerAjax') ?>";
-</script>
-
-<script src="<?= base_url('assets/js/customer-search.js') ?>"></script>
 </body>
 
 </html>

@@ -376,46 +376,22 @@ class Auth extends BaseController
     }
 
 private function containsReceiverName(string $text, array $expectedNames): bool
-{
-    if (preg_match_all('/(?:To|Paid To)\s*:?\s*([^\n]+)/i', $text, $matches)) {
-        foreach ($matches[1] as $name) {
-            // Normalize whitespace and case
-            $cleanName = strtolower(trim(preg_replace('/\s+/', ' ', $name)));
+    {
+        // Normalize the input text
+        $normalizedText = strtolower(preg_replace('/\s+/', ' ', $text));
 
-            // Remove common prefixes
-            $cleanName = preg_replace('/^(mr|mrs|dr)\s+/i', '', $cleanName);
+        foreach ($expectedNames as $expected) {
+            // Normalize expected name
+            $expectedClean = strtolower(trim(preg_replace('/\s+/', ' ', $expected)));
 
-            foreach ($expectedNames as $expected) {
-                $expectedClean = strtolower(trim(preg_replace('/\s+/', ' ', $expected)));
-
-                // ✅ Use "contains" instead of strict equality
-                if (strpos($cleanName, $expectedClean) !== false) {
-                    log_message('debug', 'Name matched: ' . $expectedClean);
-                    return true;
-                }
+            // Simple substring check
+            if (strpos($normalizedText, $expectedClean) !== false) {
+                return true;
             }
         }
+
+        return false;
     }
-
-    // Extra handling for next-line case
-    $lines = preg_split('/\r?\n/', $text);
-    for ($i = 0; $i < count($lines) - 1; $i++) {
-        if (preg_match('/^(?:To|Paid To)\s*:?\s*$/i', trim($lines[$i]))) {
-            $nextLine = strtolower(trim(preg_replace('/\s+/', ' ', $lines[$i+1])));
-            $nextLine = preg_replace('/^(mr|mrs|dr)\s+/i', '', $nextLine);
-
-            foreach ($expectedNames as $expected) {
-                $expectedClean = strtolower(trim(preg_replace('/\s+/', ' ', $expected)));
-                if (strpos($nextLine, $expectedClean) !== false) {
-                    log_message('debug', 'Name matched: ' . $expectedClean);
-                    return true;
-                }
-            }
-        }
-    }
-
-    return false;
-}
 
     private function extractDateFromText(string $text): ?string
     {

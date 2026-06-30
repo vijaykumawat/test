@@ -1,0 +1,13 @@
+/* fix left sidebar when layout is fixed */
+    #main-wrapper[data-layout="vertical"][data-sidebar-position="fixed"] .left-sidebar {
+        top: 0 !important;
+    }
+
+    .body-wrapper .container-fluid,
+    .body-wrapper .container-sm,
+    .body-wrapper .container-md,
+    .body-wrapper .container-lg,
+    .body-wrapper .container-xl,
+    .body-wrapper .container-xxl {
+        padding-top: 100px;
+    }

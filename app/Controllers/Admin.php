@@ -535,7 +535,7 @@ class Admin extends BaseController
         }
 
         $imagePath = $uploadPath . $newName;
-        $ocrResult = $this->runOcrPython($imagePath);
+        $ocrResult = $this->runOcr($imagePath);
 
         if (! empty($ocrResult['error'])) {
             //return redirect()->to('/admin/renew')->with('renewError', 'OCR failed: ' . $ocrResult['error']);
@@ -644,7 +644,7 @@ class Admin extends BaseController
     }
 
     $imagePath = $uploadPath . $newName;
-    $ocrResult = $this->runOcrPython($imagePath);
+    $ocrResult = $this->runOcr($imagePath);
     if (! empty($ocrResult['error'])) {
         return ['success' => false, 'message' => 'OCR failed: ' . $ocrResult['error']];
     }
@@ -699,69 +699,74 @@ class Admin extends BaseController
 }
 
 
-    private function runOcrPython(string $imagePath): array
+
+    private function runOcr(string $imagePath): array
     {
-        $rootPath = defined('ROOTPATH') ? ROOTPATH : realpath(APPPATH . '../') . DIRECTORY_SEPARATOR;
-        $scriptPath = $rootPath . 'ocr.py';
+        $apiKey = 'K89821879188957'; // Better: store this in .env
 
-        if (! file_exists($scriptPath)) {
-            return ['error' => 'OCR script not found'];
+        if (!file_exists($imagePath)) {
+            return ['error' => 'Image not found.'];
         }
 
-        $commands = ['python', 'python3', 'py -3'];
-        foreach ($commands as $command) {
-            $cmd = $command . ' ' . escapeshellarg($scriptPath) . ' ' . escapeshellarg($imagePath) . ' 2>&1';
-            $output = shell_exec($cmd);
-            $result = json_decode($output, true);
-            if (is_array($result)) {
-                return $result;
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => 'https://api.ocr.space/parse/image',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_TIMEOUT => 60,
+            CURLOPT_POSTFIELDS => [
+                'apikey' => $apiKey,
+                'language' => 'eng',
+                'file' => new \CURLFile($imagePath),
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+
+        if ($response === false) {
+            $error = curl_error($curl);
+            curl_close($curl);
+
+            return ['error' => $error];
+        }
+
+        curl_close($curl);
+
+        $json = json_decode($response, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return ['error' => 'Invalid response from OCR API'];
+        }
+
+        if (!empty($json['ParsedResults'][0]['ParsedText'])) {
+            return [
+                'text' => trim($json['ParsedResults'][0]['ParsedText'])
+            ];
+        }
+
+        return [
+            'error' => $json['ErrorMessage'] ?? 'No text detected.'
+        ];
+    }
+
+    private function containsReceiverName(string $text, array $expectedNames): bool
+    {
+        // Normalize the input text
+        $normalizedText = strtolower(preg_replace('/\s+/', ' ', $text));
+
+        foreach ($expectedNames as $expected) {
+            // Normalize expected name
+            $expectedClean = strtolower(trim(preg_replace('/\s+/', ' ', $expected)));
+
+            // Simple substring check
+            if (strpos($normalizedText, $expectedClean) !== false) {
+                return true;
             }
         }
 
-        return ['error' => 'OCR execution failed or returned invalid response.'];
+        return false;
     }
-
-private function containsReceiverName(string $text, array $expectedNames): bool
-{
-    // Regex: match "To" or "Paid To" followed by optional colon/spaces,
-    // then capture the next line or same line name
-    if (preg_match_all('/(?:To|Paid To)\s*:?\s*([A-Za-z\s]+)/i', $text, $matches)) {
-        foreach ($matches[1] as $name) {
-            // Normalize whitespace and case
-            $cleanName = strtolower(trim(preg_replace('/\s+/', ' ', $name)));
-
-            // Remove common prefixes like MR, MRS, DR
-            $cleanName = preg_replace('/^(mr|mrs|dr)\s+/i', '', $cleanName);
-
-            foreach ($expectedNames as $expected) {
-                $expectedClean = strtolower(trim(preg_replace('/\s+/', ' ', $expected)));
-                if ($cleanName === $expectedClean) {
-                    return true;
-                }
-            }
-        }
-    }
-
-    // Extra handling: if "Paid to" or "To" is alone on a line, check next line
-    $lines = preg_split('/\r?\n/', $text);
-    for ($i = 0; $i < count($lines) - 1; $i++) {
-        if (preg_match('/^(?:To|Paid To)\s*:?\s*$/i', trim($lines[$i]))) {
-            $nextLine = strtolower(trim(preg_replace('/\s+/', ' ', $lines[$i+1])));
-            // Remove prefixes
-            $nextLine = preg_replace('/^(mr|mrs|dr)\s+/i', '', $nextLine);
-
-            foreach ($expectedNames as $expected) {
-                $expectedClean = strtolower(trim(preg_replace('/\s+/', ' ', $expected)));
-                if ($nextLine === $expectedClean) {
-                    return true;
-                }
-            }
-        }
-    }
-
-    return false;
-}
-
     private function extractDateFromText(string $text): ?string
     {
         $patterns = [
@@ -1693,7 +1698,7 @@ public function uploadDataPost()
         }
 
         $imagePath = $uploadPath . $newName;
-        $ocrResult = $this->runOcrPython($imagePath);
+        $ocrResult = $this->runOcr($imagePath);
         if (! empty($ocrResult['error'])) {
             return redirect()->to('/admin/subscription')
                             ->with('error', 'OCR failed: ' . $ocrResult['error']);
@@ -1711,6 +1716,7 @@ public function uploadDataPost()
         $dateText      = $this->extractDateFromText($text);
         $dateValid     = $this->isTodayDate($dateText);
 
+      
         if (!$receiverValid || !$dateValid) {
             return redirect()->to('/admin/subscription')
                             ->with('error', 'Wrong screenshot attached.');
