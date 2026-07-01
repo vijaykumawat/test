@@ -1,0 +1,14 @@
+CRITICAL - 2026-07-01 00:07:41 --> ErrorException: Undefined array key "gender"
+[Method: GET, Route: admin/subscription]
+in APPPATH\Views\admin\subscription\employee_subscriptions.php on line 376.
+ 1 APPPATH\Views\admin\subscription\employee_subscriptions.php(376): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "gender"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\subscription\\employee_subscriptions.php', 376)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\subscription\\employee_subscriptions.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/subscription/employee_subscriptions', [], true)
+ 5 APPPATH\Controllers\Admin.php(1632): view('admin/subscription/employee_subscriptions', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->subscriptionDetails()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

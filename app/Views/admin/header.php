@@ -65,8 +65,10 @@
                                 <?php
         $photo = session()->get('profilePhoto');
         if (empty($photo)) {
+                    // normalize gender to lowercase
+            $gender = strtolower(session()->get('gender'));
             // fallback based on gender
-            $photo = (session()->get('gender') === 'Male') ? 'user-1.jpg' : 'user-2.jpg';
+            $photo = ($gender === 'male') ? 'user-1.jpg' : 'user-2.jpg';
         }
     ?>
                                 <img src="<?= base_url('uploads/profile/' . $photo) ?>" class="rounded-circle"

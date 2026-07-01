@@ -2,11 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Flexy Free Bootstrap Admin Template by WrapPixel</title>
-    <link rel="shortcut icon" type="image/png" href="<?= base_url('/assets/images/logos/favicon.png') ?>" />
-    <link rel="stylesheet" href="<?= base_url('/assets/css/styles.min.css') ?>" />
+<?= $this->include('admin/link'); ?>
     <link rel="stylesheet" href="<?= base_url('/assets/css/toast.css') ?>" />
           <link rel="stylesheet" href="<?= base_url('/assets/css/common.css') ?>" />
     <style>
@@ -377,8 +373,8 @@
 
                                                                     if (empty($photo)) {
                                                                         // Fallback based on session gender
-                                                                        $gender = session()->get('gender');
-                                                                        $photo = ($gender === 'Male') ? 'user-1.jpg' : 'user-2.jpg';
+                                                                        $gender = strtolower($emp['gender']);;
+                                                                        $photo = ($gender === 'male') ? 'user-1.jpg' : 'user-2.jpg';
                                                                     }
                                                                 ?>
                                                     <img src="<?= base_url('uploads/profile/' . $photo) ?>"
@@ -537,6 +533,7 @@
     </div>
     </div>
 
+    <?= $this->include('admin/script'); ?>
     <script>
     document.querySelectorAll('.purchaseSubscriptionBtn').forEach(btn => {
         btn.addEventListener('click', function() {
@@ -574,21 +571,7 @@
     });
     </script>
 
-    <script src="<?= base_url('/assets/libs/jquery/dist/jquery.min.js') ?>"></script>
-    <script src="<?= base_url('/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') ?>"></script>
-    <script src="<?= base_url('/assets/js/sidebarmenu.js') ?>"></script>
-    <script src="<?= base_url('/assets/js/app.min.js') ?>"></script>
-    <script src="<?= base_url('/assets/libs/apexcharts/dist/apexcharts.min.js') ?>"></script>
-    <script src="<?= base_url('/assets/libs/simplebar/dist/simplebar.js') ?>"></script>
-    <script src="<?= base_url('/assets/js/dashboard.js') ?>"></script>
-    <!-- solar icons -->
-    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
-<script>
-    const baseUrl = "<?= base_url() ?>";
-    const searchCustomerUrl = "<?= site_url('admin/searchCustomerAjax') ?>";
-</script>
 
-<script src="<?= base_url('assets/js/customer-search.js') ?>"></script>
 </body>
 
 </html>

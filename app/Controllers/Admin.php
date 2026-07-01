@@ -693,6 +693,9 @@ class Admin extends BaseController
         'success'        => true,
         'message'        => 'Payment screenshot verified successfully.',
         'receiver'       => 'Vijay Kailas kumawat',
+
+
+
         'date'           => $dateText ?: date('Y-m-d'),
         'subscriptionId' => $subscriptionId
     ];
@@ -1619,7 +1622,7 @@ public function uploadDataPost()
                 ->update(['status' => 'Expired']);
 
         $builder = $db->table('employee');
-        $builder->select('employee.employeeId, employee.profilePhoto, employee.jobTitle, employee.name, employee.username, employee.password, employee.isActive, employee.hireDate, subscriptions.startDate, subscriptions.endDate, subscriptions.status, subscriptions.amount');
+        $builder->select('employee.employeeId, employee.profilePhoto, employee.jobTitle, employee.name, employee.username, employee.password, employee.isActive, employee.hireDate,employee.gender, subscriptions.startDate, subscriptions.endDate, subscriptions.status, subscriptions.amount');
         $builder->join('subscriptions', 'subscriptions.employeeId = employee.employeeId', 'left'); 
         // use 'inner' if you only want employees who have subscriptions
 
