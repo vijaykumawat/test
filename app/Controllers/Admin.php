@@ -40,17 +40,15 @@ class Admin extends BaseController
     /**
      * Display admin dashboard
      */
-     public function index()
-    {   
+   public function index()
+    {
         $db = \Config\Database::connect();
         $builder = $db->table('employee');
-        $builder->select('employee.employeeId, employee.profilePhoto, employee.name,employee.gender, subscriptions.endDate, subscriptions.status');
-        $builder->join('subscriptions', 'subscriptions.employeeId = employee.employeeId', 'left'); 
+        $builder->select('employee.employeeId, employee.profilePhoto, employee.name, employee.gender, subscriptions.endDate, subscriptions.status');
+        $builder->join('subscriptions', 'subscriptions.employeeId = employee.employeeId', 'left');
+        $employees = $builder->get()->getResultArray();
 
-        $query = $builder->get();
-        $employees = $query->getResultArray();
-
-        // Add daysRemaining field
+        // Calculate remaining days
         foreach ($employees as &$emp) {
             if (!empty($emp['endDate'])) {
                 $endDate = strtotime($emp['endDate']);
@@ -61,14 +59,33 @@ class Admin extends BaseController
             }
         }
 
-        $data['employees'] = $employees;
-        // Total policies
-        $data['totalPolicies'] = $this->policyModel->countAllResults();
+        // Dashboard metrics
+        $data['employees']       = $employees;
+        $data['totalPolicies']   = $this->policyModel->countAllResults();
+        $data['totalData']       = $this->dataModel->countAllResults();
+        $data['currentExpiries'] = $this->policyModel->where('MONTH(expiry_date)', date('m'))->countAllResults();
+        $data['nextExpiries']    = $this->policyModel->where('MONTH(expiry_date)', date('m', strtotime('+1 month')))->countAllResults();
 
-        // Total data
-        $data['totalData'] = $this->dataModel->countAllResults();
+        // Chart data (example: policies issued per month)
+        $chartQuery = $db->query("
+            SELECT DATE_FORMAT(issue_date, '%b') AS month, COUNT(*) AS total
+            FROM policies
+            WHERE issue_date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+            GROUP BY month ORDER BY issue_date ASC
+        ");
+        $data['chartData'] = $chartQuery->getResultArray();
+
+        // Policy type distribution
+        $typeQuery = $db->query("
+            SELECT insurance_type, COUNT(*) AS total
+            FROM policies
+            GROUP BY insurance_type
+        ");
+        $data['policyTypes'] = $typeQuery->getResultArray();
+
         return view('admin/dashboard', $data);
     }
+
 
 
     /**
@@ -1256,7 +1273,7 @@ public function uploadDataPost()
     {
         $employeeModel = new EmployeeModel();
         $employees = $employeeModel->where('isActive', 1)->orderBy('name', 'ASC')->findAll();
-
+        
         return view('admin/attendance/mark', [
             'employees' => $employees,
             'today'     => date('Y-m-d'),
@@ -1266,6 +1283,15 @@ public function uploadDataPost()
     /**
      * Save attendance for single or multiple employees
      */
+    private function isValidTime(?string $time): bool
+{
+    if (empty($time)) {
+        return true; // allow null/empty
+    }
+    // Match HH:MM 24-hour format
+   return (bool) preg_match('/^(?:[0-9]|[01]\d|2[0-3]):[0-5]\d$/', $time);
+}
+
     public function saveAttendance()
     {
         if (!$this->request->is('post')) {
@@ -1277,7 +1303,7 @@ public function uploadDataPost()
 
         $attendanceDate = $this->request->getPost('attendance_date');
         $employees = $this->request->getPost('employees') ?? [];
-        
+
         // Validate date
         if (!$attendanceDate || strtotime($attendanceDate) > strtotime(date('Y-m-d'))) {
             return $this->response->setJSON([
@@ -1298,9 +1324,17 @@ public function uploadDataPost()
         $errors = [];
 
         foreach ($employees as $employeeId) {
-            // Check if attendance already exists
             if ($this->attendanceModel->attendanceExists($employeeId, $attendanceDate)) {
                 $skippedCount++;
+                continue;
+            }
+
+            $checkIn  = $this->request->getPost("check_in_$employeeId") ?: null;
+            $checkOut = $this->request->getPost("check_out_$employeeId") ?: null;
+
+            // Validate times
+            if (!$this->isValidTime($checkIn) || !$this->isValidTime($checkOut)) {
+                $errors[] = "Invalid time format for employee $employeeId";
                 continue;
             }
 
@@ -1308,13 +1342,14 @@ public function uploadDataPost()
                 'employee_id'     => $employeeId,
                 'attendance_date' => $attendanceDate,
                 'status'          => $this->request->getPost("status_$employeeId") ?? 'Present',
-                'check_in_time'   => $this->request->getPost("check_in_$employeeId") ?: null,
-                'check_out_time'  => $this->request->getPost("check_out_$employeeId") ?: null,
+                'check_in_time'   => $checkIn,
+                'check_out_time'  => $checkOut,
                 'remarks'         => $this->request->getPost("remarks_$employeeId") ?: null,
             ];
 
             if (!$this->attendanceModel->insert($attendanceData)) {
-                $errors[] = "Failed to save attendance for employee $employeeId";
+                $errors[] = "Failed to save attendance for employee $employeeId: " 
+                        . implode(', ', $this->attendanceModel->errors());
             } else {
                 $savedCount++;
             }
@@ -1332,6 +1367,7 @@ public function uploadDataPost()
             'skipped' => $skippedCount,
         ]);
     }
+
 
     /**
      * Display attendance report page
@@ -1459,9 +1495,9 @@ public function uploadDataPost()
      */
     public function getMonthlyAttendance()
     {
-        if (!$this->request->is('ajax')) {
-            return $this->response->setJSON(['success' => false, 'message' => 'Invalid request']);
-        }
+        //if (!$this->request->is('ajax')) {
+        //    return $this->response->setJSON(['success' => false, 'message' => 'Invalid request']);
+        //}
 
         $employeeId = $this->request->getPost('employee_id');
         $month = $this->request->getPost('month');
@@ -1490,7 +1526,8 @@ public function uploadDataPost()
     public function employeeAttendanceHistory($employeeId = null)
     {
         if (!$employeeId) {
-            return redirect()->back()->with('error', 'Invalid employee');
+            $employeeId = session()->get('employeeId'); // fallback to logged-in user
+            //return redirect()->back()->with('error', 'Invalid employee');
         }
 
         $employeeModel = new EmployeeModel();

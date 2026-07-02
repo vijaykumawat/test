@@ -111,11 +111,11 @@
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
 
-        <?php include '../sidebar.php'; ?>
-
+        <?= $this->include('admin/sidebar'); ?>
+       
         <div class="body-wrapper">
-            <?php include '../header.php'; ?>
-
+         <?= $this->include('admin/header'); ?>
+        
             <div class="body-wrapper-inner">
                 <div class="container-fluid">
                     <!-- Employee Header -->

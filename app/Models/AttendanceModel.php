@@ -23,14 +23,15 @@ class AttendanceModel extends Model
     protected $updatedField  = 'updated_at';
 
     protected $validationRules = [
-        'employee_id'     => 'required|integer|greater_than[0]',
+        'employee_id' => 'required|alpha_numeric',
         'attendance_date' => 'required|valid_date',
-        'check_in_time'   => 'permit_empty|valid_time',
-        'check_out_time'  => 'permit_empty|valid_time',
+        'check_in_time'   => 'permit_empty|regex_match[/^(?:[01]\d|2[0-3]):[0-5]\d$/]',
+        'check_out_time'  => 'permit_empty|regex_match[/^(?:[01]\d|2[0-3]):[0-5]\d$/]',
         'status'          => 'required|in_list[Present,Absent,Half Day,Leave]',
         'remarks'         => 'permit_empty|string',
     ];
 
+   
     protected $validationMessages = [
         'employee_id' => [
             'required'      => 'Employee is required',
@@ -42,10 +43,10 @@ class AttendanceModel extends Model
             'valid_date'    => 'Invalid date format',
         ],
         'check_in_time' => [
-            'valid_time'    => 'Invalid check-in time format',
+            'regex_match'   => 'Invalid check-in time format',
         ],
         'check_out_time' => [
-            'valid_time'    => 'Invalid check-out time format',
+            'regex_match'   => 'Invalid check-out time format',
         ],
         'status' => [
             'required'      => 'Status is required',

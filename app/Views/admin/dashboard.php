@@ -4,34 +4,7 @@
 <head>
     <?= $this->include('admin/link'); ?>
     <link rel="stylesheet" href="<?= base_url('/assets/css/common.css') ?>" />
-    <style>
-    /* Ensure no top gap after removing app-topstrip */
-    html,
-    body {
-        margin: 0;
-        padding: 0;
-    }
-
-    #main-wrapper,
-    .page-wrapper {
-        padding-top: 0 !important;
-    }
-
-    .body-wrapper,
-    .body-wrapper-inner {
-        margin-top: 0 !important;
-        padding-top: 0 !important;
-    }
-
-    .app-header,
-    .navbar {
-        top: 0 !important;
-        margin-top: 0 !important;
-        padding-top: 0 !important;
-    }
-
- 
-    </style>
+    
 </head>
 
 <body>
@@ -149,8 +122,6 @@
                                             </div>
                                             <?php endforeach; ?>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>

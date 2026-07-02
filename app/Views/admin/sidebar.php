@@ -131,69 +131,67 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                                 </div>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link justify-content-between has-arrow" href="javascript:void(0)"
-                                aria-expanded="false">
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="round-16 d-flex align-items-center justify-content-center">
-                                        <i class="ti ti-circle"></i>
-                                    </div>
-                                    <span class="hide-menu">Attendance</span>
-                                </div>
-                            </a>
-                            <ul aria-expanded="false" class="collapse second-level">
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="<?= site_url('/admin/attendance/mark') ?>">
-                                        <div class="d-flex align-items-center gap-3">
-                                            <div class="round-16 d-flex align-items-center justify-content-center">
-                                                <i class="ti ti-point-filled"></i>
-                                            </div>
-                                            <span class="hide-menu">Mark Attendance</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="<?= site_url('/admin/attendance/report') ?>">
-                                        <div class="d-flex align-items-center gap-3">
-                                            <div class="round-16 d-flex align-items-center justify-content-center">
-                                                <i class="ti ti-point-filled"></i>
-                                            </div>
-                                            <span class="hide-menu">Attendance Report</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="<?= site_url('/admin/attendance/monthly') ?>">
-                                        <div class="d-flex align-items-center gap-3">
-                                            <div class="round-16 d-flex align-items-center justify-content-center">
-                                                <i class="ti ti-point-filled"></i>
-                                            </div>
-                                            <span class="hide-menu">Monthly Attendance</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="<?= site_url('/admin/attendance/history') ?>">
-                                        <div class="d-flex align-items-center gap-3">
-                                            <div class="round-16 d-flex align-items-center justify-content-center">
-                                                <i class="ti ti-point-filled"></i>
-                                            </div>
-                                            <span class="hide-menu">Attendance History</span>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-
                     </ul>
                 </li>
                 <li class="sidebar-item">
-                            <a class="sidebar-link" href="<?= base_url('/admin/subscription') ?>" aria-expanded="false">
-                                <i class="ti ti-currency-dollar"></i>
-                                <span class="hide-menu">Subscription</span>
+                    <a class="sidebar-link justify-content-between has-arrow" href="javascript:void(0)"
+                        aria-expanded="false">
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="d-flex">
+                                <i class="ti ti-notes"></i>
+                            </span>
+                            <span class="hide-menu">Attendance</span>
+                        </div>
+                    </a>
+                    <ul aria-expanded="false" class="collapse second-level">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="<?= site_url('/admin/attendance/mark') ?>">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="round-16 d-flex align-items-center justify-content-center">
+                                        <i class="ti ti-point-filled"></i>
+                                    </div>
+                                    <span class="hide-menu">Mark Attendance</span>
+                                </div>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="<?= site_url('/admin/attendance/report') ?>">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="round-16 d-flex align-items-center justify-content-center">
+                                        <i class="ti ti-point-filled"></i>
+                                    </div>
+                                    <span class="hide-menu">Attendance Report</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="<?= site_url('/admin/attendance/monthly') ?>">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="round-16 d-flex align-items-center justify-content-center">
+                                        <i class="ti ti-point-filled"></i>
+                                    </div>
+                                    <span class="hide-menu">Monthly Attendance</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="<?= site_url('/admin/attendance/history') ?>">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="round-16 d-flex align-items-center justify-content-center">
+                                        <i class="ti ti-point-filled"></i>
+                                    </div>
+                                    <span class="hide-menu">Attendance History</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="<?= base_url('/admin/subscription') ?>" aria-expanded="false">
+                        <i class="ti ti-currency-dollar"></i>
+                        <span class="hide-menu">Subscription</span>
+                    </a>
+                </li>
 
 
             </ul>

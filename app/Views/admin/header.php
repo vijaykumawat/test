@@ -28,35 +28,31 @@
         <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
                 <li>
-                <div class="position-relative">
+                    <div class="position-relative">
 
-    <form action="<?= site_url('admin/customer-search') ?>" method="GET">
+                        <form action="<?= site_url('admin/customer-search') ?>" method="GET">
 
-        <div class="input-group">
+                            <div class="input-group">
 
-            <span class="input-group-text">
-                <i class="ti ti-search"></i>
-            </span>
+                                <span class="input-group-text">
+                                    <i class="ti ti-search"></i>
+                                </span>
 
-            <input
-                type="text"
-                id="customerSearch"
-                name="keyword"
-                class="form-control"
-                autocomplete="off"
-                placeholder="Search Customer, Policy, Vehicle">
+                                <input type="text" id="customerSearch" name="keyword" class="form-control"
+                                    autocomplete="off" placeholder="Search Customer, Policy, Vehicle">
 
-           
 
-        </div>
 
-    </form>
+                            </div>
 
-    <div id="suggestionBox" class="list-group shadow"
-        style="position:absolute; width:100%; z-index:999; display:none;">
-    </div>
+                        </form>
 
-</div></li>
+                        <div id="suggestionBox" class="list-group shadow"
+                            style="position:absolute; width:100%; z-index:999; display:none;">
+                        </div>
+
+                    </div>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link " href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -84,13 +80,13 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                         <div class="message-body">
-                            
-                                        <a href="<?= base_url('admin/employee/' . session()->get('employeeId')) ?>"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
-                                            <i class="ti ti-user fs-6"></i>
-                                            <p class="mb-0 fs-3">My Profile</p>
-                                        </a>
-                                        <!--
+
+                            <a href="<?= base_url('admin/employee/' . session()->get('employeeId')) ?>"
+                                class="d-flex align-items-center gap-2 dropdown-item">
+                                <i class="ti ti-user fs-6"></i>
+                                <p class="mb-0 fs-3">My Profile</p>
+                            </a>
+                            <!--
                                         <a href="javascript:void(0)"
                                             class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-mail fs-6"></i>

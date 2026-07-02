@@ -1,12 +1,72 @@
-CRITICAL - 2026-07-01 00:07:41 --> ErrorException: Undefined array key "gender"
-[Method: GET, Route: admin/subscription]
-in APPPATH\Views\admin\subscription\employee_subscriptions.php on line 376.
- 1 APPPATH\Views\admin\subscription\employee_subscriptions.php(376): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "gender"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\subscription\\employee_subscriptions.php', 376)
- 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\subscription\\employee_subscriptions.php')
+CRITICAL - 2026-07-01 00:23:03 --> CodeIgniter\Validation\Exceptions\ValidationException: "valid_time" is not a valid rule.
+[Method: POST, Route: admin/attendance/save]
+in SYSTEMPATH\Validation\Validation.php on line 354.
+ 1 SYSTEMPATH\Validation\Validation.php(354): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('valid_time')
+ 2 SYSTEMPATH\Validation\Validation.php(210): CodeIgniter\Validation\Validation->processRules('check_in_time', 'check_in_time', '10:52', [...], [...], 'check_in_time')
+ 3 SYSTEMPATH\BaseModel.php(1615): CodeIgniter\Validation\Validation->run([...], null, null)
+ 4 SYSTEMPATH\BaseModel.php(868): CodeIgniter\BaseModel->validate([...])
+ 5 SYSTEMPATH\Model.php(670): CodeIgniter\BaseModel->insert([...], true)
+ 6 APPPATH\Controllers\Admin.php(1316): CodeIgniter\Model->insert([...])
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->saveAttendance()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-01 00:32:31 --> CodeIgniter\Validation\Exceptions\ValidationException: "valid_time" is not a valid rule.
+[Method: POST, Route: admin/attendance/save]
+in SYSTEMPATH\Validation\Validation.php on line 354.
+ 1 SYSTEMPATH\Validation\Validation.php(354): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('valid_time')
+ 2 SYSTEMPATH\Validation\Validation.php(210): CodeIgniter\Validation\Validation->processRules('check_in_time', 'check_in_time', '09:02', [...], [...], 'check_in_time')
+ 3 SYSTEMPATH\BaseModel.php(1615): CodeIgniter\Validation\Validation->run([...], null, null)
+ 4 SYSTEMPATH\BaseModel.php(868): CodeIgniter\BaseModel->validate([...])
+ 5 SYSTEMPATH\Model.php(670): CodeIgniter\BaseModel->insert([...], true)
+ 6 APPPATH\Controllers\Admin.php(1333): CodeIgniter\Model->insert([...])
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->saveAttendance()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-01 00:47:02 --> ErrorException: include(../sidebar.php): Failed to open stream: No such file or directory
+[Method: GET, Route: admin/attendance/report]
+in APPPATH\Views\admin\attendance\report.php on line 62.
+ 1 APPPATH\Views\admin\attendance\report.php(62): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../sidebar.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\report.php', 62)
+ 2 APPPATH\Views\admin\attendance\report.php(62): include()
+ 3 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\report.php')
+ 4 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/attendance/report', [], true)
+ 6 APPPATH\Controllers\Admin.php(1363): view('admin/attendance/report', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->attendanceReportPage()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-01 00:52:13 --> ErrorException: include(../sidebar.php): Failed to open stream: No such file or directory
+[Method: GET, Route: admin/attendance/monthly]
+in APPPATH\Views\admin\attendance\monthly.php on line 145.
+ 1 APPPATH\Views\admin\attendance\monthly.php(145): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../sidebar.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\monthly.php', 145)
+ 2 APPPATH\Views\admin\attendance\monthly.php(145): include()
+ 3 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\monthly.php')
+ 4 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/attendance/monthly', [], true)
+ 6 APPPATH\Controllers\Admin.php(1469): view('admin/attendance/monthly', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->monthlyAttendancePage()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-01 18:04:42 --> ErrorException: Undefined variable $currentExpiries
+[Method: GET, Route: admin]
+in APPPATH\Views\admin\dashboard.php on line 66.
+ 1 APPPATH\Views\admin\dashboard.php(66): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $currentExpiries', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php', 66)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php')
  3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/subscription/employee_subscriptions', [], true)
- 5 APPPATH\Controllers\Admin.php(1632): view('admin/subscription/employee_subscriptions', [...])
- 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->subscriptionDetails()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/dashboard', [], true)
+ 5 APPPATH\Controllers\Admin.php(70): view('admin/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
  7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
  8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()

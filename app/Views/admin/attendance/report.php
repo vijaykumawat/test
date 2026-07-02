@@ -59,11 +59,11 @@
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
 
-        <?php include '../sidebar.php'; ?>
-
+         <?= $this->include('admin/sidebar'); ?>
+       
         <div class="body-wrapper">
-            <?php include '../header.php'; ?>
-
+         <?= $this->include('admin/header'); ?>
+        
             <div class="body-wrapper-inner">
                 <div class="container-fluid">
                     <div class="row">
@@ -78,7 +78,7 @@
 
                                     <!-- Filter Section -->
                                     <div class="filter-section">
-                                        <form id="filterForm">
+                                        <form id="filterForm" method="POST">
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="mb-3">
@@ -248,53 +248,47 @@
         }
 
         function displayReport(records) {
-            const tbody = document.getElementById('reportBody');
-            tbody.innerHTML = '';
-
-            if (records.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">No records found</td></tr>';
-                if (dataTable) dataTable.destroy();
-                return;
+    if (!dataTable) {
+        dataTable = new DataTable('#reportTable', {
+            paging: true,
+            pageLength: 15,
+            searching: true,
+            ordering: true,
+            language: {
+                search: 'Filter:',
+                paginate: { previous: 'Previous', next: 'Next' }
             }
+        });
+    }
 
-            records.forEach(record => {
-                const row = `
-                    <tr>
-                        <td><strong>${htmlEscape(record.employee_name)}</strong></td>
-                        <td>${htmlEscape(record.jobTitle || 'N/A')}</td>
-                        <td>${record.attendance_date}</td>
-                        <td>${record.check_in_time || '-'}</td>
-                        <td>${record.check_out_time || '-'}</td>
-                        <td>${getStatusBadge(record.status)}</td>
-                        <td>${htmlEscape(record.remarks || '-')}</td>
-                        <td>
-                            <button class="btn btn-sm btn-warning edit-btn" data-id="${record.id}" title="Edit">
-                                <i class="ti ti-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-                tbody.innerHTML += row;
-            });
+    // Clear existing rows
+    dataTable.clear();
 
-            if (dataTable) {
-                dataTable.destroy();
-            }
+    if (records.length === 0) {
+        // Show "No records found"
+        document.getElementById('reportBody').innerHTML =
+            '<tr><td colspan="8" class="text-center text-muted">No records found</td></tr>';
+        dataTable.rows.add([]).draw();
+        return;
+    }
 
-            dataTable = new DataTable('#reportTable', {
-                paging: true,
-                pageLength: 15,
-                searching: true,
-                ordering: true,
-                language: {
-                    search: 'Filter:',
-                    paginate: {
-                        previous: 'Previous',
-                        next: 'Next'
-                    }
-                }
-            });
-        }
+    // Build new rows
+    const newRows = records.map(record => [
+        `<strong>${htmlEscape(record.employee_name)}</strong>`,
+        htmlEscape(record.jobTitle || 'N/A'),
+        record.attendance_date,
+        record.check_in_time || '-',
+        record.check_out_time || '-',
+        getStatusBadge(record.status),
+        htmlEscape(record.remarks || '-'),
+        `<button class="btn btn-sm btn-warning edit-btn" data-id="${record.id}" title="Edit">
+            <i class="ti ti-edit"></i>
+         </button>`
+    ]);
+
+    // Add and redraw
+    dataTable.rows.add(newRows).draw();
+}
 
         function htmlEscape(text) {
             const div = document.createElement('div');
