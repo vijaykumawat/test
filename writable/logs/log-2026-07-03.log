@@ -1,0 +1,557 @@
+CRITICAL - 2026-07-03 12:05:14 --> ErrorException: Undefined variable $totalPolicies
+[Method: GET, Route: admin]
+in APPPATH\Views\admin\dashboard.php on line 139.
+ 1 APPPATH\Views\admin\dashboard.php(139): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $totalPolicies', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php', 139)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/dashboard', [], true)
+ 5 APPPATH\Controllers\Admin.php(89): view('admin/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 12:07:24 --> ErrorException: Undefined variable $totalPolicies
+[Method: GET, Route: admin]
+in APPPATH\Views\admin\dashboard.php on line 41.
+ 1 APPPATH\Views\admin\dashboard.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $totalPolicies', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php', 41)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/dashboard', [], true)
+ 5 APPPATH\Controllers\Admin.php(89): view('admin/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 12:09:06 --> ErrorException: Undefined variable $totalPolicies
+[Method: GET, Route: admin]
+in APPPATH\Views\admin\dashboard.php on line 139.
+ 1 APPPATH\Views\admin\dashboard.php(139): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $totalPolicies', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php', 139)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/dashboard', [], true)
+ 5 APPPATH\Controllers\Admin.php(89): view('admin/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 12:23:41 --> ErrorException: Undefined variable $usedData
+[Method: GET, Route: admin]
+in APPPATH\Views\admin\dashboard.php on line 78.
+ 1 APPPATH\Views\admin\dashboard.php(78): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $usedData', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php', 78)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/dashboard', [], true)
+ 5 APPPATH\Controllers\Admin.php(91): view('admin/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-07-03 12:31:39 --> Unknown column 'p.policyId' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policyId) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('
+    SELECT e.name, e.profilePhoto, COUNT(p.policyId) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('
+    SELECT e.name, e.profilePhoto, COUNT(p.policyId) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 4 APPPATH\Controllers\Admin.php(73): CodeIgniter\Database\BaseConnection->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policyId) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 12:31:39 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'p.policyId' in 'field list'
+[Method: GET, Route: admin]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 APPPATH\Controllers\Admin.php(73): CodeIgniter\Database\BaseConnection->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policyId) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 12:31:39 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'p.policyId' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('
+    SELECT e.name, e.profilePhoto, COUNT(p.policyId) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('
+    SELECT e.name, e.profilePhoto, COUNT(p.policyId) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 3 APPPATH\Controllers\Admin.php(73): CodeIgniter\Database\BaseConnection->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policyId) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 4 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 5 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 12:31:39 --> [Caused by] mysqli_sql_exception: Unknown column 'p.policyId' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policyId) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('
+    SELECT e.name, e.profilePhoto, COUNT(p.policyId) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('
+    SELECT e.name, e.profilePhoto, COUNT(p.policyId) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 4 APPPATH\Controllers\Admin.php(73): CodeIgniter\Database\BaseConnection->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policyId) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-07-03 12:33:06 --> Unknown column 'p.employeeId' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 4 APPPATH\Controllers\Admin.php(73): CodeIgniter\Database\BaseConnection->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 12:33:06 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'p.employeeId' in 'on clause'
+[Method: GET, Route: admin]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 APPPATH\Controllers\Admin.php(73): CodeIgniter\Database\BaseConnection->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 12:33:06 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'p.employeeId' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 3 APPPATH\Controllers\Admin.php(73): CodeIgniter\Database\BaseConnection->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 4 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 5 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 12:33:06 --> [Caused by] mysqli_sql_exception: Unknown column 'p.employeeId' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 4 APPPATH\Controllers\Admin.php(73): CodeIgniter\Database\BaseConnection->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-07-03 12:33:19 --> Unknown column 'p.employeeId' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 4 APPPATH\Controllers\Admin.php(73): CodeIgniter\Database\BaseConnection->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 12:33:20 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'p.employeeId' in 'on clause'
+[Method: GET, Route: admin]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 APPPATH\Controllers\Admin.php(73): CodeIgniter\Database\BaseConnection->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 12:33:20 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'p.employeeId' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 3 APPPATH\Controllers\Admin.php(73): CodeIgniter\Database\BaseConnection->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 4 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 5 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 12:33:20 --> [Caused by] mysqli_sql_exception: Unknown column 'p.employeeId' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 4 APPPATH\Controllers\Admin.php(73): CodeIgniter\Database\BaseConnection->query('
+    SELECT e.name, e.profilePhoto, COUNT(p.policy_id) AS total
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.employeeId
+    WHERE MONTH(p.issue_date) = MONTH(CURDATE())
+      AND YEAR(p.issue_date) = YEAR(CURDATE())
+    GROUP BY e.employeeId
+    ORDER BY total DESC
+    LIMIT 3
+    ')
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 12:55:26 --> ErrorException: Undefined array key "profilePhoto"
+[Method: GET, Route: admin]
+in APPPATH\Views\admin\dashboard.php on line 57.
+ 1 APPPATH\Views\admin\dashboard.php(57): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "profilePhoto"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php', 57)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/dashboard', [], true)
+ 5 APPPATH\Controllers\Admin.php(104): view('admin/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 14:14:46 --> ErrorException: Undefined variable $medal
+[Method: GET, Route: admin]
+in APPPATH\Views\admin\dashboard.php on line 56.
+ 1 APPPATH\Views\admin\dashboard.php(56): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $medal', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php', 56)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/dashboard', [], true)
+ 5 APPPATH\Controllers\Admin.php(104): view('admin/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 19:15:22 --> ErrorException: Undefined variable $status
+[Method: GET, Route: admin/edit-policy-view/51]
+in APPPATH\Views\admin\policy\editpolicy.php on line 127.
+ 1 APPPATH\Views\admin\policy\editpolicy.php(127): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $status', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\policy\\editpolicy.php', 127)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\policy\\editpolicy.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/policy/editpolicy', [], true)
+ 5 APPPATH\Controllers\Admin.php(1889): view('admin/policy/editpolicy', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->editPolicyView('51')
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

@@ -23,6 +23,18 @@
     .body-wrapper .container-xxl {
         padding-top: 100px;
     }
+
+    .processing-state {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .processing-state .spinner-border {
+        width: 1rem;
+        height: 1rem;
+        border-width: 0.14em;
+    }
     </style>
 </head>
 
@@ -85,7 +97,7 @@
                     <?php endif; ?>
 
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-lg-6 col-md-12 col-12 align-self-center">
                             <!-- start Default Basic Forms -->
                             <form action="<?= site_url('admin/employee-add') ?>" method="post"
                                 enctype="multipart/form-data" id="employeeForm">
@@ -293,7 +305,7 @@
                             </form>
                             <!-- end Default Basic Forms -->
                         </div>
-                        <div class="col-6">
+                        <div class="col-lg-6">
                             <!-- start Event Registration -->
                             <div class="card">
                                 <form action="<?= site_url('admin/extract-data') ?>" method="post"
@@ -342,6 +354,12 @@
                                         </div>
                                         <?php endif; ?>
                                         <div id="alertBox"></div>
+                                        <div id="processingNotice" class="alert alert-info mb-3 d-none" role="status">
+                                            <div class="d-flex align-items-center">
+                                                <div class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></div>
+                                                <span>Processing, please wait...</span>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="mb-3">
@@ -368,8 +386,10 @@
                                                 <div class="ms-auto">
                                                     <button type="submit" id="uploadBtn"
                                                         class="btn btn-outline-success btn-sm shadow-sm">
-                                                        <i class="ti ti-upload me-2"></i>
-                                                        Extract Data
+                                                        <span class="processing-state" id="uploadBtnContent">
+                                                            <i class="ti ti-upload me-2"></i>
+                                                            <span>Extract Data</span>
+                                                        </span>
                                                     </button>
                                                 </div>
                                             </div>
@@ -391,13 +411,15 @@
     const screenshotInput = document.getElementById('paymentScreenshot');
     const finalSubmitBtn = document.getElementById('finalSubmitBtn');
 
-    screenshotInput.addEventListener('change', function() {
-        if (this.files.length > 0) {
-            finalSubmitBtn.disabled = false; // enable submit
-        } else {
-            finalSubmitBtn.disabled = true; // keep disabled if no file
-        }
-    });
+    if (screenshotInput && finalSubmitBtn) {
+        screenshotInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                finalSubmitBtn.disabled = false; // enable submit
+            } else {
+                finalSubmitBtn.disabled = true; // keep disabled if no file
+            }
+        });
+    }
 
     function toggleEdit(field) {
         const view = document.getElementById(field + 'View');
@@ -491,6 +513,36 @@
     <script>
     const baseUrl = "<?= base_url() ?>";
     const searchCustomerUrl = "<?= site_url('admin/searchCustomerAjax') ?>";
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const uploadForm = document.getElementById('uploadForm');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const uploadBtnContent = document.getElementById('uploadBtnContent');
+        const processingNotice = document.getElementById('processingNotice');
+        const idProofInput = document.getElementById('idproof');
+
+        if (uploadForm && uploadBtn && uploadBtnContent && processingNotice) {
+            uploadForm.addEventListener('submit', function(e) {
+                if (!idProofInput || idProofInput.files.length === 0) {
+                    e.preventDefault();
+                    alert('Please select a PDF or image file first.');
+                    return;
+                }
+
+                e.preventDefault();
+                uploadBtn.disabled = true;
+                uploadBtnContent.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span>Processing...</span>';
+                processingNotice.classList.remove('d-none');
+                processingNotice.classList.add('d-block');
+
+                window.requestAnimationFrame(function() {
+                    window.setTimeout(function() {
+                        uploadForm.submit();
+                    }, 200);
+                });
+            });
+        }
+    });
 </script>
 
 <script src="<?= base_url('assets/js/customer-search.js') ?>"></script>

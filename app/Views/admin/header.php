@@ -59,14 +59,14 @@
                         <div class="d-flex align-items-center gap-2 border-start ps-3">
                             <div class="user-profile-img">
                                 <?php
-        $photo = session()->get('profilePhoto');
-        if (empty($photo)) {
-                    // normalize gender to lowercase
-            $gender = strtolower(session()->get('gender'));
-            // fallback based on gender
-            $photo = ($gender === 'male') ? 'user-1.jpg' : 'user-2.jpg';
-        }
-    ?>
+                                    $photo = session()->get('profilePhoto');
+                                    if (empty($photo)) {
+                                                // normalize gender to lowercase
+                                        $gender = strtolower(session()->get('gender'));
+                                        // fallback based on gender
+                                        $photo = ($gender === 'male') ? 'user-1.jpg' : 'user-2.jpg';
+                                    }
+                                ?>
                                 <img src="<?= base_url('uploads/profile/' . $photo) ?>" class="rounded-circle"
                                     width="35" height="35" alt="profile-img">
                             </div>

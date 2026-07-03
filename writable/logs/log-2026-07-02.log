@@ -264,3 +264,234 @@ in APPPATH\Views\admin\attendance\history.php on line 114.
 10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
 11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-02 05:45:54 --> ErrorException: Undefined property: App\Controllers\Admin::$db
+[Method: GET, Route: admin/next-expiries-api]
+in APPPATH\Controllers\Admin.php on line 367.
+ 1 APPPATH\Controllers\Admin.php(367): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Admin::$db', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 367)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->expiredNextMonthApi()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-02 05:45:54 --> ErrorException: Undefined property: App\Controllers\Admin::$db
+[Method: GET, Route: admin/next-expiries-api]
+in APPPATH\Controllers\Admin.php on line 367.
+ 1 APPPATH\Controllers\Admin.php(367): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Admin::$db', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 367)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->expiredNextMonthApi()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-02 05:47:46 --> ErrorException: Undefined property: App\Controllers\Admin::$db
+[Method: POST, Route: admin/next-expiries-api]
+in APPPATH\Controllers\Admin.php on line 367.
+ 1 APPPATH\Controllers\Admin.php(367): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Admin::$db', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 367)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->expiredNextMonthApi()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-02 05:47:51 --> ErrorException: Undefined property: App\Controllers\Admin::$db
+[Method: POST, Route: admin/next-expiries-api]
+in APPPATH\Controllers\Admin.php on line 367.
+ 1 APPPATH\Controllers\Admin.php(367): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Admin::$db', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 367)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->expiredNextMonthApi()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-02 05:48:03 --> ErrorException: Undefined property: App\Controllers\Admin::$db
+[Method: POST, Route: admin/next-expiries-api]
+in APPPATH\Controllers\Admin.php on line 367.
+ 1 APPPATH\Controllers\Admin.php(367): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Admin::$db', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 367)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->expiredNextMonthApi()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-02 05:50:57 --> TypeError: CodeIgniter\Database\BaseBuilder::limit(): Argument #1 ($value) must be of type ?int, string given, called in D:\xampp\htdocs\gbinsurance\system\Model.php on line 761
+[Method: POST, Route: admin/next-expiries-api]
+in SYSTEMPATH\Database\BaseBuilder.php on line 1512.
+ 1 SYSTEMPATH\Model.php(761): CodeIgniter\Database\BaseBuilder->limit('25', '0')
+ 2 APPPATH\Controllers\Admin.php(403): CodeIgniter\Model->__call('limit', [...])
+ 3 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->expiredNextMonthApi()
+ 4 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 5 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-07-02 15:12:12 --> Table 'gbinsura_crm.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employees`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employees` ON `employees`.`id` = `data`.`telecallerId`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employees`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employees` ON `employees`.`id` = `data`.`telecallerId`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employees`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employees` ON `employees`.`id` = `data`.`telecallerId`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employees`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employees` ON `employees`.`id` = `data`.`telecallerId`', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\DataModel.php(41): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(1703): App\Models\DataModel->findAllWithTelecaller()
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->allData()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-02 15:12:12 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'gbinsura_crm.employees' doesn't exist
+[Method: GET, Route: admin/all-data]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employees`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employees` ON `employees`.`id` = `data`.`telecallerId`', [], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\DataModel.php(41): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\Admin.php(1703): App\Models\DataModel->findAllWithTelecaller()
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->allData()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-02 15:12:12 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'gbinsura_crm.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employees`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employees` ON `employees`.`id` = `data`.`telecallerId`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employees`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employees` ON `employees`.`id` = `data`.`telecallerId`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employees`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employees` ON `employees`.`id` = `data`.`telecallerId`', [], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\DataModel.php(41): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\Admin.php(1703): App\Models\DataModel->findAllWithTelecaller()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->allData()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-02 15:12:12 --> [Caused by] mysqli_sql_exception: Table 'gbinsura_crm.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employees`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employees` ON `employees`.`id` = `data`.`telecallerId`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employees`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employees` ON `employees`.`id` = `data`.`telecallerId`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employees`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employees` ON `employees`.`id` = `data`.`telecallerId`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employees`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employees` ON `employees`.`id` = `data`.`telecallerId`', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\DataModel.php(41): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(1703): App\Models\DataModel->findAllWithTelecaller()
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->allData()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-07-02 15:15:52 --> Unknown column 'data.telecallerId' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employee`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `data`.`telecallerId`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employee`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `data`.`telecallerId`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employee`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `data`.`telecallerId`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employee`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `data`.`telecallerId`', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\DataModel.php(41): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(1703): App\Models\DataModel->findAllWithTelecaller()
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->allData()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-02 15:15:52 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'data.telecallerId' in 'on clause'
+[Method: GET, Route: admin/all-data]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employee`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `data`.`telecallerId`', [], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\DataModel.php(41): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\Admin.php(1703): App\Models\DataModel->findAllWithTelecaller()
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->allData()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-02 15:15:52 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'data.telecallerId' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employee`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `data`.`telecallerId`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employee`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `data`.`telecallerId`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employee`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `data`.`telecallerId`', [], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\DataModel.php(41): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\Admin.php(1703): App\Models\DataModel->findAllWithTelecaller()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->allData()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-02 15:15:52 --> [Caused by] mysqli_sql_exception: Unknown column 'data.telecallerId' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employee`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `data`.`telecallerId`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employee`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `data`.`telecallerId`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employee`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `data`.`telecallerId`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`regDate`, `data`.`regNumber`, `data`.`ownerName`, `data`.`mobile`, `employee`.`name` as `telecaller`
+FROM `data`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `data`.`telecallerId`', [], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\DataModel.php(41): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(1703): App\Models\DataModel->findAllWithTelecaller()
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->allData()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

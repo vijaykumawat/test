@@ -358,7 +358,7 @@
                                                     <img src="<?= base_url('uploads/profile/' . $photo) ?>"
                                                         class="rounded-circle" width="40" height="40" alt="profile-img">
 
-                                                    <a href="<?= base_url('/admin/employee/' . $emp['employeeId']) ?>">
+                                                    <a href="<?= site_url('/admin/employee/' . $emp['employeeId']) ?>">
                                                         <div class="ms-3">
                                                             <h6 class="fs-4 fw-semibold mb-0"><?= esc($emp['name']) ?>
                                                             </h6>

@@ -122,6 +122,16 @@
 
                                         </div>
                                     </div>
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">Policy Details</h5>
+                                        <?php if ($status === 'Active'): ?>
+                                        <span class="badge bg-success">Active</span>
+                                        <?php elseif ($status === 'Expired'): ?>
+                                        <span class="badge bg-danger">Expired</span>
+                                        <?php else: ?>
+                                        <span class="badge bg-secondary">Unknown</span>
+                                        <?php endif; ?>
+                                    </div>
                                     <div class="card-body">
                                         <!--<h4 class="card-title">Default Basic Forms</h4>
                                     <p class="card-subtitle mb-3">

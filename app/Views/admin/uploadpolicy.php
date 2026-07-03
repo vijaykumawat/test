@@ -98,6 +98,12 @@
                                                 aria-label="Close" fdprocessedid="ed1z7v"></button>
                                         </div>
                                         <?php endif; ?>
+                                        <div id="processingMessage" class="alert alert-info mb-3 d-none" role="status">
+                                            <div class="d-flex align-items-center">
+                                                <div class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></div>
+                                                <span>Processing, please wait...</span>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="mb-3">
@@ -132,7 +138,7 @@
                                                     <button type="submit"
                                                         class="btn btn-outline-success btn-sm shadow-sm"
                                                         aria-haspopup="true" aria-expanded="false"
-                                                        fdprocessedid="sdx9js">
+                                                        fdprocessedid="sdx9js" id="submitUploadBtn">
                                                         <i class="ti ti-upload me-1 fs-4"></i>
                                                         Extract & Upload
                                                     </button>
@@ -217,6 +223,8 @@
         const fileList = document.getElementById("fileList");
         const uploadBox = document.querySelector(".upload-box");
         const uploadForm = document.getElementById("uploadForm");
+        const submitUploadBtn = document.getElementById("submitUploadBtn");
+        const processingMessage = document.getElementById("processingMessage");
 
         const validateAndDisplayFiles = () => {
             fileList.innerHTML = "";
@@ -263,6 +271,11 @@
                 alert('❌ Please remove non-PDF files before uploading.');
                 return;
             }
+
+            submitUploadBtn.disabled = true;
+            submitUploadBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Processing...';
+            processingMessage.classList.remove('d-none');
+            processingMessage.classList.add('d-block');
         });
 
         uploadBox.addEventListener("dragover", (e) => {

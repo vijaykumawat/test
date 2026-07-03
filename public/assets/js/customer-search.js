@@ -37,7 +37,7 @@ $(document).ready(function () {
                 data.forEach(function (row) {
 
                     html += `
-                        <a href="${baseUrl}/admin/edit-policy-view/${row.policy_id}"
+                        <a href="${baseUrl  }admin/edit-policy-view/${row.policy_id}"
                            class="list-group-item list-group-item-action">
                             <strong>${row.holder_name}</strong><br>
                             <small>

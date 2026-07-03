@@ -111,7 +111,7 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item">
-                            <a class="sidebar-link justify-content-between" href="<?= base_url('/admin/employees') ?>">
+                            <a class="sidebar-link justify-content-between" href="<?= site_url('/admin/employees') ?>">
                                 <div class="d-flex align-items-center gap-3">
                                     <div class="round-16 d-flex align-items-center justify-content-center">
                                         <i class="ti ti-circle"></i>

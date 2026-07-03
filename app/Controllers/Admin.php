@@ -40,51 +40,69 @@ class Admin extends BaseController
     /**
      * Display admin dashboard
      */
-   public function index()
-    {
-        $db = \Config\Database::connect();
-        $builder = $db->table('employee');
-        $builder->select('employee.employeeId, employee.profilePhoto, employee.name, employee.gender, subscriptions.endDate, subscriptions.status');
-        $builder->join('subscriptions', 'subscriptions.employeeId = employee.employeeId', 'left');
-        $employees = $builder->get()->getResultArray();
+public function index()
+{
+    $db = \Config\Database::connect();
 
-        // Calculate remaining days
-        foreach ($employees as &$emp) {
-            if (!empty($emp['endDate'])) {
-                $endDate = strtotime($emp['endDate']);
-                $today   = strtotime(date('Y-m-d'));
-                $emp['daysRemaining'] = ceil(($endDate - $today) / (60 * 60 * 24));
-            } else {
-                $emp['daysRemaining'] = null;
-            }
+    // Employees + subscriptions
+    $builder = $db->table('employee');
+    $builder->select('employee.employeeId, employee.profilePhoto, employee.name, employee.gender, subscriptions.endDate, subscriptions.status');
+    $builder->join('subscriptions', 'subscriptions.employeeId = employee.employeeId AND subscriptions.status = "active"', 'left');
+    $employees = $builder->get()->getResultArray();
+
+    foreach ($employees as &$emp) {
+        if (!empty($emp['endDate'])) {
+            $endDate = strtotime($emp['endDate']);
+            $today   = strtotime(date('Y-m-d'));
+            $emp['daysRemaining'] = ceil(($endDate - $today) / (60 * 60 * 24));
+        } else {
+            $emp['daysRemaining'] = null;
         }
-
-        // Dashboard metrics
-        $data['employees']       = $employees;
-        $data['totalPolicies']   = $this->policyModel->countAllResults();
-        $data['totalData']       = $this->dataModel->countAllResults();
-        $data['currentExpiries'] = $this->policyModel->where('MONTH(expiry_date)', date('m'))->countAllResults();
-        $data['nextExpiries']    = $this->policyModel->where('MONTH(expiry_date)', date('m', strtotime('+1 month')))->countAllResults();
-
-        // Chart data (example: policies issued per month)
-        $chartQuery = $db->query("
-            SELECT DATE_FORMAT(issue_date, '%b') AS month, COUNT(*) AS total
-            FROM policies
-            WHERE issue_date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
-            GROUP BY month ORDER BY issue_date ASC
-        ");
-        $data['chartData'] = $chartQuery->getResultArray();
-
-        // Policy type distribution
-        $typeQuery = $db->query("
-            SELECT insurance_type, COUNT(*) AS total
-            FROM policies
-            GROUP BY insurance_type
-        ");
-        $data['policyTypes'] = $typeQuery->getResultArray();
-
-        return view('admin/dashboard', $data);
     }
+
+    // Dashboard metrics
+    $data['employees']     = $employees;
+    $data['allCount']      = $this->policyModel->countAll();
+    $data['monthlyCount']  = $this->policyModel->where('MONTH(issue_date)', date('m'))->countAllResults();
+    $data['todaysCount']   = $this->policyModel->where('DATE(issue_date)', date('Y-m-d'))->countAllResults();
+    $data['totalData']     = $this->dataModel->countAll();
+    $data['totalPolicies'] = $this->policyModel->countAll();
+    
+    $data['usedData']   = $this->dataModel->where('actionTaken', 1)->countAllResults();
+    $data['unusedData'] = $this->dataModel->where('actionTaken', 0)->countAllResults();
+    $topPerformers = $db->query("
+    SELECT e.name, e.profilePhoto, e.gender, COUNT(p.policy_id) AS total, MIN(p.issue_date) AS first_issue, MAX(p.issue_date) AS last_issue
+    FROM policies p
+    JOIN employee e ON e.employeeId = p.telecaller
+    WHERE p.issue_date >= DATE_FORMAT(CURDATE(), '%Y-%m-01')
+    AND p.issue_date < DATE_ADD(DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 1 MONTH)
+    GROUP BY e.employeeId, e.name, e.profilePhoto
+    ORDER BY total DESC;
+    ")->getResultArray();
+
+    $data['topPerformers'] = $topPerformers;
+
+    // Chart data
+    $chartQuery = $db->query("
+        SELECT DATE_FORMAT(issue_date, '%b') AS month, COUNT(*) AS total
+        FROM policies
+        WHERE issue_date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+        GROUP BY YEAR(issue_date), MONTH(issue_date)
+        ORDER BY YEAR(issue_date), MONTH(issue_date)
+    ");
+    $data['chartData'] = $chartQuery->getResultArray();
+
+    // Policy type distribution
+    $typeQuery = $db->query("
+        SELECT insurance_type, COUNT(*) AS total
+        FROM policies
+        GROUP BY insurance_type
+        ORDER BY total DESC
+    ");
+    $data['policyTypes'] = $typeQuery->getResultArray();
+
+    return view('admin/dashboard', $data);
+}
 
 
 
@@ -354,6 +372,67 @@ class Admin extends BaseController
     /**
      * API endpoint for next month expired policies
      */
+ public function expiredNextMonthApi()
+{
+    $request = service('request');
+
+    $draw   = (int) $request->getPost('draw');
+    $start  = (int) $request->getPost('start');
+    $length = (int) $request->getPost('length');
+    $search = $request->getPost('search')['value'] ?? '';
+    $order  = $request->getPost('order');
+
+    $columns = ['holder_name','vehicle_number','insurance_type','mobileNo','issue_date','expiry_date','policy_id'];
+    $orderColumn = 'expiry_date';
+    $orderDir    = 'ASC';
+
+    if (!empty($order)) {
+        $colIndex = (int) $order[0]['column'];
+        $orderDir = $order[0]['dir'];
+        $orderColumn = $columns[$colIndex] ?? 'expiry_date';
+    }
+
+    // Get filtered data
+    $data = $this->policyModel->getExpiredNextMonth($length, $start, $search, $orderColumn, $orderDir);
+
+    // Total count (without search)
+    $nextMonth = date('m') + 1;
+    $nextYear = date('Y');
+    if ($nextMonth > 12) {
+        $nextMonth = 1;
+        $nextYear++;
+    }
+
+    $totalRecords = $this->policyModel
+        ->where("YEAR(expiry_date) = {$nextYear}", null, false)
+        ->where("MONTH(expiry_date) = {$nextMonth}", null, false)
+        ->countAllResults();
+
+    // Filtered count (with search)
+    $filteredRecords = $this->policyModel
+        ->where("YEAR(expiry_date) = {$nextYear}", null, false)
+        ->where("MONTH(expiry_date) = {$nextMonth}", null, false);
+
+    if (!empty($search)) {
+        $filteredRecords->groupStart()
+            ->like('holder_name', $search)
+            ->orLike('vehicle_number', $search)
+            ->orLike('insurance_type', $search)
+            ->orLike('mobileNo', $search)
+        ->groupEnd();
+    }
+
+    $filteredCount = $filteredRecords->countAllResults();
+
+    return $this->response->setJSON([
+        "draw"            => $draw,
+        "recordsTotal"    => $totalRecords,
+        "recordsFiltered" => $filteredCount,
+        "data"            => $data
+    ]);
+}
+    /*
+    
     public function expiredNextMonthApi()
     {
         $search = $this->request->getVar('q') ?? '';
@@ -395,7 +474,7 @@ class Admin extends BaseController
             'per_page' => $perPage,
             'total_pages' => $totalPages
         ]);
-    }
+    }*/
 
     /**
      * Handle image OCR extraction
@@ -1082,7 +1161,7 @@ public function uploadDataPost()
 
         return view('admin/employees/addemployee', $data);
     }
-
+    
     public function extractData()
     {
         $file = $this->request->getFile('idproof');
@@ -1639,10 +1718,7 @@ public function uploadDataPost()
 
     public function allData()
     {
-        // Fetch all rows from the data table
-        $rows = $this->dataModel->findAll();
-
-        // Pass them to the view
+        $rows = $this->dataModel->findAllWithTelecaller();
         return view('admin/all_data', ['rows' => $rows]);
     }
 
@@ -1792,6 +1868,18 @@ public function uploadDataPost()
             return redirect()->back()->with('error', 'Policy not found.');
         }
 
+        $expiryDate = $policy['expiry_date'] ?? null;
+        $status = 'Unknown';
+
+        if ($expiryDate) {
+            $today = date('Y-m-d');
+            if ($expiryDate >= $today) {
+                $status = 'Active';
+            } else {
+                $status = 'Expired';
+            }
+        }
+
         // Fetch only active employees
         $employees = $this->employeeModel->where('isActive', 1)->findAll();
 
@@ -1801,7 +1889,8 @@ public function uploadDataPost()
         return view('admin/policy/editpolicy', [
             'policy'     => $policy,
             'employees'  => $employees,
-            'telecaller' => $telecaller['name'] ?? ''   // pass employee name
+            'telecaller' => $telecaller['name'] ?? '',   // pass employee name
+            'status'     => $status
         ]);
     }
 

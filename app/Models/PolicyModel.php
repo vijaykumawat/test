@@ -84,27 +84,36 @@ class PolicyModel extends Model
     /**
      * Get policies expiring in next month
      */
-    public function getExpiredNextMonth($limit = null, $offset = 0)
+    public function getExpiredNextMonth($limit = null, $offset = 0, $search = null, $orderColumn = 'expiry_date', $orderDir = 'ASC')
     {
         $nextMonth = date('m') + 1;
         $nextYear = date('Y');
-        
+
         if ($nextMonth > 12) {
             $nextMonth = 1;
             $nextYear++;
         }
 
-        $query = $this->where("YEAR(expiry_date) = {$nextYear}", null, false)
-                      ->where("MONTH(expiry_date) = {$nextMonth}", null, false)
-                      ->orderBy('expiry_date', 'ASC');
+        $builder = $this->where("YEAR(expiry_date) = {$nextYear}", null, false)
+                        ->where("MONTH(expiry_date) = {$nextMonth}", null, false);
 
-        if ($limit) {
-            $query = $query->limit($limit, $offset);
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like('holder_name', $search)
+                ->orLike('vehicle_number', $search)
+                ->orLike('insurance_type', $search)
+                ->orLike('mobileNo', $search)
+            ->groupEnd();
         }
 
-        return $query->findAll();
-    }
+        $builder->orderBy($orderColumn, $orderDir);
 
+        if ($limit !== null) {
+            $builder->limit((int)$limit, (int)$offset);
+        }
+
+        return $builder->findAll();
+    }
     /**
      * Count total search results
      */

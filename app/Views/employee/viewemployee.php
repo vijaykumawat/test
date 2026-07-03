@@ -129,7 +129,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-8 ">
+                        <div class="col-lg-8 col-sm-12 d-flex align-items-stretch">
                             <!-- start Default Basic Forms -->
                             <form action="<?= site_url('employee/employee-update') ?>" method="post"
                                 enctype="multipart/form-data" id="employeeForm">

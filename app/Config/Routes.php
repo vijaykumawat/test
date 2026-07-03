@@ -45,7 +45,8 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->get('current-expiries', 'Admin::expiredCurrentMonth');
     $routes->get('current-expiries-api', 'Admin::expiredCurrentMonthApi');
     $routes->get('next-expiries', 'Admin::expiredNextMonth');
-    $routes->get('next-expiries-api', 'Admin::expiredNextMonthApi');
+    //$routes->get('next-expiries-api', 'Admin::expiredNextMonthApi');
+    $routes->post('next-expiries-api', 'Admin::expiredNextMonthApi');
     $routes->post('ocr', 'Admin::extractImageText');
     $routes->get('export-expired', 'Admin::exportExpiredExcel');
     $routes->get('export-next-expiries', 'Admin::exportNextExpiriesExcel');
