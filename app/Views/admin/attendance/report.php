@@ -91,7 +91,7 @@
                                                     <div class="mb-3">
                                                         <label for="endDate" class="form-label">End Date <span class="text-danger">*</span></label>
                                                         <input type="date" class="form-control" id="endDate" 
-                                                               value="<?= date('Y-m-d') ?>" required>
+                                                               value="<?= date('Y-m-t') ?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
@@ -134,6 +134,10 @@
                                                 <button type="button" class="btn btn-success btn-sm" id="exportBtn" style="display:none;">
                                                     <i class="ti ti-download"></i> Export to CSV
                                                 </button>
+
+                                                <button type="button" class="btn btn-danger btn-sm" id="exportPdfBtn" style="display:none;">
+                                                    <i class="ti ti-file-text"></i> Export to PDF
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -150,12 +154,13 @@
                                                     <th>Check Out</th>
                                                     <th>Status</th>
                                                     <th>Remarks</th>
-                                                    <th>Actions</th>
+                                                    <!--<th>Actions</th>-->
                                                 </tr>
                                             </thead>
                                             <tbody id="reportBody">
                                             </tbody>
                                         </table>
+                                        <div id="salarySummary" class="mt-4"></div> 
                                     </div>
                                 </div>
                             </div>
@@ -230,17 +235,30 @@
                 const data = await response.json();
 
                 if (data.success) {
-                    displayReport(data.data);
-                    exportBtn.style.display = 'inline-block';
-                    
-                    // Update export button
-                    exportBtn.onclick = () => {
-                        window.location.href = `<?= site_url('admin/attendance/export') ?>?start_date=${startDate}&end_date=${endDate}&employee_id=${employeeId}`;
-                    };
-                } else {
-                    setAlert(data.message || 'Error loading report', 'error');
-                    exportBtn.style.display = 'none';
-                }
+                        displayReport(data.data.attendance);
+                        displaySummary(data.data.summary);
+
+                        exportBtn.style.display = 'inline-block';
+                        exportPdfBtn.style.display = 'inline-block';
+
+                        // CSV export
+                        exportBtn.onclick = () => {
+                            window.location.href = `<?= site_url('admin/attendance/export') ?>?start_date=${startDate}&end_date=${endDate}&employee_id=${employeeId}`;
+                        };
+
+                        // PDF export
+                        exportPdfBtn.onclick = () => {
+                            if (!employeeId) {
+                                alert("Please select an employee before exporting to PDF");
+                                return;
+                            }
+                            window.location.href = `<?= site_url('admin/attendance/export-pdf') ?>/${employeeId}/${startDate}/${endDate}`;
+                        };
+                    } else {
+                        setAlert(data.message || 'Error loading report', 'error');
+                        exportBtn.style.display = 'none';
+                        exportPdfBtn.style.display = 'none';
+                    }
             } catch (error) {
                 setAlert('Error: ' + error.message, 'error');
                 exportBtn.style.display = 'none';
@@ -280,10 +298,10 @@
         record.check_in_time || '-',
         record.check_out_time || '-',
         getStatusBadge(record.status),
-        htmlEscape(record.remarks || '-'),
-        `<button class="btn btn-sm btn-warning edit-btn" data-id="${record.id}" title="Edit">
-            <i class="ti ti-edit"></i>
-         </button>`
+        htmlEscape(record.remarks || '-')// ,
+        //`<button class="btn btn-sm btn-warning edit-btn" data-id="${record.id}" title="Edit">
+        //    <i class="ti ti-edit"></i>
+        // </button>`
     ]);
 
     // Add and redraw
@@ -304,6 +322,29 @@
 
         // Load initial report
         loadReport();
+        
+        function displaySummary(summary) {
+    document.getElementById('salarySummary').innerHTML = `
+        <table class="table table-bordered">
+            <tbody>
+                <tr><th>Present Days</th><td>${summary.presentDays}</td>
+                    <th>Absent Days</th><td>${summary.absentDays}</td></tr>
+                <tr><th>Half Days</th><td>${summary.halfDays}</td>
+                    <th>Leave Days</th><td>${summary.leaveDays}</td></tr>
+                <tr><th>Salary Per Day</th><td>₹${summary.salaryPerDay.toFixed(2)}</td>
+                    <th>Salary Per Hour</th><td>₹${summary.salaryPerHour.toFixed(2)}</td></tr>
+                <tr><th>Payable Salary</th><td colspan="3">₹${summary.totalPayable.toFixed(2)}</td></tr>
+                <tr><th>Bonus</th><td>₹${summary.bonus.toFixed(2)}</td>
+                    <th>Deductions</th><td>₹$0.00</td></tr>
+                <tr><th>Advance/Loan</th><td>₹${summary.advanceLoan.toFixed(2)}</td>
+                    <th>Previous Balance</th><td>₹$0.00</td></tr>
+                <tr class="table-success"><th colspan="3">Final Salary</th>
+                    <td><strong>₹${summary.finalSalary.toFixed(2)}</strong></td></tr>
+            </tbody>
+        </table>
+    `;
+}  
+
     </script>
 </body>
 

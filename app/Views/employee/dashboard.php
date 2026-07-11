@@ -61,8 +61,10 @@
                             <form action="<?php echo base_url();?>employee/save" method="post">
                                 <!-- start Event Registration -->
                                 <div
-                                    class="card <?php if($actionTaken){ echo "blur";} else{ echo "";}?> <?php if($alreadySale==1){echo "alSale";} ?>">
+                                    class="card <?php if($actionTaken){ echo "blur";} else{ echo "";}?> <?php if($alreadySale==1){echo "alSale";} ?> shadow">
                                     <div class="form-actions">
+                                        <!-- <div class="card-body">
+                                            <h3 class="card-title
                                         <div class="card-body border-top">
                                             <input type="hidden" id="recordId" name="recordId"
                                                 value="<?php echo $recordId; ?>">
@@ -74,8 +76,11 @@
                                                 class="btn btn-outline-dark btn-sm shadow-sm">
                                                 Cancel
                                             </button>
-
-                                        </div>
+                                            <button type="button" class="btn btn-outline-primary btn-sm shadow-sm"
+                                                data-bs-toggle="modal" data-bs-target="#quotationModal">
+                                                Quotation
+                                            </button>
+                                        </div> -->
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-sm-1">
@@ -170,9 +175,21 @@
                                                     </div>
                                                 </dd>
                                             </div>
-
-
                                         </div>
+                                        <div class="card-body border-top">
+                                            <input type="hidden" id="recordId" name="recordId"
+                                                value="<?php echo $recordId; ?>">
+
+                                            <button type="submit" class="btn btn-success btn-sm shadow-sm ">
+                                                Save
+                                            </button>
+
+                                            <button type="button" class="btn btn-primary btn-sm shadow-sm "
+                                                data-bs-toggle="modal" data-bs-target="#quotationModal">
+                                                Quotation
+                                            </button>
+                                        </div>
+
                                     </div>
 
                                 </div>
@@ -291,7 +308,7 @@
                             <div class="card">
                                 <div class="form-actions">
                                     <div class="card-body">
-                                        <h3 > Oops!  &nbsp; Record not found</h3>
+                                        <h3> Oops! &nbsp; Record not found</h3>
                                     </div>
                                 </div>
                             </div>
@@ -302,7 +319,115 @@
             <?php        
                 }
              ?>
+            <!-- Quotation Modal -->
+            <div class="modal fade" id="quotationModal" tabindex="-1" aria-labelledby="quotationModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <!-- xl for wide form -->
+                    <div class="modal-content">
 
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="quotationModalLabel">Generate Quotation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <!-- Your form goes here -->
+                            <form action="<?php echo base_url();?>Tcpdfexample/quote" method="post">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label>IDV</label>
+                                            <input type="text" name="idv" class="form-control" placeholder="Enter ..."
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label>Cubic Capacity</label>
+                                            <input type="text" name="cubicCapacity" class="form-control"
+                                                placeholder="Enter ..." required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label>NCB</label>
+                                            <input type="text" name="ncb" class="form-control" placeholder="Enter ..."
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label>Net Premium</label>
+                                            <input type="text" name="netPremium" class="form-control"
+                                                placeholder="Enter ..." required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label>Company</label>
+                                            <select name="company" class="form-control">
+                                                <option>SBI</option>
+                                                <option>SHRIRAM</option>
+                                                <option>RELIANCE</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <input type="checkbox" id="consumableCheckBox" name="consumableCheckBox">
+                                            <label for="consumable">Consumable</label>
+                                            <input type="text" name="consumable" class="form-control" placeholder="000">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <input type="checkbox" id="towingCheckBox" name="towingCheckBox">
+                                            <label for="towing">Towing</label>
+                                            <input type="text" name="towing" class="form-control" placeholder="000">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <input type="checkbox" id="returnToInvoiceCheckBox"
+                                                name="returnToInvoiceCheckBox">
+                                            <label for="returnToInvoice">Return To Invoice</label>
+                                            <input type="text" name="returnToInvoice" class="form-control"
+                                                placeholder="000">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <input type="checkbox" id="PAOwnerCheckBox" name="PAOwnerCheckBox">
+                                            <label for="PAOwner">PA Owner 15 Lac</label>
+                                            <input type="text" name="PAOwner" class="form-control" placeholder="000">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-sm-3">
+                                        <input type="hidden" id="recordId" name="recordId"
+                                            value="<?php echo $recordId; ?>">
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="fas fa-download"></i> Download Quotation
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary btn-sm"
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <?= $this->include('admin/script'); ?>

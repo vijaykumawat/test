@@ -7,7 +7,7 @@
     <title>Flexy Free Bootstrap Admin Template by WrapPixel</title>
     <link rel="shortcut icon" type="image/png" href="<?= base_url('/assets/images/logos/favicon.png') ?>" />
     <link rel="stylesheet" href="<?= base_url('/assets/css/styles.min.css') ?>" />
-          <link rel="stylesheet" href="<?= base_url('/assets/css/common.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('/assets/css/common.css') ?>" />
     <style>
     /* Ensure removing the topstrip leaves no empty gap */
 
@@ -112,11 +112,11 @@
                                             <input type="hidden" name="policy_id" id="policy_id"
                                                 value="<?= esc($policy['policy_id'] ?? '') ?>">
                                             <button type="submit" id="saveBtn"
-                                                class="btn btn-outline-success btn-sm shadow-sm" disabled>
+                                                class="btn btn-success btn-sm shadow-sm" disabled>
                                                 Save
                                             </button>
                                             <button type="button" id="cancelBtn"
-                                                class="btn btn-outline-dark btn-sm shadow-sm">
+                                                class="btn btn-dark btn-sm shadow-sm">
                                                 Cancel
                                             </button>
 
@@ -124,13 +124,45 @@
                                     </div>
                                     <div class="card-header d-flex justify-content-between align-items-center">
                                         <h5 class="mb-0">Policy Details</h5>
-                                        <?php if ($status === 'Active'): ?>
-                                        <span class="badge bg-success">Active</span>
-                                        <?php elseif ($status === 'Expired'): ?>
-                                        <span class="badge bg-danger">Expired</span>
-                                        <?php else: ?>
-                                        <span class="badge bg-secondary">Unknown</span>
-                                        <?php endif; ?>
+                                        <div>
+                                            <?php if ($status === 'Active'): ?>
+                                            <span class="badge bg-success me-2">Active</span>
+                                            <?php if ($countdown): ?>
+                                            <span class="badge bg-info"><?= esc($countdown) ?></span>
+                                            <?php endif; ?>
+                                            <?php elseif ($status === 'Expired'): ?>
+                                            <span class="badge bg-danger">Expired</span>
+                                            <?php else: ?>
+                                            <span class="badge bg-secondary">Unknown</span>
+                                            <?php endif; ?>
+                                            <!-- Preview icon (opens modal) -->
+                                            <button type="button" class="btn btn-sm btn-outline-secondary me-2" 
+                                                    data-bs-toggle="modal" data-bs-target="#policyPreviewModal">
+                                                <i class="ti ti-eye"></i>
+                                            </button>
+                                            <!-- Download icon -->
+                                            <a href="<?= site_url('admin/download-policy/'.$policy['policy_id']) ?>"
+                                                class="btn btn-sm btn-outline-primary" title="Download Policy">
+                                                <i class="ti ti-download"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="policyPreviewModal" tabindex="-1">
+                                        <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Policy Preview</h5>
+                                                    <button type="button" class="btn-close"
+                                                        data-bs-dismiss="modal"></button>
+
+
+                                                </div>
+                                                <div class="modal-body">
+  <iframe src="<?= site_url('admin/preview-policy/'.$policy['policy_id']) ?>" 
+          width="100%" height="600px" style="border:none;"></iframe>
+</div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="card-body">
                                         <!--<h4 class="card-title">Default Basic Forms</h4>
@@ -218,13 +250,14 @@
                                                 <span id="telecallerView" class="flex-grow-1">
                                                     <?= esc($telecaller) ?>
                                                 </span>
-                                                <select class="form-control d-none flex-grow-1" id="telecallerEdit" name="telecaller">
+                                                <select class="form-control d-none flex-grow-1" id="telecallerEdit"
+                                                    name="telecaller">
                                                     <option value="">--Select Employee--</option>
                                                     <?php foreach ($employees as $emp): ?>
-                                                        <option value="<?= esc($emp['employeeId']) ?>"
-                                                            <?= ($policy['telecaller'] == $emp['employeeId']) ? 'selected' : '' ?>>
-                                                            <?= esc($emp['name']) ?>
-                                                        </option>
+                                                    <option value="<?= esc($emp['employeeId']) ?>"
+                                                        <?= ($policy['telecaller'] == $emp['employeeId']) ? 'selected' : '' ?>>
+                                                        <?= esc($emp['name']) ?>
+                                                    </option>
                                                     <?php endforeach; ?>
                                                 </select>
 
@@ -270,6 +303,7 @@
                             </form>
                             <!-- end Default Basic Forms -->
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -381,9 +415,9 @@
     <script>
     const baseUrl = "<?= base_url() ?>";
     const searchCustomerUrl = "<?= site_url('admin/searchCustomerAjax') ?>";
-</script>
+    </script>
 
-<script src="<?= base_url('assets/js/customer-search.js') ?>"></script>
+    <script src="<?= base_url('assets/js/customer-search.js') ?>"></script>
 </body>
 
 </html>

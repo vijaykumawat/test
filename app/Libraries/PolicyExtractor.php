@@ -186,8 +186,13 @@ class PolicyExtractor
 
         if (empty($holderName)) {
             if (preg_match("/(?i)Dear\\s+([A-Z][A-Za-z\\s&\\.]+?)(?=,|\\r?\\n|$)/", $text, $m)) {
-                $holderName = preg_replace("/\\s{2,}/", " ", $m[1]);
-                $holderName = trim($holderName);
+                $capturedName = preg_replace("/\\s{2,}/", " ", $m[1]);
+                $capturedName = trim($capturedName);
+                // Skip if the captured name is "Customer"
+
+                if (strcasecmp($capturedName, "Customer") !== 0) {
+                    $holderName = $capturedName;
+                }
             }
         }
 

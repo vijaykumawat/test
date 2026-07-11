@@ -10,6 +10,11 @@ $routes->get('/employee/logout', 'Auth::logout');
 $routes->get('/register', 'Auth::register');
 $routes->post('/auth/employee-add', 'Auth::employeeAdd');
 
+$routes->get('/tcpdfexample/quote', 'tcpdfexample::quote');
+$routes->get('/Tcpdfexample/test', 'Tcpdfexample::test');
+$routes->match(['get','post'], '/Tcpdfexample/quote', 'Tcpdfexample::quote');
+
+
 
 // Protected Employee Routes
 $routes->group('employee', ['filter' => ['authEmployee', 'sessionExpire']], function($routes) {
@@ -25,6 +30,7 @@ $routes->group('employee', ['filter' => ['authEmployee', 'sessionExpire']], func
     $routes->post('employee-update', 'Employee::updateEmployee');
 });
 
+
 // Protected Admin Routes
 $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->get('/', 'Admin::index');
@@ -37,6 +43,7 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->get('search-policy-api', 'Admin::searchPolicyApi');
     //$routes->get('edit-policy-view', 'Admin::editPolicyView');
     $routes->get('edit-policy-view/(:num)', 'Admin::editPolicyView/$1');
+    $routes->get('preview-policy/(:num)', 'Admin::previewPolicy/$1');
     $routes->get('searchCustomerAjax','Admin::searchCustomerAjax');
     $routes->get('download-policy/(:num)', 'Admin::downloadPolicy/$1');
     $routes->delete('policy/(:num)', 'Admin::deletePolicy/$1');
@@ -78,5 +85,14 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->get('all-data', 'Admin::allData');
     $routes->post('uploadProfilePhoto', 'Admin::uploadProfilePhoto');
     $routes->post('renew-subscription', 'Admin::renewEmpSubscription');
-    
+
+    // Attendance report (already defined)
+    $routes->get('attendance/report', 'Admin::attendanceReportPage');
+    $routes->post('attendance/get-report', 'Admin::getAttendanceReport');
+    $routes->get('attendance/export', 'Admin::exportAttendanceReport');
+ 
+    // NEW: Export attendance + salary report as PDF
+    $routes->get(
+        'attendance/export-pdf/(:segment)/(:segment)/(:segment)','Admin::exportAttendancePdf/$1/$2/$3');
+
 });

@@ -136,7 +136,7 @@
 
                                                 <div class="btn-group">
                                                     <button type="submit"
-                                                        class="btn btn-outline-success btn-sm shadow-sm"
+                                                        class="btn btn-success btn-sm shadow-sm"
                                                         aria-haspopup="true" aria-expanded="false"
                                                         fdprocessedid="sdx9js" id="submitUploadBtn">
                                                         <i class="ti ti-upload me-1 fs-4"></i>

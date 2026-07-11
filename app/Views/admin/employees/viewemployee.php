@@ -214,7 +214,6 @@
                                                     class="flex-grow-1"><?php if($employee['isActive']==1): ?>Active<?php else: ?>Inactive<?php endif; ?></span>
                                                 <select class="form-control d-none flex-grow-1" id="statusEdit"
                                                     name="status">
-                                                    <option>--Select Status--</option>
                                                     <option>Active</option>
                                                     <option>Inactive</option>
                                                 </select>

@@ -13,6 +13,8 @@ use CodeIgniter\Email\Email;
 use CodeIgniter\I18n\Time;
 use App\Models\EmployeeSubscriptionModel;
 use App\Models\HistoryModel;
+require_once APPPATH . '../public/dompdf/autoload.inc.php';
+use Dompdf\Dompdf;
 
 use DateTime;
 
@@ -1471,10 +1473,10 @@ public function uploadDataPost()
             return $this->response->setJSON(['success' => false, 'message' => 'Invalid request']);
         }
 
-        $startDate = $this->request->getPost('start_date');
-        $endDate = $this->request->getPost('end_date');
+        $startDate  = $this->request->getPost('start_date');
+        $endDate    = $this->request->getPost('end_date');
         $employeeId = $this->request->getPost('employee_id');
-        $status = $this->request->getPost('status');
+        $status     = $this->request->getPost('status');
 
         if (!$startDate || !$endDate) {
             return $this->response->setJSON([
@@ -1491,10 +1493,10 @@ public function uploadDataPost()
         }
 
         $query = $this->attendanceModel
-                      ->select('attendance.*, employee.name as employee_name, employee.jobTitle')
-                      ->join('employee', 'employee.employeeId = attendance.employee_id', 'left')
-                      ->where('attendance_date >=', $startDate)
-                      ->where('attendance_date <=', $endDate);
+                    ->select('attendance.*, employee.name as employee_name, employee.jobTitle, employee.salary')
+                    ->join('employee', 'employee.employeeId = attendance.employee_id', 'left')
+                    ->where('attendance_date >=', $startDate)
+                    ->where('attendance_date <=', $endDate);
 
         if ($employeeId) {
             $query->where('attendance.employee_id', $employeeId);
@@ -1505,12 +1507,68 @@ public function uploadDataPost()
         }
 
         $records = $query->orderBy('attendance.attendance_date', 'DESC')
-                         ->orderBy('employee.name', 'ASC')
-                         ->findAll();
+                        ->orderBy('employee.name', 'ASC')
+                        ->findAll();
+
+        // --- Salary summary calculation ---
+        $presentDays = $absentDays = $halfDays = $leaveDays = 0;
+        $totalPayable = 0;
+        $salaryPerDay = $salaryPerHour = 0;
+        $bonus = 0;
+        $deductions = 1000;
+        $previousSalary = 8673;
+        $advanceLoan = 0;
+
+        if ($employeeId && !empty($records)) {
+            $monthlySalary = $records[0]['salary'] ?? 0;
+            $daysInMonth   = date('t', strtotime($startDate));
+            $salaryPerDay  = $monthlySalary / $daysInMonth;
+            $salaryPerHour = $salaryPerDay / 8;
+
+            foreach ($records as &$record) {
+                switch ($record['status']) {
+                    case 'Present':
+                        $presentDays++;
+                        $record['payable'] = $salaryPerDay;
+                        break;
+                    case 'Absent':
+                        $absentDays++;
+                        $record['payable'] = 0;
+                        break;
+                    case 'Half Day':
+                        $halfDays++;
+                        $record['payable'] = $salaryPerDay / 2;
+                        break;
+                    case 'Leave':
+                        $leaveDays++;
+                        $record['payable'] = $salaryPerDay;
+                        break;
+                }
+                $totalPayable += $record['payable'];
+            }
+        }
+
+        $finalSalary = ($totalPayable + $bonus + $previousSalary) - ($deductions + $advanceLoan);
 
         return $this->response->setJSON([
             'success' => true,
-            'data'    => $records,
+            'data'    => [
+                'attendance' => $records,
+                'summary' => [
+                    'presentDays'    => $presentDays,
+                    'absentDays'     => $absentDays,
+                    'halfDays'       => $halfDays,
+                    'leaveDays'      => $leaveDays,
+                    'salaryPerDay'   => $salaryPerDay,
+                    'salaryPerHour'  => $salaryPerHour,
+                    'totalPayable'   => $totalPayable,
+                    'bonus'          => $bonus,
+                    'deductions'     => $deductions,
+                    'advanceLoan'    => $advanceLoan,
+                    'previousSalary' => $previousSalary,
+                    'finalSalary'    => $finalSalary,
+                ]
+            ],
             'count'   => count($records),
         ]);
     }
@@ -1870,11 +1928,16 @@ public function uploadDataPost()
 
         $expiryDate = $policy['expiry_date'] ?? null;
         $status = 'Unknown';
+        $countdown = null;
 
         if ($expiryDate) {
-            $today = date('Y-m-d');
-            if ($expiryDate >= $today) {
+            $today = new DateTime();
+            $expiry = new DateTime($expiryDate);
+
+            if ($expiry >= $today) {
                 $status = 'Active';
+                $interval = $today->diff($expiry);
+                $countdown = $interval->days . ' days left';
             } else {
                 $status = 'Expired';
             }
@@ -1890,9 +1953,32 @@ public function uploadDataPost()
             'policy'     => $policy,
             'employees'  => $employees,
             'telecaller' => $telecaller['name'] ?? '',   // pass employee name
-            'status'     => $status
+            'status'     => $status,
+            'countdown' => $countdown
         ]);
     }
+
+public function previewPolicy($id)
+{
+    $policy = $this->policyModel->find($id);
+
+    if (! $policy || empty($policy['file_path'])) {
+        return $this->response->setStatusCode(404)
+                              ->setBody('Policy file not found.');
+    }
+
+    $filePath = WRITEPATH . 'uploads/policies/' . basename($policy['file_path']);
+
+    if (! file_exists($filePath)) {
+        return $this->response->setStatusCode(404)
+                              ->setBody('File not found on server.');
+    }
+
+    // Stream PDF inline
+    return $this->response->setHeader('Content-Type', 'application/pdf')
+                          ->setHeader('Content-Disposition', 'inline; filename="'.basename($filePath).'"')
+                          ->setBody(file_get_contents($filePath));
+}
 
     public function postUpdatePolicy()
     {
@@ -1937,5 +2023,249 @@ public function uploadDataPost()
 
         return $this->response->setJSON($result);
     }
-   
+
+public function exportAttendancePdf($employeeId, $startDate, $endDate)
+{
+    $employeeModel = new EmployeeModel();
+
+    if ($employeeId == 0) {
+        // Export all employees
+        $employees = $employeeModel->where('isActive', 1)->findAll();
+        $reports   = [];
+
+        foreach ($employees as $emp) {
+            $records = $this->getAttendanceWithWeeklyOffAndHolidays(
+                $emp['employeeId'],
+                $startDate,
+                $endDate
+            );
+
+            // Salary logic
+            $monthlySalary = $emp['salary']; // salary column in employee table
+            $daysInMonth   = date('t', strtotime($startDate));
+            $salaryPerDay  = $monthlySalary / $daysInMonth;
+
+            $totalPayable  = 0;
+            $weeklyOffCount = 0;
+
+            foreach ($records as &$record) {
+                if (isset($record['status'])) {
+                    if ($record['status'] === 'Present' || $record['status'] === 'Weekly Off') {
+                        $record['payable'] = $salaryPerDay;
+                        $totalPayable += $salaryPerDay;
+                    } else {
+                        $record['payable'] = 0;
+                    }
+                    if ($record['status'] === 'Weekly Off') {
+                        $weeklyOffCount++;
+                    }
+                }
+            }
+
+            // Build report data
+            $report = $this->buildReportData($emp, $records, $startDate);
+            $report['weeklyOffDays'] = $weeklyOffCount;
+            $report['salaryPerDay']  = $salaryPerDay;
+            $report['totalPayable']  = $totalPayable;
+
+            $reports[] = $report;
+        }
+
+        $html = view('admin/attendance/pdf_report_all', [
+            'reports' => $reports,
+            'period'  => [$startDate, $endDate],
+        ]);
+    } else {
+        // Export single employee
+        $employee = $employeeModel->find($employeeId);
+
+        $records = $this->getAttendanceWithWeeklyOffAndHolidays(
+            $employeeId,
+            $startDate,
+            $endDate
+        );
+
+        // Salary logic
+        $monthlySalary = $employee['salary'];
+        $daysInMonth   = date('t', strtotime($startDate));
+        $salaryPerDay  = $monthlySalary / $daysInMonth;
+
+        $totalPayable  = 0;
+        $weeklyOffCount = 0;
+
+        foreach ($records as &$record) {
+            if (isset($record['status'])) {
+                if ($record['status'] === 'Present' || $record['status'] === 'Weekly Off') {
+                    $record['payable'] = $salaryPerDay;
+                    $totalPayable += $salaryPerDay;
+                } else {
+                    $record['payable'] = 0;
+                }
+                if ($record['status'] === 'Weekly Off') {
+                    $weeklyOffCount++;
+                }
+            }
+        }
+
+        // Build report data
+        $report = $this->buildReportData($employee, $records, $startDate);
+        $report['weeklyOffDays'] = $weeklyOffCount;
+        $report['salaryPerDay']  = $salaryPerDay;
+        $report['totalPayable']  = $totalPayable;
+
+        $html = view('admin/attendance/pdf_report', [
+            'report' => $report,
+            'period' => [$startDate, $endDate],
+        ]);
+    }
+
+    // Generate PDF
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+    $dompdf->stream("attendance-report-$employeeId.pdf");
+}
+
+
+    /**
+     * Build attendance records including Weekly Off + Holidays
+     */
+    private function getAttendanceWithWeeklyOffAndHolidays($employeeId, $startDate, $endDate)
+    {
+        $attendanceModel = new AttendanceModel();
+
+        // Fetch existing records
+        $records = $attendanceModel
+            ->where('employee_id', $employeeId)
+            ->where('attendance_date >=', $startDate)
+            ->where('attendance_date <=', $endDate)
+            ->orderBy('attendance_date', 'ASC')
+            ->findAll();
+
+        // Index records by date
+        $indexed = [];
+        foreach ($records as $r) {
+            $indexed[$r['attendance_date']] = $r;
+        }
+
+        // Weekly off (Sunday for all employees)
+        $weeklyOffDays = ['Sunday'];
+
+        // Example holiday list (better to keep in DB)
+        $holidays = [
+            '2026-08-15' => 'Independence Day',
+            '2026-10-02' => 'Gandhi Jayanti',
+            '2026-12-25' => 'Christmas',
+        ];
+
+        $start = new \DateTime($startDate);
+        $end   = new \DateTime($endDate);
+        $allRecords = [];
+
+        while ($start <= $end) {
+            $date    = $start->format('Y-m-d');
+            $dayName = $start->format('l');
+
+            if (isset($indexed[$date])) {
+                $allRecords[] = $indexed[$date];
+            } elseif (in_array($dayName, $weeklyOffDays)) {
+                $allRecords[] = [
+                    'attendance_date' => $date,
+                    'status'          => 'Weekly Off',
+                    'check_in_time'   => null,
+                    'check_out_time'  => null,
+                    'remarks'         => 'Weekly holiday',
+                ];
+            } elseif (array_key_exists($date, $holidays)) {
+                $allRecords[] = [
+                    'attendance_date' => $date,
+                    'status'          => 'Holiday',
+                    'check_in_time'   => null,
+                    'check_out_time'  => null,
+                    'remarks'         => $holidays[$date],
+                ];
+            } else {
+                $allRecords[] = [
+                    'attendance_date' => $date,
+                    'status'          => 'Absent',
+                    'check_in_time'   => null,
+                    'check_out_time'  => null,
+                    'remarks'         => 'No login',
+                ];
+            }
+
+            $start->modify('+1 day');
+        }
+
+        return $allRecords;
+    }
+
+    /**
+     * Helper to calculate salary + summary
+     */
+    private function buildReportData($employee, $records, $startDate)
+    {
+        $monthlySalary = $employee['salary'];
+        $daysInMonth   = date('t', strtotime($startDate));
+        $salaryPerDay  = $monthlySalary / $daysInMonth;
+        $salaryPerHour = $salaryPerDay / 8;
+
+        $presentDays = $absentDays = $halfDays = $leaveDays = 0;
+        $totalPayable = 0;
+
+        foreach ($records as &$record) {
+            switch ($record['status']) {
+                case 'Present':
+                    $presentDays++;
+                    $record['payable'] = $salaryPerDay;
+                    break;
+                case 'Absent':
+                    $absentDays++;
+                    $record['payable'] = 0;
+                    break;
+                case 'Half Day':
+                    $halfDays++;
+                    $record['payable'] = $salaryPerDay / 2;
+                    break;
+                case 'Leave':
+                    $leaveDays++;
+                    $record['payable'] = $salaryPerDay;
+                    break;
+                case 'Weekly Off':
+                    $record['payable'] = $salaryPerDay; // ✅ Paid weekly off
+                    break;
+                case 'Holiday':
+                    $record['payable'] = $salaryPerDay; // ✅ Paid holiday
+                    break;
+            }
+            $totalPayable += $record['payable'];
+        }
+
+        // Example extras (replace with DB values if available)
+        $bonus          = 0;
+        $deductions     = 0;
+        $previousSalary = 0;
+        $advanceLoan    = 0;
+        $finalSalary    = ($totalPayable + $bonus + $previousSalary) - ($deductions + $advanceLoan);
+        $gender         = $employee['gender'];
+
+        return [
+            'employee'       => $employee,
+            'attendance'     => $records,
+            'salaryPerDay'   => $salaryPerDay,
+            'salaryPerHour'  => $salaryPerHour,
+            'presentDays'    => $presentDays,
+            'absentDays'     => $absentDays,
+            'halfDays'       => $halfDays,
+            'leaveDays'      => $leaveDays,
+            'totalPayable'   => $totalPayable,
+            'bonus'          => $bonus,
+            'deductions'     => $deductions,
+            'previousSalary' => $previousSalary,
+            'advanceLoan'    => $advanceLoan,
+            'finalSalary'    => $finalSalary,
+            'gender'         => $gender
+        ];
+    }
 }

@@ -31,6 +31,7 @@ class Auth extends BaseController
     public function login()
     {
         $session = session();
+        helper('common_helper'); 
         // 🚫 Prevent re-login if already logged in
         if ($session->get('isLoggedIn')) {
             if ($session->get('jobTitle') === 'Admin') {
@@ -90,6 +91,8 @@ class Auth extends BaseController
                 'status'     => 'LoggedIn'
             ]);
 
+            markAttendance($employee['employeeId']);
+
             if ($employee['jobTitle'] === 'Admin') {
                 return redirect()->to('/admin');
             }
@@ -102,6 +105,7 @@ class Auth extends BaseController
 
     public function logout()
     {
+        helper('common_helper');
         $employeeId = session()->get('employeeId');
         
          if ($employeeId) {
@@ -121,6 +125,10 @@ class Auth extends BaseController
                 ->set('status', 'LoggedOut')
                 ->update();
             }
+
+            
+            markCheckout($employeeId); // ✅ update check-out time
+            
         }
 
         session()->destroy();

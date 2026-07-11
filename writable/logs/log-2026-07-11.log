@@ -1,0 +1,155 @@
+CRITICAL - 2026-07-11 02:18:41 --> ErrorException: Undefined variable $employeeId
+[Method: GET, Route: admin/attendance/report]
+in APPPATH\Views\admin\attendance\report.php on line 138.
+ 1 APPPATH\Views\admin\attendance\report.php(138): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $employeeId', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\report.php', 138)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\report.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/attendance/report', [], true)
+ 5 APPPATH\Controllers\Admin.php(1459): view('admin/attendance/report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->attendanceReportPage()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 02:46:31 --> ErrorException: Undefined variable $employee
+[Method: GET, Route: admin/attendance/export-pdf/ada6e82001732249/2026-07-01/2026-07-11]
+in APPPATH\Views\admin\attendance\pdf_report.php on line 14.
+ 1 APPPATH\Views\admin\attendance\pdf_report.php(14): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $employee', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php', 14)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/attendance/pdf_report', [], true)
+ 5 APPPATH\Controllers\Admin.php(2067): view('admin/attendance/pdf_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->exportAttendancePdf('ada6e82001732249', '2026-07-01', '2026-07-11')
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 02:47:35 --> ErrorException: Undefined variable $employee
+[Method: GET, Route: admin/attendance/export-pdf/ada6e82001732249/2026-07-01/2026-07-11]
+in APPPATH\Views\admin\attendance\pdf_report.php on line 14.
+ 1 APPPATH\Views\admin\attendance\pdf_report.php(14): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $employee', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php', 14)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/attendance/pdf_report', [], true)
+ 5 APPPATH\Controllers\Admin.php(2067): view('admin/attendance/pdf_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->exportAttendancePdf('ada6e82001732249', '2026-07-01', '2026-07-11')
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 02:51:55 --> ErrorException: Undefined variable $employee
+[Method: GET, Route: admin/attendance/export-pdf/ada6e82001732249/2026-07-01/2026-07-11]
+in APPPATH\Views\admin\attendance\pdf_report.php on line 14.
+ 1 APPPATH\Views\admin\attendance\pdf_report.php(14): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $employee', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php', 14)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/attendance/pdf_report', [], true)
+ 5 APPPATH\Controllers\Admin.php(2067): view('admin/attendance/pdf_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->exportAttendancePdf('ada6e82001732249', '2026-07-01', '2026-07-11')
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 02:53:25 --> ErrorException: Undefined variable $presentDays
+[Method: GET, Route: admin/attendance/export-pdf/ada6e82001732249/2026-07-01/2026-07-11]
+in APPPATH\Views\admin\attendance\pdf_report.php on line 16.
+ 1 APPPATH\Views\admin\attendance\pdf_report.php(16): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $presentDays', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php', 16)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/attendance/pdf_report', [], true)
+ 5 APPPATH\Controllers\Admin.php(2066): view('admin/attendance/pdf_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->exportAttendancePdf('ada6e82001732249', '2026-07-01', '2026-07-11')
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 02:55:25 --> ErrorException: Undefined variable $attendance
+[Method: GET, Route: admin/attendance/export-pdf/ada6e82001732249/2026-07-01/2026-07-11]
+in APPPATH\Views\admin\attendance\pdf_report.php on line 42.
+ 1 APPPATH\Views\admin\attendance\pdf_report.php(42): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $attendance', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php', 42)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/attendance/pdf_report', [], true)
+ 5 APPPATH\Controllers\Admin.php(2066): view('admin/attendance/pdf_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->exportAttendancePdf('ada6e82001732249', '2026-07-01', '2026-07-11')
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 07:31:00 --> Error: Call to undefined function App\Controllers\markAttendance()
+[Method: POST, Route: employee/login]
+in APPPATH\Controllers\Auth.php on line 94.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Auth->login()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 08:56:58 --> ErrorException: Undefined array key "designation"
+[Method: GET, Route: admin/attendance/export-pdf/ada6e82001732249/2026-07-01/2026-07-31]
+in APPPATH\Views\admin\attendance\pdf_report.php on line 122.
+ 1 APPPATH\Views\admin\attendance\pdf_report.php(122): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "designation"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php', 122)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/attendance/pdf_report', [], true)
+ 5 APPPATH\Controllers\Admin.php(2063): view('admin/attendance/pdf_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->exportAttendancePdf('ada6e82001732249', '2026-07-01', '2026-07-31')
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 08:57:31 --> ErrorException: Undefined array key "job_title"
+[Method: GET, Route: admin/attendance/export-pdf/ada6e82001732249/2026-07-01/2026-07-31]
+in APPPATH\Views\admin\attendance\pdf_report.php on line 122.
+ 1 APPPATH\Views\admin\attendance\pdf_report.php(122): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "job_title"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php', 122)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/attendance/pdf_report', [], true)
+ 5 APPPATH\Controllers\Admin.php(2063): view('admin/attendance/pdf_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->exportAttendancePdf('ada6e82001732249', '2026-07-01', '2026-07-31')
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 09:23:26 --> ErrorException: Undefined array key "weeklyOffDays"
+[Method: GET, Route: admin/attendance/export-pdf/ada6e82001732249/2026-07-01/2026-07-31]
+in APPPATH\Views\admin\attendance\pdf_report.php on line 115.
+ 1 APPPATH\Views\admin\attendance\pdf_report.php(115): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "weeklyOffDays"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php', 115)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\attendance\\pdf_report.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/attendance/pdf_report', [], true)
+ 5 APPPATH\Controllers\Admin.php(2063): view('admin/attendance/pdf_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->exportAttendancePdf('ada6e82001732249', '2026-07-01', '2026-07-31')
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 11:19:34 --> ErrorException: Trying to access array offset on value of type null
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Controllers\Tcpdfexample.php on line 105.
+ 1 APPPATH\Controllers\Tcpdfexample.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Tcpdfexample.php', 105)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 11:22:18 --> ErrorException: Trying to access array offset on value of type null
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Controllers\Tcpdfexample.php on line 109.
+ 1 APPPATH\Controllers\Tcpdfexample.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Tcpdfexample.php', 109)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

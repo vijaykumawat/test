@@ -555,3 +555,16 @@ in APPPATH\Views\admin\policy\editpolicy.php on line 127.
  9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-03 19:37:52 --> CodeIgniter\Files\Exceptions\FileNotFoundException: File not found: "D:\xampp\htdocs\gbinsurance\writable\uploads/writable/uploads/policies/1782538319_78244ff16b01aaa91e4d.pdf"
+[Method: GET, Route: admin/preview-policy/40]
+in SYSTEMPATH\Files\File.php on line 51.
+ 1 SYSTEMPATH\Files\File.php(51): CodeIgniter\Files\Exceptions\FileNotFoundException::forFileNotFound('D:\\xampp\\htdocs\\gbinsurance\\writable\\uploads/writable/uploads/policies/1782538319_78244ff16b01aaa91e4d.pdf')
+ 2 SYSTEMPATH\HTTP\DownloadResponse.php(106): CodeIgniter\Files\File->__construct('D:\\xampp\\htdocs\\gbinsurance\\writable\\uploads/writable/uploads/policies/1782538319_78244ff16b01aaa91e4d.pdf', true)
+ 3 SYSTEMPATH\HTTP\ResponseTrait.php(746): CodeIgniter\HTTP\DownloadResponse->setFilePath('D:\\xampp\\htdocs\\gbinsurance\\writable\\uploads/writable/uploads/policies/1782538319_78244ff16b01aaa91e4d.pdf')
+ 4 APPPATH\Controllers\Admin.php(1912): CodeIgniter\HTTP\Response->download('1782538319_78244ff16b01aaa91e4d.pdf', null)
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->previewPolicy('40')
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

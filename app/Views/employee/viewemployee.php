@@ -129,7 +129,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-8 col-sm-12 d-flex align-items-stretch">
+                        <div class="col-lg-8 ">
                             <!-- start Default Basic Forms -->
                             <form action="<?= site_url('employee/employee-update') ?>" method="post"
                                 enctype="multipart/form-data" id="employeeForm">
@@ -213,7 +213,6 @@
                                                     class="flex-grow-1"><?php if($employee['isActive']==1): ?>Active<?php else: ?>Inactive<?php endif; ?></span>
                                                 <select class="form-control d-none flex-grow-1" id="statusEdit"
                                                     name="status">
-                                                    <option>--Select Status--</option>
                                                     <option>Active</option>
                                                     <option>Inactive</option>
                                                 </select>
