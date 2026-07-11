@@ -13,7 +13,8 @@ use CodeIgniter\Email\Email;
 use CodeIgniter\I18n\Time;
 use App\Models\EmployeeSubscriptionModel;
 use App\Models\HistoryModel;
-require_once APPPATH . '../public/dompdf/autoload.inc.php';
+//require_once APPPATH . '../public/dompdf/autoload.inc.php';
+require_once FCPATH . 'dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 
 use DateTime;
@@ -191,6 +192,8 @@ public function index()
                     'insurance_type' => $details['insuranceType'],
                     'mobileNo'       => '',
                     'telecaller'     => '',
+                    'premium'        => '',  
+                    'policyType'     => '',
                     'issue_date' => $details['policyStart'],
                     'expiry_date' => $details['expiryDate'],
                     'file_path' => 'writable/uploads/policies/' . $newName,
@@ -1994,6 +1997,8 @@ public function previewPolicy($id)
             'vehicle_number'=> $this->request->getPost('vehicleNumber'),
             'mobileNo'      => $this->request->getPost('mobileNo'),
             'telecaller'    => $this->request->getPost('telecaller'), // employeeId
+            'premium'       => $this->request->getPost('premium'),
+            'policyType'    => $this->request->getPost('policyType'),
             'issue_date'    => $this->request->getPost('issueDate'),
             'expiry_date'   => $this->request->getPost('expiryDate'),
             'updated_at'    => date('Y-m-d H:i:s')

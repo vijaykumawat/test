@@ -111,12 +111,11 @@
                                             </button>-->
                                             <input type="hidden" name="policy_id" id="policy_id"
                                                 value="<?= esc($policy['policy_id'] ?? '') ?>">
-                                            <button type="submit" id="saveBtn"
-                                                class="btn btn-success btn-sm shadow-sm" disabled>
+                                            <button type="submit" id="saveBtn" class="btn btn-success btn-sm shadow-sm"
+                                                disabled>
                                                 Save
                                             </button>
-                                            <button type="button" id="cancelBtn"
-                                                class="btn btn-dark btn-sm shadow-sm">
+                                            <button type="button" id="cancelBtn" class="btn btn-dark btn-sm shadow-sm">
                                                 Cancel
                                             </button>
 
@@ -136,8 +135,8 @@
                                             <span class="badge bg-secondary">Unknown</span>
                                             <?php endif; ?>
                                             <!-- Preview icon (opens modal) -->
-                                            <button type="button" class="btn btn-sm btn-outline-secondary me-2" 
-                                                    data-bs-toggle="modal" data-bs-target="#policyPreviewModal">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary me-2"
+                                                data-bs-toggle="modal" data-bs-target="#policyPreviewModal">
                                                 <i class="ti ti-eye"></i>
                                             </button>
                                             <!-- Download icon -->
@@ -158,9 +157,10 @@
 
                                                 </div>
                                                 <div class="modal-body">
-  <iframe src="<?= site_url('admin/preview-policy/'.$policy['policy_id']) ?>" 
-          width="100%" height="600px" style="border:none;"></iframe>
-</div>
+                                                    <iframe
+                                                        src="<?= site_url('admin/preview-policy/'.$policy['policy_id']) ?>"
+                                                        width="100%" height="600px" style="border:none;"></iframe>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -293,11 +293,39 @@
                                                         class="ti ti-pencil"></i></button>
                                             </div>
                                         </div>
-
-
-
-
-
+                                        <div class="mb-1 row">
+                                            <label class="col-md-2 col-form-label d-flex justify-content-end">Premium
+                                                </label>
+                                            <div class="col-md-4 d-flex align-items-center">
+                                                <span id="premiumView"
+                                                    class="flex-grow-1"><?= esc($policy['premium'] ?? '') ?></span>
+                                                <input id="premiumEdit" name="premium" type="text"
+                                                    class="form-control d-none flex-grow-1"
+                                                    value="<?= esc($policy['premium'] ?? '') ?>">
+                                                <button type="button" class="btn btn-sm btn-link text-primary p-0 ms-2"
+                                                    onclick="startEdit('premium')"><i
+                                                        class="ti ti-pencil"></i></button>
+                                            </div>
+                                            <label class="col-md-2 col-form-label d-flex justify-content-end">Policy Type
+                                                </label>
+                                            <div class="col-md-4 d-flex align-items-center">
+                                                <span id="policyTypeView"
+                                                    class="flex-grow-1"><?= esc($policy['policyType'] ?? '') ?></span>
+                                                <input id="" name="policyType" type="text"
+                                                    class="form-control d-none flex-grow-1"
+                                                    value="<?= esc($policy['policyType'] ?? '') ?>">
+                                                <select class="form-control d-none flex-grow-1" id="policyTypeEdit"
+                                                    name="policyType">
+                                                    <option value="Fresh">Fresh</option>
+                                                    <option value="Renewal">Renewal</option>
+                                                    <option value="Reference">Reference</option>
+                                                </select>
+                                                    <button type="button" class="btn btn-sm btn-link text-primary p-0 ms-2"
+                                                    onclick="startEdit('policyType')"><i
+                                                        class="ti ti-pencil"></i></button>
+                                            </div>
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </form>

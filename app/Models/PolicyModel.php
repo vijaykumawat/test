@@ -20,6 +20,8 @@ class PolicyModel extends Model
         'insurance_type',
         'mobileNo',
         'telecaller',
+        'premium',
+        'policyType',
         'issue_date',
         'expiry_date',
         'file_path',
