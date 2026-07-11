@@ -138,6 +138,8 @@ public function index()
             return redirect()->to('/admin/upload')->with('error', 'No files selected');
         }
 
+        
+
         $uploadPath = WRITEPATH . 'uploads/policies/';
         if (! is_dir($uploadPath)) {
             mkdir($uploadPath, 0755, true);
@@ -180,6 +182,18 @@ public function index()
                     $warnings[] = $file->getClientName() . ' - Policy #' . $details['policyNumber'] . ' already exists in database. Skipped.';
                     continue;
                 } */
+
+                $existingPolicy = $this->policyModel->getPolicyByDetails(
+                    $details['policyNumber'],
+                    $details['policyStart'],   // use same key as insert
+                    $details['expiryDate']     // use same key as insert
+                );
+
+                if ($existingPolicy) {
+                    $warnings[] = $file->getClientName()  
+                                . ' already exists in database. Skipped.';
+                    continue;
+                }
 
                 $newName = $file->getRandomName();
                 $file->move($uploadPath, $newName);

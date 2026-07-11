@@ -166,6 +166,14 @@ class PolicyModel extends Model
         return $this->where('policy_number', $policyNumber)->first();
     }
 
+    public function getPolicyByDetails($policyNumber, $issueDate, $expiryDate)
+    {
+        return $this->where('policy_number', $policyNumber)
+                    ->where('issue_date', $issueDate)
+                    ->where('expiry_date', $expiryDate)
+                    ->first();
+    }
+
 public function getAllPoliciesWithTelecaller($limit, $offset)
 {
     return $this->select('policies.*, employee.name as telecaller_name')
