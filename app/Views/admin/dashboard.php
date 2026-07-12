@@ -27,7 +27,6 @@
     .toggle-control button:hover {
         text-decoration: none !important;
     }
-    
     </style>
 </head>
 
@@ -71,17 +70,17 @@
                                                     
                                                 ?>
                                                 <a class="sidebar-link justify-content-between"
-                                href="<?= site_url('admin/search-policy') ?>">
-                                                <img src="<?= base_url('uploads/profile/' . $photo); ?>"
-                                                    class="rounded-circle me-2" width="32" height="32" alt="avatar">
-                                            </a>
-                                                    <div>
-                                                <a class="sidebar-link justify-content-between"
-                                href="<?= site_url('admin/search-policy') ?>">    
-                                                    <strong><?= esc($emp['name']); ?></strong><br>
-                                                    <small class="text-muted"><?= $emp['total']; ?> Policies This
-                                                        Month</small>
-                                            </a>    
+                                                    href="<?= site_url('admin/search-policy') ?>">
+                                                    <img src="<?= base_url('uploads/profile/' . $photo); ?>"
+                                                        class="rounded-circle me-2" width="32" height="32" alt="avatar">
+                                                </a>
+                                                <div>
+                                                    <a class="sidebar-link justify-content-between"
+                                                        href="<?= site_url('admin/search-policy') ?>">
+                                                        <strong><?= esc($emp['name']); ?></strong><br>
+                                                        <small class="text-muted"><?= $emp['total']; ?> Policies This
+                                                            Month</small>
+                                                    </a>
                                                 </div>
                                             </li>
                                             <?php endforeach; ?>
@@ -141,7 +140,7 @@
 
 
                             <!-- Subscription Card -->
-                            <div class="col-lg-4 align-self-center">
+                            <div class="col-lg-4 ">
                                 <div class="card shadow-none border">
                                     <div class="card-body">
                                         <h4 class="fw-semibold mb-3"><i
@@ -149,30 +148,30 @@
                                         <div class="row">
                                             <?php foreach ($employees as $emp): ?>
                                             <?php
-                          $endDate = strtotime($emp['endDate']);
-                          $today   = strtotime(date('Y-m-d'));
-                          $daysRemaining = ceil(($endDate - $today) / (60 * 60 * 24));
+                                                $endDate = strtotime($emp['endDate']);
+                                                $today   = strtotime(date('Y-m-d'));
+                                                $daysRemaining = ceil(($endDate - $today) / (60 * 60 * 24));
 
-                          if ($daysRemaining < 0) {
-                              $statusText  = "Expired";
-                              $statusClass = "text-danger";
-                          } elseif ($daysRemaining >= 10) {
-                              $statusText  = $daysRemaining . " days remaining";
-                              $statusClass = "text-success";
-                          } elseif ($daysRemaining >= 0 && $daysRemaining <= 10) {
-                              $statusText  = $daysRemaining . " days remaining";
-                              $statusClass = "text-warning";
-                          } else {
-                              $statusText  = $daysRemaining . " days remaining";
-                              $statusClass = "text-danger";
-                          }
+                                                if ($daysRemaining < 0) {
+                                                    $statusText  = "Expired";
+                                                    $statusClass = "text-danger";
+                                                } elseif ($daysRemaining >= 10) {
+                                                    $statusText  = $daysRemaining . " days remaining";
+                                                    $statusClass = "text-success";
+                                                } elseif ($daysRemaining >= 0 && $daysRemaining <= 10) {
+                                                    $statusText  = $daysRemaining . " days remaining";
+                                                    $statusClass = "text-warning";
+                                                } else {
+                                                    $statusText  = $daysRemaining . " days remaining";
+                                                    $statusClass = "text-danger";
+                                                }
 
-                          $photo = $emp['profilePhoto'] ?? null;
-                          $gender = strtolower(trim($emp['gender'] ?? ''));
-                          if (empty($photo)) {
-                              $photo = ($gender === 'male') ? 'user-1.jpg' : 'user-2.jpg';
-                          }
-                        ?>
+                                                $photo = $emp['profilePhoto'] ?? null;
+                                                $gender = strtolower(trim($emp['gender'] ?? ''));
+                                                if (empty($photo)) {
+                                                    $photo = ($gender === 'male') ? 'user-1.jpg' : 'user-2.jpg';
+                                                }
+                                                ?>
                                             <div class="col-md-4 mb-4">
                                                 <a href="<?= base_url('/admin/subscription') ?>">
                                                     <div class="position-relative">
@@ -186,6 +185,83 @@
                                                 </a>
                                             </div>
                                             <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 ">
+                                <div class="card ">
+                                    <div class="card-body">
+                                        <div class="d-md-flex align-items-center">
+                                            <div>
+                                                <h4 class="card-title">Data Calling Date</h4>
+                                                <p class="card-subtitle">
+                                                    Ensure a three‑day gap before contacting customers.
+                                                </p>
+                                            </div>
+                                            <div class="ms-auto mt-3 mt-md-0">
+                                                <select class="form-select theme-select"
+                                                    aria-label="Default select example" fdprocessedid="4e6gr">
+                                                    <option value="1"><?php echo date('F Y'); ?></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive mt-4">
+                                            <table class="table mb-0 text-nowrap varient-table align-middle fs-3">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" class="px-0 text-muted">
+                                                            Telecaller
+                                                        </th>
+                                                        
+                                                        <th scope="col" class="px-0 text-muted">
+                                                            Calling Date
+                                                        </th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($unusedDataRecords as $rec): ?>
+                                                        <tr>
+                                                            <td class="px-0">
+                                                                <div class="d-flex align-items-center">
+                                                                    <?php 
+                                                                    $photo = $rec['profilePhoto'] ?? null;
+                                                                    $gender = strtolower(trim($rec['gender'] ?? ''));
+                                                                    if (empty($photo)) {
+                                                                        $photo = ($gender === 'male') ? 'user-1.jpg' : 'user-2.jpg';
+                                                                    }
+                                                                    ?>
+                                                                    <img src="<?= base_url('uploads/profile/' . $photo) ?>"
+                                                                        class="rounded-circle" width="35" alt="flexy">
+                                                                    <div class="ms-3">
+                                                                        <h6 class="mb-0 fw-bolder"><?= esc($rec['employeeName']) ?></h6>
+                                                                        <span class="text-muted"><?= esc($rec['jobTitle'] ?? '') ?></span>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                           <?php
+                                                            $expiry = strtotime($rec['expiryDate']);
+                                                            $today  = strtotime(date('Y-m-d'));
+                                                            $diff   = ($expiry - $today) / (60 * 60 * 24); // difference in days
+
+                                                            $badgeClass = 'bg-success'; // default green
+                                                            if ($diff <= 1) {
+                                                                $badgeClass = 'bg-danger'; // red
+                                                            } elseif ($diff >= 2 && $diff <= 3) {
+                                                                $badgeClass = 'bg-warning'; // yellow
+                                                            }
+                                                            ?>
+                                                            <td class="px-0">
+                                                                <span class="badge <?= $badgeClass ?>">
+                                                                    <?= date('d-m-Y', $expiry) ?>
+                                                                </span>
+                                                            </td>
+                                                            
+                                                        </tr>
+                                                        <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -205,7 +281,7 @@
     const monthlyCount = <?= $monthlyCount; ?>;
     const allCount = <?= $totalPolicies; ?>;
 
-    const options = [ "All-time","Monthly", "Today"];
+    const options = ["All-time", "Monthly", "Today"];
     let currentIndex = 0;
 
     document.getElementById("nextOption").addEventListener("click", () => {
@@ -226,7 +302,7 @@
     const usedData = <?= $usedData; ?>;
     const unusedData = <?= $unusedData; ?>;
 
-    const dataOptions = [ "Unused","Used"];
+    const dataOptions = ["Unused", "Used"];
     let dataIndex = 0;
 
     document.getElementById("nextDataOption").addEventListener("click", () => {

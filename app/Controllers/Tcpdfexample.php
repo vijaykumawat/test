@@ -3,7 +3,8 @@
 use App\Libraries\Pdf;
 use App\Models\DataModel;
 use App\Libraries\tcpdf\tcpdf;
-
+require_once FCPATH . 'dompdf/autoload.inc.php';
+use Dompdf\Dompdf;
 //require_once APPPATH.'libraries/tcpdf/tcpdf.php';
 
  class Tcpdfexample extends BaseController {
@@ -15,7 +16,82 @@ use App\Libraries\tcpdf\tcpdf;
      
     }
 
-    public function quote(){
+    public function quote()
+    {
+        $session = session();
+        helper(['form']);
+        
+        $dataModel = new DataModel();
+
+        // Fetch record
+        $record = $dataModel->where([
+            'telecaller' => $session->get('employeeId'),
+            'recordId'   => $this->request->getVar('recordId')
+        ])->first();
+
+        if (!$record) {
+            return "No record found.";
+        }
+
+        // Prepare quotation data
+        $quotationData = [
+            'quoteNo' => 'Q-' . mt_rand(1000,9999),
+            'ownerName' => $record['ownerName'],
+            'regNumber' => $record['regNumber'],
+            'vehicleModel' => $record['vehicleModel'],
+            'vehicleMaker' => $record['vehicleMaker'],
+            'manufacturingYear' => $record['regDateMonth'],
+            'mobile' => $record['mobile'],
+            'fuelType' => $record['fuelType'],
+            'idv' => 565000.00,
+            'policyType' => 'MOTOR PACKAGE POLICY',
+            'odStart' => '13-JUL-2026',
+            'odEnd' => '12-JUL-2027',
+            'tpStart' => '13-JUL-2026',
+            'tpEnd' => '12-JUL-2027',
+            'basicOD' => 19481.20,
+            'basicTP' => 11852.00,
+            'nilDep' => 5932.50,
+            'legalLiability' => 50.00,
+            'ncbDiscount' => 1278.45,
+            'specialDiscount' => 730.55,
+            'totalOD' => 9867.86,
+            'totalTP' => 11962.00,
+            'totalPremium' => 21830.00,
+            'sgst' => 1965.00,
+            'cgst' => 1965.00,
+            'finalPremium' => 25760.00,
+            'email' => 'gbinsurance@gmail.com',
+            'company'=> $this->request->getVar('company'),
+            'quoteDate' => date('d-m-Y')
+        ];
+
+        // Calculate totals
+        $totalPremium = $quotationData['basicOD'] + $quotationData['basicTP'] + $quotationData['nilDep'] - $quotationData['ncbDiscount'];
+        $gst          = $totalPremium * 0.18;
+        $finalPremium = $totalPremium + $gst;
+
+        $quotationData['totalPremium'] = $totalPremium;
+        $quotationData['gst']          = $gst;
+        $quotationData['finalPremium'] = $finalPremium;
+
+        // Load HTML view
+        $html = view('quotation_template', $quotationData);
+        
+        // Render with dompdf
+        $dompdf = new Dompdf();
+        
+        $options = $dompdf->getOptions();
+        $options->set(['isRemoteEnabled' => true]);
+        $dompdf->setOptions($options);
+        
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream("Quotation_{$quotationData['quoteNo']}.pdf");
+    }
+
+    public function quote_old(){
         
         
         $session = session();

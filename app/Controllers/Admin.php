@@ -104,6 +104,16 @@ public function index()
     ");
     $data['policyTypes'] = $typeQuery->getResultArray();
 
+$records = $this->dataModel
+    ->select('data.recordId, data.expiryDate, data.telecaller, employee.name as employeeName, employee.profilePhoto, employee.gender')
+    ->join('employee', 'employee.employeeId = data.telecaller')
+    ->where('data.actionTaken', 0)
+    ->orderBy('data.recordId', 'ASC')
+    ->groupBy('data.telecaller')
+    ->findAll();
+
+$data['unusedDataRecords'] = $records;
+
     return view('admin/dashboard', $data);
 }
 

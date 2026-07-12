@@ -1,0 +1,90 @@
+CRITICAL - 2026-07-12 04:34:02 --> ErrorException: Undefined variable $record
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Views\quotation_template.php on line 28.
+ 1 APPPATH\Views\quotation_template.php(28): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $record', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\quotation_template.php', 28)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\quotation_template.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('quotation_template', [], true)
+ 5 APPPATH\Controllers\Tcpdfexample.php(59): view('quotation_template', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-12 04:36:44 --> ErrorException: Undefined variable $basicOD
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Views\quotation_template.php on line 60.
+ 1 APPPATH\Views\quotation_template.php(60): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $basicOD', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\quotation_template.php', 60)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\quotation_template.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('quotation_template', [], true)
+ 5 APPPATH\Controllers\Tcpdfexample.php(60): view('quotation_template', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-12 04:42:57 --> ErrorException: Undefined array key "manufacturingYear"
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Controllers\Tcpdfexample.php on line 42.
+ 1 APPPATH\Controllers\Tcpdfexample.php(42): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "manufacturingYear"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Tcpdfexample.php', 42)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-12 04:55:52 --> ErrorException: Undefined variable $company
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Views\quotation_template.php on line 18.
+ 1 APPPATH\Views\quotation_template.php(18): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $company', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\quotation_template.php', 18)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\quotation_template.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('quotation_template', [], true)
+ 5 APPPATH\Controllers\Tcpdfexample.php(75): view('quotation_template', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-12 04:56:58 --> ErrorException: Undefined variable $quoteDate
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Views\quotation_template.php on line 26.
+ 1 APPPATH\Views\quotation_template.php(26): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $quoteDate', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\quotation_template.php', 26)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\quotation_template.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('quotation_template', [], true)
+ 5 APPPATH\Controllers\Tcpdfexample.php(76): view('quotation_template', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-12 04:58:37 --> ErrorException: Undefined variable $mobile
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Views\quotation_template.php on line 36.
+ 1 APPPATH\Views\quotation_template.php(36): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $mobile', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\quotation_template.php', 36)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\quotation_template.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('quotation_template', [], true)
+ 5 APPPATH\Controllers\Tcpdfexample.php(77): view('quotation_template', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-12 05:06:53 --> ErrorException: Undefined variable $dompdf
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Controllers\Tcpdfexample.php on line 23.
+ 1 APPPATH\Controllers\Tcpdfexample.php(23): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $dompdf', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Tcpdfexample.php', 23)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

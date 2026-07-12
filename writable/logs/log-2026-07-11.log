@@ -167,3 +167,289 @@ in APPPATH\Views\admin\searchpolicy.php on line 73.
  9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 18:16:57 --> ErrorException: Undefined array key "nextRecordId"
+[Method: GET, Route: admin]
+in APPPATH\Controllers\Admin.php on line 113.
+ 1 APPPATH\Controllers\Admin.php(113): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "nextRecordId"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 113)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-07-11 18:23:33 --> Table 'gbinsura_crm.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employees`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employees`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employees`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employees`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = :data.actionTaken:
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(115): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 18:23:34 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'gbinsura_crm.employees' doesn't exist
+[Method: GET, Route: admin]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employees`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = :data.actionTaken:
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC', [...], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Admin.php(115): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 18:23:34 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'gbinsura_crm.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employees`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employees`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employees`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = :data.actionTaken:
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC', [...], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Admin.php(115): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 18:23:34 --> [Caused by] mysqli_sql_exception: Table 'gbinsura_crm.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employees`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employees`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employees`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employees`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = :data.actionTaken:
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(115): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-07-11 18:24:24 --> Table 'gbinsura_crm.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employee`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employee`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employee`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employee`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = :data.actionTaken:
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(115): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 18:24:24 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'gbinsura_crm.employees' doesn't exist
+[Method: GET, Route: admin]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employee`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = :data.actionTaken:
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC', [...], false)
+ 2 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Admin.php(115): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 6 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 18:24:24 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'gbinsura_crm.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employee`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employee`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employee`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = :data.actionTaken:
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC', [...], false)
+ 4 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Admin.php(115): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 8 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 18:24:24 --> [Caused by] mysqli_sql_exception: Table 'gbinsura_crm.employees' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employee`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employee`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employee`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = 0
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `data`.`recordId`, `data`.`expiryDate`, `data`.`telecaller`, `employee`.*
+FROM `data`
+JOIN `employees` ON `employees`.`employeeId` = `data`.`telecaller`
+WHERE `data`.`actionTaken` = :data.actionTaken:
+GROUP BY `data`.`telecaller`
+ORDER BY `data`.`recordId` ASC', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Admin.php(115): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 18:26:46 --> ErrorException: Undefined array key "employeeName"
+[Method: GET, Route: admin]
+in APPPATH\Views\admin\dashboard.php on line 235.
+ 1 APPPATH\Views\admin\dashboard.php(235): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "employeeName"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php', 235)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/dashboard', [], true)
+ 5 APPPATH\Controllers\Admin.php(126): view('admin/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 18:27:08 --> ErrorException: Undefined array key "name"
+[Method: GET, Route: admin]
+in APPPATH\Views\admin\dashboard.php on line 235.
+ 1 APPPATH\Views\admin\dashboard.php(235): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "name"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php', 235)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/dashboard', [], true)
+ 5 APPPATH\Controllers\Admin.php(126): view('admin/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-11 18:28:24 --> ErrorException: Undefined array key "employee"
+[Method: GET, Route: admin]
+in APPPATH\Views\admin\dashboard.php on line 235.
+ 1 APPPATH\Views\admin\dashboard.php(235): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "employee"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php', 235)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\admin\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('admin/dashboard', [], true)
+ 5 APPPATH\Controllers\Admin.php(126): view('admin/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->index()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
