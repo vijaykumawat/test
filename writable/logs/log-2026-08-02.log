@@ -1,0 +1,281 @@
+ERROR - 2026-08-02 05:11:33 --> Unknown column 'updatedAt' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updatedAt`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647491_17b19e5780084e0f201c.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:11:33\', \'2026-08-02 05:11:33\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updatedAt`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647491_17b19e5780084e0f201c.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:11:33\', \'2026-08-02 05:11:33\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updatedAt`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647491_17b19e5780084e0f201c.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:11:33\', \'2026-08-02 05:11:33\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2343): CodeIgniter\Database\BaseConnection->query('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updatedAt`) VALUES (:employeeId:, :subscriptionId:, :transactionId:, :utrNumber:, :amount:, :screenshotPath:, :paymentDate:, :status:, :createdAt:, :updatedAt:)', [...], false)
+ 5 SYSTEMPATH\Model.php(357): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(670): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\Admin.php(2035): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 05:11:33 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'updatedAt' in 'field list'
+[Method: POST, Route: admin/renew-subscription]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2343): CodeIgniter\Database\BaseConnection->query('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updatedAt`) VALUES (:employeeId:, :subscriptionId:, :transactionId:, :utrNumber:, :amount:, :screenshotPath:, :paymentDate:, :status:, :createdAt:, :updatedAt:)', [...], false)
+ 2 SYSTEMPATH\Model.php(357): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(670): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\Admin.php(2035): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 05:11:33 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'updatedAt' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updatedAt`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647491_17b19e5780084e0f201c.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:11:33\', \'2026-08-02 05:11:33\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updatedAt`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647491_17b19e5780084e0f201c.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:11:33\', \'2026-08-02 05:11:33\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2343): CodeIgniter\Database\BaseConnection->query('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updatedAt`) VALUES (:employeeId:, :subscriptionId:, :transactionId:, :utrNumber:, :amount:, :screenshotPath:, :paymentDate:, :status:, :createdAt:, :updatedAt:)', [...], false)
+ 4 SYSTEMPATH\Model.php(357): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(670): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\Admin.php(2035): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 05:11:33 --> [Caused by] mysqli_sql_exception: Unknown column 'updatedAt' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updatedAt`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647491_17b19e5780084e0f201c.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:11:33\', \'2026-08-02 05:11:33\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updatedAt`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647491_17b19e5780084e0f201c.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:11:33\', \'2026-08-02 05:11:33\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updatedAt`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647491_17b19e5780084e0f201c.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:11:33\', \'2026-08-02 05:11:33\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2343): CodeIgniter\Database\BaseConnection->query('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updatedAt`) VALUES (:employeeId:, :subscriptionId:, :transactionId:, :utrNumber:, :amount:, :screenshotPath:, :paymentDate:, :status:, :createdAt:, :updatedAt:)', [...], false)
+ 5 SYSTEMPATH\Model.php(357): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(670): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\Admin.php(2035): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-08-02 05:13:25 --> Unknown column 'updated_at' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updated_at`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647602_2941875b26ffae9d06a2.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:13:25\', \'2026-08-02 05:13:25\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updated_at`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647602_2941875b26ffae9d06a2.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:13:25\', \'2026-08-02 05:13:25\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updated_at`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647602_2941875b26ffae9d06a2.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:13:25\', \'2026-08-02 05:13:25\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2343): CodeIgniter\Database\BaseConnection->query('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updated_at`) VALUES (:employeeId:, :subscriptionId:, :transactionId:, :utrNumber:, :amount:, :screenshotPath:, :paymentDate:, :status:, :createdAt:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(357): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(670): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\Admin.php(2035): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 05:13:25 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'updated_at' in 'field list'
+[Method: POST, Route: admin/renew-subscription]
+in SYSTEMPATH\Database\BaseConnection.php on line 863.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2343): CodeIgniter\Database\BaseConnection->query('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updated_at`) VALUES (:employeeId:, :subscriptionId:, :transactionId:, :utrNumber:, :amount:, :screenshotPath:, :paymentDate:, :status:, :createdAt:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(357): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(670): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\Admin.php(2035): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 05:13:25 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'updated_at' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updated_at`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647602_2941875b26ffae9d06a2.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:13:25\', \'2026-08-02 05:13:25\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updated_at`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647602_2941875b26ffae9d06a2.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:13:25\', \'2026-08-02 05:13:25\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2343): CodeIgniter\Database\BaseConnection->query('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updated_at`) VALUES (:employeeId:, :subscriptionId:, :transactionId:, :utrNumber:, :amount:, :screenshotPath:, :paymentDate:, :status:, :createdAt:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(357): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(670): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\Admin.php(2035): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 05:13:25 --> [Caused by] mysqli_sql_exception: Unknown column 'updated_at' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updated_at`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647602_2941875b26ffae9d06a2.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:13:25\', \'2026-08-02 05:13:25\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updated_at`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647602_2941875b26ffae9d06a2.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:13:25\', \'2026-08-02 05:13:25\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updated_at`) VALUES (\'207c49c0f2fc6493\', \'4\', \'T2607291050082481137388\', \'490321037139\', \'250\', \'uploads/receipts/1785647602_2941875b26ffae9d06a2.jpg\', \'2026-07-29 00:00:00\', \'Success\', \'2026-08-02 05:13:25\', \'2026-08-02 05:13:25\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2343): CodeIgniter\Database\BaseConnection->query('INSERT INTO `payments` (`employeeId`, `subscriptionId`, `transactionId`, `utrNumber`, `amount`, `screenshotPath`, `paymentDate`, `status`, `createdAt`, `updated_at`) VALUES (:employeeId:, :subscriptionId:, :transactionId:, :utrNumber:, :amount:, :screenshotPath:, :paymentDate:, :status:, :createdAt:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(357): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(670): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\Admin.php(2035): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 06:23:25 --> Error: Call to private method App\Libraries\OCRProcessor::runOcr() from scope App\Services\SubscriptionService
+[Method: POST, Route: admin/renew-subscription]
+in APPPATH\Services\SubscriptionService.php on line 46.
+ 1 APPPATH\Controllers\Admin.php(1958): App\Services\SubscriptionService->renewSubscription('207c49c0f2fc6493', Object(CodeIgniter\HTTP\Files\UploadedFile))
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 06:25:08 --> Error: Cannot use object of type CodeIgniter\HTTP\RedirectResponse as array
+[Method: POST, Route: admin/renew-subscription]
+in APPPATH\Controllers\Admin.php on line 1963.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 06:51:45 --> Error: Call to undefined function containsReceiverName()
+[Method: POST, Route: admin/renew-subscription]
+in APPPATH\Helpers\ocr_helper.php on line 28.
+ 1 APPPATH\Services\SubscriptionService.php(50): validateImage('D:\\xampp\\htdocs\\gbinsurance\\public\\uploads/receipts/1785653503_610920873e281be624ea.jpg', Object(App\Libraries\OCRProcessor))
+ 2 APPPATH\Controllers\Admin.php(1960): App\Services\SubscriptionService->renewSubscription('207c49c0f2fc6493', Object(CodeIgniter\HTTP\Files\UploadedFile))
+ 3 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+ 4 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 5 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 06:54:52 --> ParseError: syntax error, unexpected token "private", expecting end of file
+[Method: POST, Route: admin/renew-subscription]
+in APPPATH\Helpers\ocr_helper.php on line 58.
+ 1 APPPATH\Services\SubscriptionService.php(23): helper([...])
+ 2 APPPATH\Controllers\Admin.php(1960): App\Services\SubscriptionService->renewSubscription('207c49c0f2fc6493', Object(CodeIgniter\HTTP\Files\UploadedFile))
+ 3 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+ 4 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 5 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 06:55:33 --> Error: Using $this when not in object context
+[Method: POST, Route: admin/renew-subscription]
+in APPPATH\Helpers\ocr_helper.php on line 87.
+ 1 APPPATH\Helpers\ocr_helper.php(29): extractDateFromText('Transaction Successful
+29 July 2026 at 10:50 AM
+Paid to
+Mr VIJAY KAILASH KUMAWAT
+7
+vijay.kumawat.mca16-2@okhdfcbank
+Sent to : G pay vijay.kumawat.mca16-2@okhdfcbank
+Payment Details
+PhonePe Transaction ID
+T2607291050082481137388
+Debited from
+UTR: 490321037139
+Q50
+?250')
+ 2 APPPATH\Services\SubscriptionService.php(50): validateImage('D:\\xampp\\htdocs\\gbinsurance\\public\\uploads/receipts/1785653731_00d73b9035af1984c553.jpg', Object(App\Libraries\OCRProcessor))
+ 3 APPPATH\Controllers\Admin.php(1960): App\Services\SubscriptionService->renewSubscription('207c49c0f2fc6493', Object(CodeIgniter\HTTP\Files\UploadedFile))
+ 4 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+ 5 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 07:00:18 --> ErrorException: Undefined variable $dateText
+[Method: POST, Route: admin/renew-subscription]
+in APPPATH\Services\SubscriptionService.php on line 92.
+ 1 APPPATH\Services\SubscriptionService.php(92): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $dateText', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Services\\SubscriptionService.php', 92)
+ 2 APPPATH\Controllers\Admin.php(1960): App\Services\SubscriptionService->renewSubscription('207c49c0f2fc6493', Object(CodeIgniter\HTTP\Files\UploadedFile))
+ 3 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+ 4 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 5 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 07:04:06 --> ErrorException: Undefined variable $transactionId
+[Method: POST, Route: admin/renew-subscription]
+in APPPATH\Services\SubscriptionService.php on line 107.
+ 1 APPPATH\Services\SubscriptionService.php(107): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $transactionId', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Services\\SubscriptionService.php', 107)
+ 2 APPPATH\Controllers\Admin.php(1960): App\Services\SubscriptionService->renewSubscription('207c49c0f2fc6493', Object(CodeIgniter\HTTP\Files\UploadedFile))
+ 3 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+ 4 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 5 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 07:05:35 --> ErrorException: Undefined variable $transactionId
+[Method: POST, Route: admin/renew-subscription]
+in APPPATH\Services\SubscriptionService.php on line 121.
+ 1 APPPATH\Services\SubscriptionService.php(121): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $transactionId', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Services\\SubscriptionService.php', 121)
+ 2 APPPATH\Controllers\Admin.php(1960): App\Services\SubscriptionService->renewSubscription('207c49c0f2fc6493', Object(CodeIgniter\HTTP\Files\UploadedFile))
+ 3 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+ 4 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 5 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 07:11:11 --> TypeError: validateImage(): Argument #2 ($ocrProcessor) must be of type OCRProcessor, App\Libraries\OCRProcessor given, called in D:\xampp\htdocs\gbinsurance\app\Services\SubscriptionService.php on line 50
+[Method: POST, Route: admin/renew-subscription]
+in APPPATH\Helpers\ocr_helper.php on line 10.
+ 1 APPPATH\Services\SubscriptionService.php(50): validateImage('D:\\xampp\\htdocs\\gbinsurance\\public\\uploads/receipts/1785654671_774dc50a7345754659fc.jpg', Object(App\Libraries\OCRProcessor))
+ 2 APPPATH\Controllers\Admin.php(1960): App\Services\SubscriptionService->renewSubscription('207c49c0f2fc6493', Object(CodeIgniter\HTTP\Files\UploadedFile))
+ 3 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+ 4 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 5 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 07:30:18 --> Error: Call to private method App\Services\SubscriptionService::purchaseSubscription() from scope App\Controllers\Auth
+[Method: POST, Route: auth/employee-add]
+in APPPATH\Controllers\Auth.php on line 221.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Auth->employeeAdd()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 07:32:37 --> ErrorException: Undefined variable $dateText
+[Method: POST, Route: auth/employee-add]
+in APPPATH\Services\SubscriptionService.php on line 183.
+ 1 APPPATH\Services\SubscriptionService.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $dateText', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Services\\SubscriptionService.php', 183)
+ 2 APPPATH\Controllers\Auth.php(221): App\Services\SubscriptionService->purchaseSubscription(Object(CodeIgniter\HTTP\Files\UploadedFile), [...])
+ 3 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Auth->employeeAdd()
+ 4 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 5 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 15:39:33 --> Error: Cannot use object of type CodeIgniter\HTTP\RedirectResponse as array
+[Method: POST, Route: admin/renew-subscription]
+in APPPATH\Controllers\Admin.php on line 1838.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->renewEmpSubscription()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 16:44:16 --> ErrorException: Undefined array key "success"
+[Method: POST, Route: admin/employee-add]
+in APPPATH\Controllers\Admin.php on line 1268.
+ 1 APPPATH\Controllers\Admin.php(1268): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "success"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 1268)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->addEmployee()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-02 16:44:21 --> ErrorException: Undefined array key "success"
+[Method: POST, Route: admin/employee-add]
+in APPPATH\Controllers\Admin.php on line 1268.
+ 1 APPPATH\Controllers\Admin.php(1268): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "success"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 1268)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->addEmployee()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

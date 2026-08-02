@@ -21,6 +21,7 @@ class DataModel extends Model{
         'fuelType',
         'saleAmt',
         'seatCapacity',
+        'cubicCapacity',
         'mobile',
         'expiryDate',
         'prevInsuCompany',
@@ -36,7 +37,7 @@ class DataModel extends Model{
 
     public function findAllWithTelecaller()
     {
-        return $this->select('data.recordId, data.regDate, data.regNumber, data.ownerName, data.mobile, employee.name as telecaller')
+        return $this->select('data.recordId, data.regDate, data.regNumber, data.ownerName, data.mobile,data.alreadySale, data.actionTaken,data.expiryDate, employee.name as telecaller')
                     ->join('employee', 'employee.employeeId = data.telecaller', 'left')
                     ->findAll();
     }

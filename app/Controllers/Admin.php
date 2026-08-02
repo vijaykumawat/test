@@ -13,6 +13,8 @@ use CodeIgniter\Email\Email;
 use CodeIgniter\I18n\Time;
 use App\Models\EmployeeSubscriptionModel;
 use App\Models\HistoryModel;
+use App\Models\PaymentModel;
+use App\Services\SubscriptionService;
 //require_once APPPATH . '../public/dompdf/autoload.inc.php';
 require_once FCPATH . 'dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
@@ -28,7 +30,9 @@ class Admin extends BaseController
     protected $attendanceModel;
     protected $historyModel;
     protected $employeeModel;
-    
+    protected $paymentModel;
+    protected $empSubscriptionModel;
+    protected $subscriptionService;
     public function __construct()
     {
         $this->policyModel = new PolicyModel();
@@ -38,6 +42,9 @@ class Admin extends BaseController
         $this->attendanceModel = new AttendanceModel();     
         $this->historyModel = new HistoryModel();
         $this->employeeModel = new EmployeeModel();
+        $this->paymentModel = new PaymentModel();
+        $this->empSubscriptionModel = new EmployeeSubscriptionModel();
+        $this->subscriptionService = new SubscriptionService();      
     }
 
     /**
@@ -84,6 +91,31 @@ public function index()
     ")->getResultArray();
 
     $data['topPerformers'] = $topPerformers;
+
+    $telecallerProgressQuery = $db->query("SELECT 
+    e.employeeId, 
+    e.name, 
+    e.profilePhoto, 
+    e.gender,
+    COUNT(DISTINCT d.recordId) AS total_leads,
+    COUNT(DISTINCT CASE WHEN d.actionTaken = 1 THEN d.recordId END) AS handled_leads,
+    COUNT(DISTINCT p.policy_id) AS policies_sold
+FROM employee e
+LEFT JOIN data d 
+    ON d.telecaller = e.employeeId
+LEFT JOIN policies p 
+    ON p.telecaller = e.employeeId
+WHERE e.jobTitle = 'telecaller'
+GROUP BY 
+    e.employeeId, 
+    e.name, 
+    e.profilePhoto, 
+    e.gender
+ORDER BY 
+    policies_sold DESC, 
+    handled_leads DESC, 
+    total_leads DESC;");
+    $data['telecallerProgress'] = $telecallerProgressQuery->getResultArray();
 
     // Chart data
     $chartQuery = $db->query("
@@ -216,6 +248,7 @@ $data['unusedDataRecords'] = $records;
                     'insurance_type' => $details['insuranceType'],
                     'mobileNo'       => '',
                     'telecaller'     => '',
+                    'cashback'        => '',
                     'premium'        => '',  
                     'policyType'     => '',
                     'issue_date' => $details['policyStart'],
@@ -286,17 +319,34 @@ $data['unusedDataRecords'] = $records;
         return view('admin/searchpolicy', $data);
     }
 
+    protected function normalizePolicyPerPage($perPage): int
+    {
+        $perPage = (int) $perPage;
+
+        if ($perPage <= 0) {
+            return 10000;
+        }
+
+        if ($perPage > 10000) {
+            return 10000;
+        }
+
+        return $perPage;
+    }
+
     /**
      * API endpoint for search with pagination
      */
     public function searchPolicyApi()
     {
-        $search  = $this->request->getVar('q') ?? '';
-        $page    = (int)($this->request->getVar('page') ?? 1);
-        $perPage = (int)($this->request->getVar('per_page') ?? 25);
+        $search = trim((string) ($this->request->getVar('q') ?? ''));
+        $page   = (int) ($this->request->getVar('page') ?? 1);
+        $perPage = $this->normalizePolicyPerPage($this->request->getVar('per_page'));
 
-        if ($perPage === 0 || $perPage > 200) {
-            $perPage = 25;
+        $hasExplicitPagination = $this->request->getVar('page') !== null || $this->request->getVar('per_page') !== null;
+        if (! $hasExplicitPagination) {
+            $page = 1;
+            $perPage = 10000;
         }
 
         $offset = ($page - 1) * $perPage;
@@ -459,55 +509,8 @@ $data['unusedDataRecords'] = $records;
         "recordsFiltered" => $filteredCount,
         "data"            => $data
     ]);
-}
+}   
     /*
-    
-    public function expiredNextMonthApi()
-    {
-        $search = $this->request->getVar('q') ?? '';
-        $page = (int)($this->request->getVar('page') ?? 1);
-        $perPage = (int)($this->request->getVar('per_page') ?? 25);
-
-        if ($perPage === 0 || $perPage > 200) {
-            $perPage = 25;
-        }
-
-        $offset = ($page - 1) * $perPage;
-        $cache = \Config\Services::cache();
-        $countCacheKey = 'expired_next_month_count';
-
-        $total = $cache->get($countCacheKey);
-        if ($total === null) {
-            $total = $this->policyModel->countExpiredNextMonth();
-            $cache->save($countCacheKey, $total, 0);
-        }
-
-        $policies = $this->policyModel->getExpiredNextMonth($perPage, $offset);
-
-        if (!empty($search)) {
-            $policies = array_filter($policies, function ($policy) use ($search) {
-                $searchLower = strtolower($search);
-                return stripos($policy['policy_number'], $searchLower) !== false ||
-                       stripos($policy['holder_name'], $searchLower) !== false ||
-                       stripos($policy['vehicle_number'], $searchLower) !== false;
-            });
-        }
-
-        $totalPages = $perPage ? ceil($total / $perPage) : 1;
-
-        return $this->response->setJSON([
-            'success' => true,
-            'data' => array_values($policies),
-            'total' => $total,
-            'page' => $page,
-            'per_page' => $perPage,
-            'total_pages' => $totalPages
-        ]);
-    }*/
-
-    /**
-     * Handle image OCR extraction
-     */
     public function extractImageText()
     {
         if ($this->request->getMethod() !== 'post') {
@@ -540,7 +543,7 @@ $data['unusedDataRecords'] = $records;
 
         return $this->response->setJSON($result);
     }
-
+    */
     /**
      * Export expired policies to Excel
      */
@@ -745,86 +748,6 @@ $data['unusedDataRecords'] = $records;
             ->with('renewDate', $dateText ?: date('Y-m-d'));
     }
 
-    private function purchaseSubscription($img, array $employeeData)
-    {
-    $image = $img;
-    if (! $image || ! $image->isValid()) {
-        return ['success' => false, 'message' => 'Please upload a valid image file.'];
-    }
-
-    $extension = strtolower($image->getClientExtension() ?: pathinfo($image->getClientName(), PATHINFO_EXTENSION));
-    $allowedExtensions = ['jpg','jpeg','png','webp','bmp','gif'];
-    if (! in_array($extension, $allowedExtensions)) {
-        return ['success' => false, 'message' => 'Only image files are allowed (jpg, png, webp, bmp, gif).'];
-    }
-
-    $uploadPath = FCPATH . 'uploads/receipts/';
-    if (! is_dir($uploadPath)) {
-        mkdir($uploadPath, 0755, true);
-    }
-
-    $newName = $image->getRandomName();
-    if (! $image->move($uploadPath, $newName)) {
-        return ['success' => false, 'message' => 'Failed to save uploaded image.'];
-    }
-
-    $imagePath = $uploadPath . $newName;
-    $ocrResult = $this->runOcr($imagePath);
-    if (! empty($ocrResult['error'])) {
-        return ['success' => false, 'message' => 'OCR failed: ' . $ocrResult['error']];
-    }
-
-    $validNames = [
-        "Vijay Kailas Kumawat",
-        "Vijey Kumawatt",
-        "Vijay Kailash Kumawat",
-        "Vijay Kumawat"
-    ];
-
-    $text          = trim($ocrResult['text'] ?? '');
-    $receiverValid = $this->containsReceiverName($text, $validNames);
-    $dateText      = $this->extractDateFromText($text);
-    $dateValid     = $this->isTodayDate($dateText);
-
-    // 🚫 Stop here if validation fails — no DB insert
-    if (!$receiverValid || !$dateValid) {
-        return [
-            'success' => false,
-            'message' => 'Wrong screenshot attached.',
-        ];
-    }
-
-    // ✅ Only insert if validation passed
-    $subscriptionModel = new EmployeeSubscriptionModel();
-    $insertData = [
-        'employeeId' => $employeeData['employeeId'],
-        'startDate'  => date('Y-m-d'),
-        'endDate'    => date('Y-m-d', strtotime('+1 month')),
-        'status'     => 'Active',
-        'amount'     => 100.00
-    ];
-
-    $subscriptionId = $subscriptionModel->insert($insertData);
-
-    if ($subscriptionId === false) {
-        return [
-            'success' => false,
-            'message' => 'Failed to insert subscription',
-            'errors'  => $subscriptionModel->errors()
-        ];
-    }
-
-    return [
-        'success'        => true,
-        'message'        => 'Payment screenshot verified successfully.',
-        'receiver'       => 'Vijay Kailas kumawat',
-
-
-
-        'date'           => $dateText ?: date('Y-m-d'),
-        'subscriptionId' => $subscriptionId
-    ];
-}
 
 
 
@@ -940,6 +863,31 @@ $data['unusedDataRecords'] = $records;
         return $dateStr === date('Y-m-d');
     }
 
+    function extractTransactionId($input) {
+        // Regex looks for "Transaction ID" followed by a space and an alphanumeric string
+        $pattern = '/Transaction ID\s+([A-Za-z0-9]+)/i';
+        if (preg_match($pattern, $input, $matches)) {
+            return $matches[1]; // Transaction ID
+        }
+        return null; // Not found
+    }
+    function extractAmount($input) {
+        // Regex looks for ? or ₹ or Rs followed by digits
+        $pattern = '/[₹?Rs]\s?(\d+(?:\.\d{1,2})?)/i';
+        if (preg_match($pattern, $input, $matches)) {
+            return $matches[1]; // Amount as string
+        }
+        return null; // Not found
+    }
+    function extractUTR($input) {
+        // Regex looks for "UTR:" followed by digits
+        $pattern = '/UTR:\s*([0-9]+)/i';
+        if (preg_match($pattern, $input, $matches)) {
+            return $matches[1]; // UTR number
+        }
+        return null; // Not found
+    }
+
     /**
      * Delete a policy and invalidate cache
      */
@@ -1029,7 +977,7 @@ public function uploadDataPost()
     $dbFields = [
         'regDate','regDateMonth','regNumber','ownerName',
         'address','vehicleMaker','vehicleModel','fuelType','saleAmt',
-        'seatCapacity','mobile','expiryDate','prevInsuCompany','finance','telecaller'
+        'seatCapacity','cubicCapacity','mobile','expiryDate','prevInsuCompany','finance','telecaller'
     ];
 
     // Read CSV header (first line)
@@ -1114,6 +1062,16 @@ public function uploadDataPost()
 
     if (empty($rows)) {
         return $this->response->setStatusCode(400)->setJSON(['success'=>false,'message'=>'No data rows found in CSV']);
+    }
+
+    $currentEmployeeName = session()->get('employeeName');
+    $currentEmployeeId = session()->get('employeeId');
+    $isRestrictedUser = (strtolower((string) $currentEmployeeName) === 'testuser') || (string) $currentEmployeeId === 'cef99519ba925515';
+    if ($isRestrictedUser && count($rows) > 20) {
+        return $this->response->setStatusCode(400)->setJSON([
+            'success' => false,
+            'message' => 'Upload blocked: this account is restricted to 20 rows per upload. This file contains ' . count($rows) . ' rows.'
+        ]);
     }
 
     try {
@@ -1302,7 +1260,7 @@ public function uploadDataPost()
 
         // Step 2: Purchase subscription (employeeId now exists)
         
-        $res = $this->purchaseSubscription(
+        $res = $this->subscriptionService->purchaseSubscription(
             $this->request->getFile('paymentScreenshot'),
             $employeeData
         );
@@ -1826,7 +1784,7 @@ public function uploadDataPost()
 
         $query = $builder->get();
         $data['employees'] = $query->getResultArray();
-
+        
         return view('admin/subscription/employee_subscriptions', $data);
        
     }
@@ -1872,73 +1830,19 @@ public function uploadDataPost()
     
     public function renewEmpSubscription()
     {
-        $employeeId = $this->request->getPost('employeeId');
+        $result = $this->subscriptionService->renewSubscription(
+            $this->request->getPost('employeeId'),
+            $this->request->getFile('paymentScreenshot')
+        );
 
-        $image = $this->request->getFile('paymentScreenshot');
-        if (! $image || ! $image->isValid()) {
-            return redirect()->to('/admin/subscription')
-                            ->with('error', 'Please upload a valid image file.');
+        if (!empty($result['error'])) {
+            return redirect()->to('/admin/subscription')->with('error', $result['error']);
         }
-
-        $extension = strtolower($image->getClientExtension() ?: pathinfo($image->getClientName(), PATHINFO_EXTENSION));
-        $allowedExtensions = ['jpg','jpeg','png','webp','bmp','gif'];
-        if (! in_array($extension, $allowedExtensions)) {
-            return redirect()->to('/admin/subscription')
-                            ->with('error', 'Only image files are allowed (jpg, png, webp, bmp, gif).');
-        }
-
-        $uploadPath = FCPATH . 'uploads/receipts/';
-        if (! is_dir($uploadPath)) {
-            mkdir($uploadPath, 0755, true);
-        }
-
-        $newName = $image->getRandomName();
-        if (! $image->move($uploadPath, $newName)) {
-            return redirect()->to('/admin/subscription')
-                            ->with('error', 'Failed to save uploaded image.');
-        }
-
-        $imagePath = $uploadPath . $newName;
-        $ocrResult = $this->runOcr($imagePath);
-        if (! empty($ocrResult['error'])) {
-            return redirect()->to('/admin/subscription')
-                            ->with('error', 'OCR failed: ' . $ocrResult['error']);
-        }
-
-        $validNames = [
-            "Vijay Kailas Kumawat",
-            "Vijey Kumawatt",
-            "Vijay Kailash Kumawat",
-            "Vijay Kumawat"
-        ];
-
-        $text          = trim($ocrResult['text'] ?? '');
-        $receiverValid = $this->containsReceiverName($text, $validNames);
-        $dateText      = $this->extractDateFromText($text);
-        $dateValid     = $this->isTodayDate($dateText);
-
-      
-        if (!$receiverValid || !$dateValid) {
-            return redirect()->to('/admin/subscription')
-                            ->with('error', 'Wrong screenshot attached.');
-        }
-
-        $subscriptionModel = new EmployeeSubscriptionModel();
-        $baseDate = strtotime($dateText);
-
-        $updateData = [
-            'endDate'   => date('Y-m-d', strtotime('+1 month', $baseDate)),
-            'status'    => 'Active',
-            'updatedAt' => date('Y-m-d H:i:s')
-        ];
-
-        $subscriptionModel->where('employeeId', $employeeId)
-                        ->set($updateData)
-                        ->update();
-
-        return redirect()->to('/admin/subscription')
-                        ->with('success', 'Payment screenshot verified successfully. Subscription renewed.');
+                        
+        return redirect()->to('/admin/subscription')->with('success', $result['success']);
     }
+
+    
 
     public function editPolicyView($policy_id)
     {
@@ -2021,6 +1925,7 @@ public function previewPolicy($id)
             'vehicle_number'=> $this->request->getPost('vehicleNumber'),
             'mobileNo'      => $this->request->getPost('mobileNo'),
             'telecaller'    => $this->request->getPost('telecaller'), // employeeId
+            'cashback'       => $this->request->getPost('cashback'),
             'premium'       => $this->request->getPost('premium'),
             'policyType'    => $this->request->getPost('policyType'),
             'issue_date'    => $this->request->getPost('issueDate'),
@@ -2297,4 +2202,116 @@ public function exportAttendancePdf($employeeId, $startDate, $endDate)
             'gender'         => $gender
         ];
     }
+
+    public function displayRecord($recordId = 0){
+        $session       = session();
+        $employeeModel = new EmployeeModel();
+        $historyModel  = new HistoryModel();
+        $dataModel     = new DataModel();
+        
+        // Check if employee is logged in
+        if (!$session->get('isLoggedIn')) {
+            return redirect()->to('/admin/login')->with('error', 'Please log in to access the dashboard');
+        }
+        $record = $dataModel
+                ->where(['recordId' => $recordId])
+                ->first();
+        
+
+        // If record found
+        if ($record) {
+            $data = $record; // use the whole row directly
+            $data['name']        = $session->get('name');
+            $data['historyData'] = $historyModel->where('recordId', $record['recordId'])->findAll();
+            $data['alreadySale'] = 0;
+
+            if (!empty($data['historyData'])) {
+                foreach ($data['historyData'] as $row) {
+                    if ($row['status'] === "Already Sale") {
+                        $data['alreadySale'] = 1;
+                        break;
+                    }
+                }
+            }
+            $data['telecallers'] = $employeeModel->where(['jobTitle' => 'Telecaller'],['isActive' => 1])->findAll();
+            $data['isDataAvailable'] = true;
+        } else {
+            $data = ['isDataAvailable' => false];
+        }
+
+        return view('admin/lead', $data);
+    }
+    
+
+    public function previousRecord($param = 0){
+        $session = session();
+        $dataModel     = new DataModel();
+        $record = $dataModel
+            ->where('recordId <', $param)
+            ->orderBy('recordId', 'DESC')
+            ->first();
+
+        if ($record) {
+            return redirect()->to('/admin/display-record/'.$record['recordId']);
+        } 
+        return redirect()->to('/admin/display-record/'.$param);
+    }
+    public function forwardRecord($param = 0){
+            
+        $session = session();
+        $dataModel     = new DataModel();
+            $record = $dataModel
+            ->where('recordId >', $param)
+            ->orderBy('recordId', 'ASC')
+            ->first();
+        if ($record) {
+            return redirect()->to('/admin/display-record/'.$record['recordId']);
+        } 
+        return redirect()->to('/admin/display-record/'.$param);
+
+    }
+
+    public function changeOwnerPostAjax()
+    {
+        $recordId = $this->request->getPost('recordId');
+        $newOwnerId = $this->request->getPost('telecallerId');
+                    /*
+        if (!$recordId || !$newOwnerId) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Missing parameters'
+            ]);
+        }*/
+        if (!$recordId ) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Missing recordID'
+            ]);
+        }
+        if (!$newOwnerId) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Missing new owner ID'
+            ]);
+        }
+
+        $dataModel = new DataModel();
+        $historyModel = new HistoryModel();
+
+        // Update owner
+        $updateSuccess = $dataModel->update($recordId, ['telecaller' => $newOwnerId]);
+
+        if ($updateSuccess) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Owner changed successfully'
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to change owner'
+            ]);
+        }
+    }
+
 }

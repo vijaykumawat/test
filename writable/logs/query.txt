@@ -1,0 +1,144 @@
+-- 1. Add new integer column in data table
+
+ALTER TABLE data
+ADD COLUMN new_id INT NOT NULL AUTO_INCREMENT,
+ADD PRIMARY KEY (new_id);
+
+
+-- 2. Create mapping table
+
+CREATE TABLE id_map (
+
+  old_id CHAR(16) PRIMARY KEY,
+
+  new_id INT UNIQUE
+
+);
+
+
+-- 3. Populate mapping table
+
+INSERT INTO id_map (old_id, new_id)
+
+SELECT recordId, new_id
+
+FROM data;
+
+
+-- 4. Update history table foreign keys
+
+UPDATE history h
+
+JOIN id_map m ON h.recordId = m.old_id
+
+SET h.recordId = m.new_id;
+
+
+
+ALTER TABLE data DROP COLUMN record_id;
+
+ALTER TABLE `data`
+CHANGE `new_id` `recordId` INT(11) NOT NULL AUTO_INCREMENT;
+
+
+
+
+
+ALTER TABLE history
+ADD COLUMN newId INT NOT NULL AUTO_INCREMENT,
+ADD PRIMARY KEY (newId);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+-- 5. (Optional) Drop old foreign key constraint if exists
+
+ALTER TABLE history DROP FOREIGN KEY fk_history_record;
+
+
+-- 6. Add new foreign key constraint on integer ID
+
+ALTER TABLE history
+
+ADD CONSTRAINT fk_history_new_record
+
+FOREIGN KEY (record_id) REFERENCES data(new_id);
+
+
+-- 7. (Optional) Keep old_id column in data table for reference
+
+-- Or drop it if you are confident no external system depends on it
+
+-- ALTER TABLE data DROP COLUMN record_id;
+
+====================================
+
+CREATE TABLE uploads (
+    record_id INT AUTO_INCREMENT PRIMARY KEY,
+    batch_id INT NOT NULL,
+    dataset_type VARCHAR(50) NOT NULL,
+    telecaller_id VARCHAR(16) DEFAULT NULL,
+    status ENUM('pending','in_progress','completed') DEFAULT 'pending',
+    data JSON NOT NULL,
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+actionTaken => 0/1
+isImportant => 0/1
+saleOutside => 0/1
+isIntrested => 0/1
+modifyDate  => date
+saleInOurFirm => 0/1
+
+===================
+
+Done
+===============
+CREATE TABLE employee_preferences ( employeeId VARCHAR(16) NOT NULL, visible_fields JSON NOT NULL, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, PRIMARY KEY (employeeId), FOREIGN KEY (employeeId) REFERENCES employee(employeeId) );
+
+CREATE TABLE lead_history (
+    history_id INT AUTO_INCREMENT PRIMARY KEY,
+    record_id INT NOT NULL,              -- FK to uploads.record_id
+    telecaller_id CHAR(16) DEFAULT NULL, -- who made the update
+    leadStatus ENUM(
+        'contacted',
+        'interested',
+        'not_interested',
+        'closed_firm',
+        'closed_outside'
+    ) NOT NULL,
+    remark TEXT DEFAULT NULL,            -- telecaller’s note
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+==================================================================
+CREATE TABLE payments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  employeeId CHAR(16) NOT NULL,
+  subscriptionId INT NOT NULL,
+  transactionId VARCHAR(50),
+  utrNumber VARCHAR(50),
+  amount DECIMAL(10,2) NOT NULL,
+  screenshotPath VARCHAR(255),
+  paymentDate DATETIME NOT NULL,
+  status ENUM('Pending','Success','Failed') DEFAULT 'Pending',
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (subscriptionId) REFERENCES subscriptions(id)
+);

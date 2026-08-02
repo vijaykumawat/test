@@ -19,6 +19,7 @@ class PolicyModel extends Model
         'vehicle_number',
         'insurance_type',
         'mobileNo',
+        'cashback',
         'telecaller',
         'premium',
         'policyType',
@@ -174,33 +175,43 @@ class PolicyModel extends Model
                     ->first();
     }
 
-public function getAllPoliciesWithTelecaller($limit, $offset)
+public function getAllPoliciesWithTelecaller($limit = null, $offset = 0)
 {
-    return $this->select('policies.*, employee.name as telecaller_name')
-                ->join('employee', 'employee.employeeId = policies.telecaller', 'left')
-                ->limit($limit, $offset)
-                ->findAll();
+    $builder = $this->select('policies.*, employee.name as telecaller_name')
+                    ->join('employee', 'employee.employeeId = policies.telecaller', 'left')
+                    ->orderBy('policies.created_at', 'DESC');
+
+    if ($limit !== null && $limit !== '') {
+        $builder->limit((int) $limit, (int) $offset);
+    }
+
+    return $builder->findAll();
 }
 
-public function searchPoliciesWithTelecaller($search, $limit, $offset)
+public function searchPoliciesWithTelecaller($search, $limit = null, $offset = 0)
 {
-    return $this->select('policies.*, employee.name as telecaller_name')
-                ->join('employee', 'employee.employeeId = policies.telecaller', 'left')
-                ->groupStart()
-                    ->like('policy_id', $search)
-                    ->orLike('policy_number', $search)
-                    ->orLike('holder_name', $search)
-                    ->orLike('company_name', $search)
-                    ->orLike('vehicle_number', $search)
-                    ->orLike('insurance_type', $search)
-                    ->orLike('mobileNo', $search)
-                    ->orLike('employee.name', $search)   // search by telecaller name
-                    ->orLike('issue_date', $search)
-                    ->orLike('expiry_date', $search)
-                    ->orLike('file_path', $search)
-                ->groupEnd()
-                ->limit($limit, $offset)
-                ->findAll();
+    $builder = $this->select('policies.*, employee.name as telecaller_name')
+                    ->join('employee', 'employee.employeeId = policies.telecaller', 'left')
+                    ->groupStart()
+                        ->like('policy_id', $search)
+                        ->orLike('policy_number', $search)
+                        ->orLike('holder_name', $search)
+                        ->orLike('company_name', $search)
+                        ->orLike('vehicle_number', $search)
+                        ->orLike('insurance_type', $search)
+                        ->orLike('mobileNo', $search)
+                        ->orLike('employee.name', $search)   // search by telecaller name
+                        ->orLike('issue_date', $search)
+                        ->orLike('expiry_date', $search)
+                        ->orLike('file_path', $search)
+                    ->groupEnd()
+                    ->orderBy('policies.created_at', 'DESC');
+
+    if ($limit !== null && $limit !== '') {
+        $builder->limit((int) $limit, (int) $offset);
+    }
+
+    return $builder->findAll();
 }
      
 }

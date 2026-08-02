@@ -29,6 +29,7 @@ class Filters extends BaseFilters
         'toolbar'       => DebugToolbar::class,
         'authEmployee'  => \App\Filters\AuthEmployee::class,
         'authAdmin'     => \App\Filters\AuthAdmin::class,
+        'authSuperAdmin' => \App\Filters\AuthSuperAdmin::class,
         'honeypot'      => Honeypot::class,
         'sessionExpire' => \App\Filters\SessionExpireFilter::class,
         'invalidchars'  => InvalidChars::class,

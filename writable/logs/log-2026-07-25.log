@@ -1,0 +1,120 @@
+CRITICAL - 2026-07-25 08:19:08 --> Error: Call to undefined method Dompdf\Adapter\CPDF::setFont()
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Controllers\Tcpdfexample.php on line 184.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-25 08:22:57 --> ArgumentCountError: Too few arguments to function Dompdf\Adapter\CPDF::rotate(), 1 passed in D:\xampp\htdocs\gbinsurance\app\Controllers\Tcpdfexample.php on line 190 and exactly 3 expected
+[Method: POST, Route: Tcpdfexample/quote]
+in FCPATH\dompdf\vendor\dompdf\dompdf\src\Adapter\CPDF.php on line 525.
+ 1 APPPATH\Controllers\Tcpdfexample.php(190): Dompdf\Adapter\CPDF->rotate(0)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-25 08:29:55 --> ErrorException: Undefined variable $pageHeight
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Controllers\Tcpdfexample.php on line 189.
+ 1 APPPATH\Controllers\Tcpdfexample.php(189): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pageHeight', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Tcpdfexample.php', 189)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-25 09:18:32 --> ErrorException: Array to string conversion
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Controllers\Tcpdfexample.php on line 89.
+ 1 APPPATH\Controllers\Tcpdfexample.php(89): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Tcpdfexample.php', 89)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-25 09:19:22 --> ErrorException: Array to string conversion
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Controllers\Tcpdfexample.php on line 89.
+ 1 APPPATH\Controllers\Tcpdfexample.php(89): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Tcpdfexample.php', 89)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-25 09:28:09 --> ErrorException: Undefined variable $ccBand
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Controllers\Tcpdfexample.php on line 114.
+ 1 APPPATH\Controllers\Tcpdfexample.php(114): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $ccBand', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Tcpdfexample.php', 114)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-25 10:38:14 --> ErrorException: Undefined property: App\Controllers\Employee::$policyModel
+[Method: GET, Route: employee/edit-policy-view/61]
+in APPPATH\Controllers\Employee.php on line 736.
+ 1 APPPATH\Controllers\Employee.php(736): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Employee::$policyModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Employee.php', 736)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->editPolicyView('61')
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-25 10:40:16 --> Error: Class "App\Controllers\DateTime" not found
+[Method: GET, Route: employee/edit-policy-view/60]
+in APPPATH\Controllers\Employee.php on line 751.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->editPolicyView('60')
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-25 10:40:53 --> ErrorException: Undefined property: App\Controllers\Employee::$employeeModel
+[Method: GET, Route: employee/edit-policy-view/61]
+in APPPATH\Controllers\Employee.php on line 765.
+ 1 APPPATH\Controllers\Employee.php(765): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Employee::$employeeModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Employee.php', 765)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->editPolicyView('61')
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-25 10:44:24 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "employee/script.php"
+[Method: GET, Route: employee/edit-policy-view/61]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('employee/script.php')
+ 2 SYSTEMPATH\View\View.php(489): CodeIgniter\View\View->render('employee/script', null, true)
+ 3 APPPATH\Views\employee\editpolicy.php(340): CodeIgniter\View\View->include('employee/script')
+ 4 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\editpolicy.php')
+ 5 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/editpolicy', [], true)
+ 7 APPPATH\Controllers\Employee.php(774): view('employee/editpolicy', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->editPolicyView('61')
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-25 10:44:30 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "employee/script.php"
+[Method: GET, Route: employee/edit-policy-view/61]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('employee/script.php')
+ 2 SYSTEMPATH\View\View.php(489): CodeIgniter\View\View->render('employee/script', null, true)
+ 3 APPPATH\Views\employee\editpolicy.php(340): CodeIgniter\View\View->include('employee/script')
+ 4 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\editpolicy.php')
+ 5 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/editpolicy', [], true)
+ 7 APPPATH\Controllers\Employee.php(774): view('employee/editpolicy', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->editPolicyView('61')
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

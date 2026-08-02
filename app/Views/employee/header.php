@@ -1,4 +1,4 @@
-<header class="app-header">
+<header class="app-header" >
     <nav class="navbar navbar-expand-lg navbar-light">
         <ul class="navbar-nav">
             <li class="nav-item d-block d-xl-none">
@@ -44,11 +44,11 @@
                                 <img src="<?= base_url('uploads/profile/' . $photo) ?>" class="rounded-circle"
                                     width="35" height="35" alt="profile-img">
                             </div>
-                            <div class="d-none d-md-flex align-items-center">
-                                <h5 class="mb-0 fs-4">Hi,</h5>
-                                <h5 class="mb-0 fs-4 fw-semibold ms-1">
-                                    &nbsp;<?= esc(explode(' ', session()->get('employeeName'))[0]) ?> &nbsp;</h5>
-                                <i class="ti ti-chevron-down"></i>
+                            <div class="d-none d-md-flex align-items-center" >
+                                <h5 class="mb-0 fs-4" >Hi,</h5>
+                                <h5 class="mb-0 fs-4 fw-semibold ms-1" >
+                                    <?= esc(explode(' ', session()->get('employeeName'))[0]) ?> &nbsp;</h5>
+                                <i class="ti ti-chevron-down" ></i>
                             </div>
                         </div>
                     </a>

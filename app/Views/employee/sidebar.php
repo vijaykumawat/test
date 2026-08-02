@@ -4,7 +4,7 @@ $currentRoute = service('router')->getMatchedRoute()[0];
 ?>
 
 
-<aside class="left-sidebar">
+<aside class="left-sidebar" >
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
@@ -32,8 +32,8 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="<?= base_url('/employee/all-data') ?>" aria-expanded="false">
-                        <i class="ti ti-file-text"></i>
-                        <span class="hide-menu">All Data</span>
+                        <i class="ti ti-database"></i>
+                        <span class="hide-menu">All Lead</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -42,6 +42,19 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                         <span class="hide-menu">Star Records</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="<?= base_url('/employee/policies-sold') ?>" aria-expanded="false">
+                        <i class="ti ti-shield-check"></i>
+                        <span class="hide-menu">Policies Sold</span>
+                        <?php if (!empty($policyCount) && (int)$policyCount > 0): ?>
+                            <span class="badge rounded-pill bg-success ms-2">
+                                <?= esc((int)$policyCount) ?>
+                            </span>
+                        <?php endif; ?>
+                    </a>
+                </li>
+                
+                
                 <!--
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="<?= base_url('/admin/data-loader') ?>" aria-expanded="false">

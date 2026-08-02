@@ -8,6 +8,8 @@ use App\Models\EmployeeLoginHistoryModel;
 use App\Models\EmployeeSubscriptionModel;
 use CodeIgniter\I18n\Time;
 use DateTime;
+use Config\SuperUser;
+use App\Services\SubscriptionService;
 
 class Auth extends BaseController
 {
@@ -15,12 +17,14 @@ class Auth extends BaseController
     protected $employeeModel;
     protected $employeeLoginHistoryModel;
     protected $subscriptionModel;
+    protected $subscriptionService;
     public function __construct()
     {
         $this->dataModel = new DataModel();
         $this->employeeModel = new EmployeeModel();
         $this->employeeLoginHistoryModel = new EmployeeLoginHistoryModel();
         $this->subscriptionModel = new EmployeeSubscriptionModel();
+        $this->subscriptionService = new SubscriptionService();
     }
 
     public function loginForm()
@@ -34,6 +38,9 @@ class Auth extends BaseController
         helper('common_helper'); 
         // 🚫 Prevent re-login if already logged in
         if ($session->get('isLoggedIn')) {
+            if ($session->get('jobTitle') === 'SuperAdmin') {
+                return redirect()->to('/superadmin/dashboard')->with('info', 'You are already logged in.');
+            }
             if ($session->get('jobTitle') === 'Admin') {
                 return redirect()->to('/admin')->with('info', 'You are already logged in.');
             }
@@ -42,6 +49,24 @@ class Auth extends BaseController
 
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
+
+         // ✅ Step 1: Check SuperUser credentials from config
+        $superUser = new SuperUser();
+        if ($username === $superUser->username && $password === $superUser->password) {
+            $session->set([
+                'employeeId'   => 0,
+                'employeeName' => 'Super User',
+                'mobile'       => '',
+                'jobTitle'     => 'SuperAdmin',
+                'gender'       => 'Male',
+                'profilePhoto' => '',
+                'isLoggedIn'   => true
+            ]);
+            $session->setTempdata('isLoggedIn', true, 36000);
+
+            return redirect()->to('/superadmin/dashboard');
+        }
+
 
         //$employeeModel = new EmployeeModel();
         $employee = $this->employeeModel->where('username', $username)->first();
@@ -79,12 +104,13 @@ class Auth extends BaseController
             $session->set([
                 'employeeId'   => $employee['employeeId'],
                 'employeeName' => $employee['name'],
+                'mobile'      =>  $employee['phoneNumber'],
                 'jobTitle'     => $employee['jobTitle'], // <-- add this
                 'gender'             => $employee['gender'],
                 'profilePhoto'             => $employee['profilePhoto'],
                 'isLoggedIn'   => true
             ]);
-            $session->setTempdata('isLoggedIn', true, 3600);
+            $session->setTempdata('isLoggedIn', true, 36000);
             
             $this->employeeLoginHistoryModel->insert([
                 'employeeId' => $employee['employeeId'],
@@ -192,7 +218,7 @@ class Auth extends BaseController
                             ->with('error', 'Failed to add employee.');
         }
 
-        $res = $this->purchaseSubscription($this->request->getFile('paymentScreenshot'), $data);
+        $res = $this->subscriptionService->purchaseSubscription($this->request->getFile('paymentScreenshot'), $data);
         if (!$res['success']) {
             $db->transRollback();
             return redirect()->to(base_url('register'))
@@ -206,168 +232,7 @@ class Auth extends BaseController
                         ->with('success', 'Employee added successfully');
     }
 
-
-    private function purchaseSubscription($img, array $employeeData)
-    {
-        $image = $img;
-        if (! $image || ! $image->isValid()) {
-            return ['success' => false, 'message' => 'Please upload a valid Payment screenshot file.'];
-        }
-
-        $extension = strtolower($image->getClientExtension() ?: pathinfo($image->getClientName(), PATHINFO_EXTENSION));
-        $allowedExtensions = ['jpg','jpeg','png','webp','bmp','gif'];
-        if (! in_array($extension, $allowedExtensions)) {
-            return ['success' => false, 'message' => 'Only image files are allowed (jpg, png, webp, bmp, gif).'];
-        }
-
-        $uploadPath = FCPATH . 'uploads/receipts/';
-        if (! is_dir($uploadPath)) {
-            mkdir($uploadPath, 0755, true);
-        }
-
-        $newName = $image->getRandomName();
-        if (! $image->move($uploadPath, $newName)) {
-            return ['success' => false, 'message' => 'Failed to save uploaded image.'];
-        }
-
-        $imagePath = $uploadPath . $newName;
-        //$ocrResult = $this->runOcrPython($imagePath);
-        $ocrResult = $this->runOcr($imagePath);
-        if (! empty($ocrResult['error'])) {
-            return ['success' => false, 'message' => 'OCR failed: ' . $ocrResult['error']];
-        }
-
-        $validNames = [
-            "Vijay Kailas Kumawat",
-            "Vijey Kumawatt",
-            "Vijay Kailash Kumawat",
-            "Vijay Kumawat",
-            "Vijay",
-            "MR VIJAY KAILAS KUMAWAT",
-            "KUMAWAT",
-            "Kumawat"
-        ];
-
-        $text          = trim($ocrResult['text'] ?? '');
-        //print_r("text::".$text);
-        log_message('debug', 'Image extract data: ' . $text);
-        $receiverValid = $this->containsReceiverName($text, $validNames);
-        $dateText      = $this->extractDateFromText($text);
-        $dateValid     = $this->isTodayDate($dateText);
-
-        //print_r("receiver valid::".$receiverValid);
-        //print_r("DateText::".$dateText);
-        //print_r("is date vlaid::".$dateValid);
-
-        // 🚫 Stop here if validation fails — no DB insert
-        if (!$receiverValid || !$dateValid) {
-        //    echo "something not valid";
-        //    exit;
-            return [
-                'success' => false,
-                'message' => 'Wrong screenshot attached.',
-            ];
-        }
-
-        // ✅ Only insert if validation passed
-        
-        $insertData = [
-            'employeeId' => $employeeData['employeeId'],
-            'startDate'  => date('Y-m-d'),
-            'endDate'    => date('Y-m-d', strtotime('+1 month')),
-            'status'     => 'Active',
-            'amount'     => 100.00
-        ];
-
-        $subscriptionId = $this->subscriptionModel->insert($insertData);
-
-        if ($subscriptionId === false) {
-            return [
-                'success' => false,
-                'message' => 'Failed to insert subscription',
-                'errors'  => $subscriptionModel->errors()
-            ];
-        }
-
-        return [
-            'success'        => true,
-            'message'        => 'Payment screenshot verified successfully.',
-            'receiver'       => 'Vijay Kailas kumawat',
-            'date'           => $dateText ?: date('Y-m-d'),
-            'subscriptionId' => $subscriptionId
-        ];
-    }
-
-    private function runOcrPython(string $imagePath): array
-    {
-        $rootPath = defined('ROOTPATH') ? ROOTPATH : realpath(APPPATH . '../') . DIRECTORY_SEPARATOR;
-        $scriptPath = $rootPath . 'ocr.py';
-
-        if (! file_exists($scriptPath)) {
-            return ['error' => 'OCR script not found'];
-        }
-
-        $commands = ['python', 'python3', 'py -3'];
-        foreach ($commands as $command) {
-            $cmd = $command . ' ' . escapeshellarg($scriptPath) . ' ' . escapeshellarg($imagePath) . ' 2>&1';
-            $output = shell_exec($cmd);
-            $result = json_decode($output, true);
-            if (is_array($result)) {
-                return $result;
-            }
-        }
-
-        return ['error' => 'OCR execution failed or returned invalid response.'];
-    }
-    private function runOcr(string $imagePath): array
-    {
-        $apiKey = 'K89821879188957'; // Better: store this in .env
-
-        if (!file_exists($imagePath)) {
-            return ['error' => 'Image not found.'];
-        }
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, [
-            CURLOPT_URL => 'https://api.ocr.space/parse/image',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => true,
-            CURLOPT_TIMEOUT => 60,
-            CURLOPT_POSTFIELDS => [
-                'apikey' => $apiKey,
-                'language' => 'eng',
-                'file' => new \CURLFile($imagePath),
-            ],
-        ]);
-
-        $response = curl_exec($curl);
-
-        if ($response === false) {
-            $error = curl_error($curl);
-            curl_close($curl);
-
-            return ['error' => $error];
-        }
-
-        curl_close($curl);
-
-        $json = json_decode($response, true);
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            return ['error' => 'Invalid response from OCR API'];
-        }
-
-        if (!empty($json['ParsedResults'][0]['ParsedText'])) {
-            return [
-                'text' => trim($json['ParsedResults'][0]['ParsedText'])
-            ];
-        }
-
-        return [
-            'error' => $json['ErrorMessage'] ?? 'No text detected.'
-        ];
-    }
+    
     /**
  * Generate a unique alphanumeric recordId (15–16 characters).
  */
@@ -383,72 +248,6 @@ class Auth extends BaseController
         return $id;
     }
 
-private function containsReceiverName(string $text, array $expectedNames): bool
-    {
-        // Normalize the input text
-        $normalizedText = strtolower(preg_replace('/\s+/', ' ', $text));
-
-        foreach ($expectedNames as $expected) {
-            // Normalize expected name
-            $expectedClean = strtolower(trim(preg_replace('/\s+/', ' ', $expected)));
-
-            // Simple substring check
-            if (strpos($normalizedText, $expectedClean) !== false) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private function extractDateFromText(string $text): ?string
-    {
-        $patterns = [
-            '/\b(\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4})\b/',
-            '/\b(\d{4}[\/-]\d{1,2}[\/-]\d{1,2})\b/',
-            '/\b([A-Za-z]{3,9}\s+\d{1,2},?\s+\d{4})\b/',
-            '/\b(\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4})\b/',
-        ];
-
-        foreach ($patterns as $pattern) {
-            if (preg_match_all($pattern, $text, $matches)) {
-                foreach ($matches[1] as $candidate) {
-                    $normalized = $this->normalizeDateString($candidate);
-                    if ($normalized !== null) {
-                        return $normalized;
-                    }
-                }
-            }
-        }
-
-        return null;
-    }
-
-    private function normalizeDateString(string $dateStr): ?string
-    {
-        $formats = ['d/m/Y', 'd-m-Y', 'd/m/y', 'd-m-y', 'Y-m-d', 'Y/m/d', 'M d, Y', 'F d, Y', 'd M Y', 'd F Y'];
-        foreach ($formats as $format) {
-            $dt = \DateTime::createFromFormat($format, trim($dateStr));
-            if ($dt !== false) {
-                return $dt->format('Y-m-d');
-            }
-        }
-
-        return null;
-    }
-
-    private function isTodayDate(?string $dateStr): bool
-    {
-        if (empty($dateStr)) {
-            return false;
-        }
-
-        $res =  $dateStr === date('Y-m-d');
-        log_message('debug', 'isDatevalid: ' . $res);
-        print_r("res::".$res);
-                    
-        return $res;
-    }
 
 
 }

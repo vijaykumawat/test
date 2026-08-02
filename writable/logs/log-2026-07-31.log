@@ -1,0 +1,42 @@
+CRITICAL - 2026-07-31 05:13:37 --> ErrorException: Undefined array key "new_id"
+[Method: GET, Route: employee/dashboard]
+in APPPATH\Controllers\Employee.php on line 52.
+ 1 APPPATH\Controllers\Employee.php(52): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "new_id"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Employee.php', 52)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-31 06:47:02 --> ErrorException: Undefined variable $session
+[Method: GET, Route: employee/prevRecord/4]
+in APPPATH\Controllers\Employee.php on line 859.
+ 1 APPPATH\Controllers\Employee.php(859): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $session', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Employee.php', 859)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->previousRecord('4')
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-31 07:56:37 --> ErrorException: Undefined variable $dir
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Controllers\Tcpdfexample.php on line 226.
+ 1 APPPATH\Controllers\Tcpdfexample.php(226): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $dir', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Tcpdfexample.php', 226)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-31 08:53:13 --> ParseError: syntax error, unexpected end of file, expecting "elseif" or "else" or "endif"
+[Method: GET, Route: employee/dashboard]
+in APPPATH\Views\employee\dashboard.php on line 1279.
+ 1 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/dashboard', [], true)
+ 3 APPPATH\Controllers\Employee.php(70): view('employee/dashboard', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard()
+ 5 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 6 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

@@ -15,19 +15,34 @@ $routes->get('/Tcpdfexample/test', 'Tcpdfexample::test');
 $routes->match(['get','post'], '/Tcpdfexample/quote', 'Tcpdfexample::quote');
 
 
-
 // Protected Employee Routes
 $routes->group('employee', ['filter' => ['authEmployee', 'sessionExpire']], function($routes) {
     $routes->get('dashboard', 'Employee::dashboard');
     $routes->get('dashboard/(:any)', 'Employee::dashboard/$1');
     $routes->post('save', 'Employee::save');
+    $routes->post('save-ajax', 'Employee::saveAjax');
+    $routes->post('toggle-star-ajax', 'Employee::toggleStarAjax');
+    $routes->post('upload-policy', 'Employee::uploadPolicyPost');
+    $routes->post('upload-policy-ajax', 'Employee::uploadPolicyPostAjax');
+    $routes->get('edit-policy-view/(:num)', 'Employee::editPolicyView/$1');
+    $routes->get('policies-sold', 'Employee::policiesSold');
+    $routes->get('renewals', 'Employee::renewals');
+    $routes->post('saveFieldSettings', 'Employee::saveFieldSettings');
+    $routes->get('renewals/(:any)', 'Employee::renewals/$1');
     $routes->get('all-data', 'Employee::allData');
     $routes->get('nextRecord/(:any)', 'Employee::nextRecord/$1');
     $routes->get('starRecord/(:any)/(:any)', 'Employee::starRecord/$1/$2');
     $routes->get('allStarRecord', 'Employee::allStarRecord');
+    $routes->get('download-policy/(:num)', 'Employee::downloadPolicy/$1');
+    $routes->get('preview-policy/(:num)', 'Employee::previewPolicy/$1');
+    $routes->get('prevRecord/(:any)', 'Employee::previousRecord/$1');
+    $routes->get('forwardRecord/(:any)', 'Employee::forwardRecord/$1');
+    
     $routes->get('(:any)', 'Employee::viewEmployee/$1');
     $routes->post('uploadProfilePhoto', 'Employee::uploadProfilePhoto'); 
     $routes->post('employee-update', 'Employee::updateEmployee');
+    $routes->post('policy-update', 'Employee::postUpdatePolicy');
+    
 });
 
 
@@ -38,6 +53,8 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->get('upload', 'Admin::uploadPolicy');
     $routes->post('upload', 'Admin::uploadPolicyPost');
     $routes->get('data-loader', 'Admin::dataLoader');
+    $routes->get('generic-data-loader', 'Admin::genericDataLoader');
+    $routes->post('generic-upload-data', 'Admin::genericDataLoaderPost');
     $routes->post('upload-data', 'Admin::uploadDataPost');
     $routes->get('search-policy', 'Admin::searchPolicy');
     $routes->get('search-policy-api', 'Admin::searchPolicyApi');
@@ -61,11 +78,16 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->post('renew', 'Admin::renewSubscriptionPost');
     $routes->get('payment-history', 'Admin::paymentHistory');
     $routes->post('remove-all-data', 'Admin::removeAllData');
+    $routes->post('remove-generic-data', 'Admin::removeGenericData');
+    
     $routes->get('employees', 'Admin::listEmployees');
     $routes->get('employee/(:any)', 'Admin::viewEmployee/$1');
     $routes->get('employees/(:num)/edit', 'Admin::editEmployee/$1');
     $routes->post('employees/(:num)/edit', 'Admin::updateEmployee/$1');
     $routes->delete('employees/(:num)', 'Admin::deleteEmployee/$1');
+    $routes->get('prevRecord/(:any)', 'Admin::previousRecord/$1');
+    $routes->get('forwardRecord/(:any)', 'Admin::forwardRecord/$1');
+    
     $routes->get('employees/new', 'Admin::newEmployee');
     $routes->post('employee-add', 'Admin::addEmployee');
     $routes->get('attendance/mark', 'Admin::markAttendancePage');
@@ -83,8 +105,13 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->post('employee-update', 'Admin::updateEmployee');
     $routes->post('extract-data', 'Admin::extractData');
     $routes->get('all-data', 'Admin::allData');
+    $routes->get('generic-all-data', 'Admin::genericAllData');
     $routes->post('uploadProfilePhoto', 'Admin::uploadProfilePhoto');
     $routes->post('renew-subscription', 'Admin::renewEmpSubscription');
+    $routes->get('display-record/(:any)', 'Admin::displayRecord/$1');
+    $routes->post('change-owner', 'Admin::changeOwnerPost');
+    $routes->post('change-owner-ajax', 'Admin::changeOwnerPostAjax');    
+    
 
     // Attendance report (already defined)
     $routes->get('attendance/report', 'Admin::attendanceReportPage');
@@ -94,5 +121,15 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     // NEW: Export attendance + salary report as PDF
     $routes->get(
         'attendance/export-pdf/(:segment)/(:segment)/(:segment)','Admin::exportAttendancePdf/$1/$2/$3');
+
+});
+
+
+$routes->group('superadmin', ['filter' => ['authSuperAdmin', 'sessionExpire']], function($routes) {
+    $routes->get('dashboard', 'SuperAdmin::dashboard');
+    //$routes->get('clear-all-data', 'SuperAdmin::clearAllData');
+    $routes->post('clear-all-data', 'SuperAdmin::clearAllData');    
+    $routes->get('delete-controller', 'SuperAdmin::deleteController');
+    $routes->get('restore-controller', 'SuperAdmin::restoreController');
 
 });

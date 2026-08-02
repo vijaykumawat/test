@@ -132,63 +132,13 @@
                                         </div>
                                     </div>
                                     <div class="card-body pt-0">
-                                        <a href="<?= site_url('admin/calling-data') ?>"
+                                        <a href="<?= base_url('/admin/all-data') ?>"
                                             class="btn btn-success mt-2">Open</a>
                                     </div>
                                 </div>
                             </div>
 
 
-                            <!-- Subscription Card -->
-                            <div class="col-lg-4 ">
-                                <div class="card shadow-none border">
-                                    <div class="card-body">
-                                        <h4 class="fw-semibold mb-3"><i
-                                                class="ti ti-currency-dollar"></i>&nbsp;Subscription</h4>
-                                        <div class="row">
-                                            <?php foreach ($employees as $emp): ?>
-                                            <?php
-                                                $endDate = strtotime($emp['endDate']);
-                                                $today   = strtotime(date('Y-m-d'));
-                                                $daysRemaining = ceil(($endDate - $today) / (60 * 60 * 24));
-
-                                                if ($daysRemaining < 0) {
-                                                    $statusText  = "Expired";
-                                                    $statusClass = "text-danger";
-                                                } elseif ($daysRemaining >= 10) {
-                                                    $statusText  = $daysRemaining . " days remaining";
-                                                    $statusClass = "text-success";
-                                                } elseif ($daysRemaining >= 0 && $daysRemaining <= 10) {
-                                                    $statusText  = $daysRemaining . " days remaining";
-                                                    $statusClass = "text-warning";
-                                                } else {
-                                                    $statusText  = $daysRemaining . " days remaining";
-                                                    $statusClass = "text-danger";
-                                                }
-
-                                                $photo = $emp['profilePhoto'] ?? null;
-                                                $gender = strtolower(trim($emp['gender'] ?? ''));
-                                                if (empty($photo)) {
-                                                    $photo = ($gender === 'male') ? 'user-1.jpg' : 'user-2.jpg';
-                                                }
-                                                ?>
-                                            <div class="col-md-4 mb-4">
-                                                <a href="<?= base_url('/admin/subscription') ?>">
-                                                    <div class="position-relative">
-                                                        <img src="<?= base_url('uploads/profile/' . $photo) ?>"
-                                                            alt="employee-img" class="rounded-1 img-fluid mb-4">
-                                                        <div class="position-absolute start-50 translate-middle-x bg-dark bg-opacity-75 px-3 py-1 rounded <?= $statusClass; ?>"
-                                                            style="bottom: 1px;">
-                                                            <?= $statusText; ?>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-lg-6 ">
                                 <div class="card ">
                                     <div class="card-body">
@@ -262,6 +212,123 @@
                                                         <?php endforeach; ?>
                                                 </tbody>
                                             </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 mt-4 mt-lg-0">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center justify-content-between mb-3">
+                                            <div>
+                                                <h4 class="card-title mb-1">Telecaller Progress</h4>
+                                                <p class="card-subtitle mb-0">Lead handling and policy sales progress</p>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table mb-0 align-middle">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="px-0 text-muted">Telecaller</th>
+                                                        <th class="px-0 text-muted">Handled</th>
+                                                        <th class="px-0 text-muted">Policies</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php if (!empty($telecallerProgress)): ?>
+                                                        <?php foreach ($telecallerProgress as $progress): ?>
+                                                            <?php
+                                                            $totalLeads = (int) ($progress['total_leads'] ?? 0);
+                                                            $handledLeads = (int) ($progress['handled_leads'] ?? 0);
+                                                            $progressPercent = $totalLeads > 0 ? round(($handledLeads / $totalLeads) * 100) : 0;
+                                                            $photo = $progress['profilePhoto'] ?? null;
+                                                            $gender = strtolower(trim($progress['gender'] ?? ''));
+                                                            if (empty($photo)) {
+                                                                $photo = ($gender === 'male') ? 'user-1.jpg' : 'user-2.jpg';
+                                                            }
+                                                            ?>
+                                                            <tr>
+                                                                <td class="px-0">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <img src="<?= base_url('uploads/profile/' . $photo) ?>" class="rounded-circle" width="35" alt="flexy">
+                                                                        <div class="ms-3">
+                                                                            <h6 class="mb-0 fw-bolder"><?= esc($progress['name'] ?? '') ?></h6>
+                                                                            <small class="text-muted"><?= $totalLeads; ?> leads</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="px-0">
+                                                                    <div class="d-flex align-items-center gap-2">
+                                                                        <div class="progress flex-grow-1" style="height: 8px; min-width: 90px;">
+                                                                            <div class="progress-bar bg-success" role="progressbar" style="width: <?= $progressPercent; ?>%" aria-valuenow="<?= $progressPercent; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                        </div>
+                                                                        <span class="small text-muted"><?= $handledLeads; ?>/<?= $totalLeads; ?></span>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="px-0">
+                                                                    &nbsp;&nbsp;&nbsp;<span class="badge bg-primary-subtle text-primary"><?= (int) ($progress['policies_sold'] ?? 0); ?></span>
+                                                                </td>
+                                                            </tr>
+                                                        <?php endforeach; ?>
+                                                    <?php else: ?>
+                                                        <tr>
+                                                            <td colspan="3" class="text-muted text-center py-3">No telecaller progress data available.</td>
+                                                        </tr>
+                                                    <?php endif; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Subscription Card -->
+                            <div class="col-lg-4 ">
+                                <div class="card shadow-none border">
+                                    <div class="card-body">
+                                        <h4 class="fw-semibold mb-3"><i
+                                                class="ti ti-currency-dollar"></i>&nbsp;Subscription</h4>
+                                        <div class="row">
+                                            <?php foreach ($employees as $emp): ?>
+                                            <?php
+                                                $endDate = strtotime($emp['endDate']);
+                                                $today   = strtotime(date('Y-m-d'));
+                                                $daysRemaining = ceil(($endDate - $today) / (60 * 60 * 24));
+
+                                                if ($daysRemaining < 0) {
+                                                    $statusText  = "Expired";
+                                                    $statusClass = "text-danger";
+                                                } elseif ($daysRemaining >= 10) {
+                                                    $statusText  = $daysRemaining . " days remaining";
+                                                    $statusClass = "text-success";
+                                                } elseif ($daysRemaining >= 0 && $daysRemaining <= 10) {
+                                                    $statusText  = $daysRemaining . " days remaining";
+                                                    $statusClass = "text-warning";
+                                                } else {
+                                                    $statusText  = $daysRemaining . " days remaining";
+                                                    $statusClass = "text-danger";
+                                                }
+
+                                                $photo = $emp['profilePhoto'] ?? null;
+                                                $gender = strtolower(trim($emp['gender'] ?? ''));
+                                                if (empty($photo)) {
+                                                    $photo = ($gender === 'male') ? 'user-1.jpg' : 'user-2.jpg';
+                                                }
+                                                ?>
+                                            <div class="col-md-4 mb-4">
+                                                <a href="<?= base_url('/admin/subscription') ?>">
+                                                    <div class="position-relative">
+                                                        <img src="<?= base_url('uploads/profile/' . $photo) ?>"
+                                                            alt="employee-img" class="rounded-1 img-fluid mb-4">
+                                                        <div class="position-absolute start-50 translate-middle-x bg-dark bg-opacity-75 px-3 py-1 rounded <?= $statusClass; ?>"
+                                                            style="bottom: 1px;">
+                                                            <?= $statusText; ?>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <?php endforeach; ?>
                                         </div>
                                     </div>
                                 </div>

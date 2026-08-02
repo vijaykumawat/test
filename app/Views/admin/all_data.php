@@ -88,20 +88,65 @@
                                                     <th>Reg Number</th>
                                                     <th>Owner Name</th>
                                                     <th>Mobile</th>
+                                                    <th>Expiry</th>
                                                     <th>Telecaller</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php if (!empty($rows)): ?>
                                                 <?php foreach ($rows as $row): ?>
+                                                <?php
+                                                        $style = "padding:.3rem;"; // default padding
+
+                                                    if ($row['alreadySale']) {
+                                                        // Rule 1: Red background always wins
+                                                        $style .= "background-color:#F88379; color:white;";
+                                                    } elseif ($row['actionTaken']) {
+                                                        // Rule 2: Grey background + white text
+                                                        $style .= "background-color:#4b584b; color:white;";
+                                                    } elseif (!$row['actionTaken'] && !$row['alreadySale']) {
+                                                        // Rule 3: White background + black text
+                                                        $style .= "background-color:white; color:black;";
+                                                    } else {
+                                                        // Optional fallback
+                                                        $style .= "background-color:#ccc; color:black;";
+                                                    }
+                                                            ?>    
                                                 <tr>
-                                                    <td><?= esc($row['recordId']) ?></td>
-                                                    <td><?= esc($row['regDate']) ?></td>
-                                                    <td><?= esc($row['regNumber']) ?></td>
-                                                    <td><?= esc($row['ownerName']) ?></td>
-                                                    <td><?= esc($row['mobile']) ?></td>
-                                                    <td><?= esc($row['telecaller']) ?></td>
-                                                </tr>
+                                                    <td style="<?php echo $style; ?>">
+                                                        <a href="<?php echo base_url();?>admin/dashboard/<?php echo $row['recordId'];?>"
+                                                            style="color:inherit; text-decoration:none;">
+                                                            <?php echo $row['recordId'];?>
+                                                        </a>
+                                                    </td>
+                                                    <td style="<?php echo $style; ?>">
+                                                        <a href="<?php echo base_url();?>admin/display-record/<?php echo $row['recordId'];?>"
+                                                            style="color:inherit; text-decoration:none;">
+                                                            <?= esc($row['regDate']) ?>
+                                                        </a>
+                                                    </td>
+                                                    <td style="<?php echo $style; ?>">
+                                                        <a href="<?php echo base_url();?>admin/display-record/<?php echo $row['recordId'];?>"
+                                                            style="color:inherit; text-decoration:none;">
+                                                            <?php echo $row['regNumber'];?>
+                                                        </a>
+                                                    </td>
+
+                                                    <td style="<?php echo $style; ?>">
+                                                        <a href="<?php echo base_url();?>admin/display-record/<?php echo $row['recordId'];?>"
+                                                            style="color:inherit; text-decoration:none;">
+                                                            <?php echo $row['ownerName'];?>
+                                                        </a>
+                                                    </td>
+                                                    <td style="<?php echo $style; ?>">
+                                                        <a href="<?php echo base_url();?>admin/display-record/<?php echo $row['recordId'];?>"
+                                                            style="color:inherit; text-decoration:none;">
+                                                            <?php echo $row['mobile'];?>
+                                                        </a>
+                                                    </td>
+                                                    <td style="<?php echo $style; ?>"><?= esc($row['expiryDate']) ?></td>
+                                                    <td style="<?php echo $style; ?>"><?= esc($row['telecaller']) ?></td>
+                                                    </tr>
                                                 <?php endforeach; ?>
                                                 <?php else: ?>
                                                 <tr>

@@ -189,6 +189,13 @@
     </style>
 </head>
 
+<?php
+$restrictedUserName = 'TestUser';
+$restrictedEmployeeId = 'cef99519ba925515';
+$currentEmployeeName = session()->get('employeeName');
+$currentEmployeeId = session()->get('employeeId');
+$isRestrictedUser = (strtolower((string) $currentEmployeeName) === strtolower($restrictedUserName)) || (string) $currentEmployeeId === $restrictedEmployeeId;
+?>
 <body>
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -198,7 +205,7 @@
             const dbFields = [
                 'regDate', 'regDateMonth', 'regNumber', 'ownerName',
                 'address', 'vehicleMaker', 'vehicleModel', 'fuelType', 'saleAmt',
-                'seatCapacity', 'mobile', 'expiryDate', 'prevInsuCompany', 'finance', 'telecaller'
+                'seatCapacity', 'cubicCapacity', 'mobile', 'expiryDate', 'prevInsuCompany', 'finance', 'telecaller'
             ];
 
             const fileInput = document.getElementById('csvUpload');
@@ -220,7 +227,16 @@
             let csvHeaders = [];
             let currentMapping = {};
             let lastFile = null;
+            let csvRowCount = 0;
             let deleteModalInstance = null;
+            const isRestrictedUser = <?= json_encode($isRestrictedUser, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) ?>;
+            const maxAllowedRows = 20;
+            const rowLimitModalEl = document.getElementById('rowLimitModal');
+            const rowLimitModal = rowLimitModalEl ? new bootstrap.Modal(rowLimitModalEl, {
+                backdrop: 'static',
+                keyboard: false
+            }) : null;
+            const rowLimitMessageEl = document.getElementById('rowLimitMessage');
 
             function clearChildren(el) {
                 while (el && el.firstChild) el.removeChild(el.firstChild);
@@ -285,12 +301,12 @@
                     dbFieldsContainer.appendChild(dz);
                 });
 
-                let unmappedCount = 0;
+                let unmappedCsvHeaderCount = 0;
                 csvHeaders.forEach(h => {
                     if (mappedHeaders.has(h.toLowerCase())) {
                         return;
                     }
-                    unmappedCount++;
+                    unmappedCsvHeaderCount++;
                     const chip = document.createElement('div');
                     chip.className = 'csv-chip';
                     chip.draggable = true;
@@ -300,22 +316,24 @@
                     csvHeadersContainer.appendChild(chip);
                 });
 
-                if (unmappedCount === 0) {
+                if (unmappedCsvHeaderCount === 0) {
                     const placeholder = document.createElement('div');
                     placeholder.className = 'csv-empty-state';
-                    placeholder.textContent = 'All headers mapped';
+                    placeholder.textContent = 'All CSV headers are listed';
                     csvHeadersContainer.appendChild(placeholder);
                 }
 
+                const unmappedDbFieldCount = dbFields.filter(f => !currentMapping[f] || currentMapping[f] === '').length;
+
                 if (mappingCountBadge) {
-                    mappingCountBadge.textContent = `${unmappedCount} unmapped`;
+                    mappingCountBadge.textContent = `${unmappedDbFieldCount} db fields unmapped`;
                     mappingCountBadge.className =
-                        `badge ${unmappedCount > 0 ? 'bg-warning text-dark' : 'bg-success text-white'} ms-2`;
+                        `badge ${unmappedDbFieldCount > 0 ? 'bg-warning text-dark' : 'bg-success text-white'} ms-2`;
                 }
 
                 if (proceedMappingBtn) {
-                    proceedMappingBtn.disabled = unmappedCount > 0;
-                    proceedMappingBtn.textContent = unmappedCount > 0 ? 'Complete Mapping' : 'Proceed';
+                    proceedMappingBtn.disabled = unmappedDbFieldCount > 0;
+                    proceedMappingBtn.textContent = unmappedDbFieldCount > 0 ? 'Complete Mapping' : 'Proceed';
                 }
 
                 // Preview first few rows
@@ -379,16 +397,36 @@
 
             function setAlert(msg, type) {
                 if (!alertBox) return;
+                const alertClass = type === 'success'
+                    ? 'bg-success-subtle text-success'
+                    : type === 'danger'
+                        ? 'bg-danger-subtle text-danger'
+                        : 'bg-warning-subtle text-warning';
                 alertBox.innerHTML =
-                    `<div class="alert ${type==='success'?'bg-success-subtle text-success':'bg-warning-subtle text-warning'} alert-dismissible fade show mb-3" role="alert">${msg}<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>`;
+                    `<div class="alert ${alertClass} alert-dismissible fade show mb-3" role="alert">${msg}<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>`;
+            }
+
+            function showRowLimitModal(message) {
+                if (rowLimitMessageEl) {
+                    rowLimitMessageEl.textContent = message;
+                }
+                if (rowLimitModal) {
+                    rowLimitModal.show();
+                }
             }
 
             fileInput.addEventListener('change', e => {
                 const file = e.target.files[0];
                 if (!file) return;
                 lastFile = file;
-                if (mappingModal) mappingModal.show();
-                parseCsvHeadersFromFile(file, headers => {
+
+                const reader = new FileReader();
+                reader.onload = evt => {
+                    const text = evt.target.result || '';
+                    const rows = text.split(/\r?\n/).filter(r => r.trim() !== '');
+                    const headers = rows[0] ? parseCsvLine(rows[0]) : [];
+                    csvRowCount = Math.max(0, rows.length - 1);
+
                     csvHeaders = headers;
                     currentMapping = {};
                     mappingInput.value = '';
@@ -404,13 +442,26 @@
                     mappingInput.value = JSON.stringify(currentMapping);
                     renderMappingUI();
 
+                    if (isRestrictedUser && csvRowCount > maxAllowedRows) {
+                        if (mappingModal) {
+                            mappingModal.hide();
+                        }
+                        uploadBtn.disabled = true;
+                        showRowLimitModal(`This account is limited to ${maxAllowedRows} data rows per upload. This file contains ${csvRowCount} rows.`);
+                        setAlert(`Upload blocked: this account can only upload up to ${maxAllowedRows} rows. Your file contains ${csvRowCount} rows.`, 'danger');
+                        return;
+                    }
+
+                    if (mappingModal) mappingModal.show();
+
                     if (Object.keys(currentMapping).length === dbFields.length) {
                         setAlert('All required fields auto-mapped. Ready to upload.',
                             'success');
                     } else {
                         setAlert('File loaded. Please map the remaining fields.', 'warning');
                     }
-                });
+                };
+                reader.readAsText(file.slice(0, 200000));
             });
 
             openMappingBtn.addEventListener('click', () => {
@@ -439,6 +490,12 @@
                 }
                 if (!mappingInput.value || !validateMapping()) {
                     setAlert('Please complete mapping before upload', 'warning');
+                    return;
+                }
+
+                if (isRestrictedUser && csvRowCount > maxAllowedRows) {
+                    showRowLimitModal(`This account is limited to ${maxAllowedRows} data rows per upload. This file contains ${csvRowCount} rows.`);
+                    setAlert(`Upload blocked: this account can only upload up to ${maxAllowedRows} rows. Your file contains ${csvRowCount} rows.`, 'danger');
                     return;
                 }
 
@@ -716,6 +773,30 @@
                                     class="btn btn-outline-success btn-sm shadow-sm" disabled>Complete
                                     Mapping</button>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row Limit Modal -->
+                <div class="modal fade" id="rowLimitModal" tabindex="-1" aria-labelledby="rowLimitLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger-subtle">
+                                <h5 class="modal-title text-danger" id="rowLimitLabel">
+                                    <i class="ti ti-alert-triangle me-2"></i>Upload Limit Exceeded
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="mb-2"><strong>Upload blocked.</strong></p>
+                                <p id="rowLimitMessage" class="text-muted mb-0"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-danger btn-sm shadow-sm"
+                                    data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>

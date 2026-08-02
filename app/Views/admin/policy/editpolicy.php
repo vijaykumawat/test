@@ -324,7 +324,20 @@
                                                     onclick="startEdit('policyType')"><i
                                                         class="ti ti-pencil"></i></button>
                                             </div>
-                                            
+                                        </div>
+                                        <div class="mb-1 row">
+                                            <label class="col-md-2 col-form-label d-flex justify-content-end">Cashback
+                                                </label>
+                                            <div class="col-md-4 d-flex align-items-center">
+                                                <span id="cashbackView"
+                                                    class="flex-grow-1"><?= esc($policy['cashback'] ?? '') ?></span>
+                                                <input id="cashbackEdit" name="cashback" type="text"
+                                                    class="form-control d-none flex-grow-1"
+                                                    value="<?= esc($policy['cashback'] ?? '') ?>">
+                                                <button type="button" class="btn btn-sm btn-link text-primary p-0 ms-2"
+                                                    onclick="startEdit('cashback')"><i
+                                                        class="ti ti-pencil"></i></button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

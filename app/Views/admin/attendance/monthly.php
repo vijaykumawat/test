@@ -289,6 +289,7 @@
             </div>
         </div>
     </div>
+    
 
     <script src="<?= base_url('/assets/libs/jquery/dist/jquery.min.js') ?>"></script>
     <script src="<?= base_url('/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') ?>"></script>
@@ -437,6 +438,7 @@
 
         filterForm.addEventListener('submit', loadMonthlyAttendance);
     </script>
+
 </body>
 
 </html>

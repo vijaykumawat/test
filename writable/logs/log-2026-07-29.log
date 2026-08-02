@@ -1,0 +1,186 @@
+CRITICAL - 2026-07-29 17:45:04 --> ErrorException: Undefined variable $image
+[Method: GET, Route: employee/dashboard]
+in APPPATH\Views\employee\dashboard.php on line 72.
+ 1 APPPATH\Views\employee\dashboard.php(72): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $image', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php', 72)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/dashboard', [], true)
+ 5 APPPATH\Controllers\Employee.php(69): view('employee/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-29 17:58:34 --> ErrorException: Undefined variable $actionTaken
+[Method: GET, Route: employee/dashboard]
+in APPPATH\Views\employee\dashboard.php on line 139.
+ 1 APPPATH\Views\employee\dashboard.php(139): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $actionTaken', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php', 139)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/dashboard', [], true)
+ 5 APPPATH\Controllers\Employee.php(69): view('employee/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-29 18:02:52 --> ErrorException: Undefined variable $actionTaken
+[Method: GET, Route: employee/dashboard]
+in APPPATH\Views\employee\dashboard.php on line 139.
+ 1 APPPATH\Views\employee\dashboard.php(139): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $actionTaken', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php', 139)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/dashboard', [], true)
+ 5 APPPATH\Controllers\Employee.php(69): view('employee/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-29 18:04:32 --> ErrorException: Undefined variable $actionTaken
+[Method: GET, Route: employee/dashboard]
+in APPPATH\Views\employee\dashboard.php on line 139.
+ 1 APPPATH\Views\employee\dashboard.php(139): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $actionTaken', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php', 139)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/dashboard', [], true)
+ 5 APPPATH\Controllers\Employee.php(69): view('employee/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-29 18:07:34 --> ErrorException: Undefined variable $actionTaken
+[Method: GET, Route: employee/dashboard]
+in APPPATH\Views\employee\dashboard.php on line 139.
+ 1 APPPATH\Views\employee\dashboard.php(139): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $actionTaken', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php', 139)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/dashboard', [], true)
+ 5 APPPATH\Controllers\Employee.php(69): view('employee/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-29 18:15:42 --> ErrorException: Undefined variable $actionTaken
+[Method: GET, Route: employee/dashboard]
+in APPPATH\Views\employee\dashboard.php on line 319.
+ 1 APPPATH\Views\employee\dashboard.php(319): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $actionTaken', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php', 319)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/dashboard', [], true)
+ 5 APPPATH\Controllers\Employee.php(69): view('employee/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-29 18:19:27 --> ErrorException: Undefined variable $actionTaken
+[Method: GET, Route: employee/dashboard]
+in APPPATH\Views\employee\dashboard.php on line 319.
+ 1 APPPATH\Views\employee\dashboard.php(319): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $actionTaken', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php', 319)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/dashboard', [], true)
+ 5 APPPATH\Controllers\Employee.php(69): view('employee/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-29 18:23:53 --> ErrorException: Undefined variable $actionTaken
+[Method: GET, Route: employee/dashboard]
+in APPPATH\Views\employee\dashboard.php on line 319.
+ 1 APPPATH\Views\employee\dashboard.php(319): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $actionTaken', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php', 319)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/dashboard', [], true)
+ 5 APPPATH\Controllers\Employee.php(69): view('employee/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-29 18:24:16 --> ErrorException: Undefined variable $actionTaken
+[Method: GET, Route: employee/dashboard]
+in APPPATH\Views\employee\dashboard.php on line 186.
+ 1 APPPATH\Views\employee\dashboard.php(186): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $actionTaken', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php', 186)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/dashboard', [], true)
+ 5 APPPATH\Controllers\Employee.php(69): view('employee/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-29 20:08:17 --> ErrorException: Undefined variable $actionTaken
+[Method: GET, Route: employee/dashboard/64933]
+in APPPATH\Views\employee\dashboard.php on line 341.
+ 1 APPPATH\Views\employee\dashboard.php(341): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $actionTaken', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php', 341)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/dashboard', [], true)
+ 5 APPPATH\Controllers\Employee.php(69): view('employee/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard('64933')
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-29 20:08:38 --> ErrorException: Undefined variable $actionTaken
+[Method: GET, Route: employee/dashboard/64933]
+in APPPATH\Views\employee\dashboard.php on line 341.
+ 1 APPPATH\Views\employee\dashboard.php(341): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $actionTaken', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php', 341)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/dashboard', [], true)
+ 5 APPPATH\Controllers\Employee.php(69): view('employee/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard('64933')
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-29 20:08:50 --> ErrorException: Undefined variable $actionTaken
+[Method: GET, Route: employee/dashboard/64933]
+in APPPATH\Views\employee\dashboard.php on line 341.
+ 1 APPPATH\Views\employee\dashboard.php(341): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $actionTaken', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php', 341)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/dashboard', [], true)
+ 5 APPPATH\Controllers\Employee.php(69): view('employee/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard('64933')
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-29 20:10:27 --> ErrorException: Undefined variable $actionTaken
+[Method: GET, Route: employee/dashboard/64933]
+in APPPATH\Views\employee\dashboard.php on line 342.
+ 1 APPPATH\Views\employee\dashboard.php(342): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $actionTaken', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php', 342)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/dashboard', [], true)
+ 5 APPPATH\Controllers\Employee.php(69): view('employee/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->dashboard('64933')
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-07-29 20:23:27 --> ErrorException: Class App\Filters\AuthEmployee contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (CodeIgniter\Filters\FilterInterface::after)
+[Method: GET, Route: employee/dashboard]
+in APPPATH\Filters\AuthEmployee.php on line 9.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()

@@ -3,24 +3,18 @@
 use App\Libraries\Pdf;
 use App\Models\DataModel;
 use App\Libraries\tcpdf\tcpdf;
+use Config\Insurance;
 require_once FCPATH . 'dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
-//require_once APPPATH.'libraries/tcpdf/tcpdf.php';
+use Dompdf\Options;
 
- class Tcpdfexample extends BaseController {
-    public $pdf;
-    function __construct()
-    {
-        //$this->userModel = new UserModel();
-        //$this->tpdf = new Pdf();
-     
-    }
-
-    public function quote()
-    {
+class Tcpdfexample extends BaseController
+{
+    public function quote(){
         $session = session();
         helper(['form']);
-        
+        helper('common');
+
         $dataModel = new DataModel();
 
         // Fetch record
@@ -33,361 +27,396 @@ use Dompdf\Dompdf;
             return "No record found.";
         }
 
-        // Prepare quotation data
+        // Load insurer config
+        $config = new Insurance();
+        $company = $this->request->getVar('company');
+        $companyConfig = $config->insurers[$company];
+
+        // Inputs
+        //$odDiscountInput = (float)$this->request->getVar('od_discount');
+        //$age  = (int)$this->request->getVar('age');
+        
+        $idv  = (float)$this->request->getVar('idv');
+        $ncb  = (int)$this->request->getVar('ncb');
+        $cc   = (int)$this->request->getVar('cc');
+        $isCngInstalled = $this->request->getVar('cng');
+        $isZeroDep = $this->request->getVar('zero_dep');
+        $seatCapacity = (int)$this->request->getVar('seatCapacity');
+        $regDate = $this->request->getVar('regDate');
+        $ownerName = $this->request->getVar('ownerName');
+        $regNumber = $this->request->getVar('regNumber');
+        $vehicleModel = $this->request->getVar('vehicleModel'); 
+        $vehicleMaker = $this->request->getVar('vehicleMaker');
+        $mobile = $this->request->getVar('mobile');
+        $fuelType = $this->request->getVar('fuelType');
+
+        //section A Own Damage
+        $dateString = $regDate;
+        $regYear = date('Y', strtotime($dateString));
+        $currentYear = date('Y');  // gets current year, e.g. 2026
+        $age = $currentYear - $regYear;
+        $band = getCCRange($cc);
+        $odRate = $band ? $config->insurers['SHRIRAM']['od_rates'][$band] : null;
+        $BasicForVehicle = $idv * $odRate /100;
+        if($isCngInstalled)
+        {
+            $cngRate = $band ? $config->insurers['SHRIRAM']['cng_rates'][$band] : null;
+            $cngMatchAmt = $cc <= 1000 ? 1 : 2; 
+            $cngKit = ($idv * $cngRate / 100) + $cngMatchAmt;
+        }
+        else
+        {
+            $cngKit = 0;
+        }
+        $basicODPremium = $BasicForVehicle + $cngKit; 
+        if($company == 'SHRIRAM'){
+            $odDiscount = $config->insurers['SHRIRAM']['od_discount'];
+            $odDiscountAmt = $basicODPremium * $odDiscount['detariff'] / 100;
+        }
+        if ($company === 'SBI') {
+            $claimStatus = ($ncb == 0) ? 'claim_yes' : 'claim_no';
+
+            // Fetch OD discount from config
+            if (isset($config->insurers['SBI']['od_discount'][$claimStatus])) {
+                $odDiscount = $config->insurers['SBI']['od_discount'][$claimStatus];
+            } else {
+                $odDiscount = 0; // fallback if not defined
+            }
+            $odDiscountAmt = $basicODPremium * $odDiscount / 100;
+        }
+
+        $basicOdPremiumAfterDiscount = $basicODPremium - $odDiscountAmt;
+        $ncbAmt = $basicOdPremiumAfterDiscount * $ncb /100;
+        $ownDamagePremiumA = $basicOdPremiumAfterDiscount - $ncbAmt;
+
+        //Section B Add-ons
+
+        $basicLiability = $band && isset($config->insurers['SHRIRAM']['tp_rates'][$band]) ? $config->insurers['SHRIRAM']['tp_rates'][$band]['basic_liability'] : null;
+        $passengerCoverage = $band && isset($config->insurers['SHRIRAM']['tp_rates'][$band]) ? $config->insurers['SHRIRAM']['tp_rates'][$band]['per_passenger'] * ($seatCapacity -1): null;
+        $cngLiability = $band && isset($config->insurers['SHRIRAM']['tp_rates'][$band]) ? $config->insurers['SHRIRAM']['tp_rates'][$band]['cng_liability'] : null;    
+        $llLiability = $band && isset($config->insurers['SHRIRAM']['tp_rates'][$band]) ? $config->insurers['SHRIRAM']['tp_rates'][$band]['ll_driver'] : null;
+        $thirdParty = $basicLiability + $passengerCoverage;
+        $libilityB = $basicLiability + $passengerCoverage + $cngLiability + $llLiability;
+
+        // Section C Addons
+        if($isZeroDep)
+        {
+            if($company == 'SHRIRAM'){
+                $ccBand = getCCRangeForZeroDep($cc);
+                $ageBand = getAgeRange($age);
+                $zeroDepRate = ($ccBand && $ageBand) ? $config->insurers['SHRIRAM']['zero_dep_rates'][$ccBand][$ageBand] : null;
+                $zeroDep = $zeroDepRate * $idv ;
+                $totalAddonC = $zeroDep;
+            }
+
+            if($company == 'SBI'){
+                $ageBand = getAgeRange($age);
+                $zeroDepRate = $config->insurers['SBI']['zero_dep_rates'][$ageBand];
+                $zeroDep = $zeroDepRate * $idv ;
+                $totalAddonC = $zeroDep;
+            }
+
+        }
+        else
+        {
+            $zeroDep = 0;
+            $totalAddonC = 0;
+        }
+
+        $totalPremiumWithoutGst = $ownDamagePremiumA + $libilityB + $totalAddonC;
+        
+
+        $sgst = $totalPremiumWithoutGst * 9 / 100;
+        $cgst = $totalPremiumWithoutGst * 9 / 100;
+
+        $finalPremium = $totalPremiumWithoutGst + $cgst + $cgst;
+
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $randomPart = substr(str_shuffle(str_repeat($characters, 15)), 0, 13); // 13 chars
+        // Quotation data
         $quotationData = [
-            'quoteNo' => 'Q-' . mt_rand(1000,9999),
-            'ownerName' => $record['ownerName'],
-            'regNumber' => $record['regNumber'],
-            'vehicleModel' => $record['vehicleModel'],
-            'vehicleMaker' => $record['vehicleMaker'],
-            'manufacturingYear' => $record['regDateMonth'],
-            'mobile' => $record['mobile'],
-            'fuelType' => $record['fuelType'],
-            'idv' => 565000.00,
+            'quoteNo' => 'Q-' . $randomPart,
+            'ownerName' => $ownerName,
+            'regNumber' => $regNumber,
+            'vehicleModel' => $vehicleModel,
+            'vehicleMaker' => $vehicleMaker,
+            'manufacturingYear' => $regYear,
+            'mobile' => $mobile,
+            'fuelType' => $fuelType,
+            'idv' => $idv,
             'policyType' => 'MOTOR PACKAGE POLICY',
-            'odStart' => '13-JUL-2026',
-            'odEnd' => '12-JUL-2027',
-            'tpStart' => '13-JUL-2026',
-            'tpEnd' => '12-JUL-2027',
-            'basicOD' => 19481.20,
-            'basicTP' => 11852.00,
-            'nilDep' => 5932.50,
-            'legalLiability' => 50.00,
-            'ncbDiscount' => 1278.45,
-            'specialDiscount' => 730.55,
-            'totalOD' => 9867.86,
-            'totalTP' => 11962.00,
-            'totalPremium' => 21830.00,
-            'sgst' => 1965.00,
-            'cgst' => 1965.00,
-            'finalPremium' => 25760.00,
-            'email' => 'gbinsurance@gmail.com',
-            'company'=> $this->request->getVar('company'),
-            'quoteDate' => date('d-m-Y')
+            'odDiscountAmt'=> $odDiscountAmt,
+            'ncb'=> $ncb,
+            'ownDamagePremiumA'=> $ownDamagePremiumA + $totalAddonC,
+            // Add these date fields
+            'odStart' => date('d-m-Y'),
+            'odEnd'   => date('d-m-Y', strtotime('+364 days')),
+            'tpStart' => date('d-m-Y'),
+            'tpEnd'   => date('d-m-Y', strtotime('+364 days')),
+
+            // Premium breakdown
+            'basicOD' => $BasicForVehicle,
+            'cngKit' => $cngKit,
+            'totalTP' => $thirdParty,
+            'libilityB' => $libilityB,  // add this line
+            'cngLiability'=> $cngLiability,
+            //'basicTP' => $tp,   // add this line
+            'nilDep'  => $zeroDep,   // add this line
+            'legalLiability' => $llLiability,   // add this line
+            'ncbDiscount' => $ncbAmt,
+            //'netOD' => $netOD,
+            //'totalOD' => $totalOD,   // add this line
+            'totalPremium' => $totalPremiumWithoutGst,   // add this line
+            //'addons' => $addonDetails,
+            //'subtotal' => $subtotal,
+            'sgst' => $sgst,          // add this line
+            'cgst' => $cgst,          // add this line
+            //'gst' => $gst,
+            'finalPremium' => $finalPremium,
+
+            // Other info
+            'cngLiability' => $cngLiability,
+            'company'=> $company,
+            'quoteDate' => date('d-m-Y'),
+            'employeeName' => $session->get('employeeName'),
+            'employeeMobile' => $session->get('mobile'),
+            'email' => 'gbinsurance@gmail.com' // or $record['email'] if stored
         ];
 
-        // Calculate totals
-        $totalPremium = $quotationData['basicOD'] + $quotationData['basicTP'] + $quotationData['nilDep'] - $quotationData['ncbDiscount'];
-        $gst          = $totalPremium * 0.18;
-        $finalPremium = $totalPremium + $gst;
-
-        $quotationData['totalPremium'] = $totalPremium;
-        $quotationData['gst']          = $gst;
-        $quotationData['finalPremium'] = $finalPremium;
-
-        // Load HTML view
+                // Render HTML view
         $html = view('quotation_template', $quotationData);
-        
-        // Render with dompdf
-        $dompdf = new Dompdf();
-        
-        $options = $dompdf->getOptions();
-        $options->set(['isRemoteEnabled' => true]);
-        $dompdf->setOptions($options);
-        
+
+        // Generate PDF
+            // Generate PDF// Generate PDF
+        $options = new Options();
+        $options->set([
+            'isRemoteEnabled'         => true,
+            'isFontSubsettingEnabled' => true,        // embed only used glyphs
+            'defaultFont'             => 'DejaVu Sans' // safe, Unicode-compatible font
+        ]);
+
+        $dompdf = new Dompdf($options);
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-        $dompdf->stream("Quotation_{$quotationData['quoteNo']}.pdf");
+
+        $canvas = $dompdf->getCanvas();
+        $fontMetrics = $dompdf->getFontMetrics();
+        $font = $fontMetrics->get_font("helvetica", "bold");
+
+        // Get page dimensions
+        $pageWidth  = $canvas->get_width();
+        $pageHeight = $canvas->get_height();
+        // Set transparency
+        $canvas->set_opacity(0.2);
+
+        // Draw one watermark at left bottom, large size, opposite angle
+        // Draw one big watermark, top-left to bottom-right
+        $canvas->rotate(45, 40, 60); // positive angle = top-left → bottom-right
+        $canvas->text(40, 60, "GBINSURANCE", $font, 120);
+        $canvas->rotate(0, 40, 60); // reset rotation
+        // Save PDF to writable folder
+        
+        /*
+        $dir = WRITEPATH . 'quotations';
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
+       
+                            
+        $filePath = $dir . "/{$this->request->getVar('regNumber')}.pdf";
+        file_put_contents($filePath, $dompdf->output());
+
+        // Force download via CodeIgniter response (works on mobile)
+        return $this->response->download($filePath, null)
+                            ->setFileName("{$this->request->getVar('regNumber')}.pdf");
+                            */
+        return $this->response
+            ->setContentType('application/pdf')
+            ->setHeader(
+                'Content-Disposition',
+                'attachment; filename="' . $this->request->getVar('regNumber') . '.pdf"'
+            )
+            ->setBody($dompdf->output());
+
     }
 
-    public function quote_old(){
-        
-        
+    public function quote_2()
+    {
         $session = session();
         helper(['form']);
+        helper('coomon');
         $dataModel = new DataModel();
-        $record = $dataModel->where(array('telecaller'=>$session->get('employeeId'),'recordId'=>$this->request->getVar('recordId')))->first();
-        //$record = $dataModel->where(array('regNumber'=>'MH12TV0773'))->first();
+
+        // Fetch record
+        $record = $dataModel->where([
+            'telecaller' => $session->get('employeeId'),
+            'recordId'   => $this->request->getVar('recordId')
+        ])->first();
+
+        if (!$record) {
+            return "No record found.";
+        }
+
+        // Load insurer config
+        $config = new Insurance();
+        $company = $this->request->getVar('company');
+        $companyConfig = $config->insurers[$company];
+
+        // Inputs
+        $idv  = (float)$this->request->getVar('idv');
+        $age  = (int)$this->request->getVar('age');
+        $seat = (int)$this->request->getVar('seat');
+        $ncb  = (int)$this->request->getVar('ncb');
+        $cc   = (int)$this->request->getVar('cc');
+        $odDiscountInput = (float)$this->request->getVar('od_discount');
+        $cngLiability = $this->request->getVar('cng') ? ($companyConfig['liability']['cng'] ?? 0) : 0;
+
+
+        // OD Rate
+        $odRate = 0;
+        foreach($companyConfig['od_rates'] as $range=>$rate){
+            [$min,$max] = explode("-", $range);
+            if($age >= $min && $age < $max){
+                $odRate = $rate;
+                break;
+            }
+        }
+        $basicOD = ($idv * $odRate) / 100;
+
         
-        $this->pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);   
-                
+        // Apply discount if provided
+        if ($odDiscountInput > 0) {
+            $odAfterDiscount = $basicOD - (($basicOD * $odDiscountInput) / 100);
+        } else {
+            // fallback to config discounts
+            $detariffDiscount = $basicOD * $companyConfig['od_discount']['detariff'];
+            $specialDiscount  = $basicOD * $companyConfig['od_discount']['special'];
+            $odAfterDiscount  = $basicOD - ($detariffDiscount + $specialDiscount);
+        }
 
-        $this->pdf->SetCreator(PDF_CREATOR);
-        $this->pdf->SetAuthor('Nicola Asuni');
-        $this->pdf->SetTitle('QUOTATION');
-        $this->pdf->SetSubject('TCPDF Tutorial');
-        $this->pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+        // Discounts
+        $detariffDiscount = $basicOD * $companyConfig['od_discount']['detariff'];
+        $specialDiscount  = $basicOD * $companyConfig['od_discount']['special'];
+        $odAfterDiscount  = $basicOD - ($detariffDiscount + $specialDiscount);
 
-        // set header and footer fonts
-//$this->pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-//$this->pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-$this->pdf->setPrintHeader(false);
-$this->pdf->setPrintFooter(false);
-// set default monospaced font
-$this->pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        // NCB
+        $ncbDiscount = ($odAfterDiscount * $ncb) / 100;
+        $netOD = $odAfterDiscount - $ncbDiscount;
 
-// set margins
-$this->pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-$this->pdf->SetLeftMargin(22);
-//$this->pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-//$this->pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+        // TP
+        $tp = 0;
+        foreach($companyConfig['tp_rates'] as $range=>$data){
+            [$min,$max] = explode("-", $range);
+            if($cc >= $min && $cc <= $max){
+                if(isset($data[$seat])){
+                    $tp = $data[$seat];
+                } elseif(isset($data['basic'])) {
+                    $tp = $data['basic'];
+                }
+                break;
+            }
+        }
 
-// set auto page breaks
-$this->pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+        // Addons
+        $addonTotal = 0;
+        $addonDetails = [];
+        foreach($companyConfig['addons'] as $key=>$amount){
+            if($this->request->getVar($key)){
+                $addonTotal += $amount;
+                $addonDetails[$key] = $amount;
+            }
+        }
 
-// set image scale factor
-$this->pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-// set some language-dependent strings (optional)
-if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-    require_once(dirname(__FILE__).'/lang/eng.php');
-    $this->pdf->setLanguageArray($l);
-}
-
-// ---------------------------------------------------------
-
-// set font
-$this->pdf->SetFont('helvetica', '', 10);
-
-// add a page
-$this->pdf->AddPage();
-
-// NOTE: Uncomment the following line to rasterize SVG image using the ImageMagick library.
-//$pdf->setRasterizeVectorImages(true);
-
-//$this->pdf->Image($file='http://localhost/dcs/theme/img/sbilogo.jpg', $x=15, $y=30, $w='', $h='', $link='http://www.tcpdf.org', $align='', $palign='', $border=1, $fitonpage=false);
-$logo = "";
-if($this->request->getVar('company')=="SBI"){
-$this->pdf->Image($file='https://gbsoftsolution.com/dcs/theme/img/sbilogo.jpg', $x=20, $y=18, $w=40, $h=22, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-//$this->pdf->Image($file='http://localhost/dcs/theme/img/sbilogo.jpg', $x=20, $y=18, $w=40, $h=22, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-}
-if($this->request->getVar('company')=="SHRIRAM"){
-    $this->pdf->Image($file='https://gbsoftsolution.com/dcs/theme/img/shriramlogo.jpg', $x=150, $y=18, $w=40, $h=22, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-    //$this->pdf->Image($file='http://localhost/dcs/theme/img/shriramlogo.jpg', $x=150, $y=18, $w=40, $h=22, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-}
-if($this->request->getVar('company')=="RELIANCE"){
-    $this->pdf->Image($file='https://gbsoftsolution.com/dcs/theme/img/reliancelogo.jpg', $x=20, $y=22, $w=60, $h=10, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-    //$this->pdf->Image($file='http://localhost/dcs/theme/img/reliancelogo.jpg', $x=20, $y=22, $w=60, $h=10, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-}
-$this->pdf->SetFont('helvetica', '', 8);
-
-
-$this->pdf->SetY(40);
-$txt = 'Date : '.date("d/m/Y");
-$this->pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
-
-$html = <<<HTML
-<br><br><br><br>
-<div><span style="font-size:8;font-weight: bold;">Intermediary Code </span>: 454407</div>
-<div><span style="font-size:8;font-weight: bold;">Intermediary Name </span>: GB Insurance Services</div>
-<div><span style="font-size:8;font-weight: bold;text-align: center;">PCV Insurance Quote</span></div>
-HTML;
-            
-$this->pdf->writeHTMLCell(0, 0, '', 34, $html, 0, 1, 0, true, '', true);
-
-$this->pdf->SetFont('helvetica', 'B', 8);
-$this->pdf->SetY(69);
-$this->pdf->Write(0, 'Motor Insurance Quote No-: QCMVPC0100000191'.mt_rand(1000, 9999), '', 0, 'C', 1, 0, false, false, 0);
-
-$this->pdf->SetFont('helvetica', '', 8);
-$this->pdf->SetY(79);
-$txt = 'Dear '.$record['ownerName'].',';
-$this->pdf->Write(0, $txt, '', 0, 'L', 1, 0, false, false, 0);
-
-$this->pdf->SetY(88);
-$txt = 'We hereby extend our gratitude of having given us an opportunity to participate in quoting for the captioned risk';
-$this->pdf->Write(0, $txt, '', 0, 'L', 1, 0, false, false, 0);
-
-$this->pdf->SetY(97);
-$txt = 'Appended hereunder is a brief summation of the Terms we propose:-';
-$this->pdf->Write(0, $txt, '', 0, 'L', 1, 0, false, false, 0);
-
-$this->pdf->Ln(5);
-
-
-$this->pdf->Ln(5);
-
-
-$this->pdf->SetLineStyle(array('width' => 0.1, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
-$this->pdf->SetFillColor(255,255,255);
-$this->pdf->SetTextColor(0,0,0);
-$this->pdf->MultiCell(23, 14, "Reg. No", 1, 'C', 1, 0, '', '', true);
-$this->pdf->MultiCell(23, 14, "MAKE", 1, 'C', 1, 0, '', '', true);
-$this->pdf->MultiCell(23, 14, "MODEL", 1, 'C', 1, 0, '', '', true);
-$this->pdf->MultiCell(23, 14, "NCB  %", 1, 'C', 1, 0, '', '', true);
-$this->pdf->MultiCell(23, 14, "CUBIC CAPACITY", 1, 'C', 1, 0, '', '', true);
-$this->pdf->MultiCell(23, 14, "SEATING CAPACITY", 1, 'C', 1, 0, '', '', true);
-$this->pdf->MultiCell(24, 14, "FIRST PURCHASE /REGISTRATION DATE", 1, 'C', 1, 1, '', '', true);
-
-
-
-
-/*
-$this->pdf->MultiCell(23, 14, $record['regNumber'], 1, 'C', 1, 0);
-$this->pdf->MultiCell(23, 14, $record['vehicleMaker'], 'TB', 'C', 1, 0);
-$this->pdf->MultiCell(23, 14, $record['vehicleModel'], 1, 'C', 1, 0);
-$this->pdf->MultiCell(23, 14, $record['fuelType'], 1, 'C', 1, 0);
-$this->pdf->MultiCell(23, 14, "-", 'TB', 'C', 1, 0);
-$this->pdf->MultiCell(23, 14, $record['seatCapacity'], 1, 'C', 1, 0);
-$this->pdf->MultiCell(24, 14, $record['regDate'], 1, 'C', 1, 0);
-*/
-
-$this->pdf->MultiCell(23, 14, $record['regNumber'], 1, 'C', 0, 0, '', '', true);  
-$this->pdf->MultiCell(23, 14, $record['vehicleMaker'], 1, 'C', 1, 0, '' ,'', true);
-$this->pdf->MultiCell(23, 14, $record['vehicleModel'], 1, 'C', 1, 0, '' ,'', true);
-$this->pdf->MultiCell(23, 14, $this->request->getVar('ncb'), 1, 'C', 0, 0, '', '', true);  
-$this->pdf->MultiCell(23, 14, $this->request->getVar('cubicCapacity'), 1, 'C', 1, 0, '' ,'', true);
-$this->pdf->MultiCell(23, 14, $record['seatCapacity'], 1, 'C', 1, 0, '' ,'', true);
-$this->pdf->MultiCell(24, 14, $record['regDate'], 1, 'C', 1, 0, '' ,'', true);
-  
-$this->pdf->Ln(7);
-$this->pdf->Ln(7);
-
-//$style2 = array('width' => 0.1, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
-//$this->pdf->Rect(22, 124.5, 24, 14, 'D', array('all' => $style2));
-//$this->pdf->Rect(91, 124.5, 24, 14, 'D', array('all' => $style2));
-
-/*$this->pdf->SetFont('helvetica', '', 8);
-$this->pdf->SetY(145);
-$this->pdf->Write(0, 'Policy Period                               : Annual', '', 0, 'L', 1, 0, false, false, 0);
-$this->pdf->SetY(152);
-$this->pdf->Write(0, 'Cover Type                                 : Package', '', 0, 'L', 1, 0, false, false, 0);
-$this->pdf->SetY(159);
-$this->pdf->Write(0, 'APPLICABLE NCB %                 : '.$this->request->getVar('ncb').'%', '', 0, 'L', 1, 0, false, false, 0);
-*/
-
-
-$this->pdf->Ln(7);
-
-$text = "Applicationa";
-
-$this->pdf->SetLineStyle(array('width' => 0.1, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
-$this->pdf->SetFillColor(255,255,255);
-$this->pdf->SetTextColor(0,0,0);
-//$this->pdf->MultiCell(55, 4, $text, 1, 'C', 1, 0);
-//$this->pdf->MultiCell(54, 4, $text, 'TB', 'C', 1, 0);
-//$this->pdf->MultiCell(54, 4, $text, 1, 'C', 1, 1);
-
-  $this->pdf->MultiCell(55, 7, 'Net Premium', 1, 'L', 0, 0, '', '', true);  
-  $this->pdf->MultiCell(54, 7, 'Taxes Applicable', 1, 'L', 1, 0, '' ,'', true);
-  $this->pdf->MultiCell(54, 7, 'Total Premium', 1, 'L', 1, 1, '' ,'', true);
-  
-  $tax = $this->request->getVar('netPremium')*18/100;
-  $consumable = $this->request->getVar('consumable'); 
-  $towing = $this->request->getVar('towing');
-  $returnToInvoice = $this->request->getVar('returnToInvoice');
-  $PAOwner = $this->request->getVar('PAOwner');
-  $totalPremium = $this->request->getVar('netPremium') + $tax + (int)$consumable + (int)$towing + (int)$returnToInvoice + (int)$PAOwner ; 
-  $this->pdf->MultiCell(55, 7, $this->request->getVar('netPremium'), 1, 'L', 0, 0, '', '', true);  
-  $this->pdf->MultiCell(54, 7, $tax, 1, 'L', 1, 0, '' ,'', true);
-  $this->pdf->MultiCell(54, 7, $totalPremium, 1, 'L', 1, 1, '' ,'', true);
-  
-$this->pdf->Ln(7);
-
-  $this->pdf->MultiCell(25, 7, 'IDV of the Vehicle', 1, 'C', 0, 0, '', '', true);  
-  $this->pdf->MultiCell(37, 7, 'Non Electrical Accessories', 1, 'C', 1, 0, '' ,'', true);
-  $this->pdf->MultiCell(44, 7, 'Electrical/Electronic Accessories', 1, 'C', 1, 0, '' ,'', true);
-  $this->pdf->MultiCell(28, 7, 'CNG/LPG Kit Value', 1, 'C', 0, 0, '', '', true);  
-  $this->pdf->SetFont('helvetica', 'B', 8);
-  $this->pdf->MultiCell(29, 7, 'Total Sum Insured', 1, 'C', 1, 1, '' ,'', true);
-  
-
-  $this->pdf->SetFont('helvetica', '', 8);
-
-  $this->pdf->MultiCell(25, 7, $this->request->getVar('idv'), 1, 'C', 0, 0, '', '', true);  
-  $this->pdf->MultiCell(37, 7, '0', 1, 'C', 1, 0, '' ,'', true);
-  $this->pdf->MultiCell(44, 7, '0', 1, 'C', 1, 0, '' ,'', true);
-  $this->pdf->MultiCell(28, 7, '0', 1, 'C', 0, 0, '', '', true);  
-  $this->pdf->SetFont('helvetica', 'B', 8);
-  $this->pdf->MultiCell(29, 7, $this->request->getVar('idv'), 1, 'C', 1, 1, '' ,'', true);
-
-  
-  $this->pdf->Ln(7);
-  
-  $this->pdf->SetFont('helvetica', 'B', 10);
-  $this->pdf->SetTextColor(0,0,255);
-  //$this->pdf->MultiCell(30, 7, 'Clauses Applicable', 1, 'L', 0, 0, '', '', true);  
-  $this->pdf->MultiCell(163, 7, 'Add on Covers Opted', 1, 'C', 1, 1, '' ,'', true);
-  
-  $consumableCheckBox = "";
-  if(isset($_POST['consumableCheckBox'])){
-      $consumableCheckBox = "Consumable";
-  }
-  $towingCheckBox = "";
-  if(isset($_POST['towingCheckBox'])){
-      $towingCheckBox = "Towing";
-  }
-  $returnToInvoiceCheckBox = "";
-  if(isset($_POST['returnToInvoiceCheckBox'])){
-      $returnToInvoiceCheckBox = "Return To Invoice";
-  }
-  $PAOwnerCheckBox = "";
-  if(isset($_POST['PAOwnerCheckBox'])){
-      $PAOwnerCheckBox = "PA Owner";
-  }
-  
-  $this->pdf->SetFont('helvetica', '', 7);
-  $this->pdf->SetTextColor(0,0,0);
-  //$this->pdf->MultiCell(30, 7, '', 1, 'L', 0, 0, '', '', true);  
-  $this->pdf->MultiCell(81, 5, 'Own Damage Basic', 1, 'L', 0, 0, '', '', true);
-  $this->pdf->MultiCell(82, 5, $consumableCheckBox , 1, 'L', 1, 1, '' ,'', true);
-  $this->pdf->MultiCell(81, 5, 'Third Party Bodily Injury', 1, 'L', 0, 0, '', '', true);
-  $this->pdf->MultiCell(82, 5, $towingCheckBox, 1, 'L', 1, 1, '' ,'', true);
-  $this->pdf->MultiCell(81, 5, 'Legal Liability to Paid Drivers', 1, 'L', 0, 0, '', '', true);
-  $this->pdf->MultiCell(82, 5, $returnToInvoiceCheckBox, 1, 'L', 1, 1, '' ,'', true);
-  $this->pdf->MultiCell(81, 5, 'Depreciation Reimbursement', 1, 'L', 0, 0, '', '', true);
-  $this->pdf->MultiCell(82, 5, $PAOwnerCheckBox, 1, 'L', 1, 1, '' ,'', true);
-  
-  
-  
-  $this->pdf->Ln(7);
-
-  if($this->request->getVar('company')=="SBI"){
-    $html = <<<HTML
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    
-    <div><span style="font-size:8;font-weight: bold;">Exclusions </span>:For detail list of exclusions, refer policy wordings available on web site <span style="color: blue;text-decoration: underline;">www.sbigeneral.in</span></div>
-    <div><span style="font-size:8;font-weight: bold;">Please note that this quote is based on the information provided by you and valid for 30 days from date of issuance. Any
-    change in material information may lead to change in Premium amount. </span></div>
-    HTML;
-                
-    $this->pdf->writeHTMLCell(0, 0, '', 34, $html, 0, 1, 0, true, '', true);
+        // Add to totals
+        $subtotal = $netOD + $tp + $addonTotal + $cngLiability;
+        $gst = ($subtotal * $companyConfig['gst']) / 100;
+        $finalPremium = $subtotal + $gst;
+        $nilDep = $this->request->getVar('zero_dep') ? $companyConfig['addons']['zero_dep'] : 0;
+        $legalLiability = $companyConfig['liability']['paid_driver'] ?? 0;
+        $totalOD = $netOD;
+        $totalPremium = $subtotal; // OD + TP + Addons before GST
+        $sgst = $subtotal * 0.09;
+        $cgst = $subtotal * 0.09;
         
-}
-    if($this->request->getVar('company')=="SHRIRAM"){
-        $html = <<<HTML
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        
-        <div><span style="font-size:8;font-weight: bold;">Exclusions </span>:For detail list of exclusions, refer policy wordings available on web site <span style="color: blue;text-decoration: underline;">www.shriramgi.com</span></div>
-        <div><span style="font-size:8;font-weight: bold;">Please note that this quote is based on the information provided by you and valid for 30 days from date of issuance. Any
-        change in material information may lead to change in Premium amount. </span></div>
-        HTML;
-                    
-        $this->pdf->writeHTMLCell(0, 0, '', 34, $html, 0, 1, 0, true, '', true);
-    }
-    
-    if($this->request->getVar('company')=="RELIANCE"){
-        $html = <<<HTML
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        
-        <div><span style="font-size:8;font-weight: bold;">Exclusions </span>:For detail list of exclusions, refer policy wordings available on web site <span style="color: blue;text-decoration: underline;">www.reliancegeneral.co.in</span></div>
-        <div><span style="font-size:8;font-weight: bold;">Please note that this quote is based on the information provided by you and valid for 30 days from date of issuance. Any
-        change in material information may lead to change in Premium amount. </span></div>
-        HTML;
-                    
-        $this->pdf->writeHTMLCell(0, 0, '', 34, $html, 0, 1, 0, true, '', true);    
-    }    
-    $this->pdf->Ln(7);
+        // Quotation data
+        $quotationData = [
+        'quoteNo' => 'Q-' . mt_rand(1000,9999),
+        'ownerName' => $record['ownerName'],
+        'regNumber' => $record['regNumber'],
+        'vehicleModel' => $record['vehicleModel'],
+        'vehicleMaker' => $record['vehicleMaker'],
+        'manufacturingYear' => $record['regDateMonth'],
+        'mobile' => $record['mobile'],
+        'fuelType' => $record['fuelType'],
+        'idv' => $idv,
+        'policyType' => 'MOTOR PACKAGE POLICY',
 
-    $this->pdf->SetFont('helvetica', '', 8);
-    $this->pdf->SetY(250);
-    $txt = 'Producer Name : '.$session->get('name');
-    $this->pdf->Write(0, $txt, '', 0, 'L', 1, 0, false, false, 0);
-    
-    $this->pdf->SetY(257);
-    
-    $txt = 'Producer Contact : '.$session->get('contact');
-    $this->pdf->Write(0, $txt, '', 0, 'L', 1, 0, false, false, 0);
-    
+        // Add these date fields
+        'odStart' => date('d-m-Y'),
+        'odEnd'   => date('d-m-Y', strtotime('+364 days')),
+        'tpStart' => date('d-m-Y'),
+        'tpEnd'   => date('d-m-Y', strtotime('+364 days')),
 
-        $this->response->setContentType('application/pdf');
-        $txt = $record['regNumber'].'.pdf';
-        $this->pdf->Output($txt, 'I');
+        // Premium breakdown
+        'basicOD' => $basicOD,
+        'basicTP' => $tp,   // add this line
+        'nilDep'  => $nilDep,   // add this line
+        'legalLiability' => $legalLiability,   // add this line
+        'detariffDiscount' => $detariffDiscount,
+        'specialDiscount' => $specialDiscount,
+        'ncbDiscount' => $ncbDiscount,
+        'netOD' => $netOD,
+        'totalOD'          => $totalOD,   // add this line
+        'totalTP' => $tp,   // add this line
+        'totalPremium' => $totalPremium,   // add this line
+        'tp' => $tp,
+        'addons' => $addonDetails,
+        'subtotal' => $subtotal,
+        'sgst' => $sgst,          // add this line
+        'cgst' => $cgst,          // add this line
+        'gst' => $gst,
+        'finalPremium' => $finalPremium,
+
+        // Other info
+        'cngLiability' => $cngLiability,
+        'company'=> $company,
+        'quoteDate' => date('d-m-Y'),
+        'employeeName' => $session->get('employeeName'),
+        'employeeMobile' => $session->get('mobile'),
+        'email' => 'gbinsurance@gmail.com' // or $record['email'] if stored
+    ];
+
+
+        // Render HTML view
+        $html = view('quotation_template', $quotationData);
+
+        // Generate PDF
+            // Generate PDF// Generate PDF
+        $options = new Options();
+        $options->set([
+            'isRemoteEnabled'         => true,
+            'isFontSubsettingEnabled' => true,        // embed only used glyphs
+            'defaultFont'             => 'DejaVu Sans' // safe, Unicode-compatible font
+        ]);
+
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        // Save PDF to writable folder
+        
+        $dir = WRITEPATH . 'quotations';
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
+        
+        $filePath = $dir . "/{$this->request->getVar('regNumber')}.pdf";
+        file_put_contents($filePath, $dompdf->output());
+
+        // Force download via CodeIgniter response (works on mobile)
+        return $this->response->download($filePath, null)
+                            ->setFileName("{$this->request->getVar('regNumber')}.pdf");
     }
 }
-/* end tcpdfexample.php file for CodeIgniter 4 TCPDF Integration */
-?>

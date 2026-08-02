@@ -291,18 +291,15 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <!--  start Info Table -->
                             <div class="card">
                                 <div class="card-body">
-                                  
-                                   
                                     <div
                                         style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                                         <div></div>
                                         <div style="display: flex; gap: 10px; align-items: center;">
                                             <div class="search-wrapper">
                                                 <input type="text" id="searchBox" onkeyup="filterTable()"
-       placeholder="Search by policy no, holder name, or vehicle...">
+                                                    placeholder="Search by policy no, holder name, or vehicle...">
                                                 <span class="search-icon">🔍</span>
                                             </div>
                                             <select id="rowsPerPage" class="form-select" onchange="loadPolicies()">
@@ -323,54 +320,79 @@
                                                     <th>Reg. No.</th>
                                                     <th>Name</th>
                                                     <th>Mobile</th>
-                                                    <th>Telecaller</th>
+                                                    <th>C C</th>
+                                                    <th>Seat</th>
                                                     <th>Expiry Date</th>
-                                                    <!--
-                      <th>Status</th>
-                      <th>Remark</th>
-                      
-  -->
                                                     <th>Important</th>
-
                                                 </tr>
-                                                <!-- end row -->
                                             </thead>
                                             <tbody>
 
                                                 <?php if (!empty($allData)): ?>
                                                 <?php foreach ($allData as $row): ?>
                                                 <?php
-       $style = "padding:.3rem;"; // default padding
+                                                        $style = "padding:.3rem;"; // default padding
 
-if ($row['alreadySale']) {
-    // Rule 1: Red background always wins
-    $style .= "background-color:#F88379; color:white;";
-} elseif ($row['actionTaken']) {
-    // Rule 2: Grey background + white text
-    $style .= "background-color:#4b584b; color:white;";
-} elseif (!$row['actionTaken'] && !$row['alreadySale']) {
-    // Rule 3: White background + black text
-    $style .= "background-color:white; color:black;";
-} else {
-    // Optional fallback
-    $style .= "background-color:#ccc; color:black;";
-}
-        ?>
+                                                    if ($row['alreadySale']) {
+                                                        // Rule 1: Red background always wins
+                                                        $style .= "background-color:#F88379; color:white;";
+                                                    } elseif ($row['actionTaken']) {
+                                                        // Rule 2: Grey background + white text
+                                                        $style .= "background-color:#4b584b; color:white;";
+                                                    } elseif (!$row['actionTaken'] && !$row['alreadySale']) {
+                                                        // Rule 3: White background + black text
+                                                        $style .= "background-color:white; color:black;";
+                                                    } else {
+                                                        // Optional fallback
+                                                        $style .= "background-color:#ccc; color:black;";
+                                                    }
+                                                            ?>
                                                 <tr style="font-size:.9rem;">
-                                               <td style="<?php echo $style; ?>">
-    <a href="<?php echo base_url();?>employee/dashboard/<?php echo $row['recordId'];?>"
-       style="color:inherit; text-decoration:none;">
-       <?php echo $row['recordId'];?>
-    </a>
-</td>
-                                                    <td style="<?php echo $style; ?>"><?php echo $row['regNumber'];?>
+                                                    <td style="<?php echo $style; ?>">
+                                                        <a href="<?php echo base_url();?>employee/dashboard/<?php echo $row['recordId'];?>"
+                                                            style="color:inherit; text-decoration:none;">
+                                                            <?php echo $row['recordId'];?>
+                                                        </a>
                                                     </td>
-                                                    <td style="<?php echo $style; ?>"><?php echo $row['ownerName'];?>
+                                                    <td style="<?php echo $style; ?>">
+                                                        <a href="<?php echo base_url();?>employee/dashboard/<?php echo $row['recordId'];?>"
+                                                            style="color:inherit; text-decoration:none;">
+                                                            <?php echo $row['regNumber'];?>
+                                                        </a>
                                                     </td>
-                                                    <td style="<?php echo $style; ?>"><?php echo $row['mobile'];?></td>
-                                                    <td style="<?php echo $style; ?>"><?php echo $row['telecaller'];?>
+                                                    <td style="<?php echo $style; ?>">
+                                                        <a href="<?php echo base_url();?>employee/dashboard/<?php echo $row['recordId'];?>"
+                                                            style="color:inherit; text-decoration:none;">
+                                                            <?php echo $row['ownerName'];?>
+                                                        </a>
+
                                                     </td>
-                                                    <td style="<?php echo $style; ?>"><?php echo $row['expiryDate'];?>
+                                                    <td style="<?php echo $style; ?>">
+                                                        <a href="<?php echo base_url();?>employee/dashboard/<?php echo $row['recordId'];?>"
+                                                            style="color:inherit; text-decoration:none;">
+                                                            <?php echo $row['mobile'];?>
+                                                        </a>
+
+                                                    </td>
+                                                    <td style="<?php echo $style; ?>">
+                                                        <a href="<?php echo base_url();?>employee/dashboard/<?php echo $row['recordId'];?>"
+                                                            style="color:inherit; text-decoration:none;">
+                                                            <?php echo $row['cubicCapacity'];?>
+                                                        </a>
+
+                                                    </td>
+                                                    <td style="<?php echo $style; ?>">
+                                                        <a href="<?php echo base_url();?>employee/dashboard/<?php echo $row['recordId'];?>"
+                                                            style="color:inherit; text-decoration:none;">
+                                                            <?php echo $row['seatCapacity'];?>
+                                                        </a>
+
+                                                    </td>
+                                                    <td style="<?php echo $style; ?>">
+                                                        <a href="<?php echo base_url();?>employee/dashboard/<?php echo $row['recordId'];?>"
+                                                            style="color:inherit; text-decoration:none;">
+                                                            <?php echo $row['expiryDate'];?>
+                                                        </a>
                                                     </td>
                                                     <td style="<?php echo $style; ?>">
                                                         <i class="ti ti-star fa-3x"
@@ -383,22 +405,19 @@ if ($row['alreadySale']) {
                                                     <td colspan="7">No records found.</td>
                                                 </tr>
                                                 <?php endif; ?>
-
-
                                             </tbody>
                                         </table>
                                     </div>
                                     <div class="pagination" id="pagination"></div>
                                 </div>
                             </div>
-                            <!--  end Info Table -->
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+
 
     <script src="<?= base_url('/assets/libs/jquery/dist/jquery.min.js') ?>"></script>
     <script src="<?= base_url('/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') ?>"></script>
@@ -420,27 +439,26 @@ if ($row['alreadySale']) {
     }
 
     function filterTable() {
-    let query = document.getElementById("searchBox").value.toLowerCase();
-    let rows = document.querySelectorAll("#resultsTable tbody tr");
+        let query = document.getElementById("searchBox").value.toLowerCase();
+        let rows = document.querySelectorAll("#resultsTable tbody tr");
 
-    rows.forEach(row => {
-        // Collect searchable text from relevant columns
-        let policyNo   = row.cells[0]?.innerText.toLowerCase(); // Record ID / Policy No
-        let holderName = row.cells[2]?.innerText.toLowerCase(); // Name
-        let vehicle    = row.cells[1]?.innerText.toLowerCase(); // Reg. No. or Vehicle
+        rows.forEach(row => {
+            // Collect searchable text from relevant columns
+            let policyNo = row.cells[0]?.innerText.toLowerCase(); // Record ID / Policy No
+            let holderName = row.cells[2]?.innerText.toLowerCase(); // Name
+            let vehicle = row.cells[1]?.innerText.toLowerCase(); // Reg. No. or Vehicle
 
-        if (
-            policyNo.includes(query) ||
-            holderName.includes(query) ||
-            vehicle.includes(query)
-        ) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
-    });
-}
-
+            if (
+                policyNo.includes(query) ||
+                holderName.includes(query) ||
+                vehicle.includes(query)
+            ) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
     </script>
 
 </body>

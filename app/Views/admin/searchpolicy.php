@@ -46,6 +46,7 @@
                                                     <th>Mobile</th>
                                                     <th>Telecaller</th>
                                                     <th>Premium</th>
+                                                    <th>Cashback</th>
                                                     <th>Type</th>
                                                     <th>Issue Date</th>
                                                     <th>Expiry Date</th>
@@ -54,7 +55,7 @@
                                             </thead>
                                             <tbody id="tableBody">
                                                 <tr>
-                                                    <td colspan="9" class="loading">Loading policies...</td>
+                                                    <td colspan="11" class="loading">Loading policies...</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -107,14 +108,14 @@
         const downloadUrlBase = '<?= site_url('admin/download-policy') ?>';
 
         try {
-            const response = await fetch('<?= site_url('admin/search-policy-api') ?>');
+            const response = await fetch('<?= site_url('admin/search-policy-api') ?>?per_page=10000');
             const data = await response.json();
 
             const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
 
             if (!data.success || data.data.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="9" class="text-center text-muted">No policies found</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="11" class="text-center text-muted">No policies found</td></tr>';
                 exportBtn.style.display = 'none';
                 setAlert(data.message || 'No records found', 'error');
                 return;
@@ -129,6 +130,7 @@
                     <td>${policy.mobileNo}</td>
                     <td>${policy.telecaller_name}</td>
                     <td>${policy.premium}</td>
+                    <td>${policy.cashback}</td>
                     <td>${policy.policyType}</td>
                     <td>${policy.issue_date}</td>
                     <td>${policy.expiry_date}</td>

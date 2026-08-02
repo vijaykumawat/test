@@ -1,0 +1,56 @@
+CRITICAL - 2026-08-01 08:49:15 --> ErrorException: Undefined variable $uploadModel
+[Method: POST, Route: admin/generic-upload-data]
+in APPPATH\Controllers\Admin.php on line 2497.
+ 1 APPPATH\Controllers\Admin.php(2497): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $uploadModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 2497)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->genericDataLoaderPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-01 08:55:02 --> ErrorException: Undefined variable $uploadModel
+[Method: POST, Route: admin/generic-upload-data]
+in APPPATH\Controllers\Admin.php on line 2517.
+ 1 APPPATH\Controllers\Admin.php(2517): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $uploadModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php', 2517)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->genericDataLoaderPost()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-01 14:00:15 --> ErrorException: Undefined property: App\Controllers\Employee::$uploadModel
+[Method: GET, Route: employee/renewals]
+in APPPATH\Controllers\Employee.php on line 898.
+ 1 APPPATH\Controllers\Employee.php(898): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Employee::$uploadModel', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Employee.php', 898)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->renewals()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-01 14:40:17 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "employee/script.php"
+[Method: GET, Route: employee/renewals]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('employee/script.php')
+ 2 SYSTEMPATH\View\View.php(489): CodeIgniter\View\View->render('employee/script', null, true)
+ 3 APPPATH\Views\employee\renewals_page.php(197): CodeIgniter\View\View->include('employee/script')
+ 4 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\renewals_page.php')
+ 5 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/renewals_page', [], true)
+ 7 APPPATH\Controllers\Employee.php(933): view('employee/renewals_page', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->renewals()
+ 9 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+10 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-01 14:53:24 --> ErrorException: Undefined property: App\Controllers\Employee::$db
+[Method: GET, Route: employee/renewals]
+in APPPATH\Controllers\Employee.php on line 925.
+ 1 APPPATH\Controllers\Employee.php(925): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Employee::$db', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Employee.php', 925)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->renewals()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

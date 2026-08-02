@@ -7,6 +7,58 @@ class OCRProcessor
     /**
      * Extract text from image using OCR
      */
+
+    public function runOcr(string $imagePath): array
+    {
+        $apiKey = 'K89821879188957'; // Better: store this in .env
+
+        if (!file_exists($imagePath)) {
+            return ['error' => 'Image not found.'];
+        }
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => 'https://api.ocr.space/parse/image',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_TIMEOUT => 60,
+            CURLOPT_POSTFIELDS => [
+                'apikey' => $apiKey,
+                'language' => 'eng',
+                'file' => new \CURLFile($imagePath),
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+
+        if ($response === false) {
+            $error = curl_error($curl);
+            curl_close($curl);
+
+            return ['error' => $error];
+        }
+
+        curl_close($curl);
+
+        $json = json_decode($response, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return ['error' => 'Invalid response from OCR API'];
+        }
+
+        if (!empty($json['ParsedResults'][0]['ParsedText'])) {
+            return [
+                'text' => trim($json['ParsedResults'][0]['ParsedText'])
+            ];
+        }
+
+        return [
+            'error' => $json['ErrorMessage'] ?? 'No text detected.'
+        ];
+    }
+
+
     public function extractTextFromImage($imagePath)
     {
         try {
