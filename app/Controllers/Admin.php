@@ -1830,8 +1830,14 @@ public function uploadDataPost()
     
     public function renewEmpSubscription()
     {
-        $result = $this->subscriptionService->renewSubscription(
-            $this->request->getPost('employeeId'),
+        $employeeIds = $this->request->getPost('employeeIds') ?: [];
+
+        if (!is_array($employeeIds)) {
+            $employeeIds = [$employeeIds];
+        }
+
+        $result = $this->subscriptionService->renewSubscriptions(
+            $employeeIds,
             $this->request->getFile('paymentScreenshot')
         );
 

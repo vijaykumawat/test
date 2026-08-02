@@ -35,11 +35,11 @@ function validateImage(string $imagePath, OCRProcessor $ocrProcessor): array
     if (! $receiverValid) {
         return ['error' => 'This payment is done for an invalid receiver.'];
     }
-    /*
+    
     if (! $dateValid) {
         return ['error' => 'Invalid payment date.'];
     }
-    */
+    
     if ($amt < 249) {
         return ['error' => 'Invalid payment amount.'];
     }

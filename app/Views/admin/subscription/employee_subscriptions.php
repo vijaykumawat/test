@@ -292,7 +292,10 @@
                                 <h2 class="mb-0 fw-bolder fs-8">Employee Management</h2>
                             </div>
                             <div class="col-lg-4 col-md-6 d-none d-md-flex align-items-center justify-content-end">
-
+                                <button id="bulkRenewBtn" class="btn btn-danger d-flex align-items-center ms-2">
+                                    <i class="ti ti-refresh-alert me-1"></i>
+                                    Renew Subscriptions
+                                </button>
                                 <a href="<?= base_url('/admin/employees/new') ?>"
                                     class="btn btn-primary d-flex align-items-center ms-2">
                                     <i class="ti ti-plus me-1"></i>
@@ -354,9 +357,6 @@
                                             </th>
                                             <th>
                                                 <h6 class="fs-4 fw-semibold mb-0">End Date</h6>
-                                            </th>
-                                            <th>
-                                                <h6 class="fs-4 fw-semibold mb-0">Action</h6>
                                             </th>
                                         </tr>
                                     </thead>
@@ -458,30 +458,6 @@
     <?= $endDateText; ?>
   </p>
 </td>
-                                            <!-- Action -->
-                                           <td>
-                                                <?php
-                                                    // Calculate remaining days
-                                                    $endDate = strtotime($emp['endDate']);
-                                                    $today   = strtotime(date('Y-m-d'));
-                                                    $daysRemaining = ceil(($endDate - $today) / (60 * 60 * 24));
-
-                                                    // Decide button class and disabled state
-                                                    if ($daysRemaining <= 10 ) {
-                                                        // Enable Renew button if 1–10 days remaining
-                                                        $btnClass = 'btn-primary btn-sm';
-                                                        $disabled = '';
-                                                    } else {
-                                                        // Disable button if more than 10 days left OR expired
-                                                        $btnClass = 'bg-primary-subtle text-primary btn-sm';
-                                                        $disabled = 'disabled';
-                                                    }
-                                                ?>
-                                                <button class="btn <?= $btnClass; ?> purchaseSubscriptionBtn"
-                                                        data-employee-id="<?= $emp['employeeId']; ?>" <?= $disabled; ?>>
-                                                    Renew
-                                                </button>
-                                            </td>
                                         </tr>
                                         <?php endforeach; ?>
                                         <?php else: ?>
@@ -496,29 +472,83 @@
                         </div>
                     </div>
                     <!-- end Default Size Light Table -->
-                    <div class="modal fade" id="subscriptionModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal fade" id="bulkRenewModal" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <form action="<?= site_url('admin/renew-subscription') ?>" method="post"
-                                    enctype="multipart/form-data" id="subscriptionForm">
+                                    enctype="multipart/form-data" id="bulkRenewForm">
                                     <div class="modal-header text-danger">
-                                        <h5 class="modal-title bg-danger-subtle">Purchase Subscription</h5>
+                                        <h5 class="modal-title bg-danger-subtle">Renew Subscriptions</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>You must purchase a subscription to access employee management features.</p>
-                                        <div class="mb-3">
-                                            <label for="paymentScreenshot" class="form-label">Upload Payment
-                                                Screenshot</label>
-                                            <input type="file" class="form-control" id="paymentScreenshot"
-                                                name="paymentScreenshot" required>
+                                        <p>Select one or more employees to renew, attach the payment screenshot, and submit.</p>
+
+                                        <div class="table-responsive mb-3">
+                                            <table class="table table-bordered mb-0">
+                                                <thead class="text-dark fs-4">
+                                                    <tr>
+                                                        <th scope="col"><input type="checkbox" id="selectAllEmployees"></th>
+                                                        <th scope="col">Employee</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col">End Date</th>
+                                                        <th scope="col">Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php if (!empty($employees)): ?>
+                                                        <?php foreach ($employees as $emp): ?>
+                                                            <?php $hasSubscription = !empty($emp['endDate']) && !empty($emp['status']); ?>
+                                                            <?php
+                                                                $jobTitle = strtolower(trim($emp['jobTitle'] ?? ''));
+                                                                $chargeAmount = ($jobTitle === 'admin') ? 500 : 250;
+                                                            ?>
+                                                            <tr>
+                                                                <td class="text-center align-middle">
+                                                                    <input type="checkbox" class="employee-checkbox" name="employeeIds[]"
+                                                                        value="<?= esc($emp['employeeId']) ?>" <?= $hasSubscription ? '' : 'disabled' ?> >
+                                                                </td>
+                                                                <td>
+                                                                    <strong><?= esc($emp['name']) ?></strong><br>
+                                                                    <small class="text-muted"><?= esc($emp['jobTitle'] ?? 'No job title') ?></small>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="badge <?= ($hasSubscription && $emp['status'] === 'Active') ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger' ?>">
+                                                                        <?= $hasSubscription ? esc($emp['status']) : 'No subscription' ?>
+                                                                    </span>
+                                                                </td>
+                                                                <td><?= $emp['endDate'] ? esc($emp['endDate']) : '-' ?></td>
+                                                                <td class="amount-cell text-end" data-amount="<?= $chargeAmount ?>">
+                                                                    <?= number_format($chargeAmount, 2) ?>
+                                                                </td>
+                                                            </tr>
+                                                        <?php endforeach; ?>
+                                                    <?php else: ?>
+                                                        <tr>
+                                                            <td colspan="5" class="text-center">No employees found.</td>
+                                                        </tr>
+                                                    <?php endif; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <div class="col-md-6">
+                                                <label for="paymentScreenshot" class="form-label">Upload Payment Screenshot</label>
+                                                <input type="file" class="form-control" id="paymentScreenshot"
+                                                    name="paymentScreenshot" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Total Amount</label>
+                                                <div class="form-control bg-light" id="totalAmountText">₹0.00</div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <input type="hidden" name="employeeId" id="employeeIdField">
-                                        <button type="submit" id="finalSubmitBtn" class="btn btn-danger" disabled>
-                                             <span class="spinner-border spinner-border-sm d-none" id="submitSpinner"></span>
-                                            <span id="submitText">Submit</span>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" id="bulkRenewSubmitBtn" class="btn btn-danger" disabled>
+                                            <span class="spinner-border spinner-border-sm d-none" id="bulkSubmitSpinner"></span>
+                                            <span id="bulkSubmitText">Pay & Renew</span>
                                         </button>
                                     </div>
                                 </form>
@@ -535,39 +565,63 @@
 
     <?= $this->include('admin/script'); ?>
     <script>
-    document.querySelectorAll('.purchaseSubscriptionBtn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Get employeeId from button attribute
-            const empId = this.getAttribute('data-employee-id');
-            document.getElementById('employeeIdField').value = empId;
+    const bulkRenewBtn = document.getElementById('bulkRenewBtn');
+    const bulkRenewModal = new bootstrap.Modal(document.getElementById('bulkRenewModal'));
+    const employeeCheckboxes = document.querySelectorAll('.employee-checkbox');
+    const selectAllCheckbox = document.getElementById('selectAllEmployees');
+    const totalAmountText = document.getElementById('totalAmountText');
+    const paymentScreenshot = document.getElementById('paymentScreenshot');
+    const bulkRenewSubmitBtn = document.getElementById('bulkRenewSubmitBtn');
+    const bulkSubmitSpinner = document.getElementById('bulkSubmitSpinner');
+    const bulkSubmitText = document.getElementById('bulkSubmitText');
+    const bulkRenewForm = document.getElementById('bulkRenewForm');
 
-            // Show modal
-            var modal = new bootstrap.Modal(document.getElementById('subscriptionModal'));
-            modal.show();
+    function updateTotalAmount() {
+        let total = 0;
+        let selectedCount = 0;
+
+        employeeCheckboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                const amountCell = checkbox.closest('tr').querySelector('.amount-cell');
+                const amount = parseFloat(amountCell?.dataset.amount || amountCell?.innerText.replace(/[^0-9.]/g, '')) || 0;
+                total += amount;
+                selectedCount++;
+            }
+        });
+
+        totalAmountText.textContent = '₹' + total.toFixed(2);
+        const hasFile = paymentScreenshot.files.length > 0;
+        bulkRenewSubmitBtn.disabled = selectedCount === 0 || !hasFile;
+    }
+
+    bulkRenewBtn.addEventListener('click', function() {
+        bulkRenewModal.show();
+    });
+
+    selectAllCheckbox?.addEventListener('change', function() {
+        employeeCheckboxes.forEach(checkbox => {
+            if (!checkbox.disabled) {
+                checkbox.checked = selectAllCheckbox.checked;
+            }
+        });
+        updateTotalAmount();
+    });
+
+    employeeCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            if (!this.checked) {
+                selectAllCheckbox.checked = false;
+            }
+            updateTotalAmount();
         });
     });
-    const paymentScreenshot = document.getElementById('paymentScreenshot');
-    const finalSubmitBtn = document.getElementById('finalSubmitBtn');
-    const submitSpinner = document.getElementById('submitSpinner');
-    const submitText = document.getElementById('submitText');
-    const subscriptionForm = document.getElementById('subscriptionForm');
 
-    // Enable Submit only when a file is selected
-    paymentScreenshot.addEventListener('change', function() {
-        if (this.files.length > 0) {
-            finalSubmitBtn.removeAttribute('disabled');
-        } else {
-            finalSubmitBtn.setAttribute('disabled', true);
-        }
-    });
+    paymentScreenshot.addEventListener('change', updateTotalAmount);
 
-        // Show processing on submit
-    subscriptionForm.addEventListener('submit', function () {
-
-        finalSubmitBtn.disabled = true;          // Prevent double click
-        submitSpinner.classList.remove('d-none');
-        submitText.innerText = 'Processing...';
-
+    bulkRenewForm.addEventListener('submit', function () {
+        bulkRenewSubmitBtn.disabled = true;
+        bulkSubmitSpinner.classList.remove('d-none');
+        bulkSubmitText.innerText = 'Processing...';
     });
     </script>
 
