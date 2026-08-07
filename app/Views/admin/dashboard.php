@@ -95,13 +95,12 @@
                                     <div class="card-body d-flex justify-content-between align-items-start">
                                         <div>
                                             <h4 class="fw-bolder fs-5">Policies</h4>
-                                            <h2 id="policyCount" class="text-primary fs-7 mb-0"><?= $allCount; ?>
-                                            </h2>
-                                            <p id="policyLabel" class="text-muted mb-0">All Policies</p>
+                                            <h2 id="policyCount" class="text-primary fs-7 mb-0" style="cursor:pointer"><?= $monthlyCount; ?></h2>
+                                            <p id="policyLabel" class="text-muted mb-0" style="cursor:pointer">This Month's Policies</p>
                                         </div>
                                         <div class="toggle-control text-end">
                                             <span id="policyOption"
-                                                class="text-secondary small fw-semibold">All-time</span>
+                                                class="text-secondary small fw-semibold">Monthly</span>
                                             <button id="nextOption" class="btn btn-sm btn-link text-primary p-0 ms-1">
                                                 <i class="ti ti-chevron-right"></i>
                                             </button>
@@ -348,7 +347,7 @@
     const monthlyCount = <?= $monthlyCount; ?>;
     const allCount = <?= $totalPolicies; ?>;
 
-    const options = ["All-time", "Monthly", "Today"];
+    const options = [ "Monthly", "Today","All-time"];
     let currentIndex = 0;
 
     document.getElementById("nextOption").addEventListener("click", () => {
@@ -364,6 +363,21 @@
             option === "Today" ? todaysCount :
             option === "Monthly" ? monthlyCount : allCount;
     });
+    // clicking the count opens the related policy page
+    const monthlyUrl = '<?= site_url('admin/current-month-policy') ?>';
+    const searchUrl = '<?= site_url('admin/search-policy') ?>';
+
+    const openPolicyPage = () => {
+        const option = options[currentIndex];
+        if (option === 'Monthly') {
+            window.location.href = monthlyUrl;
+        } else {
+            window.location.href = searchUrl;
+        }
+    };
+
+    document.getElementById('policyCount').addEventListener('click', openPolicyPage);
+    document.getElementById('policyLabel').addEventListener('click', openPolicyPage);
     </script>
     <script>
     const usedData = <?= $usedData; ?>;

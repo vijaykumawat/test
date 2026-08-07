@@ -109,7 +109,7 @@ class SubscriptionService {
             $this->paymentModel->insertBatch($paymentData);
         }
 
-        $this->sendRenewalEmail($subscriptions, $imagePath, $result);
+        //$this->sendRenewalEmail($subscriptions, $imagePath, $result);
 
         return ['success' => 'Payment screenshot verified successfully. Subscription renewed for ' . count($employeeIds) . ' employee(s).'];
     }

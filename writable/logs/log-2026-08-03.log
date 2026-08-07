@@ -1,0 +1,20 @@
+CRITICAL - 2026-08-03 18:52:28 --> ParseError: syntax error, unexpected token "public", expecting "]"
+[Method: GET, Route: admin/current-month-policy]
+in APPPATH\Controllers\Admin.php on line 485.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(320): CodeIgniter\Autoloader\Autoloader->includeFile('D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Admin.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Admin')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Admin')
+ 4 SYSTEMPATH\Router\Router.php(790): class_exists('\\App\\Controllers\\Admin')
+ 5 SYSTEMPATH\Router\Router.php(228): CodeIgniter\Router\Router->processRouteAttributes()
+ 6 SYSTEMPATH\CodeIgniter.php(852): CodeIgniter\Router\Router->handle('admin/current-month-policy')
+ 7 SYSTEMPATH\CodeIgniter.php(464): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-08-03 18:53:55 --> currentMonthApi error: Call to undefined method App\Models\PolicyModel::getCurrentMonthPolicies
+ERROR - 2026-08-03 18:54:06 --> currentMonthApi error: Call to undefined method App\Models\PolicyModel::getCurrentMonthPolicies
+ERROR - 2026-08-03 18:55:44 --> currentMonthApi error: Call to undefined method App\Models\PolicyModel::getCurrentMonthPolicies
+ERROR - 2026-08-03 18:56:39 --> currentMonthApi error: Call to undefined method App\Models\PolicyModel::getCurrentMonthPolicies
+ERROR - 2026-08-03 18:56:48 --> currentMonthApi error: Call to undefined method App\Models\PolicyModel::getCurrentMonthPolicies
+ERROR - 2026-08-03 18:56:51 --> currentMonthApi error: Call to undefined method App\Models\PolicyModel::getCurrentMonthPolicies

@@ -90,7 +90,11 @@ if (!function_exists('policyTableToExcel')) {
             'Holder Name',
             'Company',
             'Vehicle No.',
+            'mobileNo',
             'Insurance Type',
+            'Telecaller',
+            'Premium',
+            'Cashback',
             'Issue Date',
             'Expiry Date'
         ];
@@ -103,7 +107,11 @@ if (!function_exists('policyTableToExcel')) {
                 $policy['holder_name'] ?? 'N/A',
                 $policy['company_name'] ?? 'N/A',
                 $policy['vehicle_number'] ?? 'N/A',
+                $policy['mobileNo'] ?? 'N/A',
                 $policy['insurance_type'] ?? 'N/A',
+                $policy['telecaller_name'] ?? 'N/A',
+                $policy['premium'] ?? 'N/A',
+                $policy['cashback'] ?? 'N/A',
                 $policy['issue_date'] ?? 'N/A',
                 $policy['expiry_date'] ?? 'N/A'
             ];

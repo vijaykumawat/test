@@ -84,6 +84,21 @@ class PolicyModel extends Model
         return $query->findAll();
     }
 
+    public function getCurrentMonthPoliciesWithTelecaller($limit = null, $offset = 0)
+    {
+            $builder = $this->select('policies.*, employee.name as telecaller_name')
+        ->join('employee', 'employee.employeeId = policies.telecaller', 'left')
+        ->where('MONTH(policies.created_at)', date('m'))
+        ->where('YEAR(policies.created_at)', date('Y'))
+        ->orderBy('policies.created_at', 'DESC');
+
+    if ($limit !== null && $limit !== '') {
+        $builder->limit((int) $limit, (int) $offset);
+    }
+
+    return $builder->findAll();
+    }
+
     /**
      * Get policies expiring in next month
      */

@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\EmployeeModel;
 use App\Models\DataModel;
-use App\Models\EmployeeLoginHistoryModel;
+//use App\Models\EmployeeLoginHistoryModel;
 use App\Models\EmployeeSubscriptionModel;
 use CodeIgniter\I18n\Time;
 use DateTime;
@@ -15,14 +15,14 @@ class Auth extends BaseController
 {
     protected $dataModel;
     protected $employeeModel;
-    protected $employeeLoginHistoryModel;
+    //protected $employeeLoginHistoryModel;
     protected $subscriptionModel;
     protected $subscriptionService;
     public function __construct()
     {
         $this->dataModel = new DataModel();
         $this->employeeModel = new EmployeeModel();
-        $this->employeeLoginHistoryModel = new EmployeeLoginHistoryModel();
+        //$this->employeeLoginHistoryModel = new EmployeeLoginHistoryModel();
         $this->subscriptionModel = new EmployeeSubscriptionModel();
         $this->subscriptionService = new SubscriptionService();
     }
@@ -111,12 +111,20 @@ class Auth extends BaseController
                 'isLoggedIn'   => true
             ]);
             $session->setTempdata('isLoggedIn', true, 36000);
-            
-            $this->employeeLoginHistoryModel->insert([
-                'employeeId' => $employee['employeeId'],
-                'status'     => 'LoggedIn'
-            ]);
+            /*
+            $existingLogin = $this->employeeLoginHistoryModel
+                ->where('employeeId', $employee['employeeId'])
+                ->where('DATE(dateCreated)', $today)
+                ->first();
 
+            if (!$existingLogin) {
+                $this->employeeLoginHistoryModel->insert([
+                    'employeeId' => $employee['employeeId'],
+                    'status'     => 'LoggedIn',
+                    'dateCreated'=> date('Y-m-d H:i:s')
+                ]);
+            }
+            */
             markAttendance($employee['employeeId']);
 
             if ($employee['jobTitle'] === 'Admin') {
@@ -134,32 +142,32 @@ class Auth extends BaseController
         helper('common_helper');
         $employeeId = session()->get('employeeId');
         
-         if ($employeeId) {
-           
+        if ($employeeId) {
             // Get the latest login record with no logoutTime
-            $lastLogin = $this->employeeLoginHistoryModel->where('employeeId', $employeeId)
-                                    ->where('logoutTime', null)
-                                    ->orderBy('loginTime', 'DESC')
-                                    ->first();
+            /*
+            $lastLogin = $this->employeeLoginHistoryModel
+                ->where('employeeId', $employeeId)
+                ->where('logoutTime IS NULL')   // ✅ cleaner raw condition
+                ->orderBy('loginTime', 'DESC')
+                ->first();
 
             if ($lastLogin) {
-                // Use raw CURRENT_TIMESTAMP so DB sets the time
-                $db = \Config\Database::connect();
-                $db->table('employeeloginhistory')
-                ->where('id', $lastLogin['id'])
-                ->set('logoutTime', 'CURRENT_TIMESTAMP', false) // false = don’t escape
-                ->set('status', 'LoggedOut')
-                ->update();
+                // Update using model instead of raw DB connection
+                $this->employeeLoginHistoryModel->update($lastLogin['id'], [
+                    'logoutTime' => date('Y-m-d H:i:s'), // ✅ use PHP timestamp
+                    'status'     => 'LoggedOut'
+                ]);
             }
+                */
 
-            
-            markCheckout($employeeId); // ✅ update check-out time
-            
+            // ✅ mark checkout for attendance
+            markCheckout($employeeId);
         }
 
         session()->destroy();
         return redirect()->to('/employee/login')->with('success', 'Logged out successfully');
     }
+
 
     public function register(){
         return view('registration');

@@ -533,7 +533,7 @@ $isRestrictedUser = (strtolower((string) $currentEmployeeName) === strtolower($r
                     confirmDeleteBtn.textContent = 'Deleting...';
 
                     try {
-                        const resp = await fetch('<?= site_url('admin/remove-all-data') ?>', {
+                        const resp = await fetch('<?= site_url('admin/remove-previous-data') ?>', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -587,12 +587,80 @@ $isRestrictedUser = (strtolower((string) $currentEmployeeName) === strtolower($r
                     }
                 });
             }
+            const confirmDeleteAllBtn = document.getElementById('confirmDeleteAllBtn');
+            if (confirmDeleteAllBtn) {
+                confirmDeleteAllBtn.addEventListener('click', async () => {
+                    confirmDeleteAllBtn.disabled = true;
+                    confirmDeleteAllBtn.textContent = 'Deleting...';
+
+                    try {
+                        const resp = await fetch('<?= site_url('admin/remove-all-data') ?>', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        });
+                        const json = await resp.json();
+                        
+                        if (json.success) {
+                            const alertBox = document.getElementById('alertBox');
+                            alertBox.innerHTML =
+                                `<div class="alert bg-success-subtle text-success alert-dismissible fade show mb-3" role="alert">
+                                    <div class="d-flex align-items-center">
+                                        <i class="ti ti-circle-check me-2 fs-4"></i>
+                                        ${json.message || 'All data deleted successfully!'}
+                                    </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>`;
+                            
+                            // Close modal using backdrop click or hide
+                            if (deleteModalInstance) {
+                                deleteModalInstance.hide();
+                            }
+                            
+                            // Refresh page after 2 seconds
+                            setTimeout(() => location.reload(), 2000);
+                        } else {
+                            const alertBox = document.getElementById('alertBox');
+                            alertBox.innerHTML =
+                                `<div class="alert bg-danger-subtle text-danger alert-dismissible fade show mb-3" role="alert">
+                                    <div class="d-flex align-items-center">
+                                        <i class="ti ti-alert-circle me-2 fs-4"></i>
+                                        ${json.message || 'Failed to delete data.'}
+                                    </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>`;
+                            confirmDeleteAllBtn.disabled = false;
+                            confirmDeleteAllBtn.textContent = 'Delete All Data';
+                        }
+                    } catch (err) {
+                        const alertBox = document.getElementById('alertBox');
+                        alertBox.innerHTML =
+                            `<div class="alert bg-danger-subtle text-danger alert-dismissible fade show mb-3" role="alert">
+                                <div class="d-flex align-items-center">
+                                    <i class="ti ti-alert-circle me-2 fs-4"></i>
+                                    Delete error: ${err.message}
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>`;
+                        confirmDeleteAllBtn.disabled = false;
+                        confirmDeleteAllBtn.textContent = 'Delete All Data';
+                    }
+                });
+            }
 
         });
 
         // Remove All Data with Confirmation
-        function removeAllData() {
+        function removePreviousData() {
             deleteModalInstance = new bootstrap.Modal(document.getElementById('deleteConfirmModal'), {
+                backdrop: 'static',
+                keyboard: false
+            });
+            deleteModalInstance.show();
+        }
+        function removeAllData() {
+            deleteModalInstance = new bootstrap.Modal(document.getElementById('deleteAllConfirmModal'), {
                 backdrop: 'static',
                 keyboard: false
             });
@@ -692,7 +760,14 @@ $isRestrictedUser = (strtolower((string) $currentEmployeeName) === strtolower($r
                                                     <button type="button" onclick="removeAllData()"
                                                         class="btn btn-outline-danger btn-sm shadow-sm">
                                                         <i class="ti ti-trash me-2"></i>
-                                                        Remove all Data
+                                                        Remove All Data
+                                                    </button>
+                                                </div>
+                                                <div class="ms-auto">
+                                                    <button type="button" onclick="removePreviousData()"
+                                                        class="btn btn-outline-danger btn-sm shadow-sm">
+                                                        <i class="ti ti-trash me-2"></i>
+                                                        Remove Previous Data
                                                     </button>
                                                 </div>
                                                 <div class="ms-auto">
@@ -815,13 +890,38 @@ $isRestrictedUser = (strtolower((string) $currentEmployeeName) === strtolower($r
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p class="mb-2"><strong>Warning!</strong> This action will permanently delete all records from the data table.</p>
+                                <p class="mb-2"><strong>Warning!</strong> This action will permanently delete all Previous records from the data table.</p>
                                 <p class="text-muted mb-0">This action cannot be undone. Are you sure you want to proceed?</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-secondary btn-sm shadow-sm"
                                     data-bs-dismiss="modal">Cancel</button>
                                 <button type="button" id="confirmDeleteBtn"
+                                    class="btn btn-danger btn-sm shadow-sm">Delete Previous Data</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Delete All Confirmation Modal -->
+                <div class="modal fade" id="deleteAllConfirmModal" tabindex="-1" aria-labelledby="deleteAllConfirmLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger-subtle">
+                                <h5 class="modal-title text-danger" id="deleteAllConfirmLabel">
+                                    <i class="ti ti-alert-triangle me-2"></i>Confirm Delete
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="mb-2"><strong>Warning!</strong> This action will permanently delete all records from the data table.</p>
+                                <p class="text-muted mb-0">This action cannot be undone. Are you sure you want to proceed?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary btn-sm shadow-sm"
+                                    data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" id="confirmDeleteAllBtn"
                                     class="btn btn-danger btn-sm shadow-sm">Delete All Data</button>
                             </div>
                         </div>

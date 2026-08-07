@@ -525,10 +525,17 @@ class Employee extends BaseController
             'saleInGb' => $saleInGb
         ]);
 
+        /*
         $nextRecord = $dataModel->where([
             'telecaller' => $session->get('employeeId'),
-            'actionTaken' => 0
+            'recordId' > $recordId 
         ])->first();
+        */
+        $nextRecord = $dataModel
+            ->where('telecaller', $session->get('employeeId'))
+            ->where('recordId >', $recordId)
+            ->orderBy('recordId', 'ASC')
+            ->first();
 
         return $this->response->setJSON([
             'success' => true,
@@ -602,6 +609,7 @@ class Employee extends BaseController
                 'telecaller' => $session->get('employeeId'), // or nickName
                 'actionTaken' => 0
             ])->first();
+        
 
 
         if ($record) {

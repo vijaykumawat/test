@@ -154,6 +154,7 @@ tr:nth-child(even) {
             <th>Status</th>
             <th>Check In</th>
             <th>Check Out</th>
+            <th>Duration</th>
             <th>Remarks</th>
             <th>Payable</th>
         </tr>
@@ -167,14 +168,17 @@ tr:nth-child(even) {
                 } elseif ($record['status'] === 'Weekly Off') {
                     $style = 'color:blue;';
                 }
+
+                $duration = $record['duration'] ?? '-';
             ?>
             <tr class="status-<?= strtolower(str_replace(' ', '', $record['status'])) ?>">
                 <td><?= $record['attendance_date'] ?></td>
                 <td><?= $record['status'] ?></td>
                 <td><?= $record['check_in_time'] ?></td>
                 <td><?= $record['check_out_time'] ?></td>
+                <td><?= $duration ?></td>
                 <td><?= $record['remarks'] ?></td>
-                 <td><?= number_format($record['payable'], 2) ?></td>
+                <td><?= number_format($record['payable'], 2) ?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>

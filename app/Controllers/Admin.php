@@ -73,8 +73,8 @@ public function index()
     // Dashboard metrics
     $data['employees']     = $employees;
     $data['allCount']      = $this->policyModel->countAll();
-    $data['monthlyCount']  = $this->policyModel->where('MONTH(issue_date)', date('m'))->countAllResults();
-    $data['todaysCount']   = $this->policyModel->where('DATE(issue_date)', date('Y-m-d'))->countAllResults();
+    $data['monthlyCount']  = $this->policyModel->where('MONTH(created_at)', date('m'))->countAllResults();
+    $data['todaysCount']   = $this->policyModel->where('DATE(created_at)', date('Y-m-d'))->countAllResults();
     $data['totalData']     = $this->dataModel->countAll();
     $data['totalPolicies'] = $this->policyModel->countAll();
     
@@ -319,6 +319,14 @@ $data['unusedDataRecords'] = $records;
         return view('admin/searchpolicy', $data);
     }
 
+    public function currentMonthPolicy()
+    {
+        $data = [
+            'month' => date('F Y')
+        ];
+        return view('admin/policy/currentmonthpolicy', $data);
+    }
+
     protected function normalizePolicyPerPage($perPage): int
     {
         $perPage = (int) $perPage;
@@ -435,7 +443,33 @@ $data['unusedDataRecords'] = $records;
             'total_pages' => $totalPages
         ]);
     }
+    public function currentMonthApi()
+    {
+        $perPage = $this->request->getVar('per_page') ?? 0;
+        $perPage = (int) $perPage;
+        if ($perPage <= 0) {
+            // return all for this view by default
+            $perPage = 999999;
+        }
 
+        $page = (int) ($this->request->getVar('page') ?? 1);
+        $offset = ($page - 1) * $perPage;
+
+        try {
+            $policies = $this->policyModel->getCurrentMonthPoliciesWithTelecaller($perPage, $offset);
+
+            return $this->response->setJSON([
+                'success' => true,
+                'data'    => array_values($policies)
+            ]);
+        } catch (\Exception $e) {
+            log_message('error', 'currentMonthApi error: ' . $e->getMessage());
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to load policies'
+            ]);
+        }
+    }
     /**
      * Display expired next month policies
      */
@@ -569,6 +603,20 @@ $data['unusedDataRecords'] = $records;
         $policies = $this->policyModel->getExpiredNextMonth(999999);
         
         $filename = 'next-expiries-' . date('Y-m-d_His');
+        
+        policyTableToExcel($policies, $filename);
+    }
+
+    /**
+     * Export current month's policies to Excel
+     */
+    public function exportCurrentMonthExcel()
+    {
+        helper('excel');
+        
+        $policies = $this->policyModel->getCurrentMonthPoliciesWithTelecaller(999999);
+        
+        $filename = 'current-month-policies-' . date('Y-m-d_His');
         
         policyTableToExcel($policies, $filename);
     }
@@ -967,11 +1015,12 @@ public function uploadDataPost()
     }
 
     // Block upload if table already has data
+    /*
     $count = $this->dataModel->countAll();
     if ($count >= 1) {
         return $this->response->setStatusCode(400)
             ->setJSON(['success' => false, 'message' => 'Data table already has records. Please clear before uploading.']);
-    }
+    } */
 
     // DB fields that the user can map (exclude recordId from mapping)
     $dbFields = [
@@ -1038,7 +1087,7 @@ public function uploadDataPost()
         $rowData = [];
 
         // Generate system recordId (alphanumeric, 15–16 chars)
-        $rowData['recordId'] = $this->generateRecordId();
+        //$rowData['recordId'] = $this->generateRecordId();
 
         foreach ($dbFields as $field) {
             $csvHeader = $mapping[$field];
@@ -1099,6 +1148,7 @@ public function uploadDataPost()
         return $id;
     }
 
+    /*
     public function removeAllData(){
         
         try {
@@ -1122,7 +1172,81 @@ public function uploadDataPost()
             ]);
         }
     }
+    */
+    public function removeAllData(){
+        try {
+            if ($this->dataModel->countAll() < 1 && $this->historyModel->countAll() < 1) {
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Both tables are already empty.'
+                ]);
+            }
 
+            // Truncate both tables
+            $this->dataModel->db->table('data')->truncate();
+            $this->historyModel->db->table('history')->truncate();
+
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'All records removed successfully from data and history tables!'
+            ]);
+        } catch (\Exception $e) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ]);
+        }
+    }
+    public function removePreviousData(){
+        try {
+            // Current month start
+            $currentMonthStart = date('Y-m-01 00:00:00');
+            // Next month start
+            $nextMonthStart = date('Y-m-01 00:00:00', strtotime('first day of next month'));
+            // Previous month start
+            $prevMonthStart = date('Y-m-01 00:00:00', strtotime('first day of last month'));
+
+            // Step 1: Get all recordIds that will be deleted from data table
+            $recordsToDelete = $this->dataModel->db->table('data')
+                ->select('recordId')
+                ->where("NOT (
+                    (dataUploadDate >= '{$prevMonthStart}' AND dataUploadDate < '{$currentMonthStart}')
+                    OR
+                    (dataUploadDate >= '{$currentMonthStart}' AND dataUploadDate < '{$nextMonthStart}')
+                )")
+                ->get()
+                ->getResultArray();
+
+            // Extract recordIds into array
+            $recordIds = array_column($recordsToDelete, 'recordId');
+
+            if (!empty($recordIds)) {
+                // Step 2: Delete related history rows
+                $this->historyModel->db->table('history')
+                    ->whereIn('recordId', $recordIds)
+                    ->delete();
+
+                // Step 3: Delete from data table
+                $this->dataModel->db->table('data')
+                    ->where("NOT (
+                        (dataUploadDate >= '{$prevMonthStart}' AND dataUploadDate < '{$currentMonthStart}')
+                        OR
+                        (dataUploadDate >= '{$currentMonthStart}' AND dataUploadDate < '{$nextMonthStart}')
+                    )")
+                    ->delete();
+            }
+
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Records outside current and previous month removed successfully, including history!'
+            ]);
+        } catch (\Exception $e) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ]);
+        }
+    }
     //Employee management methods
     public function listEmployees()
     {   
@@ -1980,33 +2104,10 @@ public function exportAttendancePdf($employeeId, $startDate, $endDate)
                 $endDate
             );
 
-            // Salary logic
-            $monthlySalary = $emp['salary']; // salary column in employee table
-            $daysInMonth   = date('t', strtotime($startDate));
-            $salaryPerDay  = $monthlySalary / $daysInMonth;
-
-            $totalPayable  = 0;
-            $weeklyOffCount = 0;
-
-            foreach ($records as &$record) {
-                if (isset($record['status'])) {
-                    if ($record['status'] === 'Present' || $record['status'] === 'Weekly Off') {
-                        $record['payable'] = $salaryPerDay;
-                        $totalPayable += $salaryPerDay;
-                    } else {
-                        $record['payable'] = 0;
-                    }
-                    if ($record['status'] === 'Weekly Off') {
-                        $weeklyOffCount++;
-                    }
-                }
-            }
-
-            // Build report data
             $report = $this->buildReportData($emp, $records, $startDate);
-            $report['weeklyOffDays'] = $weeklyOffCount;
-            $report['salaryPerDay']  = $salaryPerDay;
-            $report['totalPayable']  = $totalPayable;
+            $report['weeklyOffDays'] = count(array_filter($report['attendance'], function ($r) {
+                return isset($r['status']) && $r['status'] === 'Weekly Off';
+            }));
 
             $reports[] = $report;
         }
@@ -2016,42 +2117,17 @@ public function exportAttendancePdf($employeeId, $startDate, $endDate)
             'period'  => [$startDate, $endDate],
         ]);
     } else {
-        // Export single employee
         $employee = $employeeModel->find($employeeId);
-
         $records = $this->getAttendanceWithWeeklyOffAndHolidays(
             $employeeId,
             $startDate,
             $endDate
         );
 
-        // Salary logic
-        $monthlySalary = $employee['salary'];
-        $daysInMonth   = date('t', strtotime($startDate));
-        $salaryPerDay  = $monthlySalary / $daysInMonth;
-
-        $totalPayable  = 0;
-        $weeklyOffCount = 0;
-
-        foreach ($records as &$record) {
-            if (isset($record['status'])) {
-                if ($record['status'] === 'Present' || $record['status'] === 'Weekly Off') {
-                    $record['payable'] = $salaryPerDay;
-                    $totalPayable += $salaryPerDay;
-                } else {
-                    $record['payable'] = 0;
-                }
-                if ($record['status'] === 'Weekly Off') {
-                    $weeklyOffCount++;
-                }
-            }
-        }
-
-        // Build report data
         $report = $this->buildReportData($employee, $records, $startDate);
-        $report['weeklyOffDays'] = $weeklyOffCount;
-        $report['salaryPerDay']  = $salaryPerDay;
-        $report['totalPayable']  = $totalPayable;
+        $report['weeklyOffDays'] = count(array_filter($report['attendance'], function ($r) {
+            return isset($r['status']) && $r['status'] === 'Weekly Off';
+        }));
 
         $html = view('admin/attendance/pdf_report', [
             'report' => $report,
@@ -2151,14 +2227,56 @@ public function exportAttendancePdf($employeeId, $startDate, $endDate)
         $salaryPerDay  = $monthlySalary / $daysInMonth;
         $salaryPerHour = $salaryPerDay / 8;
 
-        $presentDays = $absentDays = $halfDays = $leaveDays = 0;
+        $presentDays = $absentDays = $halfDays = $leaveDays = $weeklyOffDays = 0;
         $totalPayable = 0;
+        $weekWorked = [];
 
         foreach ($records as &$record) {
+            $record['duration'] = '-';
+            $record['duration_hours'] = 0;
+            $record['week_key'] = null;
+
+            if (!empty($record['attendance_date'])) {
+                $dateTs = strtotime($record['attendance_date']);
+                if ($dateTs !== false) {
+                    $dayOfWeek = (int) date('w', $dateTs);
+                    $record['week_key'] = date('Y-m-d', strtotime("-{$dayOfWeek} days", $dateTs));
+                    if (in_array($record['status'], ['Present', 'Half Day', 'Leave'], true)) {
+                        $weekWorked[$record['week_key']] = true;
+                    } elseif (!array_key_exists($record['week_key'], $weekWorked)) {
+                        $weekWorked[$record['week_key']] = false;
+                    }
+                }
+            }
+
+            if (!empty($record['check_in_time']) && !empty($record['check_out_time'])) {
+                $start = strtotime($record['check_in_time']);
+                $end = strtotime($record['check_out_time']);
+                if ($start !== false && $end !== false) {
+                    if ($end < $start) {
+                        $end += 24 * 60 * 60;
+                    }
+                    $diff = $end - $start;
+                    $hours = floor($diff / 3600);
+                    $minutes = floor(($diff % 3600) / 60);
+                    $record['duration_hours'] = $hours + ($minutes / 60);
+                    $record['duration'] = sprintf('%dh %02dm', $hours, $minutes);
+                }
+            }
+        }
+
+        foreach ($records as &$record) {
+            $weekHasWork = !empty($record['week_key']) && !empty($weekWorked[$record['week_key']]);
+
             switch ($record['status']) {
                 case 'Present':
                     $presentDays++;
-                    $record['payable'] = $salaryPerDay;
+                    $workHours = $record['duration_hours'];
+                    if ($workHours > 0) {
+                        $record['payable'] = min($workHours, 8) * $salaryPerHour;
+                    } else {
+                        $record['payable'] = $salaryPerDay;
+                    }
                     break;
                 case 'Absent':
                     $absentDays++;
@@ -2166,17 +2284,30 @@ public function exportAttendancePdf($employeeId, $startDate, $endDate)
                     break;
                 case 'Half Day':
                     $halfDays++;
-                    $record['payable'] = $salaryPerDay / 2;
+                    $workHours = $record['duration_hours'];
+                    if ($workHours > 0) {
+                        $record['payable'] = min($workHours, 4) * $salaryPerHour;
+                    } else {
+                        $record['payable'] = $salaryPerDay / 2;
+                    }
                     break;
                 case 'Leave':
                     $leaveDays++;
                     $record['payable'] = $salaryPerDay;
                     break;
                 case 'Weekly Off':
-                    $record['payable'] = $salaryPerDay; // ✅ Paid weekly off
+                    if ($weekHasWork) {
+                        $weeklyOffDays++;
+                        $record['payable'] = $salaryPerDay;
+                    } else {
+                        $record['payable'] = 0;
+                    }
                     break;
                 case 'Holiday':
-                    $record['payable'] = $salaryPerDay; // ✅ Paid holiday
+                    $record['payable'] = $weekHasWork ? $salaryPerDay : 0;
+                    break;
+                default:
+                    $record['payable'] = 0;
                     break;
             }
             $totalPayable += $record['payable'];
@@ -2199,6 +2330,7 @@ public function exportAttendancePdf($employeeId, $startDate, $endDate)
             'absentDays'     => $absentDays,
             'halfDays'       => $halfDays,
             'leaveDays'      => $leaveDays,
+            'weeklyOffDays'  => $weeklyOffDays,
             'totalPayable'   => $totalPayable,
             'bonus'          => $bonus,
             'deductions'     => $deductions,

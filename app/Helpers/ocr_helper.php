@@ -32,6 +32,10 @@ function validateImage(string $imagePath, OCRProcessor $ocrProcessor): array
     $amt           = extractAmount($text);
     $utr           = extractUTR($text);
 
+    //return ['error' => '', 'text::' => $text, 'dateText::' => $dateText, 'transactionId::' => $transactionId, 'amount::' => $amt, 'utr::' => $utr, 'receiverValid::' => $receiverValid, 'dateValid::' => $dateValid];
+    
+    //return ['error' =>  $dateText . '::amt::'  . $amt . '::UTR::' . $utr . '::' . ($receiverValid ? 'true' : 'false') . '::' . ($dateValid ? 'true' : 'false')];
+
     if (! $receiverValid) {
         return ['error' => 'This payment is done for an invalid receiver.'];
     }
@@ -39,9 +43,9 @@ function validateImage(string $imagePath, OCRProcessor $ocrProcessor): array
     if (! $dateValid) {
         return ['error' => 'Invalid payment date.'];
     }
-    
+        
     if ($amt < 249) {
-        return ['error' => 'Invalid payment amount.'];
+        return ['error' => 'Invalid payment amount (' . $amt . ').'];
     }
 
     // ✅ If all checks pass, return parsed data

@@ -58,6 +58,7 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->post('upload-data', 'Admin::uploadDataPost');
     $routes->get('search-policy', 'Admin::searchPolicy');
     $routes->get('search-policy-api', 'Admin::searchPolicyApi');
+    $routes->get('current-month-policy', 'Admin::currentMonthPolicy');
     //$routes->get('edit-policy-view', 'Admin::editPolicyView');
     $routes->get('edit-policy-view/(:num)', 'Admin::editPolicyView/$1');
     $routes->get('preview-policy/(:num)', 'Admin::previewPolicy/$1');
@@ -68,16 +69,19 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->post('policy-update', 'Admin::postUpdatePolicy');
     $routes->get('current-expiries', 'Admin::expiredCurrentMonth');
     $routes->get('current-expiries-api', 'Admin::expiredCurrentMonthApi');
+    $routes->get('current-month-api', 'Admin::currentMonthApi');
     $routes->get('next-expiries', 'Admin::expiredNextMonth');
     //$routes->get('next-expiries-api', 'Admin::expiredNextMonthApi');
     $routes->post('next-expiries-api', 'Admin::expiredNextMonthApi');
     $routes->post('ocr', 'Admin::extractImageText');
     $routes->get('export-expired', 'Admin::exportExpiredExcel');
     $routes->get('export-next-expiries', 'Admin::exportNextExpiriesExcel');
+    $routes->get('export-current-month', 'Admin::exportCurrentMonthExcel');
     $routes->get('renew', 'Admin::renewSubscription');
     $routes->post('renew', 'Admin::renewSubscriptionPost');
     $routes->get('payment-history', 'Admin::paymentHistory');
     $routes->post('remove-all-data', 'Admin::removeAllData');
+    $routes->post('remove-previous-data', 'Admin::removePreviousData');
     $routes->post('remove-generic-data', 'Admin::removeGenericData');
     
     $routes->get('employees', 'Admin::listEmployees');

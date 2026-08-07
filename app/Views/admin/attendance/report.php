@@ -152,6 +152,7 @@
                                                     <th>Date</th>
                                                     <th>Check In</th>
                                                     <th>Check Out</th>
+                                                    <th>Duration</th>
                                                     <th>Status</th>
                                                     <th>Remarks</th>
                                                     <!--<th>Actions</th>-->
@@ -285,24 +286,45 @@
     if (records.length === 0) {
         // Show "No records found"
         document.getElementById('reportBody').innerHTML =
-            '<tr><td colspan="8" class="text-center text-muted">No records found</td></tr>';
+            '<tr><td colspan="9" class="text-center text-muted">No records found</td></tr>';
         dataTable.rows.add([]).draw();
         return;
     }
 
+    function calculateDuration(checkIn, checkOut) {
+        if (!checkIn || !checkOut) return '-';
+
+        const start = new Date(`1970-01-01T${checkIn}`);
+        const end = new Date(`1970-01-01T${checkOut}`);
+
+        if (isNaN(start) || isNaN(end)) {
+            return '-';
+        }
+
+        let diff = (end - start) / 1000; // seconds
+        if (diff < 0) {
+            diff += 24 * 60 * 60; // handle crossing midnight
+        }
+
+        const hours = Math.floor(diff / 3600);
+        const minutes = Math.floor((diff % 3600) / 60);
+        return `${hours}h ${minutes}m`;
+    }
+
     // Build new rows
-    const newRows = records.map(record => [
-        `<strong>${htmlEscape(record.employee_name)}</strong>`,
-        htmlEscape(record.jobTitle || 'N/A'),
-        record.attendance_date,
-        record.check_in_time || '-',
-        record.check_out_time || '-',
-        getStatusBadge(record.status),
-        htmlEscape(record.remarks || '-')// ,
-        //`<button class="btn btn-sm btn-warning edit-btn" data-id="${record.id}" title="Edit">
-        //    <i class="ti ti-edit"></i>
-        // </button>`
-    ]);
+    const newRows = records.map(record => {
+        const duration = calculateDuration(record.check_in_time, record.check_out_time);
+        return [
+            `<strong>${htmlEscape(record.employee_name)}</strong>`,
+            htmlEscape(record.jobTitle || 'N/A'),
+            record.attendance_date,
+            record.check_in_time || '-',
+            record.check_out_time || '-',
+            duration,
+            getStatusBadge(record.status),
+            htmlEscape(record.remarks || '-')
+        ];
+    });
 
     // Add and redraw
     dataTable.rows.add(newRows).draw();
