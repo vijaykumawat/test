@@ -10,23 +10,25 @@ use App\Models\PolicyModel;
 use App\Libraries\PolicyExtractor;
 use CodeIgniter\I18n\Time;
 use App\Models\UploadModel;
+use App\Models\AttendanceModel;
 
 use DateTime;
 
 class Employee extends BaseController
 {
-        protected $employeeModel;
-        protected $policyModel;
-        protected $uploadModel;
+    protected $employeeModel;
+    protected $policyModel;
+    protected $uploadModel;
+    protected $attendanceModel;
     
     public function __construct()
     {
         $this->policyModel = new PolicyModel();
         $this->employeeModel = new EmployeeModel();
         $this->uploadModel = new UploadModel();
-    }    
+        $this->attendanceModel = new AttendanceModel();
+    }
 
-    
     public function dashboard($recordId = null)
     {
         $session       = session();
@@ -900,5 +902,73 @@ class Employee extends BaseController
 
     }
 
+    public function timesheet($month = null, $year = null)
+    {
+        $session = session();
+
+        if (!$session->get('isLoggedIn')) {
+            return redirect()->to('/employee/login')->with('error', 'Please log in to access your timesheet');
+        }
+
+        $employeeId = $this->request->getPost('employee_id')
+            ?? $this->request->getGet('employee_id')
+            ?? $session->get('employeeId');
+
+        $month = $this->request->getPost('month')
+            ?? $this->request->getGet('month')
+            ?? $month
+            ?? date('m');
+
+        $year = $this->request->getPost('year')
+            ?? $this->request->getGet('year')
+            ?? $year
+            ?? date('Y');
+
+        $employeeId = (int) $employeeId;
+        $month = (int) $month;
+        $year = (int) $year;
+
+        $employee = $this->employeeModel->find($employeeId);
+        $records = $this->attendanceModel->getMonthlyAttendance($employeeId, str_pad($month, 2, '0', STR_PAD_LEFT), $year);
+        $summary = $this->attendanceModel->getMonthlyAttendanceSummary($employeeId, str_pad($month, 2, '0', STR_PAD_LEFT), $year);
+
+        foreach ($records as &$record) {
+            $record['duration_hours'] = null;
+            $record['duration_label'] = '-';
+            $record['row_class'] = '';
+
+            if (!empty($record['check_in_time']) && !empty($record['check_out_time'])) {
+                $start = strtotime($record['check_in_time']);
+                $end = strtotime($record['check_out_time']);
+
+                if ($start !== false && $end !== false) {
+                    $diffSeconds = $end - $start;
+
+                    if ($diffSeconds < 0) {
+                        $diffSeconds += 24 * 60 * 60;
+                    }
+
+                    $hours = round($diffSeconds / 3600, 2);
+                    $record['duration_hours'] = $hours;
+                    $record['duration_label'] = number_format($hours, 2) . ' hrs';
+
+                    if ($hours < 8) {
+                        $record['row_class'] = 'timesheet-row-danger';
+                    } elseif ($hours >= 8) {
+                        $record['row_class'] = 'timesheet-row-success';
+                    }
+                }
+            }
+        }
+        unset($record);
+
+        return view('employee/timesheet', [
+            'employee' => $employee,
+            'records' => $records,
+            'summary' => $summary,
+            'selectedMonth' => $month,
+            'selectedYear' => $year,
+        ]);
+    }
     
 }

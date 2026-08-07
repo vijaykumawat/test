@@ -30,6 +30,7 @@ $routes->group('employee', ['filter' => ['authEmployee', 'sessionExpire']], func
     $routes->post('saveFieldSettings', 'Employee::saveFieldSettings');
     $routes->get('renewals/(:any)', 'Employee::renewals/$1');
     $routes->get('all-data', 'Employee::allData');
+    $routes->get('timesheet', 'Employee::timesheet');
     $routes->get('nextRecord/(:any)', 'Employee::nextRecord/$1');
     $routes->get('starRecord/(:any)/(:any)', 'Employee::starRecord/$1/$2');
     $routes->get('allStarRecord', 'Employee::allStarRecord');

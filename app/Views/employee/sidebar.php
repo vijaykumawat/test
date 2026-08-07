@@ -53,6 +53,13 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                         <?php endif; ?>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="<?= base_url('/employee/timesheet') ?>" aria-expanded="false">
+                        <i class="ti ti-clock"></i>
+                        <span class="hide-menu">Timesheet</span>
+                    </a>
+                </li>
+                
                 
                 
                 <!--
