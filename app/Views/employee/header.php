@@ -28,6 +28,75 @@
         <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
 
+                <?php
+                date_default_timezone_set('Asia/Kolkata');
+
+                $attendanceModel = new \App\Models\AttendanceModel();
+                $dataModel = new \App\Models\DataModel();
+                $policyModel = new \App\Models\PolicyModel();
+                $employeeId = session()->get('employeeId');
+                $today = date('Y-m-d');
+                $checkInTime = null;
+                $workingSeconds = 0;
+                $workingText = '0h 00m';
+                $handledLeadCount = 0;
+                $monthlyPolicyCount = 0;
+
+                if (!empty($employeeId)) {
+                    $attendance = $attendanceModel
+                        ->where('employee_id', $employeeId)
+                        ->where('attendance_date', $today)
+                        ->first();
+
+                    if (!empty($attendance['check_in_time'])) {
+                        $checkInTime = $attendance['check_in_time'];
+                        $checkInTimestamp = strtotime($today . ' ' . $checkInTime);
+
+                        if ($checkInTimestamp !== false) {
+                            $workingSeconds = max(0, time() - $checkInTimestamp);
+                            $hours = floor($workingSeconds / 3600);
+                            $minutes = floor(($workingSeconds % 3600) / 60);
+                            $workingText = $hours . 'h ' . str_pad($minutes, 2, '0', STR_PAD_LEFT) . 'm';
+                        }
+                    }
+
+                    $handledLeadCount = $dataModel
+                        ->where('telecaller', $employeeId)
+                        ->where('actionTaken', 1)
+                        ->where('DATE(modifiyDate)', $today)
+                        ->countAllResults();
+
+                    $monthlyPolicyCount = $policyModel
+                        ->where('telecaller', $employeeId)
+                        ->where('MONTH(created_at)', date('m'))
+                        ->where('YEAR(created_at)', date('Y'))
+                        ->countAllResults();
+                }
+                ?>
+
+
+
+                <li class="nav-item me-3">
+                    <span class="badge rounded-pill bg-light-success text-success px-3 py-2 fw-semibold">
+                        <i class="ti ti-checks me-1"></i>
+                        Leads handled: <?= esc($handledLeadCount) ?>
+                    </span>
+                </li>
+
+                <li class="nav-item me-3">
+                    <a class="sidebar-link" href="<?= base_url('/employee/policies-sold') ?>" aria-expanded="false">
+                    <span class="badge rounded-pill bg-light-info text-info px-3 py-2 fw-semibold">
+                        <i class="ti ti-shield-check me-1"></i>
+                        Policies: <?= esc($monthlyPolicyCount) ?>
+                    </span>
+                    </a>
+                </li>
+                                <li class="nav-item me-3">
+                    <span id="working-hours-badge" class="badge rounded-pill bg-light-primary text-primary px-3 py-2 fw-semibold">
+                        <i class="ti ti-clock me-1"></i>
+                        Working hours today: <?= esc($workingText) ?>
+                    </span>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link " href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -81,3 +150,24 @@
         </div>
     </nav>
 </header>
+
+<script>
+(function () {
+    const badge = document.getElementById('working-hours-badge');
+    const startTime = <?= !empty($checkInTime) ? json_encode(strtotime($today . ' ' . $checkInTime) * 1000) : 'null' ?>;
+
+    if (!badge || !startTime) {
+        return;
+    }
+
+    const updateWorkingHours = function () {
+        const diffSeconds = Math.max(0, Math.floor((Date.now() - startTime) / 1000));
+        const hours = Math.floor(diffSeconds / 3600);
+        const minutes = Math.floor((diffSeconds % 3600) / 60);
+        badge.innerHTML = '<i class="ti ti-clock me-1"></i>: ' + hours + 'h ' + String(minutes).padStart(2, '0') + 'm';
+    };
+
+    updateWorkingHours();
+    setInterval(updateWorkingHours, 60000);
+})();
+</script>

@@ -39,8 +39,8 @@
     }
 
     .company-logo {
-        max-height: 60px;
-        /* keeps height consistent */
+        /*max-height: 60px;
+         keeps height consistent */
         max-width: 50%;
         /* prevents overflow on mobile */
         object-fit: contain;
@@ -471,9 +471,9 @@
                                 <input type="hidden" name="mobile" value="<?= esc($mobile ?? '') ?>">
                                 <input type="hidden" name="fuelType" value="<?= esc($fuelType ?? '') ?>">
 
-                                <div id="companyLogo" class="text-center mb-3">
+                                <div id="companyLogo" class="text-center ">
                                     <img src="<?= base_url('assets/images/logos/shriramlogo.jpg') ?>" alt="Shriram Logo"
-                                        class="company-logo">
+                                        class="company-logo" width="160px" height="100px">
                                 </div>
                                 <ul class="nav nav-tabs mb-3" id="quotationCompanyTabs" role="tablist">
                                     <li class="nav-item" role="presentation">
@@ -1002,8 +1002,8 @@
                                             ll_driver: 50
                                         },
                                         '1201-1500': {
-                                            basic_liability: 9000,
-                                            per_passenger: 1000,
+                                            basic_liability: 7940,
+                                            per_passenger: 978,
                                             cng_liability: 60,
                                             ll_driver: 50
                                         }
@@ -1032,7 +1032,7 @@
                                         }
                                     },
                                     od_discount: {
-                                        detariff: 75
+                                        detariff: 70
                                     }
                                 }
                             };
@@ -1275,8 +1275,8 @@
     <img src="${logoSrc}" 
          alt="${company} Logo" 
          class="company-logo"
-         width="80"
-         height="50">
+         width="160px"
+         height="100px">
 `;
             });
         });

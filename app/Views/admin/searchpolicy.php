@@ -43,6 +43,7 @@
                                                     <th>Holder Name</th>
                                                     <th>Vehicle No.</th>
                                                     <th>Insurance Type</th>
+                                                    <th>Company</th>
                                                     <th>Mobile</th>
                                                     <th>Telecaller</th>
                                                     <th>Premium</th>
@@ -127,6 +128,7 @@
                     <td><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.holder_name}</a></td>
                     <td>${policy.vehicle_number}</td>
                     <td>${policy.insurance_type}</td>
+                    <td>${policy.company_name}</td>
                     <td>${policy.mobileNo}</td>
                     <td>${policy.telecaller_name}</td>
                     <td>${policy.premium}</td>

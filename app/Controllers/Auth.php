@@ -108,6 +108,7 @@ class Auth extends BaseController
                 'jobTitle'     => $employee['jobTitle'], // <-- add this
                 'gender'             => $employee['gender'],
                 'profilePhoto'             => $employee['profilePhoto'],
+                'loginTime'    => date('Y-m-d H:i:s'),
                 'isLoggedIn'   => true
             ]);
             $session->setTempdata('isLoggedIn', true, 36000);

@@ -135,7 +135,7 @@ class PolicyExtractor
             "TURTLEMINT INSURANCE" => "Turtlemint",
             "SHRIRAM GENERAL INSURANCE COMPANY LIMITED" => "Shriram",
             "IndusInd Commercial Vehicles" => "Indusind",
-            "ICICI Lombard General Insurance Company Limited" => "ICICI",
+            "ICICI Lombard" => "ICICI",
             "TATA AIG" => "Tata Aig",
             "Niva Bupa" => "Niva Bupa",
             "Generali Central" => "Generali Central",

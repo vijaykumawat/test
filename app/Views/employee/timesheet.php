@@ -92,7 +92,7 @@
                                             </p>
                                         </div>
 
-                                        <form method="post" action="<?= base_url('/employee/timesheet') ?>" class="d-flex gap-2 align-items-center flex-wrap">
+                                        <form method="get" action="<?= base_url('/employee/timesheet') ?>" class="d-flex gap-2 align-items-center flex-wrap">
                                             <?= csrf_field() ?>
                                             <select name="month" class="form-select">
                                                 <?php for ($m = 1; $m <= 12; $m++): ?>

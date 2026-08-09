@@ -155,7 +155,7 @@ class Insurance extends BaseConfig
         'RELIANCE' => [
                         'gst' => 18,
             'od_discount' => [
-                'detariff' => 75,
+                'detariff' => 70,
                 'special'  => 0.05
             ],
             'od_rates' => [
@@ -188,8 +188,8 @@ class Insurance extends BaseConfig
                     'pa_owner_driver'   => 315
                 ],
                 '1201-2000' => [
-                    'basic_liability'   => 9000,   // example rate, adjust per tariff
-                    'per_passenger'     => 1000,
+                    'basic_liability'   => 7940,   // example rate, adjust per tariff
+                    'per_passenger'     => 978,
                     'cng_liability'     => 60,
                     'll_driver'         => 50,
                     'pa_owner_driver'   => 315

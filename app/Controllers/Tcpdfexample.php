@@ -84,6 +84,10 @@ class Tcpdfexample extends BaseController
             }
             $odDiscountAmt = $basicODPremium * $odDiscount / 100;
         }
+        if($company == 'RELIANCE'){
+            $odDiscount = $config->insurers['RELIANCE']['od_discount'];
+            $odDiscountAmt = $basicODPremium * $odDiscount['detariff'] / 100;
+        }
 
         $basicOdPremiumAfterDiscount = $basicODPremium - $odDiscountAmt;
         $ncbAmt = $basicOdPremiumAfterDiscount * $ncb /100;
