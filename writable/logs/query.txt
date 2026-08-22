@@ -142,3 +142,6 @@ CREATE TABLE payments (
   createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (subscriptionId) REFERENCES subscriptions(id)
 );
+
+----------------------------------------------------------
+ALTER TABLE employee ADD COLUMN activeSessionId VARCHAR(255) DEFAULT NULL;

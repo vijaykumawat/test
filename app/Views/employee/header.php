@@ -26,7 +26,8 @@
                         </li> -->
         </ul>
         <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
-            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+            
+            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
 
                 <?php
                 date_default_timezone_set('Asia/Kolkata');
@@ -82,16 +83,28 @@
                         Leads handled: <?= esc($handledLeadCount) ?>
                     </span>
                 </li>
-
+                    
                 <li class="nav-item me-3">
                     <a class="sidebar-link" href="<?= base_url('/employee/policies-sold') ?>" aria-expanded="false">
                     <span class="badge rounded-pill bg-light-info text-info px-3 py-2 fw-semibold">
                         <i class="ti ti-shield-check me-1"></i>
-                        Policies: <?= esc($monthlyPolicyCount) ?>
+                             <?= esc($monthlyPolicyCount) ?>
                     </span>
                     </a>
                 </li>
-                                <li class="nav-item me-3">
+                <!-- Cart Icon with Highlight -->
+<!--
+                <li class="nav-item nav-icon-hover-bg rounded-circle dropdown">
+  <a class="nav-link position-relative" href="<?= base_url('/employee/policies-sold') ?>">
+    <span class="badge bg-danger rounded-circle position-absolute top-50 start-50 translate-middle">
+    
+    <i class="ti ti-shield-check me-1"></i>
+      <?= esc($monthlyPolicyCount) ?>
+    </span>
+  </a>
+</li>-->
+                
+                <li class="nav-item me-3">
                     <span id="working-hours-badge" class="badge rounded-pill bg-light-primary text-primary px-3 py-2 fw-semibold">
                         <i class="ti ti-clock me-1"></i>
                         Working hours today: <?= esc($workingText) ?>
@@ -128,17 +141,7 @@
                                             class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">My Profile</p>
-                                        </a><!--
-                                        <a href="javascript:void(0)"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
-                                            <i class="ti ti-mail fs-6"></i>
-                                            <p class="mb-0 fs-3">My Account</p>
                                         </a>
-                                        <a href="javascript:void(0)"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
-                                            <i class="ti ti-list-check fs-6"></i>
-                                            <p class="mb-0 fs-3">My Task</p>
-                                        </a> -->
                             <a href="<?= base_url('/employee/logout') ?>"
                                 class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                         </div>
@@ -146,7 +149,9 @@
                 </li>
 
 
-            </ul>
+</ul>
+
+
         </div>
     </nav>
 </header>

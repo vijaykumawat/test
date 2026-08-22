@@ -216,7 +216,6 @@ class SubscriptionService {
                 'errors'  => $this->empSubscriptionModel->errors()
             ];
         }
-
         $paymentData = [
             'employeeId'     => $employeeData['employeeId'],
             'subscriptionId' => $this->empSubscriptionModel->where('employeeId', $employeeData['employeeId'])->first()['id'] ?? null,

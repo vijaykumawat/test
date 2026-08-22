@@ -342,6 +342,47 @@
 
     <?= $this->include('admin/script'); ?>
 
+    <?php $subModal = session()->getFlashdata('subscription_modal'); ?>
+    <?php if (!empty($subModal)): ?>
+    <div class="modal fade" id="subscriptionModal" tabindex="-1" aria-labelledby="subscriptionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <?php if ($subModal['type'] === 'danger'): ?>
+                <div class="modal-header bg-danger-subtle">
+                    <h5 class="modal-title text-danger" id="subscriptionModalLabel">Warning ☠️</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0">Subscription will expire today. ☠️</p>
+                </div>
+                <?php else: ?>
+                <div class="modal-header bg-warning-subtle">
+                    <h5 class="modal-title text-warning" id="subscriptionModalLabel">Subscription Notice</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0">Subscription will expire in <?= esc($subModal['days']) ?> days</p>
+                </div>
+                <?php endif; ?>
+                <div class="modal-footer">
+                    <a href="<?= base_url('/admin/subscription') ?>" class="btn btn-primary">Renew</a>
+                    <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var el = document.getElementById('subscriptionModal');
+            if (el) {
+                var modal = new bootstrap.Modal(el);
+                modal.show();
+            }
+        });
+    </script>
+    <?php endif; ?>
+
     <script>
     const todaysCount = <?= $todaysCount; ?>;
     const monthlyCount = <?= $monthlyCount; ?>;

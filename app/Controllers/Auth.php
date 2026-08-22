@@ -128,6 +128,23 @@ class Auth extends BaseController
             */
             markAttendance($employee['employeeId']);
 
+            // Check days left for subscription and set a one-time flash for modal display
+            try {
+                $endDateStr = $subscription['endDate'];
+                $todayStr = date('Y-m-d');
+                $daysLeft = (int) floor((strtotime($endDateStr) - strtotime($todayStr)) / 86400);
+
+                if ($daysLeft <= 3) {
+                    $modalType = ($daysLeft === 0) ? 'danger' : 'warning';
+                    $session->setFlashdata('subscription_modal', [
+                        'type' => $modalType,
+                        'days' => $daysLeft
+                    ]);
+                }
+            } catch (\Exception $e) {
+                // swallow errors here; modal is non-critical
+            }
+
             if ($employee['jobTitle'] === 'Admin') {
                 return redirect()->to('/admin');
             }
