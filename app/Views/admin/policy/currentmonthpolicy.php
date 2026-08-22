@@ -5,6 +5,74 @@
   <link rel="stylesheet" href="<?= base_url('/assets/css/toast.css') ?>" />
   <link rel="stylesheet" href="<?= base_url('/assets/css/common.css') ?>" />
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+  <style>
+    /* Truncate overflowing text with ellipsis (page-scoped) */
+    .truncate {
+      display: inline-block;
+      max-width: 160px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: middle;
+    }
+
+    /* Page-scoped no-pad table rule */
+    table.no-pad > :not(caption) > * > * {
+      /* padding: 16px 16px; */
+      padding: 0;
+      color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
+      background-color: var(--bs-table-bg);
+      border-bottom-width: var(--bs-border-width);
+      box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg)));
+    }
+    /* Smaller font for compact tables on this page */
+    table.no-pad th,
+    table.no-pad td,
+    table.no-pad thead th,
+    table.no-pad tbody td {
+      font-size: 5px;
+      line-height: 1.2;
+    }
+
+    /* make truncated text slightly smaller */
+    .truncate { font-size: 12px; }
+
+
+    .policy-section {
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  background-color: #fff;
+  border-radius: 6px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Remove padding from table cells */
+/* Optional: add a little spacing if needed */
+.table th,
+.table td {
+  padding: 4px 6px;  /* adjust to your preference */
+}
+.table thead th {
+  font-size: 5px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.table tbody td {
+  font-size: 9px;
+  color: #555;
+}
+
+.no-pad td, .no-pad th {
+  padding: 6px 8px;
+}
+
+  </style>
   
 </head>
 
@@ -26,39 +94,41 @@
             <div class="col-lg-12">
               <!-- Info Table -->
               <div class="card">
-                <div class="card-body">
-                  <div class="d-flex mb-3 align-items-center justify-content-between">
-                    <h4 class="card-title mb-0">Current Month Policy</h4>
-                    <button id="exportBtn" class="btn btn-secondary" style="display:none;">Export to CSV</button>
-                  </div>
+                <div class="policy-section">
+  <div class="d-flex mb-3 align-items-center justify-content-between">
+    <h4 class="section-title mb-0">Current Month Policy</h4>
+    <button id="exportBtn" class="btn btn-secondary" style="display:none;">Export to CSV</button>
+  </div>
 
-                  <!-- Alert box -->
-                  <div id="alertBox"></div>
+  <!-- Alert box -->
+  <div id="alertBox"></div>
+  
+  <div class="table-responsive">
+    <table class="table table-bordered align-middle no-pad" id="resultsTable" style="margin-top:34px !important;">
+      <thead class="table-info">
+        <tr>
+          <th><div class="truncate">#</div></th>
+          <th><div class="truncate">Holder Name</div></th>
+          <th><div class="truncate">Vehicle No.</div></th>
+          <th><div class="truncate">Type</div></th>
+          <th><div class="truncate">Policy Type</div></th>
+          <th><div class="truncate">Company</div></th>
+          <th><div class="truncate">Mobile No</div></th>
+          <th><div class="truncate">Telecaller</div></th>
+          <th><div class="truncate">Premium</div></th>
+          <th><div class="truncate">Cashback</div></th>
+          <th><div class="truncate">Issue Date</div></th>
+          <th><div class="truncate">Expiry Date</div></th>
+          <th><div class="truncate">Action</div></th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr><td colspan="13" class="loading">Loading policies...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-                  <div class="table-responsive">
-                    <table class="table table-striped table-hover" id="resultsTable">
-                      <thead class="table-info">
-                        <tr>
-                          <th>#</th>
-                          <th>Holder Name</th>
-                          <th>Vehicle No.</th>
-                          <th>Insurance Type</th>
-                          <th>Company </th>
-                          <th>Mobile No</th>
-                          <th>Telecaller</th>
-                          <th>Premium</th>
-                          <th>Cashback</th>
-                          <th>Issue Date</th>
-                          <th>Expiry Date</th>
-                          <th>Download</th>
-                        </tr>
-                      </thead>
-                      <tbody id="tableBody">
-                        <tr><td colspan="8" class="loading">Loading policies...</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
               </div>
               <!-- End Info Table -->
             </div>
@@ -107,18 +177,19 @@
         data.data.forEach((policy, idx) => {
           const row = `
             <tr>
-              <td>${idx + 1}</td>
-              <td><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.holder_name}</a></td>
-              <td>${policy.vehicle_number}</td>
-              <td>${policy.insurance_type}</td>
-              <td>${policy.company_name}</td>
-              <td>${policy.mobileNo}</td>
-              <td>${policy.telecaller_name}</td>
-              <td>${policy.premium}</td>
-              <td>${policy.cashback}</td>
-              <td>${policy.issue_date}</td>
-              <td>${policy.expiry_date}</td>
-              <td><a href="${downloadUrlBase}/${policy.policy_id}" download><i class="ti ti-download fs-6"></i></a></td>
+              <td><div class="truncate">${idx + 1}</div></td>
+              <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.holder_name}</a></div></td>
+              <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.vehicle_number}</a></div></td>
+              <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.insurance_type}</a></div></td>
+              <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.policyType}</a></div></td>
+              <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.company_name}</a></div></td>
+              <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.mobileNo}</a></div></td>
+              <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.telecaller_name}</a></div></td>
+              <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.premium}</a></div></td>
+              <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.cashback}</a></div></td>
+              <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.issue_date}</a></div></td>
+              <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.expiry_date}</a></div></td>
+              <td><div class="truncate"><a href="${downloadUrlBase}/${policy.policy_id}" download><i class="ti ti-download fs-6"></i></a></div></td>
             </tr>
           `;
           tbody.innerHTML += row;
@@ -143,7 +214,7 @@
           }
         });
 
-        setAlert('Policies loaded successfully', 'success');
+        //setAlert('Policies loaded successfully', 'success');
       } catch (error) {
         setAlert('Error: ' + error.message, 'error');
         exportBtn.style.display = 'none';

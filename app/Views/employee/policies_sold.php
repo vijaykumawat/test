@@ -129,9 +129,30 @@
     th,
     td {
         border: 1px solid #ddd;
-        padding: 10px;
+        padding: 0;
         text-align: center;
-        font-size: 14px;
+        font-size: 12px;
+    }
+
+    /* Truncate overflowing text with ellipsis */
+    .truncate {
+        display: inline-block;
+        max-width: 160px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+    }
+
+    /* Page-scoped table rule: remove padding but keep other table properties
+       Applies only to tables with the `no-pad` class on this page */
+    table.no-pad > :not(caption) > * > * {
+        /* padding: 16px 16px; */
+        padding: 0;
+        color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
+        background-color: var(--bs-table-bg);
+        border-bottom-width: var(--bs-border-width);
+        box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg)));
     }
 
     th {
@@ -149,79 +170,9 @@
         font-size: 16px;
     }
 
-    .search-wrapper {
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
+   
 
-    .search-wrapper input {
-        padding: 12px 40px 12px 16px;
-        font-size: 14px;
-        border: 2px solid #0069d9;
-        border-radius: 8px;
-        background-color: #ffffff;
-        box-shadow: 0 2px 4px rgba(0, 105, 217, 0.1);
-        width: 400px;
-    }
-
-    .search-wrapper input:focus {
-        outline: none;
-        border-color: #0053aa;
-        box-shadow: 0 4px 12px rgba(0, 105, 217, 0.25);
-    }
-
-    .search-wrapper input::placeholder {
-        color: #999;
-    }
-
-    .search-icon {
-        position: absolute;
-        right: 12px;
-        color: #0069d9;
-        font-size: 18px;
-        pointer-events: none;
-    }
-
-    .pagination {
-        margin-top: 20px;
-    }
-
-    .pagination a,
-    .pagination span {
-        padding: 8px 12px;
-        margin: 0 2px;
-        border: 1px solid #ddd;
-        text-decoration: none;
-        color: #0069d9;
-        cursor: pointer;
-        border-radius: 4px;
-    }
-
-    .pagination a:hover {
-        background: #0069d9;
-        color: #fff;
-    }
-
-    .pagination .active {
-        background: #0069d9;
-        color: #fff;
-        border-color: #0069d9;
-    }
-
-    .loading {
-        color: #666;
-        font-style: italic;
-    }
-
-    .form-select {
-        width: 120px;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-    }
-
+    
     /* Ensure no top gap after removing app-topstrip */
     html,
     body {
@@ -288,71 +239,53 @@
             <!--  Header Start -->
             <?php include 'header.php'; ?>
 
-            <div class="body-wrapper-inner">
-                <div class="container-fluid">
-                    
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <!--  start Info Table -->
-                            <div class="card">
-                                <div class="card-body">
-                                        <?php if (session()->getFlashdata('success')): ?>
-                                            <div class="alert alert-success"><?= esc(session()->getFlashdata('success')) ?></div>
-                                        <?php endif; ?>
-                                        <?php if (session()->getFlashdata('error')): ?>
-                                            <div class="alert alert-danger"><?= esc(session()->getFlashdata('error')) ?></div>
-                                        <?php endif; ?>
-                                        <?php if (session()->getFlashdata('warning')): ?>
-                                            <div class="alert alert-warning"><?= esc(session()->getFlashdata('warning')) ?></div>
-                                        <?php endif; ?>
-
-                                    <div
-                                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; margin-top: 125px;">
                                         <div></div>
                                         <div style="display: flex; gap: 10px; align-items: center;">
                                             <a href="javascript:void(0)"
-                                                class="btn btn-primary d-flex align-items-center ms-2"
+                                                class="btn btn-primary d-flex align-items-center ms-2 me-3"
                                                 data-bs-toggle="modal" data-bs-target="#uploadPolicyModal">
                                                 <i class="ti ti-plus me-1"></i>
                                                 Add Policy
                                             </a>
                                         </div>
                                     </div>
-                                    <?php if (!empty($policies)): ?>
+            <?php if (!empty($policies)): ?>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered align-middle">
+                                            <table class="table table-bordered align-middle no-pad">
                                             <thead class="table-light">
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Policy No</th>
-                                                    <th>Holder Name</th>
-                                                    <th>Vehicle No</th>
-                                                    <th>Company</th>
-                                                    <th>Mobile</th>
-                                                    <th>Premium</th>
-                                                    <th>Cashback</th>
-                                                    <th>Insurance Type</th>
-                                                    <th>Issue Date</th>
-                                                    <th>Expiry Date</th>
+                                                    <th><div class="truncate">#</div></th>
+                                                    <th><div class="truncate">Policy No</div></th>
+                                                    <th><div class="truncate">Holder Name</div></th>
+                                                    <th><div class="truncate">Vehicle No</div></th>
+                                                    <th><div class="truncate">Company</div></th>
+                                                    <th><div class="truncate">Mobile</div></th>
+                                                    <th><div class="truncate">Premium</div></th>
+                                                    <th><div class="truncate">Cashback</div></th>
+                                                    <th><div class="truncate">Insurance Type</div></th>
+                                                    <th><div class="truncate">Policy Type</div></th>
+                                                    <th><div class="truncate">Issue Date</div></th>
+                                                    <th><div class="truncate">Expiry Date</div></th>
                                                     <!--<th>File</th>-->
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($policies as $index => $policy): ?>
                                                 <tr>
-                                                    <td><?= $index + 1 ?></td>
-                                                    <td><a
-                                                            href="<?= site_url('employee/edit-policy-view') ?>/<?= $policy['policy_id']?>"><?= esc($policy['policy_number'] ?? '') ?></a>
+                                                    <td><div class="truncate"><?= $index + 1 ?></div></td>
+                                                    <td><div class="truncate"><a href="<?= site_url('employee/edit-policy-view') ?>/<?= $policy['policy_id']?>"><?= esc($policy['policy_number'] ?? '') ?></a></div>
                                                     </td>
-                                                    <td><?= esc($policy['holder_name'] ?? '') ?></td>
-                                                    <td><?= esc($policy['vehicle_number'] ?? '') ?></td>
-                                                    <td><?= esc($policy['company_name'] ?? '') ?></td>
-                                                    <td><?= esc($policy['mobileNo'] ?? '') ?></td>
-                                                    <td><?= esc($policy['premium'] ?? '') ?></td>
-                                                    <td><?= esc($policy['cashback'] ?? '') ?></td>
-                                                    <td><?= esc($policy['insurance_type'] ?? '') ?></td>
-                                                    <td><?= esc($policy['issue_date'] ?? '') ?></td>
-                                                    <td><?= esc($policy['expiry_date'] ?? '') ?></td>
+                                                    <td><div class="truncate"><a href="<?= site_url('employee/edit-policy-view') ?>/<?= $policy['policy_id']?>"><?= esc($policy['holder_name'] ?? '') ?></a></div></td>
+                                                    <td><div class="truncate"><a href="<?= site_url('employee/edit-policy-view') ?>/<?= $policy['policy_id']?>"><?= esc($policy['vehicle_number'] ?? '') ?></a></div></td>
+                                                    <td><div class="truncate"><a href="<?= site_url('employee/edit-policy-view') ?>/<?= $policy['policy_id']?>"><?= esc($policy['company_name'] ?? '') ?></a></div></td>
+                                                    <td><div class="truncate"><a href="<?= site_url('employee/edit-policy-view') ?>/<?= $policy['policy_id']?>"><?= esc($policy['mobileNo'] ?? '') ?></a></div></td>
+                                                    <td><div class="truncate"><a href="<?= site_url('employee/edit-policy-view') ?>/<?= $policy['policy_id']?>"><?= esc($policy['premium'] ?? '') ?></a></div></td>
+                                                    <td><div class="truncate"><a href="<?= site_url('employee/edit-policy-view') ?>/<?= $policy['policy_id']?>"><?= esc($policy['cashback'] ?? '') ?></a></div></td>
+                                                    <td><div class="truncate"><a href="<?= site_url('employee/edit-policy-view') ?>/<?= $policy['policy_id']?>"><?= esc($policy['insurance_type'] ?? '') ?></a></div></td>
+                                                    <td><div class="truncate"><a href="<?= site_url('employee/edit-policy-view') ?>/<?= $policy['policy_id']?>"><?= esc($policy['policyType'] ?? '') ?></a></div></td>
+                                                    <td><div class="truncate"><a href="<?= site_url('employee/edit-policy-view') ?>/<?= $policy['policy_id']?>"><?= esc($policy['issue_date'] ?? '') ?></a></div></td>
+                                                    <td><div class="truncate"> <a href="<?= site_url('employee/edit-policy-view') ?>/<?= $policy['policy_id']?>"><?= esc($policy['expiry_date'] ?? '') ?></a></div></td>
                                                     <!--
                                                     <td>
                                                         <a href="<?= site_url('employee/download-policy/'.$policy['policy_id']) ?>"
@@ -374,17 +307,10 @@
                                     <div class="alert alert-info mb-0">No policies uploaded yet.</div>
                                     <?php endif; ?>
 
-                                </div>
-                            </div>
-                            <!--  end Info Table -->
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </div>
+        
     </div>
-
+                                            
     <div class="modal fade" id="uploadPolicyModal" tabindex="-1" aria-labelledby="uploadPolicyModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">

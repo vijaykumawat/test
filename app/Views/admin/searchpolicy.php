@@ -6,6 +6,34 @@
     <link rel="stylesheet" href="<?= base_url('/assets/css/toast.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('/assets/css/common.css') ?>" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    <style>
+        /* Truncate overflowing text with ellipsis (page-scoped) */
+        .truncate {
+            display: inline-block;
+            max-width: 160px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: middle;
+            font-size: 12px;
+        }
+
+        /* Page-scoped no-pad table rule */
+        table.no-pad > :not(caption) > * > * {
+            /* padding: 16px 16px; */
+            padding: 0;
+            color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
+            background-color: var(--bs-table-bg);
+            border-bottom-width: var(--bs-border-width);
+            box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg)));
+        }
+
+        table.no-pad th,
+        table.no-pad td {
+            font-size: 12px;
+            line-height: 1.2;
+        }
+    </style>
 </head>
 
 <body>
@@ -37,26 +65,26 @@
                                     <div id="alertBox"></div>
 
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-hover" id="resultsTable">
+                                        <table class="table table-bordered align-middle no-pad" id="resultsTable" style="margin-top:34px !important;">
                                             <thead class="table-info">
                                                 <tr>
-                                                    <th>Holder Name</th>
-                                                    <th>Vehicle No.</th>
-                                                    <th>Insurance Type</th>
-                                                    <th>Company</th>
-                                                    <th>Mobile</th>
-                                                    <th>Telecaller</th>
-                                                    <th>Premium</th>
-                                                    <th>Cashback</th>
-                                                    <th>Type</th>
-                                                    <th>Issue Date</th>
-                                                    <th>Expiry Date</th>
-                                                    <th>Download</th>
+                                                    <th><div class="truncate">Holder Name</div></th>
+                                                    <th><div class="truncate">Vehicle No.</div></th>
+                                                    <th><div class="truncate">Insurance Type</div></th>
+                                                    <th><div class="truncate">Company</div></th>
+                                                    <th><div class="truncate">Mobile</div></th>
+                                                    <th><div class="truncate">Telecaller</div></th>
+                                                    <th><div class="truncate">Premium</div></th>
+                                                    <th><div class="truncate">Cashback</div></th>
+                                                    <th><div class="truncate">Type</div></th>
+                                                    <th><div class="truncate">Issue Date</div></th>
+                                                    <th><div class="truncate">Expiry Date</div></th>
+                                                    <th><div class="truncate">Download</div></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tableBody">
                                                 <tr>
-                                                    <td colspan="11" class="loading">Loading policies...</td>
+                                                    <td colspan="12" class="loading">Loading policies...</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -125,27 +153,23 @@
             data.data.forEach(policy => {
                 const row = `
                 <tr>
-                    <td><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.holder_name}</a></td>
-                    <td>${policy.vehicle_number}</td>
-                    <td>${policy.insurance_type}</td>
-                    <td>${policy.company_name}</td>
-                    <td>${policy.mobileNo}</td>
-                    <td>${policy.telecaller_name}</td>
-                    <td>${policy.premium}</td>
-                    <td>${policy.cashback}</td>
-                    <td>${policy.policyType}</td>
-                    <td>${policy.issue_date}</td>
-                    <td>${policy.expiry_date}</td>
-                    <td>
-                        <a href="${downloadUrlBase}/${policy.policy_id}" download>
-                            <i class="ti ti-download fs-6"></i>
-                        </a>
+                    <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.holder_name}</a></div></td>
+                    <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.vehicle_number}</a></div></td>
+                    <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.insurance_type}</a></div></td>
+                    <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.company_name}</a></div></td>
+                    <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.mobileNo}</a></div></td>
+                    <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.telecaller_name}</a></div></td>
+                    <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.premium}</a></div></td>
+                    <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.cashback}</a></div></td>
+                    <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.policyType}</a></div></td>
+                    <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.issue_date}</a></div></td>
+                    <td><div class="truncate"><a href="<?= site_url('admin/edit-policy-view') ?>/${policy.policy_id}">${policy.expiry_date}</a></div></td>
+                    <td><div class="truncate"><a href="${downloadUrlBase}/${policy.policy_id}" download><i class="ti ti-download fs-6"></i></a>
                         &nbsp;
-                        <button type="button" class="btn btn-sm btn-outline-secondary me-2 previewBtn" 
+                        <button type="button" class="btn btn-sm  me-2 previewBtn" 
                                 data-id="${policy.policy_id}" data-bs-toggle="modal" data-bs-target="#policyPreviewModal">
                             <i class="ti ti-eye"></i>
-                        </button>
-                    </td>
+                        </button></div></td>
                 </tr>
             `;
                 tbody.innerHTML += row;
@@ -173,7 +197,7 @@
                 }
             });
 
-            setAlert('Policies loaded successfully', 'success');
+            //setAlert('Policies loaded successfully', 'success');
         } catch (error) {
             setAlert('Error: ' + error.message, 'error');
             exportBtn.style.display = 'none';
