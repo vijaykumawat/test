@@ -14,6 +14,7 @@ use CodeIgniter\I18n\Time;
 use App\Models\EmployeeSubscriptionModel;
 use App\Models\HistoryModel;
 use App\Models\PaymentModel;
+use App\Models\ExpiryDataModel;
 use App\Services\SubscriptionService;
 //require_once APPPATH . '../public/dompdf/autoload.inc.php';
 require_once FCPATH . 'dompdf/autoload.inc.php';
@@ -33,6 +34,7 @@ class Admin extends BaseController
     protected $paymentModel;
     protected $empSubscriptionModel;
     protected $subscriptionService;
+    protected $expiryDataModel;
     public function __construct()
     {
         $this->policyModel = new PolicyModel();
@@ -45,6 +47,7 @@ class Admin extends BaseController
         $this->paymentModel = new PaymentModel();
         $this->empSubscriptionModel = new EmployeeSubscriptionModel();
         $this->subscriptionService = new SubscriptionService();      
+        $this->expiryDataModel = new ExpiryDataModel();
     }
 
     /**
@@ -1014,6 +1017,13 @@ public function uploadDataPost()
             ->setJSON(['success' => false, 'message' => 'No valid CSV uploaded']);
     }
 
+    // Route based on selected table: 'data' -> existing flow, 'expiry' -> expiry data flow
+    $tableType = $this->request->getPost('table');
+
+    if ($tableType === 'expiry') {
+        return $this->processExpiryCsv($file);
+    }
+
     // Block upload if table already has data
     /*
     $count = $this->dataModel->countAll();
@@ -1132,6 +1142,112 @@ public function uploadDataPost()
 
     return $this->response->setJSON(['success'=>true,'message'=>'Data uploaded successfully']);
 }
+
+/**
+ * Handle CSV upload for the "expiry" table (Expiry Data).
+ * Expiry Data has only two mapped columns: regNumber and employeeId.
+ */
+    private function processExpiryCsv($file)
+    {
+        // DB fields that the user can map for expiry data
+        $dbFields = ['regNumber', 'employeeId'];
+
+        // Read CSV header (first line)
+        $stream = fopen($file->getTempName(), 'r');
+        if ($stream === false) {
+            return $this->response->setStatusCode(500)->setJSON(['success'=>false,'message'=>'Unable to read uploaded file']);
+        }
+
+        $rawHeaders = fgetcsv($stream);
+        if ($rawHeaders === false) {
+            fclose($stream);
+            return $this->response->setStatusCode(400)->setJSON(['success'=>false,'message'=>'CSV appears empty or invalid']);
+        }
+
+        $headers = array_map(function($h){ return preg_replace('/^\x{FEFF}/u', '', trim((string)$h)); }, $rawHeaders);
+
+        // mapping JSON from the POST body
+        $mappingJson = $this->request->getPost('mapping');
+        $mapping = $mappingJson ? json_decode($mappingJson, true) : null;
+
+        // If no mapping provided, try exact auto-match (case-insensitive)
+        if (! $mapping) {
+            $lowerHeaders = array_map('mb_strtolower', $headers);
+            $allFound = true;
+            $mapping = [];
+            foreach ($dbFields as $f) {
+                $pos = array_search(mb_strtolower($f), $lowerHeaders);
+                if ($pos === false) { $allFound = false; break; }
+                $mapping[$f] = $headers[$pos];
+            }
+            if (! $allFound) {
+                fclose($stream);
+                return $this->response->setStatusCode(400)
+                    ->setJSON(['success'=>false,'message'=>'Mapping required: CSV headers do not match DB fields and no mapping was submitted']);
+            }
+        } else {
+            // ensure mapping covers required dbFields
+            foreach ($dbFields as $f) {
+                if (!isset($mapping[$f]) || $mapping[$f] === '') {
+                    fclose($stream);
+                    return $this->response->setStatusCode(400)
+                        ->setJSON(['success'=>false,'message'=>"Mapping incomplete: missing mapping for {$f}"]);
+                }
+            }
+        }
+
+        // Build header index lookup
+        $headerIndex = [];
+        foreach ($headers as $i => $h) { $headerIndex[mb_strtolower($h)] = $i; }
+
+        $rows = [];
+        while (($csvRow = fgetcsv($stream)) !== false) {
+            // skip empty rows
+            $nonEmpty = false;
+            foreach ($csvRow as $c) { if (trim((string)$c) !== '') { $nonEmpty = true; break; } }
+            if (! $nonEmpty) continue;
+
+            $rowData = [];
+
+            foreach ($dbFields as $field) {
+                $csvHeader = $mapping[$field];
+                $idx = array_key_exists(mb_strtolower($csvHeader), $headerIndex) ? $headerIndex[mb_strtolower($csvHeader)] : null;
+                $value = ($idx !== null && array_key_exists($idx, $csvRow)) ? trim($csvRow[$idx]) : null;
+                $rowData[$field] = $value;
+            }
+
+            // expiryDate stays blank (NULL) on CSV upload — it is filled later
+            // by the user from the Expiry Data page; status starts at 0
+            $rowData['expiryDate'] = null;
+            $rowData['status']     = 0;
+
+            $rows[] = $rowData;
+        }
+        fclose($stream);
+
+        if (empty($rows)) {
+            return $this->response->setStatusCode(400)->setJSON(['success'=>false,'message'=>'No data rows found in CSV']);
+        }
+
+        $currentEmployeeName = session()->get('employeeName');
+        $currentEmployeeId = session()->get('employeeId');
+        $isRestrictedUser = (strtolower((string) $currentEmployeeName) === 'testuser') || (string) $currentEmployeeId === 'cef99519ba925515';
+        if ($isRestrictedUser && count($rows) > 20) {
+            return $this->response->setStatusCode(400)->setJSON([
+                'success' => false,
+                'message' => 'Upload blocked: this account is restricted to 20 rows per upload. This file contains ' . count($rows) . ' rows.'
+            ]);
+        }
+
+        try {
+            $builder = $this->expiryDataModel->db->table('expirydata');
+            $builder->insertBatch($rows);
+        } catch (\Exception $e) {
+            return $this->response->setStatusCode(500)->setJSON(['success'=>false,'message'=>'DB insert failed: '.$e->getMessage()]);
+        }
+
+        return $this->response->setJSON(['success'=>true,'message'=>'Expiry data uploaded successfully']);
+    }
 
 /**
  * Generate a unique alphanumeric recordId (15–16 characters).
@@ -1889,6 +2005,121 @@ public function uploadDataPost()
         return view('admin/all_data', ['rows' => $rows]);
     }
 
+    /**
+     * Display all expiry data records from the expirydata table
+     */
+    public function expiryData()
+    {
+        $rows = $this->expiryDataModel->findAllWithEmployee();
+        return view('admin/expiry_data', ['rows' => $rows]);
+    }
+
+    /**
+     * Export all expiry data records to a CSV file (Excel compatible)
+     */
+    public function exportExpiryData()
+    {
+        $rows = $this->expiryDataModel->findAllWithEmployee();
+
+        $filename = 'expiry_data_' . date('Y-m-d_H-i-s') . '.csv';
+
+        // UTF-8 BOM so Excel opens the file with correct encoding
+        $csv = "\xEF\xBB\xBF";
+        $csv .= "ID,Reg Number,Expiry Date,Employee ID,Employee Name,Status
+";
+
+        foreach ($rows as $row) {
+            $rowStatus = (int) ($row['status'] ?? 0);
+            if ($rowStatus === 1) {
+                $status = 'Completed';
+            } elseif ($rowStatus === 2) {
+                $status = 'Skipped';
+            } else {
+                $status = 'Pending';
+            }
+
+            $csv .= '"' . str_replace('"', '""', (string) ($row['id'] ?? '')) . '",'
+                  . '"' . str_replace('"', '""', (string) ($row['regNumber'] ?? '')) . '",'
+                  . '"' . str_replace('"', '""', (string) ($row['expiryDate'] ?? '')) . '",'
+                  . '"' . str_replace('"', '""', (string) ($row['employeeId'] ?? '')) . '",'
+                  . '"' . str_replace('"', '""', (string) ($row['employeeName'] ?? '')) . '",'
+                  . '"' . $status . '"' . "
+";
+        }
+
+        return $this->response
+                    ->setHeader('Content-Type', 'text/csv; charset=utf-8')
+                    ->setHeader('Content-Disposition', 'attachment; filename="' . $filename . '"')
+                    ->setBody($csv);
+    }
+    public function exportCallingData(){
+        helper('excel');
+
+        // Fetch ALL records from the "data" table with telecaller names
+        $rows = $this->dataModel
+            ->select('data.*, employee.name as telecallerName')
+            ->join('employee', 'employee.employeeId = data.telecaller', 'left')
+            ->orderBy('data.recordId', 'ASC')
+            ->findAll();
+
+        $headers = [
+            'Record ID',
+            'Reg Date',
+            'Reg Month',
+            'Reg Number',
+            'Owner Name',
+            'Address',
+            'Vehicle Maker',
+            'Vehicle Model',
+            'Fuel Type',
+            'Sale Amount',
+            'Seat Capacity',
+            'Cubic Capacity',
+            'Mobile',
+            'Expiry Date',
+            'Previous Insurance Company',
+            'Finance',
+            'Telecaller',
+            'Data Upload Date',
+            'Action Taken',
+            'Is Important',
+            'Interested',
+            'Already Sale',
+            'Sale In GB'
+        ];
+
+        $data = [];
+        foreach ($rows as $row) {
+            $data[] = [
+                $row['recordId'] ?? '',
+                $row['regDate'] ?? '',
+                $row['regDateMonth'] ?? '',
+                $row['regNumber'] ?? '',
+                $row['ownerName'] ?? '',
+                $row['address'] ?? '',
+                $row['vehicleMaker'] ?? '',
+                $row['vehicleModel'] ?? '',
+                $row['fuelType'] ?? '',
+                $row['saleAmt'] ?? '',
+                $row['seatCapacity'] ?? '',
+                $row['cubicCapacity'] ?? '',
+                $row['mobile'] ?? '',
+                $row['expiryDate'] ?? '',
+                $row['prevInsuCompany'] ?? '',
+                $row['finance'] ?? '',
+                $row['telecallerName'] ?? ($row['telecaller'] ?? ''),
+                $row['dataUploadDate'] ?? '',
+                !empty($row['actionTaken']) ? 'Yes' : 'No',
+                !empty($row['isImportant']) ? 'Yes' : 'No',
+                !empty($row['isIntrested']) ? 'Yes' : 'No',
+                !empty($row['alreadySale']) ? 'Yes' : 'No',
+                !empty($row['saleInGb']) ? 'Yes' : 'No',
+            ];
+        }
+
+        $filename = 'calling_data_' . date('Y-m-d_H-i-s');
+        exportToExcel($data, $filename, $headers);
+    }
     public function subscriptionDetails(){
         $db = \Config\Database::connect();
 

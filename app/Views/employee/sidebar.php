@@ -59,7 +59,12 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                         <span class="hide-menu">Timesheet</span>
                     </a>
                 </li>
-                
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="<?= base_url('/employee/expiry-data') ?>" aria-expanded="false">
+                        <i class="ti ti-calendar"></i>
+                        <span class="hide-menu">Expiry Data</span>
+                    </a>
+                </li>
                 
                 
                 <!--

@@ -11,7 +11,7 @@ use App\Libraries\PolicyExtractor;
 use CodeIgniter\I18n\Time;
 use App\Models\UploadModel;
 use App\Models\AttendanceModel;
-
+use App\Models\ExpiryDataModel;
 use DateTime;
 
 class Employee extends BaseController
@@ -20,6 +20,7 @@ class Employee extends BaseController
     protected $policyModel;
     protected $uploadModel;
     protected $attendanceModel;
+    protected $expiryDataModel;
     
     public function __construct()
     {
@@ -27,6 +28,7 @@ class Employee extends BaseController
         $this->employeeModel = new EmployeeModel();
         $this->uploadModel = new UploadModel();
         $this->attendanceModel = new AttendanceModel();
+        $this->expiryDataModel = new ExpiryDataModel();
     }
 
     public function dashboard($recordId = null)
@@ -970,5 +972,183 @@ class Employee extends BaseController
             'selectedYear' => $year,
         ]);
     }
-    
+    public function expiryData()
+    {
+        $session = session();
+
+        if (!$session->get('isLoggedIn')) {
+            return redirect()->to('/employee/login')->with('error', 'Please log in to access expiry data');
+        }
+
+        $employeeId = $session->get('employeeId');
+
+        $expiryData = $this->expiryDataModel->where('employeeId', $employeeId)
+            ->orderBy('id', 'ASC')
+            ->findAll();
+
+        // First pending record (status = 0) shown next to the vehicle number badge
+        $currentRecord = $this->expiryDataModel->where('employeeId', $employeeId)
+            ->where('status', 0)
+            ->orderBy('id', 'ASC')
+            ->first();
+
+        return view('employee/expiry_data', [
+            'allData'       => $expiryData,
+            'currentRecord' => $currentRecord,
+        ]);
+    }
+
+    /**
+     * Save expiry date for an expirydata record and mark its status as 1.
+     * Returns the next pending record so the UI can continue immediately.
+     */
+    public function saveExpiryDate()
+    {
+        $session = session();
+
+        if (!$session->get('isLoggedIn')) {
+            return $this->response->setStatusCode(401)->setJSON([
+                'success' => false,
+                'message' => 'Please log in to save expiry data'
+            ]);
+        }
+
+        if (!$this->request->is('post')) {
+            return $this->response->setStatusCode(400)->setJSON([
+                'success' => false,
+                'message' => 'Invalid request method'
+            ]);
+        }
+
+        $employeeId = $session->get('employeeId');
+        $recordId   = $this->request->getPost('id');
+        $expiryDate = trim((string) $this->request->getPost('expiryDate'));
+
+        if (empty($recordId) || empty($expiryDate)) {
+            return $this->response->setStatusCode(400)->setJSON([
+                'success' => false,
+                'message' => 'Expiry date is required'
+            ]);
+        }
+
+        // Validate date format (Y-m-d coming from <input type="date">)
+        $dateObj = DateTime::createFromFormat('Y-m-d', $expiryDate);
+        if (!$dateObj || $dateObj->format('Y-m-d') !== $expiryDate) {
+            return $this->response->setStatusCode(400)->setJSON([
+                'success' => false,
+                'message' => 'Invalid expiry date format'
+            ]);
+        }
+
+        // Ensure the record belongs to the logged-in employee
+        $record = $this->expiryDataModel->where('id', $recordId)
+            ->where('employeeId', $employeeId)
+            ->first();
+
+        if (!$record) {
+            return $this->response->setStatusCode(404)->setJSON([
+                'success' => false,
+                'message' => 'Expiry record not found'
+            ]);
+        }
+
+        // Save expiry date and mark status as 1 (done)
+        $updated = $this->expiryDataModel->update($recordId, [
+            'expiryDate' => $expiryDate,
+            'status'     => 1,
+        ]);
+
+        if (!$updated) {
+            return $this->response->setStatusCode(500)->setJSON([
+                'success' => false,
+                'message' => 'Failed to save expiry date'
+            ]);
+        }
+
+        // Fetch the next pending record (status = 0)
+        $nextRecord = $this->expiryDataModel->where('employeeId', $employeeId)
+            ->where('status', 0)
+            ->orderBy('id', 'ASC')
+            ->first();
+
+        return $this->response->setJSON([
+            'success'    => true,
+            'message'    => 'Expiry date saved successfully',
+            'nextRecord' => $nextRecord ? [
+                'id'        => $nextRecord['id'],
+                'regNumber' => $nextRecord['regNumber'],
+            ] : null,
+        ]);
+    }
+
+    /**
+     * Permanently skip an expirydata record (status = 2).
+     * Skipped records are excluded from the pending queue from now on.
+     * Returns the next pending record so the UI can continue immediately.
+     */
+    public function skipExpiryDate()
+    {
+        $session = session();
+
+        if (!$session->get('isLoggedIn')) {
+            return $this->response->setStatusCode(401)->setJSON([
+                'success' => false,
+                'message' => 'Please log in to skip expiry data'
+            ]);
+        }
+
+        if (!$this->request->is('post')) {
+            return $this->response->setStatusCode(400)->setJSON([
+                'success' => false,
+                'message' => 'Invalid request method'
+            ]);
+        }
+
+        $employeeId = $session->get('employeeId');
+        $recordId   = $this->request->getPost('id');
+
+        if (empty($recordId)) {
+            return $this->response->setStatusCode(400)->setJSON([
+                'success' => false,
+                'message' => 'Record id is required'
+            ]);
+        }
+
+        // Ensure the record belongs to the logged-in employee
+        $record = $this->expiryDataModel->where('id', $recordId)
+            ->where('employeeId', $employeeId)
+            ->first();
+
+        if (!$record) {
+            return $this->response->setStatusCode(404)->setJSON([
+                'success' => false,
+                'message' => 'Expiry record not found'
+            ]);
+        }
+
+        // Mark as skipped (status = 2) so it never comes back in the queue
+        $updated = $this->expiryDataModel->update($recordId, ['status' => 2]);
+
+        if (!$updated) {
+            return $this->response->setStatusCode(500)->setJSON([
+                'success' => false,
+                'message' => 'Failed to skip record'
+            ]);
+        }
+
+        // Fetch the next pending record (status = 0)
+        $nextRecord = $this->expiryDataModel->where('employeeId', $employeeId)
+            ->where('status', 0)
+            ->orderBy('id', 'ASC')
+            ->first();
+
+        return $this->response->setJSON([
+            'success'    => true,
+            'message'    => 'Record skipped',
+            'nextRecord' => $nextRecord ? [
+                'id'        => $nextRecord['id'],
+                'regNumber' => $nextRecord['regNumber'],
+            ] : null,
+        ]);
+    }
 }

@@ -1,0 +1,14 @@
+CRITICAL - 2026-08-23 00:42:51 --> ErrorException: Undefined array key "alreadySale"
+[Method: GET, Route: employee/expiry-data]
+in APPPATH\Views\employee\expiry_data.php on line 336.
+ 1 APPPATH\Views\employee\expiry_data.php(336): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "alreadySale"', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\expiry_data.php', 336)
+ 2 SYSTEMPATH\View\View.php(240): include('D:\\xampp\\htdocs\\gbinsurance\\app\\Views\\employee\\expiry_data.php')
+ 3 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1254): CodeIgniter\View\View->render('employee/expiry_data', [], true)
+ 5 APPPATH\Controllers\Employee.php(989): view('employee/expiry_data', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Employee->expiryData()
+ 7 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Employee))
+ 8 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

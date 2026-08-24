@@ -30,18 +30,66 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
+                <!--
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="<?= base_url('/admin/data-loader') ?>" aria-expanded="false">
                         <i class="ti ti-cloud-upload"></i>
                         <span class="hide-menu">Data Loader</span>
                     </a>
                 </li>
+                -->
+                <li class="sidebar-item">
+                    <a class="sidebar-link justify-content-between has-arrow" href="javascript:void(0)"
+                        aria-expanded="false">
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="d-flex">
+                                <i class="ti ti-cloud-upload"></i>
+                            </span>
+                            <span class="hide-menu">Data Loader</span>
+                        </div>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link justify-content-between" href="<?= base_url('/admin/data-loader') ?>">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="round-16 d-flex align-items-center justify-content-center">
+                                        <i class="ti ti-upload"></i>
+                                    </div>
+                                    <span class="hide-menu">upload</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link justify-content-between"
+                                href="<?= base_url('/admin/all-data') ?>">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="round-16 d-flex align-items-center justify-content-center">
+                                        <i class="ti ti-circle"></i>
+                                    </div>
+                                    <span class="hide-menu">Telecaller Data</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link justify-content-between"
+                                href="<?= base_url('/admin/expiry-data') ?>">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="round-16 d-flex align-items-center justify-content-center">
+                                        <i class="ti ti-circle"></i>
+                                    </div>
+                                    <span class="hide-menu">Expiry Data</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!--
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="<?= base_url('/admin/all-data') ?>" aria-expanded="false">
                         <i class="ti ti-box-multiple"></i>
                         <span class="hide-menu">All Data</span>
                     </a>
-                </li>
+                </li>-->
                 <li class="sidebar-item">
                     <a class="sidebar-link justify-content-between has-arrow" href="javascript:void(0)"
                         aria-expanded="false">

@@ -186,7 +186,7 @@
 });
 
     function downloadExcel() {
-        window.location.href = "<?= site_url('admin/export-all-data') ?>";
+        window.location.href = "<?= site_url('admin/export-calling-data') ?>";
     }
     </script>
 </body>

@@ -31,6 +31,9 @@ $routes->group('employee', ['filter' => ['authEmployee', 'sessionExpire']], func
     $routes->get('renewals/(:any)', 'Employee::renewals/$1');
     $routes->get('all-data', 'Employee::allData');
     $routes->get('timesheet', 'Employee::timesheet');
+    $routes->get('expiry-data', 'Employee::expiryData');
+    $routes->post('save-expiry-date', 'Employee::saveExpiryDate');
+    $routes->post('skip-expiry-date', 'Employee::skipExpiryDate');
     $routes->get('nextRecord/(:any)', 'Employee::nextRecord/$1');
     $routes->get('starRecord/(:any)/(:any)', 'Employee::starRecord/$1/$2');
     $routes->get('allStarRecord', 'Employee::allStarRecord');
@@ -110,6 +113,10 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->post('employee-update', 'Admin::updateEmployee');
     $routes->post('extract-data', 'Admin::extractData');
     $routes->get('all-data', 'Admin::allData');
+    $routes->get('expiry-data', 'Admin::expiryData');
+    $routes->get('export-expiry-data', 'Admin::exportExpiryData');
+    $routes->get('export-calling-data', 'Admin::exportCallingData');
+    
     $routes->get('generic-all-data', 'Admin::genericAllData');
     $routes->post('uploadProfilePhoto', 'Admin::uploadProfilePhoto');
     $routes->post('renew-subscription', 'Admin::renewEmpSubscription');
