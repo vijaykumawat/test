@@ -90,38 +90,8 @@
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <?php if (!empty($rows)): ?>
-                                                <?php foreach ($rows as $row): ?>
-                                                <tr>
-                                                    <td><?= esc($row['id']) ?></td>
-                                                    <td><?= esc($row['regNumber']) ?></td>
-                                                    <td><?= esc($row['expiryDate']) ?></td>
-                                                    <td>
-                                                        <?= esc($row['employeeName'] ?? '') ?>
-                                                        <?php if (empty($row['employeeName'])): ?>
-                                                        <span class="text-muted"><?= esc($row['employeeId']) ?></span>
-                                                        <?php endif; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php $rowStatus = (int) ($row['status'] ?? 0); ?>
-                                                        <?php if ($rowStatus === 1): ?>
-                                                        <span class="badge bg-success">Completed</span>
-                                                        <?php elseif ($rowStatus === 2): ?>
-                                                        <span class="badge bg-secondary">Skipped</span>
-                                                        <?php else: ?>
-                                                        <span class="badge bg-warning text-dark">Pending</span>
-                                                        <?php endif; ?>
-                                                    </td>
-                                                </tr>
-                                                <?php endforeach; ?>
-                                                <?php else: ?>
-                                                <tr>
-                                                    <td colspan="5" class="text-center text-muted py-4">No expiry data
-                                                        records found.</td>
-                                                </tr>
-                                                <?php endif; ?>
-                                            </tbody>
+                                            <!-- Rows are loaded in chunks via AJAX (server-side processing) -->
+                                            <tbody></tbody>
                                         </table>
 
                                     </div>
@@ -143,11 +113,27 @@
     $(document).ready(function() {
         if (!$.fn.DataTable.isDataTable('#expiryTable')) {
             $('#expiryTable').DataTable({
+                // Server-side processing: only the current page chunk is
+                // fetched from the server, so the page loads fast even
+                // with 10,000+ records.
+                processing: true,
+                serverSide: true,
+                ajax: "<?= site_url('admin/expiry-data-api') ?>",
                 pageLength: 25,
                 lengthMenu: [10, 25, 50, 100, 200],
+                order: [[0, 'desc']],
+                columns: [
+                    { data: 'id' },
+                    { data: 'regNumber' },
+                    { data: 'expiryDate', defaultContent: '-' },
+                    { data: 'employee', defaultContent: '' },
+                    { data: 'status', className: 'text-center' }
+                ],
                 language: {
                     search: "Search:",
-                    paginate: { previous: "Prev", next: "Next" }
+                    paginate: { previous: "Prev", next: "Next" },
+                    emptyTable: "No expiry data records found.",
+                    zeroRecords: "No matching records found."
                 }
             });
         }

@@ -1,0 +1,134 @@
+ERROR - 2026-08-26 01:53:14 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '%c%
+ )
+ORDER BY `expirydata`.`id` DESC
+ LIMIT 25' at line 9
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `expirydata`.*, `employee`.`name` as `employeeName`
+FROM `expirydata`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `expirydata`.`employeeId`
+WHERE   (
+`expirydata`.`regNumber` LIKE \'%c%\' ESCAPE \'!\'
+OR  `expirydata`.`expiryDate` LIKE \'%c%\' ESCAPE \'!\'
+OR  `expirydata`.`employeeId` LIKE \'%c%\' ESCAPE \'!\'
+OR  `employee`.`name` LIKE \'%c%\' ESCAPE \'!\'
+OR  CASE expirydata.status WHEN 1 THEN \'Completed\' WHEN 2 THEN \'Skipped\' ELSE \'Pending\' END  LIKE %c%
+ )
+ORDER BY `expirydata`.`id` DESC
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expirydata`.*, `employee`.`name` as `employeeName`
+FROM `expirydata`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `expirydata`.`employeeId`
+WHERE   (
+`expirydata`.`regNumber` LIKE \'%c%\' ESCAPE \'!\'
+OR  `expirydata`.`expiryDate` LIKE \'%c%\' ESCAPE \'!\'
+OR  `expirydata`.`employeeId` LIKE \'%c%\' ESCAPE \'!\'
+OR  `employee`.`name` LIKE \'%c%\' ESCAPE \'!\'
+OR  CASE expirydata.status WHEN 1 THEN \'Completed\' WHEN 2 THEN \'Skipped\' ELSE \'Pending\' END  LIKE %c%
+ )
+ORDER BY `expirydata`.`id` DESC
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expirydata`.*, `employee`.`name` as `employeeName`
+FROM `expirydata`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `expirydata`.`employeeId`
+WHERE   (
+`expirydata`.`regNumber` LIKE \'%c%\' ESCAPE \'!\'
+OR  `expirydata`.`expiryDate` LIKE \'%c%\' ESCAPE \'!\'
+OR  `expirydata`.`employeeId` LIKE \'%c%\' ESCAPE \'!\'
+OR  `employee`.`name` LIKE \'%c%\' ESCAPE \'!\'
+OR  CASE expirydata.status WHEN 1 THEN \'Completed\' WHEN 2 THEN \'Skipped\' ELSE \'Pending\' END  LIKE %c%
+ )
+ORDER BY `expirydata`.`id` DESC
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `expirydata`.*, `employee`.`name` as `employeeName`
+FROM `expirydata`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `expirydata`.`employeeId`
+WHERE   (
+`expirydata`.`regNumber` LIKE :expirydata.regNumber: ESCAPE \'!\'
+OR  `expirydata`.`expiryDate` LIKE :expirydata.expiryDate: ESCAPE \'!\'
+OR  `expirydata`.`employeeId` LIKE :expirydata.employeeId: ESCAPE \'!\'
+OR  `employee`.`name` LIKE :employee.name: ESCAPE \'!\'
+OR  CASE expirydata.status WHEN 1 THEN \'Completed\' WHEN 2 THEN \'Skipped\' ELSE \'Pending\' END  LIKE :CASE expirydata.status WHEN 1 THEN \'Completed\' WHEN 2 THEN \'Skipped\' ELSE \'Pending\' END:
+ )
+ORDER BY `expirydata`.`id` DESC
+ LIMIT 25', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\ExpiryDataModel.php(65): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(2046): App\Models\ExpiryDataModel->getPaginatedWithEmployee(25, 0, 'c', 'expirydata.id', 'DESC')
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->expiryDataApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-08-26 01:53:14 --> expiryDataApi error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '%c%
+ )
+ORDER BY `expirydata`.`id` DESC
+ LIMIT 25' at line 9
+ERROR - 2026-08-26 01:53:22 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '%7%
+ )
+ORDER BY `expirydata`.`id` DESC
+ LIMIT 25' at line 9
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `expirydata`.*, `employee`.`name` as `employeeName`
+FROM `expirydata`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `expirydata`.`employeeId`
+WHERE   (
+`expirydata`.`regNumber` LIKE \'%7%\' ESCAPE \'!\'
+OR  `expirydata`.`expiryDate` LIKE \'%7%\' ESCAPE \'!\'
+OR  `expirydata`.`employeeId` LIKE \'%7%\' ESCAPE \'!\'
+OR  `employee`.`name` LIKE \'%7%\' ESCAPE \'!\'
+OR  CASE expirydata.status WHEN 1 THEN \'Completed\' WHEN 2 THEN \'Skipped\' ELSE \'Pending\' END  LIKE %7%
+ )
+ORDER BY `expirydata`.`id` DESC
+ LIMIT 25', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expirydata`.*, `employee`.`name` as `employeeName`
+FROM `expirydata`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `expirydata`.`employeeId`
+WHERE   (
+`expirydata`.`regNumber` LIKE \'%7%\' ESCAPE \'!\'
+OR  `expirydata`.`expiryDate` LIKE \'%7%\' ESCAPE \'!\'
+OR  `expirydata`.`employeeId` LIKE \'%7%\' ESCAPE \'!\'
+OR  `employee`.`name` LIKE \'%7%\' ESCAPE \'!\'
+OR  CASE expirydata.status WHEN 1 THEN \'Completed\' WHEN 2 THEN \'Skipped\' ELSE \'Pending\' END  LIKE %7%
+ )
+ORDER BY `expirydata`.`id` DESC
+ LIMIT 25')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expirydata`.*, `employee`.`name` as `employeeName`
+FROM `expirydata`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `expirydata`.`employeeId`
+WHERE   (
+`expirydata`.`regNumber` LIKE \'%7%\' ESCAPE \'!\'
+OR  `expirydata`.`expiryDate` LIKE \'%7%\' ESCAPE \'!\'
+OR  `expirydata`.`employeeId` LIKE \'%7%\' ESCAPE \'!\'
+OR  `employee`.`name` LIKE \'%7%\' ESCAPE \'!\'
+OR  CASE expirydata.status WHEN 1 THEN \'Completed\' WHEN 2 THEN \'Skipped\' ELSE \'Pending\' END  LIKE %7%
+ )
+ORDER BY `expirydata`.`id` DESC
+ LIMIT 25')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1647): CodeIgniter\Database\BaseConnection->query('SELECT `expirydata`.*, `employee`.`name` as `employeeName`
+FROM `expirydata`
+LEFT JOIN `employee` ON `employee`.`employeeId` = `expirydata`.`employeeId`
+WHERE   (
+`expirydata`.`regNumber` LIKE :expirydata.regNumber: ESCAPE \'!\'
+OR  `expirydata`.`expiryDate` LIKE :expirydata.expiryDate: ESCAPE \'!\'
+OR  `expirydata`.`employeeId` LIKE :expirydata.employeeId: ESCAPE \'!\'
+OR  `employee`.`name` LIKE :employee.name: ESCAPE \'!\'
+OR  CASE expirydata.status WHEN 1 THEN \'Completed\' WHEN 2 THEN \'Skipped\' ELSE \'Pending\' END  LIKE :CASE expirydata.status WHEN 1 THEN \'Completed\' WHEN 2 THEN \'Skipped\' ELSE \'Pending\' END:
+ )
+ORDER BY `expirydata`.`id` DESC
+ LIMIT 25', [...], false)
+ 5 SYSTEMPATH\Model.php(255): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\ExpiryDataModel.php(65): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(2046): App\Models\ExpiryDataModel->getPaginatedWithEmployee(25, 0, '7', 'expirydata.id', 'DESC')
+ 9 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Admin->expiryDataApi()
+10 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-08-26 01:53:22 --> expiryDataApi error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '%7%
+ )
+ORDER BY `expirydata`.`id` DESC
+ LIMIT 25' at line 9

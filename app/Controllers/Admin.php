@@ -2006,12 +2006,90 @@ public function uploadDataPost()
     }
 
     /**
-     * Display all expiry data records from the expirydata table
+     * Display expiry data page (records are loaded in chunks via AJAX)
      */
     public function expiryData()
     {
-        $rows = $this->expiryDataModel->findAllWithEmployee();
-        return view('admin/expiry_data', ['rows' => $rows]);
+        return view('admin/expiry_data');
+    }
+
+    /**
+     * Server-side API for the expiry data DataTable.
+     * Returns only the requested chunk (page) of records so the page
+     * loads fast even with 10,000+ rows.
+     */
+    public function expiryDataApi()
+    {
+        // DataTables server-side parameters
+        $draw      = (int) ($this->request->getVar('draw') ?? 1);
+        $start     = max(0, (int) ($this->request->getVar('start') ?? 0));
+        $length    = (int) ($this->request->getVar('length') ?? 25);
+        $searchRaw = trim((string) ($this->request->getVar('search')['value'] ?? ''));
+
+        if ($length < 1 || $length > 500) {
+            $length = 25;
+        }
+
+        // Map the clicked column index to a real DB column
+        $columns = [
+            0 => 'expirydata.id',
+            1 => 'expirydata.regNumber',
+            2 => 'expirydata.expiryDate',
+            3 => 'employee.name',
+            4 => 'expirydata.status',
+        ];
+        $orderColIndex = (int) ($this->request->getVar('order')[0]['column'] ?? 0);
+        $orderColumn   = $columns[$orderColIndex] ?? 'expirydata.id';
+        $orderDir      = strtolower((string) ($this->request->getVar('order')[0]['dir'] ?? 'desc')) === 'asc' ? 'ASC' : 'DESC';
+
+        try {
+            $rows = $this->expiryDataModel->getPaginatedWithEmployee($length, $start, $searchRaw, $orderColumn, $orderDir);
+
+            $totalFiltered = $searchRaw !== ''
+                ? $this->expiryDataModel->countFilteredWithEmployee($searchRaw)
+                : $this->expiryDataModel->countAllWithEmployee();
+
+            $data = [];
+            foreach ($rows as $row) {
+                $rowStatus = (int) ($row['status'] ?? 0);
+                if ($rowStatus === 1) {
+                    $badge = '<span class="badge bg-success">Completed</span>';
+                } elseif ($rowStatus === 2) {
+                    $badge = '<span class="badge bg-secondary">Skipped</span>';
+                } else {
+                    $badge = '<span class="badge bg-warning text-dark">Pending</span>';
+                }
+
+                $employeeCell = esc($row['employeeName'] ?? '');
+                if (empty($row['employeeName'])) {
+                    $employeeCell .= ' <span class="text-muted">' . esc($row['employeeId']) . '</span>';
+                }
+
+                $data[] = [
+                    'id'         => esc($row['id']),
+                    'regNumber'  => esc($row['regNumber']),
+                    'expiryDate' => esc($row['expiryDate']),
+                    'employee'   => $employeeCell,
+                    'status'     => $badge,
+                ];
+            }
+
+            return $this->response->setJSON([
+                'draw'            => $draw,
+                'recordsTotal'    => $totalFiltered,
+                'recordsFiltered' => $totalFiltered,
+                'data'            => $data,
+            ]);
+        } catch (\Exception $e) {
+            log_message('error', 'expiryDataApi error: ' . $e->getMessage());
+            return $this->response->setJSON([
+                'draw'            => $draw,
+                'recordsTotal'    => 0,
+                'recordsFiltered' => 0,
+                'data'            => [],
+                'error'           => 'Failed to load expiry data',
+            ]);
+        }
     }
 
     /**

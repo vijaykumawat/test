@@ -982,20 +982,105 @@ class Employee extends BaseController
 
         $employeeId = $session->get('employeeId');
 
-        $expiryData = $this->expiryDataModel->where('employeeId', $employeeId)
-            ->orderBy('id', 'ASC')
-            ->findAll();
-
-        // First pending record (status = 0) shown next to the vehicle number badge
+        // First pending record (status = 0) shown next to the vehicle number badge.
+        // Table rows are loaded in chunks via AJAX (see expiryDataApi).
         $currentRecord = $this->expiryDataModel->where('employeeId', $employeeId)
             ->where('status', 0)
             ->orderBy('id', 'ASC')
             ->first();
 
         return view('employee/expiry_data', [
-            'allData'       => $expiryData,
             'currentRecord' => $currentRecord,
         ]);
+    }
+
+    /**
+     * Server-side API for the employee expiry data DataTable.
+     * Returns only the requested chunk (page) of the logged-in
+     * employee's records so the page loads fast even with 10,000+ rows.
+     */
+    public function expiryDataApi()
+    {
+        $session = session();
+        if (!$session->get('isLoggedIn')) {
+            return $this->response->setStatusCode(401)->setJSON([
+                'draw'            => 0,
+                'recordsTotal'    => 0,
+                'recordsFiltered' => 0,
+                'data'            => [],
+                'error'           => 'Please log in to access expiry data',
+            ]);
+        }
+
+        $employeeId = (string) $session->get('employeeId');
+
+        // DataTables server-side parameters
+        $draw      = (int) ($this->request->getVar('draw') ?? 1);
+        $start     = max(0, (int) ($this->request->getVar('start') ?? 0));
+        $length    = (int) ($this->request->getVar('length') ?? 25);
+        $searchRaw = trim((string) ($this->request->getVar('search')['value'] ?? ''));
+
+        if ($length < 1 || $length > 500) {
+            $length = 25;
+        }
+
+        // Map the clicked column index to a real DB column
+        $columns = [
+            0 => 'id',
+            1 => 'regNumber',
+            2 => 'expiryDate',
+            3 => 'status',
+        ];
+        $orderColIndex = (int) ($this->request->getVar('order')[0]['column'] ?? 0);
+        $orderColumn   = $columns[$orderColIndex] ?? 'id';
+        $orderDir      = strtolower((string) ($this->request->getVar('order')[0]['dir'] ?? 'asc')) === 'desc' ? 'DESC' : 'ASC';
+
+        try {
+            $rows = $this->expiryDataModel->getPaginatedForEmployee($employeeId, $length, $start, $searchRaw, $orderColumn, $orderDir);
+
+            $totalFiltered = $searchRaw !== ''
+                ? $this->expiryDataModel->countFilteredForEmployee($employeeId, $searchRaw)
+                : $this->expiryDataModel->countAllForEmployee($employeeId);
+
+            $data = [];
+            foreach ($rows as $row) {
+                $rowStatus = (int) ($row['status'] ?? 0);
+                if ($rowStatus === 1) {
+                    $badge = '<span class="badge bg-success">Complete</span>';
+                } elseif ($rowStatus === 2) {
+                    $badge = '<span class="badge bg-secondary">Skipped</span>';
+                } else {
+                    $badge = '<span class="badge bg-warning text-dark">Pending</span>';
+                }
+
+                $regLink = '<a href="' . site_url('employee/dashboard/' . $row['id'])
+                         . '" style="color:inherit; text-decoration:none;">'
+                         . esc($row['regNumber']) . '</a>';
+
+                $data[] = [
+                    'regNumber'  => $regLink,
+                    'expiryDate' => esc($row['expiryDate'] ?? ''),
+                    'status'     => $badge,
+                    'id'         => $row['id'],
+                ];
+            }
+
+            return $this->response->setJSON([
+                'draw'            => $draw,
+                'recordsTotal'    => $totalFiltered,
+                'recordsFiltered' => $totalFiltered,
+                'data'            => $data,
+            ]);
+        } catch (\Exception $e) {
+            log_message('error', 'employee expiryDataApi error: ' . $e->getMessage());
+            return $this->response->setJSON([
+                'draw'            => $draw,
+                'recordsTotal'    => 0,
+                'recordsFiltered' => 0,
+                'data'            => [],
+                'error'           => 'Failed to load expiry data',
+            ]);
+        }
     }
 
     /**

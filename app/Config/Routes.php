@@ -32,6 +32,7 @@ $routes->group('employee', ['filter' => ['authEmployee', 'sessionExpire']], func
     $routes->get('all-data', 'Employee::allData');
     $routes->get('timesheet', 'Employee::timesheet');
     $routes->get('expiry-data', 'Employee::expiryData');
+    $routes->get('expiry-data-api', 'Employee::expiryDataApi');
     $routes->post('save-expiry-date', 'Employee::saveExpiryDate');
     $routes->post('skip-expiry-date', 'Employee::skipExpiryDate');
     $routes->get('nextRecord/(:any)', 'Employee::nextRecord/$1');
@@ -114,6 +115,7 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->post('extract-data', 'Admin::extractData');
     $routes->get('all-data', 'Admin::allData');
     $routes->get('expiry-data', 'Admin::expiryData');
+    $routes->get('expiry-data-api', 'Admin::expiryDataApi');
     $routes->get('export-expiry-data', 'Admin::exportExpiryData');
     $routes->get('export-calling-data', 'Admin::exportCallingData');
     

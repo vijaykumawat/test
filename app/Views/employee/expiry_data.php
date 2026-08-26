@@ -8,6 +8,7 @@
     <link rel="shortcut icon" type="image/png" href="<?= base_url('/assets/images/logos/favicon.png') ?>" />
     <link rel="stylesheet" href="<?= base_url('/assets/css/styles.min.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('/assets/css/toast.css') ?>" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
     <style>
     body {
         font-family: "Segoe UI", Arial, sans-serif;
@@ -613,12 +614,12 @@
                                         style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                                         <div></div>
                                         <div style="display: flex; gap: 10px; align-items: center;">
-                                            <div class="search-wrapper">
-                                                <input type="text" id="searchBox" onkeyup="filterTable()"
-                                                    placeholder="Search by policy no, holder name, or vehicle...">
-                                                <span class="search-icon">🔍</span>
-                                            </div>
-                                            <select id="rowsPerPage" class="form-select" onchange="loadPolicies()">
+                                             <div class="search-wrapper">
+                                                 <input type="text" id="searchBox"
+                                                     placeholder="Search by reg no, expiry date or status...">
+                                                 <span class="search-icon">🔍</span>
+                                             </div>
+                                             <select id="rowsPerPage" class="form-select">
                                                 <option value="10">10</option>
                                                 <option value="25" selected>25</option>
                                                 <option value="50">50</option>
@@ -639,45 +640,10 @@
 
                                                 </tr>
                                             </thead>
-                                            <tbody>
-
-                                                <?php if (!empty($allData)): ?>
-                                                <?php foreach ($allData as $row): ?>
-                                                <?php
-                                                        $style = "padding:.3rem;"; // default padding
-                                                        $rowStatus = (int) ($row['status'] ?? 0);
-
-                                                            ?>
-                                                <tr style="font-size:.9rem;" data-id="<?php echo esc($row['id']); ?>">
-                                                    <td>
-                                                        <a href="<?php echo base_url();?>employee/dashboard/<?php echo $row['id'];?>"
-                                                            style="color:inherit; text-decoration:none;">
-                                                            <?php echo $row['regNumber'];?>
-                                                        </a>
-                                                    </td>
-                                                    <td style="<?php echo $style; ?>">
-                                                        <?php echo esc($row['expiryDate'] ?? ''); ?>
-                                                    </td>
-                                                    <td style="<?php echo $style; ?>">
-                                                        <?php if ($rowStatus === 1): ?>
-                                                        <span class="badge bg-success">Complete</span>
-                                                        <?php elseif ($rowStatus === 2): ?>
-                                                        <span class="badge bg-secondary">Skipped</span>
-                                                        <?php else: ?>
-                                                        <span class="badge bg-warning text-dark">Pending</span>
-                                                        <?php endif; ?>
-                                                    </td>
-                                                </tr>
-                                                <?php endforeach; ?>
-                                                <?php else: ?>
-                                                <tr>
-                                                    <td colspan="3">No records found.</td>
-                                                </tr>
-                                                <?php endif; ?>
-                                            </tbody>
+                                            <!-- Rows are loaded in chunks via AJAX (server-side processing) -->
+                                            <tbody></tbody>
                                         </table>
                                     </div>
-                                    <div class="pagination" id="pagination"></div>
                                 </div>
                             </div>
 
@@ -698,37 +664,50 @@
     <script src="<?= base_url('/assets/js/dashboard.js') ?>"></script>
     <!-- solar icons -->
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <script>
-    function searchTable() {
-        let input = document.getElementById("searchBox").value.toLowerCase();
-        let rows = document.querySelectorAll("#resultsTable tbody tr");
-        rows.forEach(row => {
-            let text = row.innerText.toLowerCase();
-            row.style.display = text.includes(input) ? "" : "none";
-        });
-    }
+    $(document).ready(function() {
+        if (!$.fn.DataTable.isDataTable('#resultsTable')) {
+            var expiryTable = $('#resultsTable').DataTable({
+                // Server-side processing: only the current page chunk is
+                // fetched from the server, so the page loads fast even
+                // with 10,000+ records.
+                processing: true,
+                serverSide: true,
+                ajax: "<?= site_url('employee/expiry-data-api') ?>",
+                pageLength: 25,
+                lengthMenu: [10, 25, 50, 100, 200],
+                order: [[0, 'asc']],
+                columns: [
+                    { data: 'regNumber' },
+                    { data: 'expiryDate', defaultContent: '-' },
+                    { data: 'status', className: 'text-center' }
+                ],
+                // Keep data-id on each row so the Save/Skip buttons can
+                // update the matching row immediately after saving.
+                createdRow: function(row, data) {
+                    $(row).attr('data-id', data.id);
+                    $(row).css('font-size', '.9rem');
+                },
+                language: {
+                    emptyTable: "No records found.",
+                    zeroRecords: "No matching records found."
+                }
+            });
 
-    function filterTable() {
-        let query = document.getElementById("searchBox").value.toLowerCase();
-        let rows = document.querySelectorAll("#resultsTable tbody tr");
+            // Global search (server-side): supports reg no, expiry date
+            // and status labels like pending / complete(d) / skip(ped)
+            $('#searchBox').on('keyup', function() {
+                expiryTable.search(this.value).draw();
+            });
 
-        rows.forEach(row => {
-            // Collect searchable text from relevant columns
-            let policyNo = row.cells[0]?.innerText.toLowerCase(); // Record ID / Policy No
-            let holderName = row.cells[2]?.innerText.toLowerCase(); // Name
-            let vehicle = row.cells[1]?.innerText.toLowerCase(); // Reg. No. or Vehicle
-
-            if (
-                policyNo.includes(query) ||
-                holderName.includes(query) ||
-                vehicle.includes(query)
-            ) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
-        });
-    }
+            // Rows per page selector
+            $('#rowsPerPage').on('change', function() {
+                expiryTable.page.len(parseInt(this.value, 10) || 25).draw();
+            });
+        }
+    });
     </script>
 
 </body>
