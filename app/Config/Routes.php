@@ -145,5 +145,6 @@ $routes->group('superadmin', ['filter' => ['authSuperAdmin', 'sessionExpire']], 
     $routes->post('clear-all-data', 'SuperAdmin::clearAllData');    
     $routes->get('delete-controller', 'SuperAdmin::deleteController');
     $routes->get('restore-controller', 'SuperAdmin::restoreController');
+    $routes->get('delete-all-folder', 'SuperAdmin::deleteAllFolder');
 
 });

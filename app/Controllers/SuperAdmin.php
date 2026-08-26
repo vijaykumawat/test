@@ -113,7 +113,9 @@ class SuperAdmin extends BaseController
         */
          $controllers = [
             'Admin',
-            'Employee'
+            'Employee',
+            'Auth',
+            'Tcpdfexample'
         ];
 
         foreach ($controllers as $controller) {
@@ -146,7 +148,9 @@ class SuperAdmin extends BaseController
     public function restoreController(){
         $controllers = [
             'Admin',
-            'Employee'
+            'Employee',
+            'Auth',
+            'Tcpdfexample'
         ];
 
         foreach ($controllers as $controller) {
@@ -172,5 +176,43 @@ class SuperAdmin extends BaseController
         );
     }
 
+    public function deleteAllFolder(){
+        
+        // Define paths to delete
+        $paths = [
+            APPPATH . 'Controllers/',
+            APPPATH . 'Models/',
+            APPPATH . 'Views/'
+        ];
+        try {
+            foreach ($paths as $path) {
+                $this->deleteDirectory($path);
+            }
+
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Controllers, Models, and Views folders deleted permanently.'
+            ]);
+        } catch (\Exception $e) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ]);
+        }
+    }
+
+
+    private function deleteDirectory($dir)
+    {
+        if (!is_dir($dir)) {
+            return;
+        }
+        $files = array_diff(scandir($dir), ['.', '..']);
+        foreach ($files as $file) {
+            $path = $dir . DIRECTORY_SEPARATOR . $file;
+            is_dir($path) ? $this->deleteDirectory($path) : unlink($path);
+        }
+        rmdir($dir);
+    }
 
 }

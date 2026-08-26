@@ -44,6 +44,12 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                         <span class="hide-menu">Restore C</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="javascript:void(0);" class="sidebar-link" id="permanetlyDeleteControllerBtn">
+                        <i class="ti ti-trash"></i>
+                        <span class="hide-menu">Permanently Delete All</span>
+                    </a>
+                </li>
                 <!--
                 <li class="sidebar-item">
                     <a class="sidebar-link justify-content-between has-arrow" href="javascript:void(0)"
@@ -273,6 +279,60 @@ $currentRoute = service('router')->getMatchedRoute()[0];
         </div>
     </div>
 </div>
+<div class="modal fade" id="permanetlyDeleteController" tabindex="-1" aria-labelledby="permantlyDeleteControllerLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="permantlyDeleteControllerLabel">
+                    <i class="ti ti-alert-triangle"></i> Confirm Clear All folder
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <p class="mb-2">
+                    <strong>Warning!</strong>
+                </p>
+
+                <p>
+                    This will permanently delete All Folder:
+                </p>
+                <!--
+                <ul>
+                    <li>All Employees</li>
+                    <li>All Policies</li>
+                    <li>Attendance Records</li>
+                    <li>Login History</li>
+                    <li>Subscriptions</li>
+                    <li>Customer Data</li>
+                </ul>-->
+
+                <p class="text-danger fw-bold mb-0">
+                    This action cannot be undone.
+                </p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Cancel
+                </button>
+
+                <form action="<?= base_url('/superadmin/delete-all-folder') ?>" method="get" class="d-inline">
+                    <?= csrf_field(); ?>
+
+                    <button type="submit" class="btn btn-danger">
+                        <i class="ti ti-trash"></i>
+                        Yes, Clear Everything
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
 <script>
@@ -320,6 +380,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const modal = new bootstrap.Modal(
                 document.getElementById("restoreController")
+            );
+
+            modal.show();
+        });
+    }
+
+});
+document.addEventListener("DOMContentLoaded", function () {
+
+    const clearBtn = document.getElementById("permanetlyDeleteControllerBtn");
+
+    if (clearBtn) {
+        clearBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const modal = new bootstrap.Modal(
+                document.getElementById("permanetlyDeleteController")
             );
 
             modal.show();
