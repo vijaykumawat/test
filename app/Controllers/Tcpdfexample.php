@@ -7,7 +7,7 @@ use Config\Insurance;
 require_once FCPATH . 'dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
-
+use DateTime;
 class Tcpdfexample extends BaseController
 {
     public function quote(){
@@ -51,10 +51,36 @@ class Tcpdfexample extends BaseController
         $fuelType = $this->request->getVar('fuelType');
 
         //section A Own Damage
+        /*
         $dateString = $regDate;
         $regYear = date('Y', strtotime($dateString));
         $currentYear = date('Y');  // gets current year, e.g. 2026
         $age = $currentYear - $regYear;
+        */
+
+        $age=0;
+        $currentYear = date('Y');
+        $dateString = $regDate;
+
+        // Try parsing with d-m-Y
+        $date = DateTime::createFromFormat('d-m-Y', $dateString);
+
+        // If that fails, try d/m/Y
+        if (!$date) {
+            $date = DateTime::createFromFormat('d/m/Y', $dateString);
+        }
+
+        if ($date) {
+            $regYear = $date->format('Y');
+            //$currentYear = date('Y');
+            $age = $currentYear - $regYear;
+
+        } else {
+            echo "Invalid date format!";
+        }
+
+        
+        
         $band = getCCRange($cc);
         $odRate = $band ? $config->insurers['SHRIRAM']['od_rates'][$band] : null;
         $BasicForVehicle = $idv * $odRate /100;

@@ -625,6 +625,69 @@ $data['unusedDataRecords'] = $records;
     }
 
     /**
+     * Export every row and column from the policies table as an Excel-compatible CSV.
+     */
+    public function exportAllPoliciesCsv()
+    {
+        $db = \Config\Database::connect();
+        $columns = array_values(array_filter(
+            $db->getFieldNames('policies'),
+            static fn (string $column): bool => $column !== 'file_path'
+        ));
+        $policies = $db->table('policies')
+            ->select('policies.*, employee.name AS telecaller_name')
+            ->join('employee', 'employee.employeeId = policies.telecaller', 'left')
+            ->orderBy('policies.policy_id', 'DESC')
+            ->get()
+            ->getResultArray();
+
+        $stream = fopen('php://temp', 'w+');
+
+        if ($stream === false) {
+            return $this->response->setStatusCode(500, 'Unable to create the CSV export.');
+        }
+
+        // UTF-8 BOM ensures that Microsoft Excel displays Unicode text correctly.
+        fwrite($stream, "\xEF\xBB\xBF");
+        fputcsv($stream, $columns);
+
+        foreach ($policies as $policy) {
+            $row = [];
+
+            foreach ($columns as $column) {
+                $value = $column === 'telecaller'
+                    ? (string) ($policy['telecaller_name'] ?? '')
+                    : (string) ($policy[$column] ?? '');
+
+                // Prevent cells supplied by users from being interpreted as formulas.
+                if (preg_match('/^\s*[=+\-@]/', $value) === 1) {
+                    $value = "'" . $value;
+                }
+
+                $row[] = $value;
+            }
+
+            fputcsv($stream, $row);
+        }
+
+        rewind($stream);
+        $csv = stream_get_contents($stream);
+        fclose($stream);
+
+        if ($csv === false) {
+            return $this->response->setStatusCode(500, 'Unable to read the CSV export.');
+        }
+
+        $filename = 'all-policies-' . date('Y-m-d_H-i-s') . '.csv';
+
+        return $this->response
+            ->setHeader('Content-Type', 'text/csv; charset=utf-8')
+            ->setHeader('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->setHeader('Cache-Control', 'no-store, no-cache, must-revalidate')
+            ->setBody($csv);
+    }
+
+    /**
      * Download policy PDF
      */
     public function downloadPolicy($policyId)

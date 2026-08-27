@@ -178,7 +178,7 @@
             // Show export button
             exportBtn.style.display = 'inline-block';
             exportBtn.onclick = () => {
-                window.location.href = `<?= site_url('admin/export-expired') ?>`;
+                window.location.href = `<?= site_url('admin/export-all-policy') ?>`;
             };
 
             // Initialize DataTable

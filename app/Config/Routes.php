@@ -63,6 +63,7 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->post('upload-data', 'Admin::uploadDataPost');
     $routes->get('search-policy', 'Admin::searchPolicy');
     $routes->get('search-policy-api', 'Admin::searchPolicyApi');
+    $routes->get('export-all-policy', 'Admin::exportAllPoliciesCsv');
     $routes->get('current-month-policy', 'Admin::currentMonthPolicy');
     //$routes->get('edit-policy-view', 'Admin::editPolicyView');
     $routes->get('edit-policy-view/(:num)', 'Admin::editPolicyView/$1');

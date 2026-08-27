@@ -87,12 +87,13 @@ class Auth extends BaseController
                                             ->orderBy('endDate', 'DESC')
                                             ->first();
 
+            date_default_timezone_set('Asia/Kolkata');
             $today = date('Y-m-d');
 
             if (!$subscription) {
                 return redirect()->back()->with('error', 'No subscription found. Please contact admin.');
             }
-
+            
             if ($subscription['endDate'] < $today ) {
                  $this->subscriptionModel->update($subscription['id'], [
                     'status' => 'Expired'
