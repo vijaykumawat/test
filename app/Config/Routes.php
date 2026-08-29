@@ -115,6 +115,7 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->post('employee-update', 'Admin::updateEmployee');
     $routes->post('extract-data', 'Admin::extractData');
     $routes->get('all-data', 'Admin::allData');
+    $routes->get('all-data-api', 'Admin::allDataApi');
     $routes->get('extended-data', 'Admin::extendedData');
     $routes->post('update-record', 'Admin::updateRecord');
     $routes->post('delete-record', 'Admin::deleteRecord');

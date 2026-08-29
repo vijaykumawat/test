@@ -2064,12 +2064,114 @@ public function uploadDataPost()
 
     public function allData()
     {
-        $rows = $this->dataModel->findAllWithTelecaller();
-
-        // Active employees for the telecaller dropdown in the edit modal
+        // Active employees for the telecaller dropdown in the edit modal.
+        // The data rows themselves are loaded in chunks via allDataApi()
+        // (DataTables server-side processing) so the page loads fast.
         $employees = $this->employeeModel->where('isActive', 1)->orderBy('name', 'ASC')->findAll();
-                            
-        return view('admin/all_data', ['rows' => $rows, 'employees' => $employees]);
+
+        return view('admin/all_data', ['employees' => $employees]);
+    }
+
+        /**
+     * Server-side API for the All Data DataTable.
+     *
+     * Returns only the requested page (chunk) of records, with search / sort /
+     * pagination handled on the database side, so the page loads fast instead
+     * of passing every record to the view at once.
+     */
+    public function allDataApi()
+    {
+        $draw      = (int) ($this->request->getVar('draw') ?? 1);
+        $start     = max(0, (int) ($this->request->getVar('start') ?? 0));
+        $length    = (int) ($this->request->getVar('length') ?? 25);
+        $searchRaw = trim((string) ($this->request->getVar('search')['value'] ?? ''));
+        if ($length < 1 || $length > 500) {
+            $length = 25;
+        }
+
+        // Column index => DB column. Indices 0 (checkbox) and 24 (action)
+        // are not orderable.
+        $columns = [
+            1 => 'data.recordId', 2 => 'data.regDate', 3 => 'data.regDateMonth',
+            4 => 'data.regNumber', 5 => 'data.ownerName', 6 => 'data.address',
+            7 => 'data.vehicleMaker', 8 => 'data.vehicleModel', 9 => 'data.fuelType',
+            10 => 'data.saleAmt', 11 => 'data.seatCapacity', 12 => 'data.cubicCapacity',
+            13 => 'data.mobile', 14 => 'data.expiryDate', 15 => 'data.prevInsuCompany',
+            16 => 'employee.name', 17 => 'data.dataUploadDate', 18 => 'data.actionTaken',
+            19 => 'data.isImportant', 20 => 'data.isIntrested', 21 => 'data.alreadySale',
+            22 => 'data.saleInGb', 23 => 'data.modifiyDate',
+        ];
+        $orderColIndex = (int) ($this->request->getVar('order')[0]['column'] ?? 0);
+        $orderColumn   = $columns[$orderColIndex] ?? 'data.recordId';
+        if ($orderColumn === '') {
+            $orderColumn = 'data.recordId';
+        }
+        $orderDir = strtolower((string) ($this->request->getVar('order')[0]['dir'] ?? 'asc')) === 'asc' ? 'ASC' : 'DESC';
+
+        try {
+            $rows = $this->dataModel->findAllWithTelecallerPaginated($length, $start, $searchRaw, $orderColumn, $orderDir);
+            $total        = $this->dataModel->countAllWithTelecaller();
+            $totalFiltered = $searchRaw !== '' ? $this->dataModel->countFilteredWithTelecaller($searchRaw) : $total;
+
+            $textFields    = ['recordId','regDate','regDateMonth','regNumber','ownerName','address','vehicleMaker','vehicleModel','fuelType','saleAmt','seatCapacity','cubicCapacity','mobile','expiryDate','prevInsuCompany','telecaller','dataUploadDate','modifiyDate'];
+            $flags         = ['actionTaken','isImportant','isIntrested','alreadySale','saleInGb'];
+            $editStrFields = ['recordId','regDate','regDateMonth','regNumber','ownerName','address','vehicleMaker','vehicleModel','fuelType','saleAmt','seatCapacity','cubicCapacity','mobile','expiryDate','prevInsuCompany','telecallerId','modifiyDate'];
+
+            $data = [];
+            foreach ($rows as $row) {
+                $style = "padding:.2rem .4rem;";
+                if (! empty($row['alreadySale'])) {
+                    $style .= "background-color:#F88379; color:white;";
+                } elseif (! empty($row['actionTaken'])) {
+                    $style .= "background-color:#4b584b; color:white;";
+                } else {
+                    $style .= "background-color:white; color:black;";
+                }
+
+                // Data passed to the edit modal (mirrors the original view logic)
+                $editData = [];
+                foreach ($editStrFields as $f) {
+                    $editData[$f] = (string) ($row[$f] ?? '');
+                }
+                foreach ($flags as $f) {
+                    $editData[$f] = ! empty($row[$f]) ? 1 : 0;
+                }
+
+                $rid       = (string) ($row['recordId'] ?? '');
+                $editJson  = esc(json_encode($editData), 'attr');
+                $ownerAttr = esc((string) ($row['ownerName'] ?? ''), 'attr');
+
+                $cell = [
+                    'rowStyle' => $style,
+                    'select'   => '<input type="checkbox" class="row-checkbox" value="' . esc($rid, 'attr') . '">',
+                    'action'   => '<button type="button" class="edit-record-btn" title="Edit Record" data-record=\'' . $editJson . '\'><i class="ti ti-pencil"></i></button>'
+                                . '<button type="button" class="delete-record-btn" title="Delete Record" data-record-id="' . esc($rid, 'attr') . '" data-record-name="' . $ownerAttr . '"><i class="ti ti-trash"></i></button>',
+                ];
+                foreach ($textFields as $f) {
+                    $cell[$f] = esc((string) ($row[$f] ?? ''));
+                }
+                foreach ($flags as $f) {
+                    $cell[$f] = ! empty($row[$f]) ? 'Yes' : 'No';
+                }
+                $data[] = $cell;
+            }
+
+            return $this->response->setJSON([
+                'draw'            => $draw,
+                'recordsTotal'    => $total,
+                'recordsFiltered' => $totalFiltered,
+                'data'            => $data,
+            ]);
+        } catch (\Exception $e) {
+            log_message('error', 'allDataApi error: ' . $e->getMessage());
+            return $this->response->setJSON([
+                'draw'            => $draw,
+                'recordsTotal'    => 0,
+                'recordsFiltered' => 0,
+                'data'            => [],
+                'error'           => 'Failed to load data',
+            ]);
+        }
     }
 
     public function extendedData(){

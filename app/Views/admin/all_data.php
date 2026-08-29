@@ -220,8 +220,8 @@ ini_set('display_errors', 1);
                                                     <th>Mode</th>
                                                     <th>Fuel</th>
                                                     <th>Sale</th>
-                                                    <th>Seat Capacity</th>
-                                                    <th>Cubic Capacity</th>
+                                                    <th>Seat</th>
+                                                    <th>C C</th>
                                                     <th>Mobile</th>
                                                     <th>Expiry</th>
                                                     <th>Prev Insurance</th>
@@ -236,91 +236,7 @@ ini_set('display_errors', 1);
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-<?php if (!empty($rows)): ?>
-    <?php foreach ($rows as $row): ?>
-        <?php
-            $style = "padding:.2rem .4rem;"; // compact padding
-
-            if (!empty($row['alreadySale'])) {
-                $style .= "background-color:#F88379; color:white;";
-            } elseif (!empty($row['actionTaken'])) {
-                $style .= "background-color:#4b584b; color:white;";
-            } else {
-                $style .= "background-color:white; color:black;";
-            }
-
-            // Data passed to edit modal
-            $editData = [
-                'recordId'        => (string)($row['recordId'] ?? ''),
-                'regDate'         => (string)($row['regDate'] ?? ''),
-                'regDateMonth'    => (string)($row['regDateMonth'] ?? ''),
-                'regNumber'       => (string)($row['regNumber'] ?? ''),
-                'ownerName'       => (string)($row['ownerName'] ?? ''),
-                'address'         => (string)($row['address'] ?? ''),
-                'vehicleMaker'    => (string)($row['vehicleMaker'] ?? ''),
-                'vehicleModel'    => (string)($row['vehicleModel'] ?? ''),
-                'fuelType'        => (string)($row['fuelType'] ?? ''),
-                'saleAmt'         => (string)($row['saleAmt'] ?? ''),
-                'seatCapacity'    => (string)($row['seatCapacity'] ?? ''),
-                'cubicCapacity'   => (string)($row['cubicCapacity'] ?? ''),
-                'mobile'          => (string)($row['mobile'] ?? ''),
-                'expiryDate'      => (string)($row['expiryDate'] ?? ''),
-                'prevInsuCompany' => (string)($row['prevInsuCompany'] ?? ''),
-                'telecallerId'    => (string)($row['telecallerId'] ?? ''),
-                'actionTaken'     => !empty($row['actionTaken']) ? 1 : 0,
-                'isImportant'     => !empty($row['isImportant']) ? 1 : 0,
-                'isIntrested'     => !empty($row['isIntrested']) ? 1 : 0,
-                'alreadySale'     => !empty($row['alreadySale']) ? 1 : 0,
-                'saleInGb'        => !empty($row['saleInGb']) ? 1 : 0,
-                'modifiyDate'     => (string)($row['modifiyDate'] ?? ''),
-            ];
-        ?>
-        <tr>
-            <td style="<?php echo $style; ?>">
-                                                        <input type="checkbox" class="row-checkbox"
-                                                            value="<?= esc($row['recordId']) ?>">
-                                                    </td>
-            <td style="<?= $style ?>"><?= esc($row['recordId']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['regDate']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['regDateMonth']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['regNumber']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['ownerName']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['address']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['vehicleMaker']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['vehicleModel']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['fuelType']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['saleAmt']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['seatCapacity']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['cubicCapacity']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['mobile']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['expiryDate']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['prevInsuCompany']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['telecaller']) ?></td>
-            <td style="<?= $style ?>"><?= esc($row['dataUploadDate']) ?></td>
-            <td style="<?= $style ?>"><?= !empty($row['actionTaken']) ? 'Yes' : 'No' ?></td>
-            <td style="<?= $style ?>"><?= !empty($row['isImportant']) ? 'Yes' : 'No' ?></td>
-            <td style="<?= $style ?>"><?= !empty($row['isIntrested']) ? 'Yes' : 'No' ?></td>
-            <td style="<?= $style ?>"><?= !empty($row['alreadySale']) ? 'Yes' : 'No' ?></td>
-            <td style="<?= $style ?>"><?= !empty($row['saleInGb']) ? 'Yes' : 'No' ?></td>
-            <td style="<?= $style ?>"><?= esc($row['modifiyDate'] ?? '') ?></td>
-            <td style="<?= $style ?>">
-                <button type="button" class="edit-record-btn" title="Edit Record"
-                    data-record='<?= esc(json_encode($editData), 'attr') ?>'>
-                    <i class="ti ti-pencil"></i>
-                </button>
-                <button type="button" class="delete-record-btn" title="Delete Record"
-                    data-record-id="<?= esc($row['recordId']) ?>"
-                    data-record-name="<?= esc($row['ownerName']) ?>">
-                    <i class="ti ti-trash"></i>
-                </button>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-<?php else: ?>
-    <tr><td colspan="25">No records found.</td></tr>
-<?php endif; ?>
-</tbody>
+                                            <tbody></tbody>
 
                                         </table>
 
@@ -613,14 +529,55 @@ ini_set('display_errors', 1);
     $(document).ready(function() {
         if (!$.fn.DataTable.isDataTable('#resultsTable')) {
             $('#resultsTable').DataTable({
+                // Server-side processing: only the current page chunk is
+                // fetched from the server, so the page loads fast even
+                // with 10,000+ records (instead of loading all rows).
+                processing: true,
+                serverSide: true,
+                ajax: "<?= site_url('admin/all-data-api') ?>",
                 pageLength: 25,
                 lengthMenu: [10, 25, 50, 100, 200],
+                order: [[1, 'asc']],
+                columns: [
+                    { data: 'select', orderable: false, searchable: false },
+                    { data: 'recordId' },
+                    { data: 'regDate' },
+                    { data: 'regDateMonth' },
+                    { data: 'regNumber' },
+                    { data: 'ownerName' },
+                    { data: 'address' },
+                    { data: 'vehicleMaker' },
+                    { data: 'vehicleModel' },
+                    { data: 'fuelType' },
+                    { data: 'saleAmt' },
+                    { data: 'seatCapacity' },
+                    { data: 'cubicCapacity' },
+                    { data: 'mobile' },
+                    { data: 'expiryDate' },
+                    { data: 'prevInsuCompany' },
+                    { data: 'telecaller' },
+                    { data: 'dataUploadDate' },
+                    { data: 'actionTaken' },
+                    { data: 'isImportant' },
+                    { data: 'isIntrested' },
+                    { data: 'alreadySale' },
+                    { data: 'saleInGb' },
+                    { data: 'modifiyDate' },
+                    { data: 'action', orderable: false, searchable: false }
+                ],
+                // Re-apply the row highlight color (already-sold / action-taken)
+                createdRow: function(row, data, dataIndex) {
+                    if (data.rowStyle) {
+                        $(row).find('td').attr('style', data.rowStyle);
+                    }
+                },
                 language: {
                     search: "Search:",
                     paginate: {
                         previous: "Prev",
                         next: "Next"
-                    }
+                    },
+                    zeroRecords: "No matching records found."
                 }
             });
         }
