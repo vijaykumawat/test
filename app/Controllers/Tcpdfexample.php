@@ -30,6 +30,9 @@ class Tcpdfexample extends BaseController
         // Load insurer config
         $config = new Insurance();
         $company = $this->request->getVar('company');
+        if (!$company || !isset($config->insurers[$company])) {
+            $company = 'SHRIRAM'; // safe fallback
+        }
         $companyConfig = $config->insurers[$company];
 
         // Inputs
@@ -58,61 +61,49 @@ class Tcpdfexample extends BaseController
         $age = $currentYear - $regYear;
         */
 
-        $age=0;
-        $currentYear = date('Y');
-        $dateString = $regDate;
+        $age         = 0;
+        $currentYear = (int) date('Y');
+        $regYear     = $currentYear;
 
-        // Try parsing with d-m-Y
-        $date = DateTime::createFromFormat('d-m-Y', $dateString);
+        // Robust parsing: handles Excel serial dates (e.g. "44818"), d-m-Y, d/m/Y, Y-m-d, etc.
+        // Never echoes/aborts - falls back to defaults so PDF generation cannot crash.
+        $parsedDate = parseVehicleRegDate($regDate);
 
-        // If that fails, try d/m/Y
-        if (!$date) {
-            $date = DateTime::createFromFormat('d/m/Y', $dateString);
-        }
-
-        if ($date) {
-            $regYear = $date->format('Y');
-            //$currentYear = date('Y');
-            $age = $currentYear - $regYear;
-
-        } else {
-            echo "Invalid date format!";
+        if ($parsedDate instanceof DateTime) {
+            $regYear = (int) $parsedDate->format('Y');
+            $age     = max(0, $currentYear - $regYear);
         }
 
         
         
         $band = getCCRange($cc);
-        $odRate = $band ? $config->insurers['SHRIRAM']['od_rates'][$band] : null;
-        $BasicForVehicle = $idv * $odRate /100;
-        if($isCngInstalled)
-        {
-            $cngRate = $band ? $config->insurers['SHRIRAM']['cng_rates'][$band] : null;
-            $cngMatchAmt = $cc <= 1000 ? 1 : 2; 
+
+        // Use the SELECTED insurer's rates (was hardcoded to SHRIRAM which broke RELIANCE)
+        $insurerRates = $config->insurers[$company] ?? $config->insurers['SHRIRAM'];
+
+        $odRate = ($band && isset($insurerRates['od_rates'][$band])) ? $insurerRates['od_rates'][$band] : 0;
+        $BasicForVehicle = $idv * $odRate / 100;
+
+        $cngKit = 0;
+        if ($isCngInstalled) {
+            $cngRate = ($band && isset($insurerRates['cng_rates'][$band])) ? $insurerRates['cng_rates'][$band] : 0;
+            $cngMatchAmt = $cc <= 1000 ? 1 : 2;
             $cngKit = ($idv * $cngRate / 100) + $cngMatchAmt;
         }
-        else
-        {
-            $cngKit = 0;
-        }
-        $basicODPremium = $BasicForVehicle + $cngKit; 
-        if($company == 'SHRIRAM'){
-            $odDiscount = $config->insurers['SHRIRAM']['od_discount'];
-            $odDiscountAmt = $basicODPremium * $odDiscount['detariff'] / 100;
-        }
+
+        $basicODPremium = $BasicForVehicle + $cngKit;
+
+        $odDiscountAmt = 0;
         if ($company === 'SBI') {
             $claimStatus = ($ncb == 0) ? 'claim_yes' : 'claim_no';
 
             // Fetch OD discount from config
-            if (isset($config->insurers['SBI']['od_discount'][$claimStatus])) {
-                $odDiscount = $config->insurers['SBI']['od_discount'][$claimStatus];
-            } else {
-                $odDiscount = 0; // fallback if not defined
-            }
+            $odDiscount = isset($insurerRates['od_discount'][$claimStatus]) ? $insurerRates['od_discount'][$claimStatus] : 0;
             $odDiscountAmt = $basicODPremium * $odDiscount / 100;
-        }
-        if($company == 'RELIANCE'){
-            $odDiscount = $config->insurers['RELIANCE']['od_discount'];
-            $odDiscountAmt = $basicODPremium * $odDiscount['detariff'] / 100;
+        } else {
+            // SHRIRAM / RELIANCE use a flat de-tariff discount
+            $odDiscount = isset($insurerRates['od_discount']['detariff']) ? $insurerRates['od_discount']['detariff'] : 0;
+            $odDiscountAmt = $basicODPremium * $odDiscount / 100;
         }
 
         $basicOdPremiumAfterDiscount = $basicODPremium - $odDiscountAmt;
@@ -121,28 +112,44 @@ class Tcpdfexample extends BaseController
 
         //Section B Add-ons
 
-        $basicLiability = $band && isset($config->insurers['SHRIRAM']['tp_rates'][$band]) ? $config->insurers['SHRIRAM']['tp_rates'][$band]['basic_liability'] : null;
-        $passengerCoverage = $band && isset($config->insurers['SHRIRAM']['tp_rates'][$band]) ? $config->insurers['SHRIRAM']['tp_rates'][$band]['per_passenger'] * ($seatCapacity -1): null;
-        $cngLiability = $band && isset($config->insurers['SHRIRAM']['tp_rates'][$band]) ? $config->insurers['SHRIRAM']['tp_rates'][$band]['cng_liability'] : null;    
-        $llLiability = $band && isset($config->insurers['SHRIRAM']['tp_rates'][$band]) ? $config->insurers['SHRIRAM']['tp_rates'][$band]['ll_driver'] : null;
-        $thirdParty = $basicLiability + $passengerCoverage;
-        $libilityB = $basicLiability + $passengerCoverage + $cngLiability + $llLiability;
+        // TP rates: config bands use "1201-2000" while getCCRange() returns "1201-1500",
+        // so fall back to the closest matching band - otherwise Basic TP premium was missed.
+        $tpRates = isset($insurerRates['tp_rates']) ? $insurerRates['tp_rates'] : [];
+        $tpBand  = null;
+        if ($band) {
+            if (isset($tpRates[$band])) {
+                $tpBand = $band;
+            } elseif ($band === '1201-1500' && isset($tpRates['1201-1500'])) {
+                $tpBand = '1201-1500';
+            } elseif ($band === '1201-1500' && isset($tpRates['1201-2000'])) {
+                $tpBand = '1201-2000';
+            }
+        }
 
+        $basicLiability    = $tpBand ? ($tpRates[$tpBand]['basic_liability'] ?? 0) : 0;
+        $passengerCoverage = $tpBand ? (($tpRates[$tpBand]['per_passenger'] ?? 0) * max(0, $seatCapacity - 1)) : 0;
+        $cngLiability      = ($tpBand && $isCngInstalled) ? ($tpRates[$tpBand]['cng_liability'] ?? 0) : 0;
+        $llLiability       = $tpBand ? ($tpRates[$tpBand]['ll_driver'] ?? 0) : 0;
+
+        $thirdParty = $basicLiability + $passengerCoverage;
+        $libilityB  = $basicLiability + $passengerCoverage + $cngLiability + $llLiability;
+        $totalAddonC = 0;
+        $zeroDep = 0;
         // Section C Addons
         if($isZeroDep)
         {
-            if($company == 'SHRIRAM'){
+            if($company == 'SHRIRAM' || $company == 'RELIANCE'){
                 $ccBand = getCCRangeForZeroDep($cc);
                 $ageBand = getAgeRange($age);
-                $zeroDepRate = ($ccBand && $ageBand) ? $config->insurers['SHRIRAM']['zero_dep_rates'][$ccBand][$ageBand] : null;
-                $zeroDep = $zeroDepRate * $idv ;
+                $zeroDepRate = ($ccBand && $ageBand && isset($insurerRates['zero_dep_rates'][$ccBand][$ageBand])) ? $insurerRates['zero_dep_rates'][$ccBand][$ageBand] : null;
+                $zeroDep = ($zeroDepRate !== null) ? $zeroDepRate * $idv : 0;
                 $totalAddonC = $zeroDep;
             }
 
             if($company == 'SBI'){
                 $ageBand = getAgeRange($age);
-                $zeroDepRate = $config->insurers['SBI']['zero_dep_rates'][$ageBand];
-                $zeroDep = $zeroDepRate * $idv ;
+                $zeroDepRate = ($ageBand && isset($insurerRates['zero_dep_rates'][$ageBand])) ? $insurerRates['zero_dep_rates'][$ageBand] : null;
+                $zeroDep = ($zeroDepRate !== null) ? $zeroDepRate * $idv : 0;
                 $totalAddonC = $zeroDep;
             }
 
@@ -159,7 +166,7 @@ class Tcpdfexample extends BaseController
         $sgst = $totalPremiumWithoutGst * 9 / 100;
         $cgst = $totalPremiumWithoutGst * 9 / 100;
 
-        $finalPremium = $totalPremiumWithoutGst + $cgst + $cgst;
+        $finalPremium = $totalPremiumWithoutGst + $sgst + $cgst;
 
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         $randomPart = substr(str_shuffle(str_repeat($characters, 15)), 0, 13); // 13 chars

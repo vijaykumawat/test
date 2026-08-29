@@ -1,0 +1,40 @@
+CRITICAL - 2026-08-28 17:00:37 --> ErrorException: Undefined variable $totalAddonC
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Controllers\Tcpdfexample.php on line 156.
+ 1 APPPATH\Controllers\Tcpdfexample.php(156): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $totalAddonC', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Tcpdfexample.php', 156)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-28 17:02:36 --> ErrorException: Undefined variable $zeroDep
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Controllers\Tcpdfexample.php on line 194.
+ 1 APPPATH\Controllers\Tcpdfexample.php(194): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $zeroDep', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Tcpdfexample.php', 194)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-28 17:03:44 --> ErrorException: Undefined variable $zeroDep
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Controllers\Tcpdfexample.php on line 131.
+ 1 APPPATH\Controllers\Tcpdfexample.php(131): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $zeroDep', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Tcpdfexample.php', 131)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-08-28 17:13:41 --> ErrorException: Array to string conversion
+[Method: POST, Route: Tcpdfexample/quote]
+in APPPATH\Controllers\Tcpdfexample.php on line 35.
+ 1 APPPATH\Controllers\Tcpdfexample.php(35): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\xampp\\htdocs\\gbinsurance\\app\\Controllers\\Tcpdfexample.php', 35)
+ 2 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\Tcpdfexample->quote()
+ 3 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tcpdfexample))
+ 4 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

@@ -106,3 +106,78 @@ if (!function_exists('getAgeRange')) {
         return $ageBand;
     }
 }
+
+if (!function_exists('parseVehicleRegDate')) {
+    /**
+     * Robustly parse a vehicle registration date coming from the CRM data.
+     *
+     * Handles Excel serial dates (e.g. "44818"), d-m-Y, d/m/Y, Y-m-d and other
+     * common formats. Returns null when the value cannot be parsed so callers
+     * can fall back gracefully instead of crashing (e.g. during PDF generation).
+     *
+     * @param mixed $value
+     * @return DateTime|null
+     */
+    function parseVehicleRegDate($value)
+    {
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        $value = trim((string) $value);
+
+        if ($value === '') {
+            return null;
+        }
+
+        // Excel serial date (days since 1899-12-30). 25569 == 1970-01-01.
+        if (ctype_digit($value)) {
+            $serial = (int) $value;
+            if ($serial >= 25569 && $serial <= 80000) {
+                $date = new DateTime('1899-12-30', new DateTimeZone('UTC'));
+                $date->modify('+' . $serial . ' days');
+
+                return $date;
+            }
+
+            // Plain numbers that are not Excel serials cannot be parsed safely.
+            return null;
+        }
+
+        $formats = ['d-m-Y', 'd/m/Y', 'Y-m-d', 'd-m-y', 'd/m/y', 'd-M-Y', 'd-M-y', 'Y/m/d'];
+        foreach ($formats as $format) {
+            $date = DateTime::createFromFormat('!' . $format, $value);
+            if ($date instanceof DateTime) {
+                $lastErrors = DateTime::getLastErrors();
+                $hasErrors  = is_array($lastErrors)
+                    && (((int) ($lastErrors['warning_count'] ?? 0)) > 0 || ((int) ($lastErrors['error_count'] ?? 0)) > 0);
+                if (!$hasErrors) {
+                    return $date;
+                }
+            }
+        }
+
+        $timestamp = strtotime($value);
+        if ($timestamp !== false) {
+            return new DateTime('@' . $timestamp);
+        }
+
+        return null;
+    }
+}
+
+if (!function_exists('formatVehicleRegDate')) {
+    /**
+     * Format a registration date for display (d-m-Y).
+     * Returns the original value when it cannot be parsed.
+     *
+     * @param mixed $value
+     * @return string
+     */
+    function formatVehicleRegDate($value)
+    {
+        $date = parseVehicleRegDate($value);
+
+        return $date instanceof DateTime ? $date->format('d-m-Y') : (string) $value;
+    }
+}

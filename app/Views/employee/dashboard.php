@@ -1,3 +1,4 @@
+<?php helper('common'); ?>
 <!doctype html>
 <html lang="en">
 
@@ -148,7 +149,7 @@
                                                     Reg. Date</dt>
                                                 <dd class="col-sm-4 text-dark"
                                                     style="font-weight: bold; background-color: yellow;">
-                                                    <?php echo $regDate;?></dd>
+                                                    <?php echo formatVehicleRegDate($regDate);?></dd>
                                                 <dt class="col-sm-2 text-end" style="color:black; font-weight: bold;">
                                                     Maker</dt>
                                                 <dd class="col-sm-4 text-dark"><?php echo $vehicleMaker;?></dd>
@@ -178,7 +179,7 @@
                                                     Expiry Date</dt>
                                                 <dd class="col-sm-4 text-dark"
                                                     style="font-weight: bold; background-color: yellow;">
-                                                    <?php echo $expiryDate;?></dd>
+                                                    <?php echo formatVehicleRegDate($expiryDate);?></dd>
                                                 <dt class="col-sm-2 text-end" style="color:black; font-weight: bold;">
                                                     Telecaller</dt>
                                                 <dd class="col-sm-4 text-dark"><?php echo $telecaller;?></dd>
@@ -603,11 +604,13 @@
                                             <label class="form-check-label">CNG Kit Installed</label>
                                         </div>
                                         <br>
+                                        <!--
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input secondary" type="checkbox"
                                                 name="reliance_zero_dep" value="1">
                                             <label class="form-check-label">Zero Dep</label>
-                                        </div>
+                                        </div> -->
+
                                         <div class="mt-3 p-3 border rounded bg-light">
                                             <div class="small text-muted">Estimated Final Premium</div>
                                             <div class="h5 mb-0 text-primary quotation-premium-value">₹ 0.00</div>
@@ -1082,6 +1085,36 @@
                                 return null;
                             };
 
+                            const parseRegDate = function(value) {
+                                if (!value) {
+                                    return null;
+                                }
+                                const str = String(value).trim();
+                                if (!str) {
+                                    return null;
+                                }
+                                // Excel serial date (days since 1899-12-30), e.g. "44818"
+                                if (/^\d+$/.test(str)) {
+                                    const serial = parseInt(str, 10);
+                                    if (serial >= 25569 && serial <= 80000) {
+                                        return new Date(Date.UTC(1899, 11, 30) + serial * 86400000);
+                                    }
+                                    return null;
+                                }
+                                // d-m-Y or d/m/Y (day first, matches server-side parsing)
+                                let match = str.match(/^(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})$/);
+                                if (match) {
+                                    return new Date(parseInt(match[3], 10), parseInt(match[2], 10) - 1, parseInt(match[1], 10));
+                                }
+                                // Y-m-d
+                                match = str.match(/^(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})$/);
+                                if (match) {
+                                    return new Date(parseInt(match[1], 10), parseInt(match[2], 10) - 1, parseInt(match[3], 10));
+                                }
+                                const fallback = new Date(str);
+                                return isNaN(fallback.getTime()) ? null : fallback;
+                            };
+
                             const getPaneValue = function(pane, attribute) {
                                 const input = pane.querySelector(`[name="${pane.dataset[attribute]}"]`);
                                 return input ? input.value : '';
@@ -1114,9 +1147,9 @@
                                 let age = 0;
 
                                 if (regDate) {
-                                    const regYear = new Date(regDate).getFullYear();
-                                    if (!Number.isNaN(regYear)) {
-                                        age = new Date().getFullYear() - regYear;
+                                    const parsedRegDate = parseRegDate(regDate);
+                                    if (parsedRegDate && !Number.isNaN(parsedRegDate.getTime())) {
+                                        age = Math.max(0, new Date().getFullYear() - parsedRegDate.getFullYear());
                                     }
                                 }
 
