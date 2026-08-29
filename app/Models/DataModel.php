@@ -35,9 +35,11 @@ class DataModel extends Model{
         'modifiyDate'
     ];
 
+    
+
     public function findAllWithTelecaller()
     {
-        return $this->select('data.recordId, data.regDate, data.regNumber, data.ownerName, data.mobile,data.alreadySale, data.actionTaken,data.expiryDate, employee.name as telecaller')
+        return $this->select('data.*, employee.name as telecaller, data.telecaller as telecallerId')
                     ->join('employee', 'employee.employeeId = data.telecaller', 'left')
                     ->findAll();
     }

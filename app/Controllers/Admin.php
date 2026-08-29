@@ -2065,7 +2065,190 @@ public function uploadDataPost()
     public function allData()
     {
         $rows = $this->dataModel->findAllWithTelecaller();
-        return view('admin/all_data', ['rows' => $rows]);
+
+        // Active employees for the telecaller dropdown in the edit modal
+        $employees = $this->employeeModel->where('isActive', 1)->orderBy('name', 'ASC')->findAll();
+                            
+        return view('admin/all_data', ['rows' => $rows, 'employees' => $employees]);
+    }
+
+    public function extendedData(){
+        $rows = $this->dataModel->findAllWithTelecaller();
+
+        // Active employees for the telecaller dropdown in the edit modal
+        $employees = $this->employeeModel->where('isActive', 1)->orderBy('name', 'ASC')->findAll();
+     
+
+        return view('admin/all_data_extended', ['rows' => $rows, 'employees' => $employees]);
+    }
+    /**
+     * Update a single data record (used by the edit modal on the All Data page).
+     */
+    public function updateRecord()
+    {
+        if (! $this->request->is('post')) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Invalid request method']);
+        }
+
+        // recordId is an alphanumeric string in this system, do not cast to int
+        $recordId = trim((string) ($this->request->getPost('recordId') ?? ''));
+        if ($recordId === '') {
+            return $this->response->setJSON(['success' => false, 'message' => 'Invalid record ID']);
+        }
+
+        $record = $this->dataModel->find($recordId);
+        if (! $record) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Record not found']);
+        }
+
+        // Only allow editing of these fields
+        $allowedFields = [
+            'regDate',
+            'regDateMonth',
+            'regNumber',
+            'ownerName',
+            'address',
+            'vehicleMaker',
+            'vehicleModel',
+            'fuelType',
+            'saleAmt',
+            'seatCapacity',
+            'cubicCapacity',
+            'mobile',
+            'expiryDate',
+            'prevInsuCompany',
+            'telecaller',
+            'actionTaken',
+            'isImportant',
+            'isIntrested',
+            'alreadySale',
+            'saleInGb',
+        ];
+
+        $updateData = [];
+        foreach ($allowedFields as $field) {
+            if ($this->request->getPost($field) !== null) {
+                $updateData[$field] = trim((string) $this->request->getPost($field));
+            }
+        }
+
+        if (empty($updateData)) {
+            return $this->response->setJSON(['success' => false, 'message' => 'No data to update']);
+        }
+
+        // Track modification time
+        $updateData['modifiyDate'] = date('Y-m-d H:i:s');
+
+        if (! $this->dataModel->update($recordId, $updateData)) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to update record',
+                'errors'  => $this->dataModel->errors()
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'Record updated successfully'
+        ]);
+    }
+
+    /**
+     * Delete a single data record (used by the delete confirmation modal on the All Data page).
+     */
+    public function deleteRecord()
+    {
+        if (! $this->request->is('post')) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Invalid request method']);
+        }
+
+        // recordId is an alphanumeric string in this system, do not cast to int
+        $recordId = trim((string) ($this->request->getPost('recordId') ?? ''));
+        if ($recordId === '') {
+            return $this->response->setJSON(['success' => false, 'message' => 'Invalid record ID']);
+        }
+
+        $record = $this->dataModel->find($recordId);
+        if (! $record) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Record not found']);
+        }
+
+        // Remove related history rows first, then the record itself
+        $this->historyModel->where('recordId', $recordId)->delete();
+
+        if (! $this->dataModel->delete($recordId)) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Failed to delete record']);
+        }
+
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'Record deleted successfully'
+        ]);
+    }
+
+    /**
+     * Delete multiple data records at once (bulk delete from the All Data page).
+     */
+    public function deleteRecords()
+    {
+        if (! $this->request->is('post')) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Invalid request method']);
+        }
+
+        $recordIds = $this->request->getPost('recordIds');
+        if (empty($recordIds) || ! is_array($recordIds)) {
+            return $this->response->setJSON(['success' => false, 'message' => 'No records selected']);
+        }
+
+        // Keep only valid non-empty string ids (recordId is alphanumeric in this system)
+        $recordIds = array_values(array_filter(array_map(function ($id) {
+            return trim((string) $id);
+        }, $recordIds), function ($id) {
+            return $id !== '';
+        }));
+
+        if (empty($recordIds)) {
+            return $this->response->setJSON(['success' => false, 'message' => 'No records selected']);
+        }
+
+        $deleted = 0;
+        $failed = [];
+
+        foreach ($recordIds as $recordId) {
+            $record = $this->dataModel->find($recordId);
+            if (! $record) {
+                $failed[] = $recordId;
+                continue;
+            }
+
+            // Remove related history rows first, then the record itself
+            $this->historyModel->where('recordId', $recordId)->delete();
+
+            if ($this->dataModel->delete($recordId)) {
+                $deleted++;
+            } else {
+                $failed[] = $recordId;
+            }
+        }
+
+        if ($deleted === 0) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to delete selected records'
+            ]);
+        }
+
+        $message = $deleted . ' record(s) deleted successfully';
+        if (! empty($failed)) {
+            $message .= ', ' . count($failed) . ' failed';
+        }
+
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => $message,
+            'deleted' => $deleted,
+            'failed'  => $failed
+        ]);
     }
 
     /**

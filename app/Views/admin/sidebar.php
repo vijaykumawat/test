@@ -81,6 +81,17 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                                 </div>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link justify-content-between"
+                                href="<?= base_url('/admin/extended-data') ?>">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="round-16 d-flex align-items-center justify-content-center">
+                                        <i class="ti ti-circle"></i>
+                                    </div>
+                                    <span class="hide-menu">Extended Data</span>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <!--

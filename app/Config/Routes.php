@@ -115,6 +115,10 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->post('employee-update', 'Admin::updateEmployee');
     $routes->post('extract-data', 'Admin::extractData');
     $routes->get('all-data', 'Admin::allData');
+    $routes->get('extended-data', 'Admin::extendedData');
+    $routes->post('update-record', 'Admin::updateRecord');
+    $routes->post('delete-record', 'Admin::deleteRecord');
+    $routes->post('delete-records', 'Admin::deleteRecords');
     $routes->get('expiry-data', 'Admin::expiryData');
     $routes->get('expiry-data-api', 'Admin::expiryDataApi');
     $routes->get('export-expiry-data', 'Admin::exportExpiryData');
