@@ -1,0 +1,89 @@
+WARNING - 2026-08-30 04:19:16 --> [DEPRECATED] Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
+ 1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET".', 16384)
+ 2 APPPATH\Config\Routes.php(15): CodeIgniter\Router\RouteCollection->match([...], '/Tcpdfexample/quote', 'Tcpdfexample::quote')
+ 3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\gbinsurance\\app\\Config\\Routes.php')
+ 4 SYSTEMPATH\Boot.php(137): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 5 ROOTPATH\tmp_model_test.php(28): CodeIgniter\Boot::bootConsole(Object(Config\Paths))
+WARNING - 2026-08-30 04:19:16 --> [DEPRECATED] Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
+ 1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST".', 16384)
+ 2 APPPATH\Config\Routes.php(15): CodeIgniter\Router\RouteCollection->match([...], '/Tcpdfexample/quote', 'Tcpdfexample::quote')
+ 3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\gbinsurance\\app\\Config\\Routes.php')
+ 4 SYSTEMPATH\Boot.php(137): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 5 ROOTPATH\tmp_model_test.php(28): CodeIgniter\Boot::bootConsole(Object(Config\Paths))
+ERROR - 2026-08-30 02:21:03 --> Table 'policies' already exists
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('CREATE TABLE `policies` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`policy_number` VARCHAR(255) NOT NULL UNIQUE,
+	`holder_name` VARCHAR(255) NOT NULL,
+	`company_name` VARCHAR(255) NULL,
+	`vehicle_number` VARCHAR(50) NOT NULL,
+	`insurance_type` VARCHAR(100) NULL,
+	`issue_date` DATE NULL,
+	`expiry_date` DATE NULL,
+	`file_path` VARCHAR(255) NULL,
+	`created_at` DATETIME NULL,
+	`updated_at` DATETIME NULL,
+	UNIQUE KEY `id` (`id`),
+	KEY `policy_number` (`policy_number`),
+	KEY `expiry_date` (`expiry_date`)
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(908): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `policies` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`policy_number` VARCHAR(255) NOT NULL UNIQUE,
+	`holder_name` VARCHAR(255) NOT NULL,
+	`company_name` VARCHAR(255) NULL,
+	`vehicle_number` VARCHAR(50) NOT NULL,
+	`insurance_type` VARCHAR(100) NULL,
+	`issue_date` DATE NULL,
+	`expiry_date` DATE NULL,
+	`file_path` VARCHAR(255) NULL,
+	`created_at` DATETIME NULL,
+	`updated_at` DATETIME NULL,
+	UNIQUE KEY `id` (`id`),
+	KEY `policy_number` (`policy_number`),
+	KEY `expiry_date` (`expiry_date`)
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 3 SYSTEMPATH\Database\BaseConnection.php(825): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `policies` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`policy_number` VARCHAR(255) NOT NULL UNIQUE,
+	`holder_name` VARCHAR(255) NOT NULL,
+	`company_name` VARCHAR(255) NULL,
+	`vehicle_number` VARCHAR(50) NOT NULL,
+	`insurance_type` VARCHAR(100) NULL,
+	`issue_date` DATE NULL,
+	`expiry_date` DATE NULL,
+	`file_path` VARCHAR(255) NULL,
+	`created_at` DATETIME NULL,
+	`updated_at` DATETIME NULL,
+	UNIQUE KEY `id` (`id`),
+	KEY `policy_number` (`policy_number`),
+	KEY `expiry_date` (`expiry_date`)
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 4 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `policies` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`policy_number` VARCHAR(255) NOT NULL UNIQUE,
+	`holder_name` VARCHAR(255) NOT NULL,
+	`company_name` VARCHAR(255) NULL,
+	`vehicle_number` VARCHAR(50) NOT NULL,
+	`insurance_type` VARCHAR(100) NULL,
+	`issue_date` DATE NULL,
+	`expiry_date` DATE NULL,
+	`file_path` VARCHAR(255) NULL,
+	`created_at` DATETIME NULL,
+	`updated_at` DATETIME NULL,
+	UNIQUE KEY `id` (`id`),
+	KEY `policy_number` (`policy_number`),
+	KEY `expiry_date` (`expiry_date`)
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 5 APPPATH\Database\Migrations\2026-06-06-000000_CreatePoliciesTable.php(67): CodeIgniter\Database\Forge->createTable('policies')
+ 6 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\CreatePoliciesTable->up()
+ 7 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 8 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 9 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+10 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+11 SYSTEMPATH\CLI\Commands.php(72): CodeIgniter\Commands\Database\Migrate->run([])
+12 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+13 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+14 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+15 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))

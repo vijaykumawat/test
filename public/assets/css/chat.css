@@ -1,0 +1,189 @@
+/* ============ Real-time Chat System ============ */
+.chat-card {
+    border: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    /* Baseline only - chat.js sizes the card to the exact space between
+       the portal header and the bottom of the viewport */
+    height: calc(100vh - 170px);
+    min-height: 420px;
+}
+
+/* ============ Page-level lockdown ============
+   The chat page behaves like an app screen: the document itself never
+   scrolls. Only the employee list and the message area scroll internally,
+   so the "Messages" header + search box (left) and the conversation
+   header (right) always stay pinned on screen. This also removes the
+   page-level horizontal scrollbar caused by the layout's side margins. */
+html,
+body {
+    overflow: hidden;
+}
+
+/* Very short viewports must still be able to reach the whole card */
+@media (max-height: 559.98px) {
+    html,
+    body {
+        overflow: auto;
+    }
+}
+
+/* The row must fill the card so both panes get a real, constrained height */
+.chat-card > .row {
+    height: 100%;
+    min-height: 0;
+}
+
+/* ---------- Panes : flex columns so header + input stay pinned ---------- */
+.chat-users-pane,
+.chat-conversation-pane {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* ---------- Left panel : employee list ---------- */
+.chat-users-search {
+    flex: 0 0 auto;
+}
+
+.chat-users-list {
+    position: relative; /* anchor for offsetTop math in chat.js */
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.chat-user {
+    cursor: pointer;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .06) !important;
+}
+
+.chat-user.active {
+    background: #eff4ff;
+}
+
+.chat-user:hover {
+    background: #f8fafc;
+}
+
+/* Selected employee : keep it clearly readable (the admin theme restyles
+   Bootstrap's .active state with light text on a light background) */
+.chat-user.active,
+.chat-user.active:hover {
+    background: #eff4ff !important;
+    color: #2b3a55 !important;
+    box-shadow: inset 3px 0 0 #5d87ff;
+}
+
+.chat-user.active .text-muted {
+    color: #5d87ff !important;
+}
+
+#noResults {
+    flex: 0 0 auto;
+}
+
+.chat-avatar {
+    object-fit: cover;
+    background: #e9eef6;
+}
+
+/* ---------- Right panel : conversation ---------- */
+.chat-conv-header {
+    flex: 0 0 auto;
+}
+
+.chat-messages {
+    flex: 1 1 auto;
+    min-height: 0; /* REQUIRED so the list scrolls internally instead of stretching the pane */
+    overflow-y: auto;
+    padding: 1rem;
+    background: #f8fafc;
+}
+
+/* Message bubbles */
+.message-row {
+    display: flex;
+    margin-bottom: .9rem;
+}
+
+.message-row.sent {
+    justify-content: flex-end;
+}
+
+.message-row.received {
+    justify-content: flex-start;
+}
+
+.message-bubble {
+    max-width: 70%;
+    padding: .5rem .85rem;
+    border-radius: 1rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+    word-break: break-word;
+}
+
+.message-row.sent .message-bubble {
+    background: #5d87ff;
+    color: #fff;
+    border-bottom-right-radius: .25rem;
+}
+
+.message-row.received .message-bubble {
+    background: #fff;
+    color: #212529;
+    border: 1px solid #eef1f6;
+    border-bottom-left-radius: .25rem;
+}
+
+.message-text {
+    font-size: .9rem;
+    line-height: 1.4;
+    white-space: pre-wrap;
+}
+
+.message-time {
+    font-size: .7rem;
+    opacity: .8;
+    margin-top: .2rem;
+    text-align: right;
+}
+
+.message-row.sent .message-time {
+    color: #e6ecff;
+}
+
+.message-row.received .message-time {
+    color: #9aa4b2;
+}
+
+.chat-input {
+    flex: 0 0 auto;
+}
+
+.chat-toast {
+    margin-top: .5rem;
+    font-size: .85rem;
+    color: #dc3545;
+    min-height: 1.2rem;
+}
+
+/* Small screens : stack the panels */
+@media (max-width: 767.98px) {
+    .chat-card {
+        height: calc(100vh - 170px);
+    }
+
+    .chat-users-pane {
+        height: 40%;
+    }
+
+    .chat-conversation-pane {
+        height: 60%;
+        border-top: 1px solid #eef1f6;
+    }
+}

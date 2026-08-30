@@ -42,7 +42,14 @@ $routes->group('employee', ['filter' => ['authEmployee', 'sessionExpire']], func
     $routes->get('preview-policy/(:num)', 'Employee::previewPolicy/$1');
     $routes->get('prevRecord/(:any)', 'Employee::previousRecord/$1');
     $routes->get('forwardRecord/(:any)', 'Employee::forwardRecord/$1');
-    
+
+    // Real-time chat system
+    $routes->get('chat', 'Chat::index');
+    $routes->get('chat/employees', 'Chat::employeeList');
+    $routes->get('chat/recent', 'Chat::recentConversations');
+    $routes->get('chat/messages/(:any)', 'Chat::getMessages/$1');
+    $routes->post('chat/send', 'Chat::sendMessage');
+
     $routes->get('(:any)', 'Employee::viewEmployee/$1');
     $routes->post('uploadProfilePhoto', 'Employee::uploadProfilePhoto'); 
     $routes->post('employee-update', 'Employee::updateEmployee');

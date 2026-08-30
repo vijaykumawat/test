@@ -1,3 +1,10 @@
 {
-    "cline.model": "zai/glm-5.3-flash"
+  "cline.providers": {
+    "ollama": {
+      "apiBaseUrl": "http://localhost:11434",
+      "models": ["llama3", "mistral", "codellama"]
+    }
+  },
+  "cline.defaultProvider": "ollama",
+  "cline.model": "llama3"
 }
