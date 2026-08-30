@@ -25,6 +25,12 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                     <span class="hide-menu">Home</span>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link" href="<?= base_url('/admin/chat') ?>" aria-expanded="false">
+                        <i class="ti ti-message-circle"></i>
+                        <span class="hide-menu">Chat</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="<?= base_url('/admin') ?>" aria-expanded="false">
                         <i class="ti ti-atom"></i>
                         <span class="hide-menu">Dashboard</span>

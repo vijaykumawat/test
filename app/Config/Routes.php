@@ -61,6 +61,15 @@ $routes->group('employee', ['filter' => ['authEmployee', 'sessionExpire']], func
 // Protected Admin Routes
 $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->get('/', 'Admin::index');
+
+    // Real-time chat system (admin is an employee record with jobTitle 'Admin',
+    // so the chat endpoints work for the admin session as well)
+    $routes->get('chat', 'Chat::index');
+    $routes->get('chat/employees', 'Chat::employeeList');
+    $routes->get('chat/recent', 'Chat::recentConversations');
+    $routes->get('chat/messages/(:any)', 'Chat::getMessages/$1');
+    $routes->post('chat/send', 'Chat::sendMessage');
+
     $routes->get('subscription', 'Admin::subscriptionDetails');    
     $routes->get('upload', 'Admin::uploadPolicy');
     $routes->post('upload', 'Admin::uploadPolicyPost');

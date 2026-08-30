@@ -35,7 +35,12 @@ class Chat extends BaseController
             ->limit(200)
             ->findAll();
 
-        return view('employee/chat', [
+        // Admins (jobTitle 'Admin') get the admin-themed chat page with the
+        // admin sidebar/header; everyone else gets the employee chat page.
+        // Both share the same endpoints, which are keyed on the session's employeeId.
+        $view = ($session->get('jobTitle') === 'Admin') ? 'admin/chat' : 'employee/chat';
+
+        return view($view, [
             'employees'     => $employees,
             'currentUserId' => $session->get('employeeId'),
             'currentUser'   => [
