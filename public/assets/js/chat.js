@@ -394,6 +394,20 @@
         }
     }
 
+    /* Reveal/hide the plain employee list items so that anyone shown under
+       "Recent Chats" is not rendered twice in the list below. Passing null
+       reveals every item (used when the recent block is removed or a search
+       rebuilt the list). */
+    function syncListVisibility(recentIds) {
+        for (var i = 0; i < chatUsersList.children.length; i++) {
+            var item = chatUsersList.children[i];
+            if (item.id === 'recentChatsBlock' || !item.classList.contains('chat-user')) {
+                continue;
+            }
+            item.classList.toggle('d-none', !!(recentIds && recentIds[String(item.dataset.userId)]));
+        }
+    }
+
     /* Sync the sidebar badge (the poller script lives inside the sidebar include) */
     function refreshSidebarBadge() {
         if (typeof window.refreshChatUnreadBadge === 'function') {
@@ -552,6 +566,7 @@
             existing.remove();
         }
         if (!items.length || (employeeSearch.value || '').trim() !== '') {
+            syncListVisibility(null); /* reveal the full employee list again */
             return;
         }
 
@@ -568,6 +583,14 @@
         });
 
         chatUsersList.insertBefore(block, chatUsersList.firstChild);
+
+        /* Anyone already listed under "Recent Chats" must not appear a
+           second time in the employee list below - hide those duplicates. */
+        var recentIds = {};
+        items.forEach(function (r) {
+            recentIds[String(r.employeeId)] = true;
+        });
+        syncListVisibility(recentIds);
 
         if (currentReceiver) {
             markActiveUser(currentReceiver.employeeId);
