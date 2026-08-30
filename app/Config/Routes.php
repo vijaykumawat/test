@@ -47,6 +47,7 @@ $routes->group('employee', ['filter' => ['authEmployee', 'sessionExpire']], func
     $routes->get('chat', 'Chat::index');
     $routes->get('chat/employees', 'Chat::employeeList');
     $routes->get('chat/recent', 'Chat::recentConversations');
+    $routes->get('chat/unread-count', 'Chat::unreadCount');
     $routes->get('chat/messages/(:any)', 'Chat::getMessages/$1');
     $routes->post('chat/send', 'Chat::sendMessage');
 
@@ -67,6 +68,7 @@ $routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
     $routes->get('chat', 'Chat::index');
     $routes->get('chat/employees', 'Chat::employeeList');
     $routes->get('chat/recent', 'Chat::recentConversations');
+    $routes->get('chat/unread-count', 'Chat::unreadCount');
     $routes->get('chat/messages/(:any)', 'Chat::getMessages/$1');
     $routes->post('chat/send', 'Chat::sendMessage');
 

@@ -194,6 +194,7 @@
         messageInput.focus({ preventScroll: true }); /* never scroll the page on focus */
 
         markActiveUser(user.employeeId, true);
+        clearUnreadPill(user.employeeId);
         pinPageToTop(); /* keep both panel headers in view after the pick */
 
         fetchMessages({ page: 1, limit: C.pageSize || 20 })
@@ -209,6 +210,7 @@
                 toggleLoadOlder();
                 scrollToBottom(true);
                 startPolling();
+                refreshSidebarBadge();
                 loadRecentChats();
             })
             .catch(function (err) {
@@ -281,6 +283,7 @@
                 var ids = incoming.map(function (m) { return m.messageId; });
                 lastMessageId = Math.max(lastMessageId, Math.max.apply(null, ids));
                 scrollToBottom(false);
+                refreshSidebarBadge();
                 loadRecentChats();
             })
             .catch(function () { /* transient errors are ignored; next poll retries */ });
@@ -316,6 +319,7 @@
                 messageInput.value = '';
                 appendMessages([json.data]);
                 lastMessageId = Math.max(lastMessageId, json.data.messageId);
+                refreshSidebarBadge();
                 scrollToBottom(true);
                 loadRecentChats();
             })
@@ -370,6 +374,33 @@
             markActiveUser(currentReceiver.employeeId);
         }
     }
+    /* ------------------ unread badge helpers -------------------- */
+    function makeUnreadPill(count) {
+        var pill = document.createElement('span');
+        pill.className = 'badge rounded-pill bg-danger chat-unread-pill flex-shrink-0';
+        pill.textContent = count > 99 ? '99+' : String(count);
+        return pill;
+    }
+
+    /* Remove the unread pill of a user right after their conversation is opened */
+    function clearUnreadPill(userId) {
+        var item = chatUsersList.querySelector('.chat-user[data-user-id="' + userId + '"]');
+        if (!item) {
+            return;
+        }
+        var pill = item.querySelector('.chat-unread-pill');
+        if (pill) {
+            pill.remove();
+        }
+    }
+
+    /* Sync the sidebar badge (the poller script lives inside the sidebar include) */
+    function refreshSidebarBadge() {
+        if (typeof window.refreshChatUnreadBadge === 'function') {
+            window.refreshChatUnreadBadge();
+        }
+    }
+
     /* -------------------- user list items ---------------------- */
     function makeUserEl(emp) {
         var a = document.createElement('a');
@@ -407,6 +438,11 @@
         info.appendChild(small);
         wrap.appendChild(img);
         wrap.appendChild(info);
+
+        var unread = parseInt(emp.unreadCount, 10) || 0;
+        if (unread > 0) {
+            wrap.appendChild(makeUnreadPill(unread));
+        }
         a.appendChild(wrap);
 
         return a;
@@ -438,6 +474,11 @@
             nameSpan.parentNode.replaceChild(nameRow, nameSpan);
             nameRow.appendChild(nameSpan);
             nameRow.appendChild(time);
+
+            var unread = parseInt(r.unreadCount, 10) || 0;
+            if (unread > 0) {
+                nameRow.appendChild(makeUnreadPill(unread));
+            }
         }
 
         var small = a.querySelector('small.text-muted');

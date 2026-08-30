@@ -28,6 +28,13 @@ class CreateMessagesTable extends Migration
                 'type' => 'TEXT',
                 'null' => false,
             ],
+            'isRead' => [
+                'type'       => 'TINYINT',
+                'constraint' => 1,
+                'null'       => false,
+                'default'    => 0,
+                'comment'    => '0 = unread, 1 = read by the receiver',
+            ],
             'createdAt' => [
                 'type'    => 'TIMESTAMP',
                 'null'    => false,

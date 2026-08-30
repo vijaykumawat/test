@@ -28,6 +28,7 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                     <a class="sidebar-link" href="<?= base_url('/employee/chat') ?>" aria-expanded="false">
                         <i class="ti ti-message-circle"></i>
                         <span class="hide-menu">Chat</span>
+                        <span class="badge rounded-pill bg-danger chat-unread-badge ms-auto d-none" id="chatUnreadBadge">0</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -180,3 +181,38 @@ $currentRoute = service('router')->getMatchedRoute()[0];
     </div>
     <!-- End Sidebar scroll-->
 </aside>
+
+<!-- Unread chat badge (polls the count so it stays current on every page) -->
+<script>
+(function () {
+    'use strict';
+
+    var badge = document.getElementById('chatUnreadBadge');
+    if (!badge) {
+        return;
+    }
+
+    var url = "<?= site_url('employee/chat/unread-count') ?>";
+
+    function render(total) {
+        total = parseInt(total, 10) || 0;
+        badge.textContent = total > 99 ? '99+' : String(total);
+        badge.classList.toggle('d-none', total <= 0);
+    }
+
+    function refresh() {
+        fetch(url, { headers: { 'Accept': 'application/json' } })
+            .then(function (res) { return res.json(); })
+            .then(function (json) {
+                render(json && json.success ? json.total : 0);
+            })
+            .catch(function () { /* transient errors are ignored */ });
+    }
+
+    /* chat.js calls this after opening a conversation / polling / sending */
+    window.refreshChatUnreadBadge = refresh;
+
+    refresh();
+    setInterval(refresh, 15000);
+})();
+</script>

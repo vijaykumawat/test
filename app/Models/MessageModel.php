@@ -18,6 +18,7 @@ class MessageModel extends Model
         'senderId',
         'receiverId',
         'messageText',
+        'isRead',
     ];
 
     protected $validationRules = [
@@ -149,5 +150,55 @@ class MessageModel extends Model
                 LIMIT " . (int) $limit;
 
         return $db->query($sql, [$userId, $userId, $userId, $userId])->getResultArray();
+    }
+
+    /**
+     * Total number of unread messages addressed to the given user.
+     */
+    public function getUnreadCount($userId): int
+    {
+        return (int) $this->db->table($this->table)
+            ->where('receiverId', $userId)
+            ->where('isRead', 0)
+            ->countAllResults();
+    }
+
+    /**
+     * Unread message counts per sender for the given receiver.
+     *
+     * @return array<string, int> Map of senderId => unread message count
+     */
+    public function getUnreadCountsBySender($userId): array
+    {
+        $rows = $this->db->table($this->table)
+            ->select('senderId, COUNT(*) AS unreadCount')
+            ->where('receiverId', $userId)
+            ->where('isRead', 0)
+            ->groupBy('senderId')
+            ->get()
+            ->getResultArray();
+
+        $map = [];
+        foreach ($rows as $row) {
+            $map[$row['senderId']] = (int) $row['unreadCount'];
+        }
+
+        return $map;
+    }
+
+    /**
+     * Mark every message the given user received from $otherId as read.
+     *
+     * @return int Number of messages that were marked read
+     */
+    public function markConversationAsRead($userId, $otherId): int
+    {
+        $this->db->table($this->table)
+            ->where('receiverId', $userId)
+            ->where('senderId', $otherId)
+            ->where('isRead', 0)
+            ->update(['isRead' => 1]);
+
+        return $this->db->affectedRows();
     }
 }

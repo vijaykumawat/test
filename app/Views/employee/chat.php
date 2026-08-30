@@ -90,6 +90,11 @@
                                                                 <?= esc($emp['jobTitle'] ?? '') ?><?= (!empty($emp['email'])) ? ' &middot; ' . esc($emp['email']) : '' ?>
                                                             </small>
                                                         </div>
+                                                        <?php $unread = (int) ($emp['unreadCount'] ?? 0); ?>
+                                                        <?php if ($unread > 0): ?>
+                                                            <span class="badge rounded-pill bg-danger chat-unread-pill flex-shrink-0"><?= $unread > 99 ? '99+' : $unread ?></span>
+                                                        <?php endif; ?>
+
                                                     </div>
                                                 </a>
                                             <?php endforeach; ?>

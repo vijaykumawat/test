@@ -35,6 +35,8 @@ class Chat extends BaseController
             ->limit(200)
             ->findAll();
 
+        $employees = $this->withUnreadCounts($employees, (string) $session->get('employeeId'));
+
         // Admins (jobTitle 'Admin') get the admin-themed chat page with the
         // admin sidebar/header; everyone else gets the employee chat page.
         // Both share the same endpoints, which are keyed on the session's employeeId.
@@ -51,6 +53,40 @@ class Chat extends BaseController
             ],
         ]);
     }
+
+    /**
+     * GET /employee/chat/unread-count  (JSON)
+     * Total unread messages for the logged-in user (+ per-sender breakdown).
+     * Used by the sidebar badge, which is visible on every page.
+     */
+    public function unreadCount()
+    {
+        $session = session();
+        $userId  = (string) $session->get('employeeId');
+
+        return $this->response->setJSON([
+            'success'  => true,
+            'total'    => $this->messageModel->getUnreadCount($userId),
+            'bySender' => $this->messageModel->getUnreadCountsBySender($userId),
+        ]);
+    }
+
+    /**
+     * Attach unreadCount (messages received from each partner that the
+     * logged-in user has not read yet) to a list of chat partners.
+     */
+    private function withUnreadCounts(array $rows, string $userId): array
+    {
+        $counts = $this->messageModel->getUnreadCountsBySender($userId);
+
+        foreach ($rows as &$row) {
+            $row['unreadCount'] = (int) ($counts[$row['employeeId']] ?? 0);
+        }
+        unset($row);
+
+        return $rows;
+    }
+
 
     /**
      * GET /employee/chat/employees?search=...  (JSON)
@@ -80,6 +116,8 @@ class Chat extends BaseController
             ->orderBy('name', 'ASC')
             ->limit(200)
             ->findAll();
+
+        $employees = $this->withUnreadCounts($employees, (string) $session->get('employeeId'));
 
         return $this->response->setJSON([
             'success' => true,
@@ -175,6 +213,10 @@ class Chat extends BaseController
                 ->setJSON(['success' => false, 'message' => 'Receiver not found.']);
         }
 
+        // The conversation is being viewed: mark everything received from
+        // this partner as read (runs on open and on every poll while open).
+        $this->messageModel->markConversationAsRead($senderId, $receiverId);
+
         $limit = (int) $this->request->getGet('limit');
         $limit = ($limit >= 1 && $limit <= 50) ? $limit : 20;
 
@@ -219,7 +261,10 @@ class Chat extends BaseController
         $session = session();
         $userId  = (string) $session->get('employeeId');
 
-        $rows = $this->messageModel->getRecentConversations($userId, 50);
+        $rows = $this->withUnreadCounts(
+            $this->messageModel->getRecentConversations($userId, 50),
+            $userId
+        );
 
         return $this->response->setJSON([
             'success' => true,

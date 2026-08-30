@@ -172,6 +172,21 @@ body {
     min-height: 1.2rem;
 }
 
+/* ============ Unread badges ============ */
+/* Sidebar "Chat" item badge (rendered by the sidebar include's poller) */
+.sidebar-link .chat-unread-badge {
+    font-size: 11px;
+    line-height: 1.5;
+    padding: 2px 7px;
+    flex-shrink: 0;
+}
+
+/* Per-user unread pill inside the chat users list */
+.chat-user .chat-unread-pill {
+    font-size: 11px;
+    padding: 3px 8px;
+}
+
 /* Small screens : stack the panels */
 @media (max-width: 767.98px) {
     .chat-card {
