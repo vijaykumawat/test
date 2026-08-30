@@ -450,14 +450,20 @@
                                                     '#resultsTable tbody tr[data-id="' + recordId + '"]'
                                                 );
                                                 if (savedRow) {
-                                                    const dateCell = savedRow.cells[1];
+                                                    // Indexes shifted by 1 (new serial "#" column)
+                                                    const dateCell = savedRow.cells[2];
                                                     if (dateCell) {
                                                         dateCell.textContent = expiryDate;
                                                     }
-                                                    const statusCell = savedRow.cells[2];
+                                                    const statusCell = savedRow.cells[3];
                                                     if (statusCell) {
                                                         statusCell.innerHTML =
                                                             '<span class="badge bg-success">Complete</span>';
+                                                    }
+                                                    // Keep the row Edit button's date in sync
+                                                    const editBtn = savedRow.querySelector('.edit-expiry-btn');
+                                                    if (editBtn) {
+                                                        editBtn.setAttribute('data-date', expiryDate);
                                                     }
                                                 }
 
@@ -514,7 +520,8 @@
                                                     '#resultsTable tbody tr[data-id="' + recordId + '"]'
                                                 );
                                                 if (skippedRow) {
-                                                    const statusCell = skippedRow.cells[2];
+                                                    // Index shifted by 1 (new serial "#" column)
+                                                    const statusCell = skippedRow.cells[3];
                                                     if (statusCell) {
                                                         statusCell.innerHTML =
                                                             '<span class="badge bg-secondary">Skipped</span>';
@@ -607,6 +614,41 @@
                                 </div>
                             </div>
 
+                            <!-- Edit Expiry Date Modal (opened from the results table) -->
+                            <div class="modal fade" id="editExpiryModal" tabindex="-1"
+                                aria-labelledby="editExpiryModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <form id="editExpiryForm">
+                                            <div class="modal-header bg-primary-subtle">
+                                                <h5 class="modal-title text-primary" id="editExpiryModalLabel">
+                                                    <i class="ti ti-pencil me-2"></i>Edit Expiry Date
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" id="editRecordId">
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="editRegNumber">Reg. No.</label>
+                                                    <input type="text" class="form-control" id="editRegNumber" readonly>
+                                                </div>
+                                                <div>
+                                                    <label class="form-label" for="editExpiryDateInput">Expiry Date</label>
+                                                    <input type="date" class="form-control" id="editExpiryDateInput" required>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-secondary btn-sm"
+                                                    data-bs-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-primary btn-sm shadow-sm"
+                                                    id="editExpirySaveBtn">Save Changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="card">
                                 <div class="card-body">
                                     <h2>Expiry Data</h2>
@@ -634,9 +676,11 @@
                                                 <!-- start row -->
                                                 <tr>
 
+                                                    <th>#</th>
                                                     <th>Reg. No.</th>
                                                     <th>Expiry Date</th>
                                                     <th>Status</th>
+                                                    <th>Action</th>
 
                                                 </tr>
                                             </thead>
@@ -680,9 +724,11 @@
                 lengthMenu: [10, 25, 50, 100, 200],
                 order: [[0, 'asc']],
                 columns: [
+                    { data: 'serial', orderable: false, searchable: false, className: 'text-center' },
                     { data: 'regNumber' },
                     { data: 'expiryDate', defaultContent: '-' },
-                    { data: 'status', className: 'text-center' }
+                    { data: 'status', className: 'text-center' },
+                    { data: 'action', orderable: false, searchable: false, className: 'text-center' }
                 ],
                 // Keep data-id on each row so the Save/Skip buttons can
                 // update the matching row immediately after saving.
@@ -705,6 +751,88 @@
             // Rows per page selector
             $('#rowsPerPage').on('change', function() {
                 expiryTable.page.len(parseInt(this.value, 10) || 25).draw();
+            });
+
+            // ----- Row-level "Edit" (expiry date) from the results table -----
+            var editModalEl = document.getElementById('editExpiryModal');
+            var editModal = (editModalEl && typeof bootstrap !== 'undefined')
+                ? bootstrap.Modal.getOrCreateInstance(editModalEl)
+                : null;
+
+            // Delegated handler: DataTables re-creates the rows on every draw
+            $('#resultsTable').on('click', '.edit-expiry-btn', function() {
+                var btn = $(this);
+                $('#editRecordId').val(btn.attr('data-id'));
+                $('#editRegNumber').val(btn.attr('data-reg'));
+                $('#editExpiryDateInput').val(btn.attr('data-date') || '');
+                if (editModal) {
+                    editModal.show();
+                }
+            });
+
+            // Save the edited expiry date (reuses the save-expiry-date endpoint,
+            // which validates ownership and marks the record complete)
+            $('#editExpiryForm').on('submit', async function(e) {
+                e.preventDefault();
+
+                var recordId   = $('#editRecordId').val();
+                var expiryDate = $('#editExpiryDateInput').val();
+                var saveBtn    = $('#editExpirySaveBtn');
+
+                if (!recordId || !expiryDate) {
+                    alert('Please select an expiry date.');
+                    return;
+                }
+
+                saveBtn.prop('disabled', true);
+                try {
+                    var body = new URLSearchParams();
+                    body.append('id', recordId);
+                    body.append('expiryDate', expiryDate);
+
+                    var resp = await fetch("<?= site_url('employee/save-expiry-date') ?>", {
+                        method: 'POST',
+                        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                        body: body
+                    });
+                    var json = await resp.json();
+
+                    if (json.success) {
+                        if (editModal) {
+                            editModal.hide();
+                        }
+
+                        // Update the row in place (no redraw keeps page/scroll position)
+                        var row = $('#resultsTable tbody tr[data-id="' + recordId + '"]');
+                        if (row.length) {
+                            row.find('td:eq(2)').text(expiryDate);
+                            row.find('td:eq(3)').html('<span class="badge bg-success">Complete</span>');
+                            row.find('.edit-expiry-btn').attr('data-date', expiryDate);
+                        }
+
+                        // If the edited record is the one shown in the top entry
+                        // area, advance that badge to the next pending record too
+                        var badgeEl = document.getElementById('vehicleNumber');
+                        if (badgeEl && String(badgeEl.dataset.id) === String(recordId)) {
+                            if (json.nextRecord) {
+                                badgeEl.dataset.id = json.nextRecord.id;
+                                badgeEl.textContent = json.nextRecord.regNumber;
+                                formatVehicleBadge();
+                            } else {
+                                badgeEl.dataset.id = '';
+                                badgeEl.textContent = 'All done!';
+                            }
+                        }
+
+                        showSavedModal(json.message || 'Expiry date saved successfully.');
+                    } else {
+                        alert(json.message || 'Failed to save expiry date.');
+                    }
+                } catch (err) {
+                    alert('Error: ' + err.message);
+                } finally {
+                    saveBtn.prop('disabled', false);
+                }
             });
         }
     });

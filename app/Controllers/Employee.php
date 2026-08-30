@@ -1024,12 +1024,15 @@ class Employee extends BaseController
             $length = 25;
         }
 
-        // Map the clicked column index to a real DB column
+        // Map the clicked column index to a real DB column.
+        // Index 0 (serial no.) and 4 (action) are display-only columns
+        // and fall back to ordering by id.
         $columns = [
             0 => 'id',
             1 => 'regNumber',
             2 => 'expiryDate',
             3 => 'status',
+            4 => 'id',
         ];
         $orderColIndex = (int) ($this->request->getVar('order')[0]['column'] ?? 0);
         $orderColumn   = $columns[$orderColIndex] ?? 'id';
@@ -1043,7 +1046,9 @@ class Employee extends BaseController
                 : $this->expiryDataModel->countAllForEmployee($employeeId);
 
             $data = [];
+            $serial = $start;
             foreach ($rows as $row) {
+                $serial++;
                 $rowStatus = (int) ($row['status'] ?? 0);
                 if ($rowStatus === 1) {
                     $badge = '<span class="badge bg-success">Complete</span>';
@@ -1057,10 +1062,21 @@ class Employee extends BaseController
                          . '" style="color:inherit; text-decoration:none;">'
                          . esc($row['regNumber']) . '</a>';
 
+                // Edit button so the user can correct the expiry date of any
+                // row. It reuses the save-expiry-date endpoint (ownership is
+                // validated there), which also marks the record complete.
+                $editBtn = '<button type="button" class="btn btn-sm btn-outline-primary edit-expiry-btn"'
+                         . ' data-id="' . esc($row['id']) . '"'
+                         . ' data-reg="' . esc($row['regNumber']) . '"'
+                         . ' data-date="' . esc($row['expiryDate'] ?? '') . '"'
+                         . ' title="Edit expiry date"><i class="ti ti-pencil"></i> Edit</button>';
+
                 $data[] = [
+                    'serial'     => $serial,
                     'regNumber'  => $regLink,
                     'expiryDate' => esc($row['expiryDate'] ?? ''),
                     'status'     => $badge,
+                    'action'     => $editBtn,
                     'id'         => $row['id'],
                 ];
             }
