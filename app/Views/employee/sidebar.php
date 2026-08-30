@@ -24,13 +24,7 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                     <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
                     <span class="hide-menu">Home</span>
                 </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="<?= base_url('/employee/chat') ?>" aria-expanded="false">
-                        <i class="ti ti-message-circle"></i>
-                        <span class="hide-menu">Chat</span>
-                        <span class="badge rounded-pill bg-danger chat-unread-badge ms-auto d-none" id="chatUnreadBadge">0</span>
-                    </a>
-                </li>
+                
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="<?= base_url('/employee/dashboard') ?>" aria-expanded="false">
                         <i class="ti ti-atom"></i>
@@ -72,7 +66,13 @@ $currentRoute = service('router')->getMatchedRoute()[0];
                         <span class="hide-menu">Expiry Data</span>
                     </a>
                 </li>
-                
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="<?= base_url('/employee/chat') ?>" aria-expanded="false">
+                        <i class="ti ti-message-circle"></i>
+                        <span class="hide-menu">Chat</span>
+                        <span class="badge rounded-pill bg-danger chat-unread-badge ms-auto d-none" id="chatUnreadBadge">0</span>
+                    </a>
+                </li>
                 
                 <!--
                 <li class="sidebar-item">
