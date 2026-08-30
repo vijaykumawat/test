@@ -68,6 +68,7 @@ class Chat extends BaseController
             'success'  => true,
             'total'    => $this->messageModel->getUnreadCount($userId),
             'bySender' => $this->messageModel->getUnreadCountsBySender($userId),
+            'senders'  => $this->messageModel->getUnreadSenders($userId, 5),
         ]);
     }
 

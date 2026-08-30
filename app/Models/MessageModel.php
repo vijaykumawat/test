@@ -201,4 +201,34 @@ class MessageModel extends Model
 
         return $this->db->affectedRows();
     }
+
+    /**
+     * Employees who have unread messages for the given receiver, with the
+     * unread count per sender and each sender's latest unread message.
+     * Drives the bottom-right new-message notification.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public function getUnreadSenders($userId, int $limit = 5): array
+    {
+        $db = \Config\Database::connect();
+
+        $sql = "SELECT e.employeeId, e.name, e.email, e.profilePhoto, e.gender, e.jobTitle,
+                       t.unreadCount,
+                       m.messageId   AS lastMessageId,
+                       m.messageText AS lastMessage,
+                       m.createdAt   AS lastMessageAt
+                FROM (
+                    SELECT senderId, COUNT(*) AS unreadCount, MAX(messageId) AS lastMid
+                    FROM messages
+                    WHERE receiverId = ? AND isRead = 0
+                    GROUP BY senderId
+                ) t
+                JOIN messages m ON m.messageId = t.lastMid
+                JOIN employee e ON e.employeeId = t.senderId
+                ORDER BY m.messageId DESC
+                LIMIT " . (int) $limit;
+
+        return $db->query($sql, [$userId])->getResultArray();
+    }
 }

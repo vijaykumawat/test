@@ -633,6 +633,36 @@
         }
     }
 
+    /* Deep link: /chat?to=<employeeId> opens that conversation directly
+       (used by the bottom-right new-message notifications). Also exposed as
+       window.openChatConversation(id) for the sidebar toast script. */
+    function openChatConversationById(employeeId) {
+        var item = chatUsersList.querySelector('.chat-user[data-user-id="' + String(employeeId) + '"]');
+        if (!item) {
+            return false;
+        }
+        openConversation({
+            employeeId: item.dataset.userId || item.getAttribute('data-user-id'),
+            name: item.dataset.name || item.getAttribute('data-name') || '',
+            email: item.dataset.email || item.getAttribute('data-email') || '',
+            jobTitle: item.dataset.jobTitle || item.getAttribute('data-jobtitle') || '',
+            gender: item.dataset.gender || item.getAttribute('data-gender') || '',
+            profilePhoto: item.dataset.photo || item.getAttribute('data-photo') || ''
+        });
+        return true;
+    }
+
+    window.openChatConversation = openChatConversationById;
+
+    function openFromQueryParam() {
+        try {
+            var toId = new URLSearchParams(window.location.search).get('to');
+            if (toId && openChatConversationById(toId)) {
+                window.history.replaceState({}, '', window.location.pathname);
+            }
+        } catch (e) { /* URLSearchParams unsupported: ignore */ }
+    }
+
     /* --------------------------- init --------------------------- */
     chatForm.addEventListener('submit', sendMessage);
     employeeSearch.addEventListener('input', onSearchInput);
@@ -643,6 +673,8 @@
     fitChatCard();
     window.addEventListener('resize', fitChatCard);
     setTimeout(fitChatCard, 300); /* re-fit after late layout shifts (web fonts etc.) */
+
+    openFromQueryParam();
 
     loadRecentChats();
 })();

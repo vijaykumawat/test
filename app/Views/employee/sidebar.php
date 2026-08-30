@@ -213,6 +213,179 @@ $currentRoute = service('router')->getMatchedRoute()[0];
     window.refreshChatUnreadBadge = refresh;
 
     refresh();
-    setInterval(refresh, 15000);
+    setInterval(function () { window.refreshChatUnreadBadge(); }, 15000);
+})();
+</script>
+
+<!-- New-message notification toasts (bottom-right) -->
+<script>
+(function () {
+    'use strict';
+
+    var chatUrl    = "<?= base_url('employee/chat') ?>";
+    var avatarBase = "<?= base_url('uploads/profile/') ?>";
+    var storageKey = 'chatLastNotified_' + "<?= esc(session()->get('employeeId'), 'attr') ?>";
+
+    var css = document.createElement('style');
+    css.textContent = [
+        '.chat-notif-stack{position:fixed;right:16px;bottom:16px;z-index:1090;display:flex;flex-direction:column;gap:10px;width:320px;max-width:calc(100vw - 32px);}',
+        '.chat-notif{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid #e6ebf1;border-left:4px solid #5d87ff;border-radius:10px;box-shadow:0 8px 24px rgba(23,43,77,.18);padding:12px;cursor:pointer;animation:chatNotifIn .25s ease;transition:opacity .3s ease,transform .3s ease;}',
+        '.chat-notif:hover{background:#f8fafc;}',
+        '.chat-notif img{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#e9eef6;flex-shrink:0;}',
+        '.chat-notif-body{min-width:0;flex:1;}',
+        '.chat-notif-head{display:flex;align-items:center;gap:6px;min-width:0;}',
+        '.chat-notif-head strong{font-size:.9rem;color:#2b3a55;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;}',
+        '.chat-notif-count{font-size:.7rem;background:#dc3545;color:#fff;border-radius:999px;padding:1px 7px;flex-shrink:0;}',
+        '.chat-notif-close{background:none;border:0;font-size:1.1rem;line-height:1;color:#9aa4b2;padding:0 2px;flex-shrink:0;cursor:pointer;}',
+        '.chat-notif-close:hover{color:#2b3a55;}',
+        '.chat-notif-text{font-size:.82rem;color:#6c757d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;}',
+        '.chat-notif.hide{opacity:0;transform:translateY(8px);}',
+        '@keyframes chatNotifIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}'
+    ].join('');
+    document.head.appendChild(css);
+
+    var stack = document.createElement('div');
+    stack.className = 'chat-notif-stack';
+    document.body.appendChild(stack);
+
+    function lastNotifiedId() {
+        try {
+            return parseInt(localStorage.getItem(storageKey), 10) || 0;
+        } catch (e) {
+            return 0;
+        }
+    }
+
+    function saveNotifiedId(id) {
+        try {
+            localStorage.setItem(storageKey, String(id));
+        } catch (e) { /* storage unavailable */ }
+    }
+
+    function avatarUrl(photo, gender) {
+        return avatarBase + (photo ? photo : (String(gender).toLowerCase() === 'male' ? 'user-1.jpg' : 'user-2.jpg'));
+    }
+
+    function openChat(employeeId) {
+        /* On the chat page chat.js opens the conversation in place; everywhere
+           else it deep-links to /chat?to=<id>. */
+        if (typeof window.openChatConversation === 'function') {
+            window.openChatConversation(employeeId);
+            return;
+        }
+        window.location.href = chatUrl + '?to=' + encodeURIComponent(employeeId);
+    }
+
+    function dismiss(node) {
+        node.classList.add('hide');
+        setTimeout(function () {
+            if (node.parentNode) {
+                node.parentNode.removeChild(node);
+            }
+        }, 300);
+    }
+
+    function showToast(sender) {
+        var node = document.createElement('div');
+        node.className = 'chat-notif';
+
+        var img = document.createElement('img');
+        img.src = avatarUrl(sender.profilePhoto, sender.gender);
+        img.alt = sender.name || '';
+
+        var body = document.createElement('div');
+        body.className = 'chat-notif-body';
+
+        var head = document.createElement('div');
+        head.className = 'chat-notif-head';
+
+        var name = document.createElement('strong');
+        name.textContent = sender.name || 'New message';
+        head.appendChild(name);
+
+        var count = parseInt(sender.unreadCount, 10) || 0;
+        if (count > 1) {
+            var pill = document.createElement('span');
+            pill.className = 'chat-notif-count';
+            pill.textContent = count > 99 ? '99+' : count;
+            head.appendChild(pill);
+        }
+
+        var close = document.createElement('button');
+        close.type = 'button';
+        close.className = 'chat-notif-close';
+        close.innerHTML = '&times;';
+        close.addEventListener('click', function (e) {
+            e.stopPropagation();
+            dismiss(node);
+        });
+        head.appendChild(close);
+
+        var text = document.createElement('div');
+        text.className = 'chat-notif-text';
+        text.textContent = sender.lastMessage || '';
+
+        body.appendChild(head);
+        body.appendChild(text);
+        node.appendChild(img);
+        node.appendChild(body);
+
+        node.addEventListener('click', function () {
+            openChat(sender.employeeId);
+            dismiss(node);
+        });
+
+        stack.appendChild(node);
+        while (stack.children.length > 4) {
+            stack.removeChild(stack.firstChild);
+        }
+
+        setTimeout(function () {
+            dismiss(node);
+        }, 7000);
+    }
+
+    /* One toast per sender that has unread messages newer than the last
+       notification shown for this user (tracked in localStorage). */
+    function notifyCheck(senders) {
+        var stored = lastNotifiedId();
+        var maxId = stored;
+
+        (senders || []).forEach(function (s) {
+            var mid = parseInt(s.lastMessageId, 10) || 0;
+            if (mid > stored) {
+                showToast(s);
+            }
+            if (mid > maxId) {
+                maxId = mid;
+            }
+        });
+
+        if (maxId !== stored) {
+            saveNotifiedId(maxId);
+        }
+    }
+
+    function fetchUnread() {
+        fetch("<?= site_url('employee/chat/unread-count') ?>", { headers: { 'Accept': 'application/json' } })
+            .then(function (res) { return res.json(); })
+            .then(function (json) {
+                if (json && json.success && json.senders && json.senders.length) {
+                    notifyCheck(json.senders);
+                }
+            })
+            .catch(function () { /* transient errors are ignored */ });
+    }
+
+    /* Wrap the badge poller so a single cycle drives badge + toasts */
+    var prevRefresher = window.refreshChatUnreadBadge;
+    window.refreshChatUnreadBadge = function () {
+        if (prevRefresher) {
+            prevRefresher();
+        }
+        fetchUnread();
+    };
+
+    fetchUnread();
 })();
 </script>
